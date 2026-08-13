@@ -266,6 +266,26 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(setzeLinie);
   }
 
+  /* --- Kopfnavigation: noch nicht gebaute Ziele sperren -------------------
+     Die Navigation zeigt die vollstaendige Struktur aus dem Masterbriefing.
+     Abschnitte 4, 5 und 7 der Startseite und die Unterseiten gibt es aber
+     noch nicht. Statt ins Leere zu springen oder eine 404 zu erzeugen,
+     werden diese Verweise gesperrt — und automatisch wieder frei, sobald
+     das Ziel existiert. Nichts muss dafuer nachgepflegt werden.            */
+  var vorhandeneSeiten = ['index.html', 'variante-a.html'];
+  Array.prototype.forEach.call(
+    document.querySelectorAll('.kopfnav a, .menu__link'),
+    function (verweis) {
+      var ziel = verweis.getAttribute('href') || '';
+      var fehlt = ziel.charAt(0) === '#'
+        ? !document.querySelector(ziel)
+        : vorhandeneSeiten.indexOf(ziel.replace('./', '')) === -1;
+      if (!fehlt) return;
+      verweis.setAttribute('aria-disabled', 'true');
+      verweis.addEventListener('click', function (e) { e.preventDefault(); });
+    }
+  );
+
   /* --- Referenzen-Akkordeon ----------------------------------------------
      Eine Spalte faehrt auf, die anderen schrumpfen. Bewusst ueber Attribute
      statt reinem :hover geloest: so greift dieselbe Logik fuer Maus,

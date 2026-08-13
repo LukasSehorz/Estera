@@ -28,7 +28,8 @@ assets/css/
   referenzen.css    Kunden, die uns vertrauen
   leistungen.css    Ablauf (senkrechte Linie + zwei Bilder)
   loop.css          Lemniskaten-Variante des Ablaufs, derzeit nicht eingebunden
-assets/js/site.js   Menü, Sticky-Header, Rotator, Reveal, Linienlänge
+assets/js/site.js   Kopfnavigation, Menü, Sticky-Header, Rotator, Reveal,
+                    Linienlänge, Referenzen-Akkordeon
 assets/fonts/       woff2, kein CDN
 assets/img/
 ```
@@ -148,6 +149,47 @@ Damit hat die Seite derzeit **keine öffentlich nachprüfbare** Referenz mehr:
 Google-Rezensionen konnte jeder selbst aufrufen, Logo und Zitat kann man nur
 glauben. Sobald die echten Referenzen stehen, lohnt ein Blick, ob die
 Bewertungen nicht doch zusätzlich an anderer Stelle auftauchen sollten.
+
+## Kopfnavigation
+
+Wortmarke mittig, links die **Abschnitte dieser Seite**, rechts die
+**einzelnen Seiten**. Wortlaut und Reihenfolge rechts exakt nach der
+vorgeschlagenen Hauptnavigation, Briefing S. 5:
+„Konzept · Qualität · Wissen · Über Estera · Karriere | Erstgespräch".
+
+Das Raster ist `1fr auto 1fr` — die Wortmarke sitzt in Spalte 2 und bleibt
+dadurch exakt mittig, obwohl links fünf und rechts sechs Punkte stehen
+(gemessen 0 px Versatz von 1440 bis 1920 px).
+
+Ab 1440 px steht die Navigation waagerecht, darunter übernimmt wieder das
+Burger-Overlay — elf Punkte nebeneinander brauchen gemessen rund 1430 px.
+
+`site.js` sperrt Verweise, deren Ziel es noch nicht gibt (Startseiten-
+Abschnitte 4, 5 und 7 sowie sämtliche Unterseiten), und gibt sie automatisch
+frei, sobald das Ziel existiert. Dadurch springt nichts ins Leere und es
+entsteht keine 404.
+
+---
+
+## Section 3 — das Geschäftsmodell in wenigen Schritten
+
+Briefing S. 6: „Die wichtigste Sektion der Startseite." Die sechs Schritte
+stehen dort **wörtlich** und sind hier nur um je einen erklärenden Satz
+ergänzt, nicht umformuliert:
+
+1. Erstgespräch und gegenseitige Eignung
+2. Ersteinschätzung der Möglichkeiten
+3. Suche nach einer passenden Kapitalanlageimmobilie
+4. Objektvorstellung mit Zahlen, Daten und Fakten
+5. Finanzierung über das Netzwerk
+6. Notar und weitere Begleitung
+
+Die Überschrift lautet **nicht** „Ein strukturierter Weg." — dieser Satz
+gehört im Briefing zu Punkt 6 (interaktiver Vergleich „Selbst koordinieren"
+gegen „Mit Estera strukturiert begleitet"). Hier steht stattdessen der
+Wortlaut des sekundären Hero-CTA, der genau hierher springt.
+
+---
 
 ## Ablauf
 

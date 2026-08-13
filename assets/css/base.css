@@ -232,7 +232,7 @@ ul, ol { list-style: none; }
 .link-quiet:hover .arrow { transform: translateX(5px); }
 
 /* ===========================================================================
-   HEADER — Logo mittig, Burger rechts
+   HEADER — Logo mittig, Navigation links und rechts daneben
    =========================================================================== */
 .site-header {
   position: absolute;
@@ -249,7 +249,7 @@ ul, ol { list-style: none; }
 
 .site-header--sticky {
   position: fixed;
-  background: rgba(250, 248, 244, 0.86);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: saturate(150%) blur(14px);
   -webkit-backdrop-filter: saturate(150%) blur(14px);
   border-bottom: 1px solid var(--line-soft);
@@ -266,6 +266,96 @@ ul, ol { list-style: none; }
 .site-header--invert .wordmark__sub,
 .site-header--invert .burger__label,
 .site-header--invert .burger__lines span { transition: color 0.45s var(--ease), background 0.45s var(--ease); }
+
+
+/* --- Kopfnavigation: links die Abschnitte, rechts die Seiten ------------- */
+/* Das Raster des Headers ist 1fr auto 1fr. Die Wortmarke sitzt in Spalte 2
+   und bleibt dadurch exakt mittig — unabhaengig davon, wie viele Punkte
+   links und rechts stehen. Ohne dieses Raster wuerde das Logo bei
+   unterschiedlich langen Listen aus der Mitte wandern. */
+.kopfnav { display: none; }
+.kopfnav ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.72rem, 0.98vw, 0.8rem);
+}
+.kopfnav a {
+  position: relative;
+  display: block;
+  padding: 0.55rem 0;
+  font-family: var(--font-display);
+  font-size: clamp(0.7rem, 0.76vw, 0.72rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-indent: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--navy-800);
+  transition: color 0.4s var(--ease);
+}
+/* Haarlinie faehrt beim Anfahren von links auf — dieselbe Geste wie beim
+   Quellenverweis im Google-Siegel. */
+.kopfnav a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0.3rem;
+  height: 1px;
+  background: var(--line-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+.kopfnav a:hover::after,
+.kopfnav a:focus-visible::after { transform: scaleX(1); }
+
+/* Erstgespraech als Abschluss der rechten Reihe, durch einen Steg
+   abgesetzt — im Briefing steht dort ein senkrechter Strich. */
+.kopfnav__cta {
+  padding-left: clamp(0.55rem, 0.85vw, 0.9rem);
+  margin-left: clamp(0.1rem, 0.3vw, 0.35rem);
+  border-left: 1px solid var(--line-soft);
+}
+.kopfnav__cta a { color: var(--gold-text); }
+.kopfnav__cta a::after { transform: scaleX(1); }
+
+/* Ueber dem dunklen Bildband stehen auch die Punkte hell. */
+.site-header--invert:not(.site-header--sticky) .kopfnav a { color: rgba(255,255,255,0.86); }
+.site-header--invert:not(.site-header--sticky) .kopfnav a:hover { color: #fff; }
+.site-header--invert:not(.site-header--sticky) .kopfnav__cta a { color: #fff; }
+.site-header--invert:not(.site-header--sticky) .kopfnav__cta { border-left-color: rgba(255,255,255,0.28); }
+.site-header--invert:not(.site-header--sticky) .kopfnav a::after { background: rgba(255,255,255,0.5); }
+.site-header--invert .kopfnav a { transition: color 0.45s var(--ease); }
+
+/* Ziel gibt es noch nicht: Verweis bleibt sichtbar, laesst sich aber nicht
+   ausloesen. site.js setzt das Attribut und nimmt es wieder weg, sobald
+   der Abschnitt bzw. die Seite existiert. */
+.kopfnav a[aria-disabled='true'] { cursor: default; }
+.kopfnav a[aria-disabled='true']:hover::after { transform: scaleX(0); }
+
+/* Ab hier ist Platz fuer elf Punkte in einer Waagerechten. Gemessen, nicht
+   geschaetzt — darunter uebernimmt wieder der Burger. */
+@media (min-width: 1440px) {
+  .kopfnav { display: block; }
+  /* Luft um die Wortmarke. Sie geht zulasten beider Rasterspalten
+     gleichermassen, das Logo bleibt dadurch mittig. */
+  .kopfnav--links  { grid-column: 1; justify-self: end;   margin-right: clamp(1.1rem, 2.2vw, 2.4rem); }
+  .kopfnav--rechts { grid-column: 3; justify-self: start; margin-left:  clamp(1.1rem, 2.2vw, 2.4rem); }
+  /* Zwei Klassen, weil die .burger-Grundregel weiter unten in dieser Datei
+     steht und bei gleicher Spezifitaet sonst gewinnen wuerde. */
+  .site-header .burger { display: none; }
+}
+
+/* Gruppentitel im Overlay-Menue */
+.menu__gruppe {
+  margin-bottom: clamp(0.7rem, 1.6vh, 1.1rem);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.42);
+}
+.menu__gruppe + .menu__nav { margin-bottom: clamp(1.6rem, 4vh, 2.6rem); }
 
 /* Wortmarke */
 .wordmark {

@@ -20,10 +20,45 @@
 
 <!-- Kopf: Wortmarke mittig, Burger rechts -->
 <header class="site-header site-header--invert" data-header>
+
+  <!-- LINKS: die Abschnitte DIESER Seite (Sprungmarken).
+       Reihenfolge nach der Startseiten-Dramaturgie im Briefing S.6/7.
+       Auswahl, Prinzip und Werte sind Punkt 4, 5 und 7 — noch nicht gebaut.
+       site.js sperrt Verweise, deren Ziel es noch nicht gibt, und gibt sie
+       automatisch frei, sobald der Abschnitt existiert. -->
+  <nav class="kopfnav kopfnav--links" aria-label="Abschnitte dieser Seite">
+    <ul>
+      <li><a href="#kunden">Kunden</a></li>
+      <li><a href="#konzept">Ablauf</a></li>
+      <li><a href="#auswahl">Auswahl</a></li>
+      <li><a href="#prinzip">Prinzip</a></li>
+      <li><a href="#werte">Werte</a></li>
+    </ul>
+  </nav>
+
   <a class="wordmark" href="./index.html" aria-label="Estera — Startseite">
     <span class="wordmark__name">ESTERA</span>
     <span class="wordmark__sub">Immobilien</span>
   </a>
+
+  <!-- RECHTS: die einzelnen Seiten. Wortlaut und Reihenfolge exakt nach der
+       vorgeschlagenen Hauptnavigation, Briefing S.5:
+       "Konzept · Qualität · Wissen · Über Estera · Karriere | Erstgespräch"
+       Die Dateien gibt es noch nicht — die Adressen stehen aber schon so,
+       wie sie spaeter heissen sollen. -->
+  <nav class="kopfnav kopfnav--rechts" aria-label="Seiten">
+    <ul>
+      <li><a href="konzept.html">Konzept</a></li>
+      <li><a href="qualitaet.html">Qualität</a></li>
+      <li><a href="wissen.html">Wissen</a></li>
+      <li><a href="ueber-estera.html">Über Estera</a></li>
+      <li><a href="karriere.html">Karriere</a></li>
+      <li class="kopfnav__cta"><a href="erstgespraech.html">Erstgespräch</a></li>
+    </ul>
+  </nav>
+
+  <!-- Bleibt fuer schmale Fenster: eine Waagerechte mit elf Punkten passt
+       dort nicht. Ab 1360 px ist der Burger aus, darunter die Navigation. -->
   <button class="burger" type="button" data-menu-open aria-expanded="false" aria-controls="hauptmenue">
     <span class="burger__label">Menü</span>
     <span class="burger__lines" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -223,6 +258,14 @@
 
 
 <!-- =====================================================================
+     SECTION 3 — DAS GESCHÄFTSMODELL IN WENIGEN SCHRITTEN (Briefing S.6/7)
+     "Die wichtigste Sektion der Startseite." Die sechs Schritte stehen im
+     Briefing woertlich; sie sind hier nur um je einen erklaerenden Satz
+     ergaenzt, nicht umformuliert.
+     Die Ueberschrift heisst NICHT "Ein strukturierter Weg." — dieser Satz
+     gehoert im Briefing zu Punkt 6 (interaktiver Vergleich "Selbst
+     koordinieren" gegen "Mit Estera begleitet"). Hier steht der Satz aus
+     dem sekundaeren Hero-CTA, der genau hierher springt.
      DER ABLAUF
      Briefing S.13: „Estera führt die relevanten Bausteine in einen klaren
      Ablauf." Arbeitsheadline ebenfalls von dort.
@@ -235,7 +278,7 @@
     <div class="lst__content">
 
   <header class="lst__head" data-reveal>
-    <h2 class="display lst__h2">Ein strukturierter Weg.</h2>
+    <h2 class="display lst__h2">So funktioniert Estera.</h2>
     <p class="lst__unterzeile">Estera Immobilien</p>
   </header>
 
@@ -247,43 +290,43 @@
         <li class="ablauf__schritt" data-reveal style="--i:0">
           <span class="ablauf__nr">1</span>
           <div>
-            <h3 class="ablauf__titel">Einordnung</h3>
-            <p class="ablauf__txt">Ausgangssituation, Ziele und grundsätzliche Eignung einordnen.</p>
+            <h3 class="ablauf__titel">Erstgespräch</h3>
+            <p class="ablauf__txt">Ausgangssituation, Ziele und die gegenseitige Eignung klären.</p>
           </div>
         </li>
         <li class="ablauf__schritt" data-reveal style="--i:1">
           <span class="ablauf__nr">2</span>
           <div>
-            <h3 class="ablauf__titel">Objektzugang</h3>
-            <p class="ablauf__txt">Off-Market-Zugang bündeln und passende Kapitalanlageimmobilien vorauswählen.</p>
+            <h3 class="ablauf__titel">Ersteinschätzung</h3>
+            <p class="ablauf__txt">Die Möglichkeiten einordnen, bevor über einzelne Objekte gesprochen wird.</p>
           </div>
         </li>
         <li class="ablauf__schritt" data-reveal style="--i:2">
           <span class="ablauf__nr">3</span>
           <div>
-            <h3 class="ablauf__titel">Aufbereitung</h3>
-            <p class="ablauf__txt">Lage, Objekt, Unterlagen und wirtschaftliche Eckdaten strukturiert aufbereiten.</p>
+            <h3 class="ablauf__titel">Objektsuche</h3>
+            <p class="ablauf__txt">Eine passende Kapitalanlageimmobilie über den Off-Market-Zugang suchen.</p>
           </div>
         </li>
         <li class="ablauf__schritt" data-reveal style="--i:3">
           <span class="ablauf__nr">4</span>
           <div>
-            <h3 class="ablauf__titel">Finanzierung</h3>
-            <p class="ablauf__txt">Die Finanzierung über das spezialisierte Netzwerk koordinieren.</p>
+            <h3 class="ablauf__titel">Objektvorstellung</h3>
+            <p class="ablauf__txt">Das Objekt mit Zahlen, Daten und Fakten aufbereitet vorstellen.</p>
           </div>
         </li>
         <li class="ablauf__schritt" data-reveal style="--i:4">
           <span class="ablauf__nr">5</span>
           <div>
-            <h3 class="ablauf__titel">Koordination</h3>
-            <p class="ablauf__txt">Beteiligte und Schritte von der Objektvorstellung bis zum Notar zusammenführen.</p>
+            <h3 class="ablauf__titel">Finanzierung</h3>
+            <p class="ablauf__txt">Die Finanzierung über das spezialisierte Netzwerk koordinieren.</p>
           </div>
         </li>
         <li class="ablauf__schritt" data-reveal style="--i:5">
           <span class="ablauf__nr">6</span>
           <div>
-            <h3 class="ablauf__titel">Begleitung</h3>
-            <p class="ablauf__txt">Bei der weiteren Organisation unterstützen, soweit es zum Leistungsumfang gehört.</p>
+            <h3 class="ablauf__titel">Notar und Begleitung</h3>
+            <p class="ablauf__txt">Bis zum Notartermin führen — und darüber hinaus begleiten.</p>
           </div>
         </li>
     </ol>
@@ -327,15 +370,21 @@
   </div>
 
   <div class="menu__body">
+    <p class="menu__gruppe">Auf dieser Seite</p>
     <ul class="menu__nav">
       <li><a class="menu__link" href="#kunden"><span class="num">01</span> Kunden</a></li>
-      <li><a class="menu__link" href="#konzept"><span class="num">02</span> Unser Konzept</a></li>
-      <li><a class="menu__link" href="#qualitaet"><span class="num">03</span> Auswahl &amp; Qualität</a></li>
-      <li><a class="menu__link" href="#wissen"><span class="num">04</span> Wissen &amp; Fragen</a></li>
-      <li><a class="menu__link" href="#ueber"><span class="num">05</span> Über Estera</a></li>
-      <li><a class="menu__link" href="#karriere"><span class="num">06</span> Karriere</a></li>
-      <li><a class="menu__link" href="#partner"><span class="num">07</span> Für Partner</a></li>
-      <li><a class="menu__link" href="#kontakt"><span class="num">08</span> Kontakt</a></li>
+      <li><a class="menu__link" href="#konzept"><span class="num">02</span> Ablauf</a></li>
+      <li><a class="menu__link" href="#auswahl"><span class="num">03</span> Auswahl</a></li>
+      <li><a class="menu__link" href="#prinzip"><span class="num">04</span> Prinzip</a></li>
+      <li><a class="menu__link" href="#werte"><span class="num">05</span> Werte</a></li>
+    </ul>
+    <p class="menu__gruppe">Seiten</p>
+    <ul class="menu__nav">
+      <li><a class="menu__link" href="konzept.html"><span class="num">01</span> Konzept</a></li>
+      <li><a class="menu__link" href="qualitaet.html"><span class="num">02</span> Qualität</a></li>
+      <li><a class="menu__link" href="wissen.html"><span class="num">03</span> Wissen</a></li>
+      <li><a class="menu__link" href="ueber-estera.html"><span class="num">04</span> Über Estera</a></li>
+      <li><a class="menu__link" href="karriere.html"><span class="num">05</span> Karriere</a></li>
     </ul>
 
     <aside class="menu__aside">
@@ -365,7 +414,7 @@
 <!-- Nur für die interne Abstimmung -->
 <div class="variant-switch">
   <a href="./index.html">Variante B · Empfehlung</a>
-  <a href="./variante-a.html" aria-current="page">Variante A · Briefing · Build B-121</a>
+  <a href="./variante-a.html" aria-current="page">Variante A · Briefing · Build B-124</a>
 </div>
 
 <script src="assets/js/site.js"></script>
