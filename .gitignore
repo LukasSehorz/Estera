@@ -6,3 +6,6 @@ Thumbs.db
 
 node_modules/
 *.log
+
+# Beispiel-Logos fremder Marken — NUR lokal zur Ansicht, nie ins oeffentliche Repo
+assets/img/logos/

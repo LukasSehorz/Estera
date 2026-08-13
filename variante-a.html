@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/hero-a.css">
 <link rel="stylesheet" href="assets/css/referenzen.css">
-<link rel="stylesheet" href="assets/css/reviews.css">
 <link rel="stylesheet" href="assets/css/leistungen.css">
 <link rel="stylesheet" href="assets/css/loop.css">
 </head>
@@ -96,7 +95,7 @@
      Danach ersetzen: .ref__logo-Inhalt, .ref__name, .ref__rolle, .ref__zitat
      und den Hinweis .ref__platzhalter-hinweis löschen.
      ===================================================================== -->
-<section class="ref" id="referenzen">
+<section class="ref" id="kunden">
   <div class="ref__inner">
 
     <header class="ref__head" data-reveal>
@@ -105,11 +104,9 @@
 
     <ul class="ref__tafel">
 
-      <li class="ref__karte" data-reveal style="--i:0">
-        <!-- PLATZHALTER — hier kommt <img src="assets/img/logos/….svg" alt="…" hin -->
-        <span class="ref__logo ref__logo--platzhalter" aria-hidden="true">
-          <span class="ref__logo-monogramm">MP</span>
-          <span class="ref__logo-wort">Mustermann<br>&amp; Partner</span>
+      <li class="ref__karte" data-reveal style="--i:0; --logo-scale:0.7">
+        <span class="ref__logo">
+          <img src="assets/img/logos/apple.svg" alt="Apple">
         </span>
         <div class="ref__person">
           <p class="ref__name">Andreas Mustermann</p>
@@ -118,10 +115,9 @@
         <p class="ref__zitat">„Platzhalter für den freigegebenen Satz der Referenz — hier stehen zwei bis drei Zeilen.“</p>
       </li>
 
-      <li class="ref__karte" data-reveal style="--i:1">
-        <span class="ref__logo ref__logo--platzhalter" aria-hidden="true">
-          <span class="ref__logo-monogramm">BB</span>
-          <span class="ref__logo-wort">Beispiel<br>Bau</span>
+      <li class="ref__karte" data-reveal style="--i:1; --logo-scale:1">
+        <span class="ref__logo">
+          <img src="assets/img/logos/baulig.svg" alt="Baulig Unternehmensgruppe">
         </span>
         <div class="ref__person">
           <p class="ref__name">Claudia Beispiel</p>
@@ -130,10 +126,9 @@
         <p class="ref__zitat">„Platzhalter für den freigegebenen Satz der Referenz — hier stehen zwei bis drei Zeilen.“</p>
       </li>
 
-      <li class="ref__karte" data-reveal style="--i:2">
-        <span class="ref__logo ref__logo--platzhalter" aria-hidden="true">
-          <span class="ref__logo-monogramm">ML</span>
-          <span class="ref__logo-wort">Musterfeld<br>Logistik</span>
+      <li class="ref__karte" data-reveal style="--i:2; --logo-scale:0.8">
+        <span class="ref__logo">
+          <img src="assets/img/logos/adidas.svg" alt="Adidas">
         </span>
         <div class="ref__person">
           <p class="ref__name">Stefan Musterfeld</p>
@@ -142,10 +137,9 @@
         <p class="ref__zitat">„Platzhalter für den freigegebenen Satz der Referenz — hier stehen zwei bis drei Zeilen.“</p>
       </li>
 
-      <li class="ref__karte" data-reveal style="--i:3">
-        <span class="ref__logo ref__logo--platzhalter" aria-hidden="true">
-          <span class="ref__logo-monogramm">PM</span>
-          <span class="ref__logo-wort">Platzhalter<br>Medizintechnik</span>
+      <li class="ref__karte" data-reveal style="--i:3; --logo-scale:1">
+        <span class="ref__logo">
+          <img src="assets/img/logos/fuermetz.svg" alt="Fürmetz Logistik">
         </span>
         <div class="ref__person">
           <p class="ref__name">Jonas Platzhalter</p>
@@ -165,113 +159,6 @@
 </section>
 
 
-<!-- =====================================================================
-     KUNDENSTIMMEN — echte Google-Bewertungen
-     Quelle: Google-Unternehmensprofil „Estera GmbH", 5,0 bei 5 Bewertungen.
-     Alle Zitate sind wortwörtliche Auszüge aus den veröffentlichten
-     Rezensionen — gekürzt, nie umformuliert.
-     Briefing S.3 „Nur echte Bewertungen", S.17 „direkt zur Quelle verlinken".
-     ===================================================================== -->
-<section class="rev" id="stimmen">
-  <div class="rev__inner">
-
-    <header class="rev__head" data-reveal>
-      <p class="rev__eyebrow"><span>Kundenstimmen</span></p>
-      <h2 class="display rev__h2">Was unsere Kunden sagen.</h2>
-
-      <div class="rev__score" style="--score: 5">
-        <span class="rev__value">5,0</span>
-        <span class="rev__stars" aria-label="5 von 5 Sternen">
-          <span class="rev__stars-row rev__stars-row--leer">
-            <svg viewBox="0 0 108 20"><g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round">
-              <path d="M10 2.5 12.3 8 18.3 8.5 13.8 12.4 15.1 18.2 10 15.1 4.9 18.2 6.2 12.4 1.7 8.5 7.7 8Z"/>
-              <path d="M32 2.5 34.3 8 40.3 8.5 35.8 12.4 37.1 18.2 32 15.1 26.9 18.2 28.2 12.4 23.7 8.5 29.7 8Z"/>
-              <path d="M54 2.5 56.3 8 62.3 8.5 57.8 12.4 59.1 18.2 54 15.1 48.9 18.2 50.2 12.4 45.7 8.5 51.7 8Z"/>
-              <path d="M76 2.5 78.3 8 84.3 8.5 79.8 12.4 81.1 18.2 76 15.1 70.9 18.2 72.2 12.4 67.7 8.5 73.7 8Z"/>
-              <path d="M98 2.5 100.3 8 106.3 8.5 101.8 12.4 103.1 18.2 98 15.1 92.9 18.2 94.2 12.4 89.7 8.5 95.7 8Z"/>
-            </g></svg>
-          </span>
-          <span class="rev__stars-row rev__stars-row--voll">
-            <svg viewBox="0 0 108 20"><g fill="currentColor">
-              <path d="M10 2.5 12.3 8 18.3 8.5 13.8 12.4 15.1 18.2 10 15.1 4.9 18.2 6.2 12.4 1.7 8.5 7.7 8Z"/>
-              <path d="M32 2.5 34.3 8 40.3 8.5 35.8 12.4 37.1 18.2 32 15.1 26.9 18.2 28.2 12.4 23.7 8.5 29.7 8Z"/>
-              <path d="M54 2.5 56.3 8 62.3 8.5 57.8 12.4 59.1 18.2 54 15.1 48.9 18.2 50.2 12.4 45.7 8.5 51.7 8Z"/>
-              <path d="M76 2.5 78.3 8 84.3 8.5 79.8 12.4 81.1 18.2 76 15.1 70.9 18.2 72.2 12.4 67.7 8.5 73.7 8Z"/>
-              <path d="M98 2.5 100.3 8 106.3 8.5 101.8 12.4 103.1 18.2 98 15.1 92.9 18.2 94.2 12.4 89.7 8.5 95.7 8Z"/>
-            </g></svg>
-          </span>
-        </span>
-        <span class="rev__meta">5 Bewertungen bei Google</span>
-        <a class="rev__link" href="https://www.google.com/maps/search/Estera+GmbH" target="_blank" rel="noopener">
-          Alle Bewertungen ansehen <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-    </header>
-
-    <ul class="rev__cards">
-      <li class="rev__card" data-reveal style="--i:0">
-        <div class="rev__person">
-          <span class="rev__initial">Y</span>
-          <span class="rev__who">
-            <span class="rev__name">Younes Karali</span>
-            <span class="rev__role">Google-Bewertung</span>
-          </span>
-        </div>
-        <blockquote class="rev__body">
-          <p class="rev__text">Er hat sich viel Zeit genommen, mir alles verständlich und in Ruhe erklärt, da ich mich vorher selbst kaum mit dem Thema beschäftigt hatte. Bei Fragen konnte ich mich jederzeit melden und habe immer schnell eine kompetente und verständliche Antwort erhalten.</p>
-          <p class="rev__mini" aria-label="5 von 5 Sternen">★★★★★</p>
-        </blockquote>
-      </li>
-
-      <li class="rev__card" data-reveal style="--i:1">
-        <div class="rev__person">
-          <span class="rev__initial">S</span>
-          <span class="rev__who">
-            <span class="rev__name">Sandro Horn</span>
-            <span class="rev__role">Google-Bewertung</span>
-          </span>
-        </div>
-        <blockquote class="rev__body">
-          <p class="rev__text">Janni hat direkt verstanden, worauf es mir ankommt, und ist sehr individuell auf meine Situation eingegangen. Es wurde nichts unnötig kompliziert gemacht und ich hatte bei meiner Entscheidung von Anfang an ein sehr gutes Gefühl.</p>
-          <p class="rev__mini" aria-label="5 von 5 Sternen">★★★★★</p>
-        </blockquote>
-      </li>
-
-      <li class="rev__card" data-reveal style="--i:2">
-        <div class="rev__person">
-          <span class="rev__initial">J</span>
-          <span class="rev__who">
-            <span class="rev__name">Johannes Strasser</span>
-            <span class="rev__role">Google-Bewertung</span>
-          </span>
-        </div>
-        <blockquote class="rev__body">
-          <p class="rev__text">Man merkt relativ schnell, ob jemandem einfach nur etwas verkauft werden soll oder ob wirklich geprüft wird, was zur eigenen Situation passt. Genau dieser Unterschied war für mich bei Estera spürbar.</p>
-          <p class="rev__mini" aria-label="5 von 5 Sternen">★★★★★</p>
-        </blockquote>
-      </li>
-
-      <li class="rev__card" data-reveal style="--i:3">
-        <div class="rev__person">
-          <span class="rev__initial">E</span>
-          <span class="rev__who">
-            <span class="rev__name">eight1six</span>
-            <span class="rev__role">Google-Bewertung</span>
-          </span>
-        </div>
-        <blockquote class="rev__body">
-          <p class="rev__text">Die Möglichkeiten, die mir gezeigt wurden, waren wirklich stark und haben mich direkt überzeugt. Trotzdem wurde bewusst realistisch und eher konservativ gerechnet, wodurch ich meine Entscheidungen mit einem sehr guten Gefühl treffen konnte.</p>
-          <p class="rev__mini" aria-label="5 von 5 Sternen">★★★★★</p>
-        </blockquote>
-      </li>
-    </ul>
-
-    <p class="rev__hinweis">
-      Wortwörtliche Auszüge aus den veröffentlichten Google-Bewertungen.
-    </p>
-
-  </div>
-</section>
 
 <!-- =====================================================================
      DER ABLAUF
@@ -379,15 +266,14 @@
 
   <div class="menu__body">
     <ul class="menu__nav">
-      <li><a class="menu__link" href="#referenzen"><span class="num">01</span> Referenzen</a></li>
+      <li><a class="menu__link" href="#kunden"><span class="num">01</span> Kunden</a></li>
       <li><a class="menu__link" href="#konzept"><span class="num">02</span> Unser Konzept</a></li>
       <li><a class="menu__link" href="#qualitaet"><span class="num">03</span> Auswahl &amp; Qualität</a></li>
       <li><a class="menu__link" href="#wissen"><span class="num">04</span> Wissen &amp; Fragen</a></li>
       <li><a class="menu__link" href="#ueber"><span class="num">05</span> Über Estera</a></li>
-      <li><a class="menu__link" href="#stimmen"><span class="num">06</span> Kundenstimmen</a></li>
-      <li><a class="menu__link" href="#karriere"><span class="num">07</span> Karriere</a></li>
-      <li><a class="menu__link" href="#partner"><span class="num">08</span> Für Partner</a></li>
-      <li><a class="menu__link" href="#kontakt"><span class="num">09</span> Kontakt</a></li>
+      <li><a class="menu__link" href="#karriere"><span class="num">06</span> Karriere</a></li>
+      <li><a class="menu__link" href="#partner"><span class="num">07</span> Für Partner</a></li>
+      <li><a class="menu__link" href="#kontakt"><span class="num">08</span> Kontakt</a></li>
     </ul>
 
     <aside class="menu__aside">
@@ -417,7 +303,7 @@
 <!-- Nur für die interne Abstimmung -->
 <div class="variant-switch">
   <a href="./index.html">Variante B · Empfehlung</a>
-  <a href="./variante-a.html" aria-current="page">Variante A · Briefing · Build B-116</a>
+  <a href="./variante-a.html" aria-current="page">Variante A · Briefing · Build B-117</a>
 </div>
 
 <script src="assets/js/site.js"></script>

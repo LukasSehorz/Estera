@@ -19,13 +19,13 @@ interne Abstimmung** und fliegt vor dem Launch raus (`.variant-switch` in
 
 ```
 index.html          Variante B — Hero
-variante-a.html     Variante A — Hero, Kundenstimmen, Ablauf
+variante-a.html     Variante A — Hero, Kunden, Ablauf
 assets/css/
   fonts.css         @font-face, self-hosted
   base.css          Tokens, Header, Menü-Overlay, Buttons, Rotator
   hero-a.css        Bildband + eingelegter Kasten
   hero-b.css        Imperia-Geometrie
-  reviews.css       Kundenstimmen
+  referenzen.css    Kunden, die uns vertrauen
   leistungen.css    Ablauf (senkrechte Linie + zwei Bilder)
   loop.css          Lemniskaten-Variante des Ablaufs, derzeit nicht eingebunden
 assets/js/site.js   Menü, Sticky-Header, Rotator, Reveal, Linienlänge
@@ -100,20 +100,38 @@ Josts geraden Strich unter (`'Estera Hyphen'` in `fonts.css`).
 
 ---
 
-## Kundenstimmen
+## Kunden, die uns vertrauen
 
-Vier **echte** Google-Bewertungen (Younes Karali, Sandro Horn,
-Johannes Strasser, eight1six), versetzt gesetzt.
+Ein Fries über die volle Breite (88–97 % der Fensterbreite): Goldhaarlinie
+oben und unten, dazwischen vier Spalten mit Firmenlogo, Name des
+Geschäftsführers und seinem Satz.
 
-Statt Porträtfotos steht eine Initiale im Medaillon: Fotos der Bewertenden
-liegen nicht vor, und Fremdfotos neben echten Namen wären Falschdarstellung
-realer Personen.
+Bewusst **kein gerahmter Kasten** wie in der Referenz — ein abgerundetes
+Rechteck mit heller Kontur ist die Formsprache eines UI-Baukastens. Der Rest
+der Seite arbeitet mit gestochenen Haarlinien.
 
-Kennzahl, Sterne, Anzahl und Quelle stehen bewusst zusammen. Wer mit einem
-Bewertungsschnitt wirbt, muss erkennbar machen, worauf er beruht und woher er
-stammt (§ 5 UWG, § 5b Abs. 3 UWG). *Keine Rechtsberatung.*
+Die Wirkung trägt der Größenkontrast: Zitat 1,48 rem kursiv, Name 1,3 rem,
+Rolle 0,71 rem gesperrte Versalien, Logo klein und einfarbig. Die Logos
+liegen im Ruhezustand auf einer Tonstufe (Graustufe, 55 % Deckkraft) und
+kommen erst bei Hover in Farbe — vier bunte Logos nebeneinander ziehen mehr
+Blick als die Zitate.
 
----
+`subgrid` bindet Logo-, Namens- und Zitatzeile aller vier Spalten auf
+gemeinsame Linien. Eine negative Außenmarge in Höhe des Spalten-Innenabstands
+sorgt dafür, dass der Text der ersten Spalte auf dem Seitenrand steht und
+trotzdem alle vier Spalten dieselbe Zeilenbreite behalten.
+
+**Alle Inhalte sind Platzhalter.** Die Logos unter `assets/img/logos/` sind
+Beispiele fremder Marken, nur zur lokalen Ansicht — der Ordner ist per
+`.gitignore` vom Repo ausgeschlossen. Vor der Freischaltung wird je Referenz
+gebraucht: Logo als SVG, Name und Funktion, der Satz wörtlich, und eine
+schriftliche Freigabe für alle drei.
+
+Die Google-Bewertungen sind entfallen (Commit `5d499b7^`, `reviews.css`).
+Damit hat die Seite derzeit **keine öffentlich nachprüfbare** Referenz mehr:
+Google-Rezensionen konnte jeder selbst aufrufen, Logo und Zitat kann man nur
+glauben. Sobald die echten Referenzen stehen, lohnt ein Blick, ob die
+Bewertungen nicht doch zusätzlich an anderer Stelle auftauchen sollten.
 
 ## Ablauf
 
@@ -176,7 +194,8 @@ Wording: nicht „ausgewählte Wohnimmobilien", sondern
 - **Leistungsumfang.** Briefing S. 14: Estera muss den tatsächlichen Umfang vor
   Veröffentlichung bestätigen. Die sechs Schritte bilden den *Ablauf* ab, nicht
   einen zugesicherten Leistungskatalog.
-- **URL des Google-Profils** für den Link unter den Bewertungen.
+- **Vier Referenzen**: Logo als SVG, Name, Funktion, der Satz wörtlich,
+  schriftliche Freigabe für Logo, Name und Zitat.
 - **Logo als SVG.** Aktuell ist die Wortmarke typografisch nachgebaut
   (Cormorant Garamond, Sperrsatz). Sobald das echte Logo da ist, ersetzt es
   `.wordmark` in beiden HTML-Dateien.
