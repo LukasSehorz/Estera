@@ -28,6 +28,7 @@ assets/css/
   referenzen.css    Kunden, die uns vertrauen
   leistungen.css    Section 3 — So funktioniert Estera
   auswahl.css       Section 4 — Warum Estera anders auswählt
+  prinzip.css       Section 5 — Das finanzielle Prinzip
   loop.css          Lemniskaten-Variante des Ablaufs, derzeit nicht eingebunden
 assets/js/site.js   Kopfnavigation, Menü, Sticky-Header, Rotator, Reveal,
                     Linienlänge, Referenzen-Akkordeon
@@ -243,6 +244,31 @@ Vorlauf ist deshalb aus der Bildgeometrie gerechnet
 (`padding-top: calc(22.1vw + 3.5rem)`, hergeleitet aus 46,6 vw Breite bei
 3:2 und 71 % Überstand) statt geschätzt — gemessen bleiben von 1101 bis
 1920 px konstant 107 px Luft zwischen Bildunterkante und Überschrift.
+
+---
+
+## Section 5 — das finanzielle Prinzip
+
+Briefing S. 7: „Eine ruhige Visualisierung zeigt das Zusammenspiel von
+Finanzierung, Immobilie, Miete, Tilgung, laufenden Kosten und möglicher
+steuerlicher Wirkung."
+
+Die sechs Bausteine stehen **wörtlich** im Briefing S. 10, Spalte „Einfache
+Aussage für die Website". Geändert ist nur die Anrede („der Investor" → „Sie").
+„Was bewusst offenbleibt" ebenso wörtlich, S. 11.
+
+**Auf der Section steht keine einzige Zahl.** Das Briefing verbietet die
+pauschale monatliche Belastung, „ab 0 Euro", aggressive Rendite- und
+Steuerversprechen sowie jede individuelle Berechnung.
+
+Bewusst **ohne Diagramm** — der Abschnitt davor ist genau das. Hier tragen
+Typografie und eine doppelte waagerechte Haarlinie: eine Tafel, kein
+Schaubild. Und bewusst **ohne Icons**, weil in Abschnitt 4 in jedem Kasten
+eins sitzt und drei der Symbole (Bank, Waage, Balken) dieselben gewesen wären.
+
+Der lange steuerliche Absatz aus S. 10 steht **nicht** hier: er gehört laut
+S. 3 auf „Wissen & Fragen", und das Briefing verlangt für ihn ausdrücklich
+eine steuerliche und rechtliche Prüfung.
 
 ---
 

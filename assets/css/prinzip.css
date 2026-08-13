@@ -1,0 +1,246 @@
+/* ===========================================================================
+   SECTION 5 — DAS FINANZIELLE PRINZIP (Briefing S.7 und S.10/11)
+   „Eine ruhige Visualisierung zeigt das Zusammenspiel von Finanzierung,
+    Immobilie, Miete, Tilgung, laufenden Kosten und möglicher steuerlicher
+    Wirkung. Die Seite nennt keine pauschale monatliche Belastung und kein
+    ‚ab 0 Euro‘."
+
+   Bewusst OHNE Diagramm mit Kästen und Pfeilen: der Abschnitt davor ist
+   genau das. Hier tragen Typografie und zwei waagerechte Haarlinien —
+   eine Tafel, kein Schaubild. „Ruhig" heißt hier wörtlich ruhig.
+
+   Ebenso bewusst OHNE Icons. In Abschnitt 4 sitzt in jedem Kasten eins;
+   zweimal dieselbe Geste hintereinander nutzt sie ab. Und drei der sechs
+   Symbole (Bank, Waage, Balken) wären dieselben gewesen.
+   =========================================================================== */
+
+.prinzip {
+  --linie: #8CA0B8;
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  padding: clamp(3.5rem, 9vh, 7rem) 0 clamp(4rem, 10vh, 8rem);
+}
+
+.prinzip__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* --- Kopf ----------------------------------------------------------------- */
+.prinzip__head {
+  max-width: 940px;
+  margin: 0 auto;
+  text-align: center;
+}
+.prinzip__h2 {
+  font-size: clamp(1.9rem, 3.2vw, 3.2rem);
+  line-height: 1.12;
+}
+.prinzip__lead {
+  margin: clamp(1.6rem, 3.4vh, 2.4rem) auto 0;
+  max-width: 46rem;
+  font-size: clamp(1.12rem, 1.42vw, 1.42rem);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+.prinzip__lead .hl { color: var(--ink-black); }
+
+/* --- Zwischentitel zwischen zwei Goldhaarlinien -------------------------- */
+.prinzip__kicker {
+  margin-top: clamp(2.8rem, 7vh, 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.9rem, 2vw, 1.6rem);
+}
+.prinzip__kicker::before,
+.prinzip__kicker::after {
+  content: '';
+  width: clamp(28px, 6vw, 90px);
+  height: 1px;
+  background: var(--line-gold);
+}
+.prinzip__kicker span {
+  font-size: clamp(0.8rem, 0.86vw, 0.89rem);
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+  white-space: nowrap;
+}
+
+/* --- Die vier Träger ------------------------------------------------------ */
+.prinzip__traeger {
+  margin: clamp(2.2rem, 5vh, 3.4rem) auto 0;
+  max-width: 1180px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.prinzip__posten {
+  position: relative;
+  padding: 0 clamp(1.1rem, 2vw, 2rem) clamp(1.8rem, 4vh, 2.8rem);
+}
+.prinzip__posten:first-child { padding-left: 0; }
+.prinzip__posten:last-child  { padding-right: 0; }
+/* Spaltenlinien, oben eingerückt — sie sollen die Achse unten nicht berühren */
+.prinzip__posten + .prinzip__posten::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.35em;
+  bottom: clamp(1.4rem, 3vh, 2.2rem);
+  width: 1px;
+  background: var(--line-soft);
+}
+.prinzip__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.45vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ink-black);
+}
+.prinzip__satz {
+  margin-top: clamp(0.6rem, 1.4vh, 0.9rem);
+  font-size: clamp(0.94rem, 1.04vw, 1.04rem);
+  line-height: 1.58;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+/* --- Die Achse ------------------------------------------------------------ */
+/* Doppelte Haarlinie wie die Verbinder in Abschnitt 4 — dieselbe Sprache,
+   nur waagerecht und über die volle Breite. Sie trennt, was die Anlage
+   trägt, von dem, was daraus folgt. */
+.prinzip__achse {
+  display: block;
+  height: 3px;
+  margin: 0 auto;
+  max-width: 1180px;
+  background: linear-gradient(to bottom,
+    var(--linie) 0 1px, transparent 1px 2px, var(--linie) 2px 3px);
+}
+
+/* --- Was daraus folgt ----------------------------------------------------- */
+.prinzip__folgen {
+  margin: clamp(2rem, 4.5vh, 3.2rem) auto 0;
+  max-width: 1180px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 5vw, 4.5rem);
+}
+.prinzip__folge-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 1.95vw, 1.95rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ink-black);
+}
+.prinzip__folge-satz {
+  margin-top: clamp(0.7rem, 1.6vh, 1rem);
+  max-width: 32rem;
+  font-size: clamp(1rem, 1.1vw, 1.1rem);
+  line-height: 1.58;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+/* --- Was bewusst offenbleibt --------------------------------------------- */
+/* Steht bewusst als eigene Tafel und nicht kleingedruckt am Rand. Das
+   Briefing verbietet pauschale Belastungsangaben und Null-Euro-Aussagen;
+   offen zu benennen, was die Seite NICHT beantwortet, ist der belastbarste
+   Teil des Abschnitts. */
+.prinzip__offen {
+  margin: clamp(3rem, 7vh, 5rem) auto 0;
+  max-width: 1180px;
+  padding: clamp(1.6rem, 3.4vw, 2.8rem) clamp(1.6rem, 3.4vw, 3rem);
+  border: 1px solid var(--line-gold);
+  border-radius: var(--radius-img);
+  background: var(--paper);
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+  gap: clamp(1.2rem, 3vw, 3rem);
+  align-items: start;
+}
+.prinzip__offen-titel {
+  font-size: clamp(0.8rem, 0.86vw, 0.89rem);
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-indent: 0.26em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--gold-text);
+}
+.prinzip__offen-liste {
+  display: grid;
+  gap: clamp(0.7rem, 1.6vh, 1.05rem);
+}
+.prinzip__offen-liste li {
+  position: relative;
+  padding-left: 1.15em;
+  font-size: clamp(0.96rem, 1.06vw, 1.06rem);
+  line-height: 1.55;
+  color: var(--ink-black);
+}
+.prinzip__offen-liste li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 6px;
+  height: 1px;
+  background: var(--gold);
+}
+.prinzip__offen-fuss {
+  margin-top: clamp(1rem, 2.2vh, 1.5rem);
+  font-size: clamp(0.9rem, 0.98vw, 0.98rem);
+  line-height: 1.55;
+  color: var(--ink-mute);
+}
+
+/* --- Verweis auf die Vertiefung ------------------------------------------ */
+.prinzip__mehr {
+  margin-top: clamp(2.4rem, 6vh, 4rem);
+  text-align: center;
+}
+.prinzip__mehr a {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.4em;
+  font-family: var(--font-display);
+  font-size: clamp(0.98rem, 1.1vw, 1.1rem);
+  font-weight: 500;
+  color: var(--navy-800);
+}
+.prinzip__mehr a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--line-gold);
+  transition: background 0.4s var(--ease);
+}
+.prinzip__mehr a:hover::after { background: var(--gold); }
+.prinzip__mehr a[aria-disabled='true'] { cursor: default; }
+
+/* --- Responsive ----------------------------------------------------------- */
+@media (max-width: 1000px) {
+  .prinzip__traeger { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* Bei zwei Spalten hat nur die zweite eine Senkrechte */
+  .prinzip__posten { padding-left: clamp(1.1rem, 2vw, 2rem); padding-right: clamp(1.1rem, 2vw, 2rem); }
+  .prinzip__posten:nth-child(2n + 1) { padding-left: 0; }
+  .prinzip__posten:nth-child(2n)     { padding-right: 0; }
+  .prinzip__posten:nth-child(2n + 1)::before { display: none; }
+  .prinzip__offen { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+  .prinzip__traeger { grid-template-columns: 1fr; }
+  .prinzip__posten { padding-left: 0; padding-right: 0; }
+  .prinzip__posten::before { display: none; }
+  .prinzip__folgen { grid-template-columns: 1fr; gap: clamp(1.6rem, 4vh, 2.4rem); }
+  .prinzip__h2 { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+}
