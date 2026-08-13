@@ -212,6 +212,17 @@ Stufen mit je einem Kasten links und rechts, jeder mit Icon. Imperia zieht
 dort 1,5-px-Linien in Gold — übernommen ist die Strichsprache, nicht die
 Farbe: hier läuft alles in Navy.
 
+Die Linien laufen als **doppelte Haarlinie**: 1 px Linie, 1 px Luft, 1 px
+Linie. Eine einzelne Linie ist eine Verbindung, zwei parallele sind eine
+Randung — dieselbe Sprache wie auf einem Wertpapier. Die Pfeilspitzen
+bestehen entsprechend aus zwei ineinanderliegenden Winkeln; eine einfache
+Spitze an einer doppelten Linie sah aus, als gehörte sie nicht dazu.
+
+Der Startkasten ist ein deckendes Navy-Siegel mit Goldrandung — der einzige
+dunkle Punkt auf weißem Papier. Vorher hatte er dasselbe Gewicht wie die
+sechs darunter, und es gab keinen erkennbaren Ursprung. Die Icons sitzen in
+Medaillons mit Goldring, derselben Form wie das Siegel im Ablauf.
+
 Die Verbinder sind **kein SVG**, sondern Rahmenkanten mit Eckenradius. Ein
 SVG müsste seine Koordinaten mit dem Raster in Deckung halten und bräche bei
 jeder Breitenänderung; Rahmen wachsen von selbst mit. Zwei Details dabei:

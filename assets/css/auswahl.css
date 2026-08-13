@@ -230,29 +230,40 @@
   border-left: 3px double var(--arm-farbe);
   border-bottom-left-radius: var(--bogen);
 }
-/* Pfeilspitze am äußeren Ende, als gedrehter Winkel aus zwei Rahmenkanten */
+/* Pfeilspitze am äußeren Ende. Sie besteht aus ZWEI ineinanderliegenden
+   Winkeln im selben Abstand wie die beiden Linien — eine einfache Spitze an
+   einer doppelten Linie sieht aus, als gehörte sie nicht dazu.
+   Der Versatz von 2,5 px ist die Parallele zum Winkel: bei 45 Grad ergibt
+   ein Abstand von 2,5 px auf der Achse rund 1,8 px senkrecht zum Strich —
+   also denselben Abstand, den die beiden Linien zueinander haben. */
+.ableh__arm::before,
 .ableh__arm::after {
   content: '';
   position: absolute;
   bottom: -3px;
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-style: solid;
   border-color: var(--arm-farbe);
   border-width: 0;
 }
+.ableh__arm--links::before,
 .ableh__arm--links::after {
-  left: -1px;
   border-left-width: 1px;
   border-bottom-width: 1px;
   transform: rotate(45deg);
 }
+.ableh__arm--links::before { left: -1.5px; }
+.ableh__arm--links::after  { left: 1px; }
+
+.ableh__arm--rechts::before,
 .ableh__arm--rechts::after {
-  right: -1px;
   border-right-width: 1px;
   border-bottom-width: 1px;
   transform: rotate(-45deg);
 }
+.ableh__arm--rechts::before { right: -1.5px; }
+.ableh__arm--rechts::after  { right: 1px; }
 
 /* --- Die Kästen ----------------------------------------------------------- */
 .ableh__kasten {
@@ -287,31 +298,8 @@
 .ableh__icon svg { width: 54%; height: 54%; display: block; }
 .ableh__kasten:hover .ableh__icon { border-color: var(--gold); }
 
-/* Tafelziffer als Prägung: groß, sehr blass, oben rechts. Sie macht aus
-   sechs gleichen Kästen sechs nummerierte Tafeln — und stiehlt dem Text
-   trotzdem nichts, weil sie fast nicht da ist. */
-.ableh__nr {
-  position: absolute;
-  top: clamp(0.5rem, 1.2vh, 0.9rem);
-  right: clamp(0.8rem, 1.4vw, 1.2rem);
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 3.6vw, 3.6rem);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0.02em;
-  /* Cormorant setzt von Haus aus Mediävalziffern — die Null hat dann
-     Versalhöhe, die Eins keine Grundserife, und „01" liest sich als „OI".
-     Versalziffern erzwingen. */
-  font-variant-numeric: lining-nums;
-  font-feature-settings: 'lnum' 1, 'onum' 0;
-  color: rgba(16, 41, 73, 0.07);
-  pointer-events: none;
-  user-select: none;
-}
 
 .ableh__txt {
-  /* Platz für die Tafelziffer oben rechts */
-  padding-right: clamp(1.4rem, 2.6vw, 2.6rem);
   font-size: clamp(0.95rem, 1.06vw, 1.06rem);
   line-height: 1.55;
   color: var(--ink-black);
