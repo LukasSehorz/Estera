@@ -22,51 +22,16 @@
    Abschnitt hinein. Ohne diesen Vorlauf läge es über der Überschrift.
    Rechnung: Bildbreite 46,6 vw, Verhältnis 3:2, davon 71 % Überstand
    = 0,221 × Fensterbreite. Darauf noch Luft. */
+/* Die Überschrift beginnt DIREKT unter dem Querbild. Der Vorlauf deckt nur
+   noch den Überstand des Bildes ab, ohne zusätzliches Polster. */
 @media (min-width: 1101px) {
-  .wahl { padding-top: calc(22.1vw + 3.5rem); }
+  .wahl { padding-top: calc(22.1vw - 0.25rem); }
 }
 
 .wahl__inner {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--gutter);
-}
-
-/* --- Signet über der Überschrift ----------------------------------------- */
-/* Aufbau wie in der Referenz: fast geschlossener Ring, in der Mitte ein
-   Zeichen, darunter Kicker und Überschrift. Zwei konzentrische Ringe statt
-   eines — dieselbe doppelte Haarlinie wie bei den Verbindern unten. */
-.wahl__signet {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: clamp(112px, 11.4vw, 158px);
-  aspect-ratio: 1;
-  /* Der Text setzt DIREKT unter dem Ring an. Der Abstand ist bewusst fast
-     null: der Ring ist unten offen, dadurch endet sein sichtbarer Bogen
-     schon rund 6 % der Höhe über der Kastenkante — diese Lücke zählt
-     optisch bereits als Abstand. */
-  margin: 0 auto clamp(0.15rem, 0.5vh, 0.4rem);
-}
-.wahl__signet-ring {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-/* Kein vector-effect: non-scaling-stroke. Die Strichlänge steht über
-   pathLength in eigenen Einheiten; beides zusammen rechnet in
-   unterschiedlichen Maßstäben und die Lücke säße nicht mehr unten. */
-.wahl__signet-ring circle {
-  fill: none;
-  stroke: var(--line-gold);
-  stroke-width: 1;
-  stroke-linecap: round;
-}
-.wahl__signet-icon {
-  width: 34%;
-  height: 34%;
-  color: var(--navy-700, var(--navy-800));
 }
 
 /* --- Kopf ----------------------------------------------------------------- */
@@ -78,18 +43,6 @@
 .wahl__h2 {
   font-size: clamp(1.9rem, 3.2vw, 3.2rem);
   line-height: 1.12;
-}
-/* Steht jetzt ÜBER der Überschrift, zwischen Signet und Zeile — sonst
-   stünde zwischen Zeichen und Überschrift nichts und das Signet schwebte
-   für sich. */
-.wahl__unterzeile {
-  margin-bottom: clamp(0.9rem, 2vh, 1.3rem);
-  font-size: clamp(0.8rem, 0.86vw, 0.89rem);
-  font-weight: 500;
-  letter-spacing: 0.3em;
-  text-indent: 0.3em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
 }
 .wahl__lead {
   margin: clamp(1.6rem, 3.4vh, 2.4rem) auto 0;
@@ -239,13 +192,7 @@
   background: linear-gradient(to right,
     var(--linie) 0 1px, transparent 1px 2px, var(--linie) 2px 3px);
 }
-/* Nach der letzten Stufe geht es nicht weiter. Die Linie endet DORT, WO DIE
-   BÖGEN ABZWEIGEN — also einen Bogenradius über der Waagerechten. Endete sie
-   erst auf Höhe der Pfeile, stünde unter dem Abzweig ein Stück Linie, an dem
-   nichts mehr hängt. */
-.ableh__stufe:last-child .ableh__verbinder::before {
-  bottom: calc(50% + var(--bogen));
-}
+/* Die Linie laeuft durch bis zum Ergebnis darunter. */
 
 /* Ein Arm ist ein Kasten, von dem nur zwei Rahmenkanten gezeichnet werden:
    die senkrechte auf der Mittellinie und die waagerechte zum Kasten hin.
@@ -469,4 +416,70 @@
   .ableh__arm { clip-path: none; }
   .ableh__start, .ableh__kasten, .ableh__abgang,
   .ableh__verbinder::before, .ableh__arm { transition: none; }
+}
+
+
+/* --- Zulauf zum Ergebnis -------------------------------------------------- */
+/* Gerader Pfeil unter der letzten Stufe: dieselbe doppelte Linie und
+   dieselbe doppelte Spitze wie bei den sechs Armen, nur senkrecht. */
+.ableh__zulauf {
+  position: relative;
+  display: block;
+  width: 3px;
+  height: clamp(2.6rem, 6vh, 4.2rem);
+  margin: 0 auto clamp(14px, 1.6vh, 20px);
+  background: linear-gradient(to right,
+    var(--linie) 0 1px, transparent 1px 2px, var(--linie) 2px 3px);
+}
+.ableh__zulauf::before,
+.ableh__zulauf::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-style: solid;
+  border-color: var(--linie);
+  border-width: 0 1px 1px 0;
+  transform: translateX(-50%) rotate(45deg);
+}
+/* Spitze unten, zweiter Winkel 2,83 px darueber — bei 45 Grad ergibt das
+   die 2 px Abstand, den die beiden Linien zueinander haben. */
+.ableh__zulauf::before { bottom: -1.7px; }
+.ableh__zulauf::after  { bottom: 1.13px; }
+
+/* --- Das Ergebnis --------------------------------------------------------- */
+.ableh__ergebnis {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: clamp(0.85rem, 1.9vh, 1.2rem) clamp(1.6rem, 3.2vw, 2.6rem);
+  border: 1px solid var(--line-gold);
+  border-radius: var(--radius-img);
+  background: var(--paper);
+  text-align: center;
+  font-size: clamp(0.82rem, 0.9vw, 0.93rem);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  text-transform: uppercase;
+  color: var(--navy-800);
+}
+
+/* Beide laufen nach der letzten Stufe auf */
+.ableh__zulauf,
+.ableh__ergebnis {
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-soft);
+}
+.ableh[data-gezeichnet='true'] .ableh__zulauf {
+  opacity: 1;
+  transition-delay: 1.62s;
+}
+.ableh[data-gezeichnet='true'] .ableh__ergebnis {
+  opacity: 1;
+  transition-delay: 1.86s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ableh__zulauf, .ableh__ergebnis { opacity: 1; transition: none; }
 }
