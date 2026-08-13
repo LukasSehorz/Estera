@@ -34,15 +34,90 @@
 }
 
 /* --- Kopf ----------------------------------------------------------------- */
+/* Der Kopf laeuft ueber die volle Breite, damit das Google-Siegel links
+   aussen sitzen kann. Die Ueberschrift bleibt trotzdem auf der Seitenmitte —
+   sie wird eigenmittig begrenzt, nicht der Kopf. */
 .ref__head {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(56px, 6vw, 76px);
 }
 .ref__h2 {
+  max-width: 900px;
   font-size: clamp(1.9rem, 3.2vw, 3.2rem);
   line-height: 1.12;
+  text-align: center;
 }
+
+/* --- Google-Siegel -------------------------------------------------------- */
+/* Sitzt auf der linken Kante des Satzspiegels — also exakt dort, wo darunter
+   das erste Logo und der erste Name beginnen. */
+.ref__siegel {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: clamp(0.6rem, 1vw, 0.85rem);
+  padding: 0.5rem 0;
+  color: var(--ink-black);
+  text-decoration: none;
+}
+.ref__siegel-g {
+  flex: 0 0 auto;
+  width: clamp(22px, 1.9vw, 27px);
+  height: auto;
+}
+.ref__siegel-txt {
+  display: grid;
+  gap: 0.22em;
+  line-height: 1.25;
+}
+
+/* Googles Gelb, nicht Estera-Gold: das Siegel ist ein Fremdkoerper mit
+   Beleg-Funktion — es soll als Google-Bewertung erkennbar sein und sich
+   nicht in die Seite einfuegen. */
+.ref__siegel-sterne {
+  display: flex;
+  gap: 1.5px;
+  color: #F4B400;
+}
+.ref__siegel-sterne svg {
+  width: clamp(12px, 1.05vw, 14px);
+  height: auto;
+  fill: currentColor;
+  display: block;
+}
+
+.ref__siegel-wert {
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  font-weight: 500;
+  color: var(--ink-black);
+}
+/* Anzahl und Quelle stehen bewusst dabei: wer mit einem Bewertungsschnitt
+   wirbt, muss erkennbar machen, worauf er beruht und woher er stammt. */
+.ref__siegel-quelle {
+  position: relative;
+  align-self: start;
+  font-size: clamp(0.66rem, 0.72vw, 0.73rem);
+  letter-spacing: 0.08em;
+  color: var(--ink-mute);
+}
+.ref__siegel-quelle::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 1px;
+  background: var(--line-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+.ref__siegel:hover .ref__siegel-quelle::after,
+.ref__siegel:focus-visible .ref__siegel-quelle::after { transform: scaleX(1); }
 
 /* --- Der Fries ------------------------------------------------------------ */
 .ref__tafel {
@@ -219,6 +294,16 @@
 }
 
 /* --- Responsive ----------------------------------------------------------- */
+/* Ab hier laeuft das Siegel in die Ueberschrift hinein — es rueckt darueber. */
+@media (max-width: 960px) {
+  .ref__head { gap: clamp(1.2rem, 3vh, 1.8rem); }
+  .ref__siegel {
+    position: static;
+    transform: none;
+    justify-content: center;
+  }
+}
+
 @media (max-width: 1200px) {
   .ref__tafel {
     grid-template-columns: repeat(2, minmax(0, 1fr));
