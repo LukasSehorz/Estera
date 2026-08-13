@@ -61,50 +61,6 @@
 }
 .wahl__lead .hl { color: var(--ink-black); }
 
-/* --- Zwischentitel zwischen zwei Goldhaarlinien -------------------------- */
-.wahl__kicker {
-  margin-top: clamp(2.8rem, 7vh, 5rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(0.9rem, 2vw, 1.6rem);
-}
-.wahl__kicker::before,
-.wahl__kicker::after {
-  content: '';
-  width: clamp(28px, 6vw, 90px);
-  height: 1px;
-  background: var(--line-gold);
-}
-.wahl__kicker span {
-  font-size: clamp(0.8rem, 0.86vw, 0.89rem);
-  font-weight: 500;
-  letter-spacing: 0.28em;
-  text-indent: 0.28em;
-  text-transform: uppercase;
-  color: var(--gold-text);
-  white-space: nowrap;
-}
-
-/* --- Die Ablehnungsgründe ------------------------------------------------- */
-/* Zwei Spalten, nicht drei: der dritte Grund ist deutlich länger als die
-   anderen und bräuchte in einer schmalen Spalte fünf Zeilen. */
-.wahl__gruende {
-  margin: clamp(2.2rem, 5vh, 3.4rem) auto 0;
-  max-width: 1080px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(1.8rem, 4vh, 2.8rem) clamp(2.2rem, 5vw, 4.5rem);
-}
-.wahl__grund {
-  padding-top: clamp(1rem, 2.2vh, 1.5rem);
-  border-top: 1px solid var(--line-soft);
-  font-size: clamp(1rem, 1.14vw, 1.14rem);
-  line-height: 1.58;
-  color: var(--ink-black);
-  text-wrap: pretty;
-}
-
 /* --- Verweis auf die Vertiefung ------------------------------------------ */
 .wahl__mehr {
   margin-top: clamp(2.4rem, 6vh, 4rem);
@@ -133,6 +89,212 @@
 
 /* --- Responsive ----------------------------------------------------------- */
 @media (max-width: 780px) {
-  .wahl__gruende { grid-template-columns: 1fr; }
   .wahl__h2 { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+}
+
+
+/* ===========================================================================
+   ABLEHNUNGSGRÜNDE ALS VERZWEIGUNG
+   Aufbau nach imperiaimmobilien.de „Unsere Leistungen": ein Kasten, von dem
+   die Wege ausgehen, dann abwechselnd links und rechts ein Kasten mit Icon.
+
+   Imperia zieht dort 1,5-px-Linien in Gold (rgb(139,96,29)) mit kleinen
+   Winkel-Pfeilspitzen. Übernommen ist die Strichsprache, nicht die Farbe:
+   hier läuft alles in Navy.
+
+   Die Verbinder sind KEIN SVG, sondern Rahmen mit Eckenradius. Ein SVG
+   müsste seine Koordinaten mit dem Raster in Deckung halten und bräche bei
+   jeder Breitenänderung; Rahmen wachsen von selbst mit.
+   =========================================================================== */
+.ableh {
+  /* Deckende Farbe, KEIN rgba: an den Bögen liegen zwei Rahmenkanten
+     exakt übereinander. Mit Transparenz addierten sie sich und die Stelle
+     wäre dunkler als der Rest der Linie. */
+  --linie: #8CA0B8;
+  --bogen: clamp(26px, 3vw, 46px);
+  max-width: 1080px;
+  margin: clamp(2.6rem, 6vh, 4.5rem) auto 0;
+}
+
+/* --- Der Kasten oben, von dem die Wege ausgehen -------------------------- */
+.ableh__start {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: clamp(0.9rem, 2vh, 1.25rem) clamp(1.4rem, 3vw, 2.4rem);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius-img);
+  background: var(--paper);
+  text-align: center;
+}
+.ableh__start-txt {
+  font-size: clamp(0.82rem, 0.9vw, 0.93rem);
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-indent: 0.26em;
+  text-transform: uppercase;
+  color: var(--navy-800);
+  white-space: nowrap;
+}
+/* Kurzes Stück Linie zwischen Startkasten und erster Stufe */
+.ableh__abgang {
+  display: block;
+  width: 1px;
+  height: clamp(2rem, 5vh, 3.4rem);
+  margin: 0 auto;
+  background: var(--linie);
+}
+
+/* --- Die drei Stufen ------------------------------------------------------ */
+/* Kein row-gap: die senkrechte Linie muss durchlaufen. Der Abstand zwischen
+   den Stufen kommt aus den Außenabständen der Kästen. */
+.ableh__stufen { display: grid; }
+
+.ableh__stufe {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(96px, 11vw, 168px) minmax(0, 1fr);
+  /* stretch statt center: in einer Stufe sollen beide Kästen gleich hoch
+     sein, sonst sitzt der Pfeil bei einem von beiden nicht auf der Mitte. */
+  align-items: stretch;
+}
+
+/* --- Verbinder: senkrechte Linie plus zwei Bögen ------------------------- */
+.ableh__verbinder {
+  position: relative;
+  align-self: stretch;
+}
+/* Die durchlaufende Senkrechte */
+.ableh__verbinder::before {
+  content: '';
+  position: absolute;
+  /* -1px, damit die Senkrechte GENAU auf den Rahmenkanten der beiden Bögen
+     liegt. Ohne das steht die Kante des linken Bogens links daneben, die des
+     rechten rechts daneben — die Linie wäre dann 2 px breit. */
+  left: calc(50% - 1px);
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--linie);
+}
+/* Nach der letzten Stufe geht es nicht weiter — die Linie endet auf Höhe
+   der letzten beiden Kästen. */
+.ableh__stufe:last-child .ableh__verbinder::before { bottom: 50%; }
+
+/* Ein Arm ist ein Kasten, von dem nur zwei Rahmenkanten gezeichnet werden:
+   die senkrechte auf der Mittellinie und die waagerechte zum Kasten hin.
+   Der Eckenradius dazwischen ergibt den Bogen. */
+.ableh__arm {
+  position: absolute;
+  top: 0;
+  height: 50%;
+  width: 50%;
+  border-bottom: 1px solid var(--linie);
+}
+.ableh__arm--links {
+  right: 50%;
+  border-right: 1px solid var(--linie);
+  border-bottom-right-radius: var(--bogen);
+}
+.ableh__arm--rechts {
+  left: calc(50% - 1px);
+  border-left: 1px solid var(--linie);
+  border-bottom-left-radius: var(--bogen);
+}
+/* Pfeilspitze am äußeren Ende, als gedrehter Winkel aus zwei Rahmenkanten */
+.ableh__arm::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  width: 9px;
+  height: 9px;
+  border-style: solid;
+  border-color: var(--linie);
+  border-width: 0;
+}
+.ableh__arm--links::after {
+  left: -1px;
+  border-left-width: 1px;
+  border-bottom-width: 1px;
+  transform: rotate(45deg);
+}
+.ableh__arm--rechts::after {
+  right: -1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  transform: rotate(-45deg);
+}
+
+/* --- Die Kästen ----------------------------------------------------------- */
+.ableh__kasten {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(0.8rem, 1.4vw, 1.15rem);
+  margin: clamp(0.7rem, 1.8vh, 1.3rem) 0;
+  padding: clamp(1rem, 1.9vw, 1.5rem) clamp(1.1rem, 2vw, 1.6rem);
+  border: 1px solid rgba(16, 41, 73, 0.16);
+  border-radius: var(--radius-img);
+  background: var(--paper);
+  /* Kein Schlagschatten wie bei Imperia — die Seite arbeitet mit Haarlinien. */
+  transition: border-color 0.5s var(--ease);
+}
+.ableh__kasten:hover { border-color: var(--linie); }
+
+.ableh__icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: clamp(30px, 3vw, 38px);
+  aspect-ratio: 1;
+  color: var(--navy-600);
+}
+.ableh__icon svg { width: 100%; height: 100%; display: block; }
+
+.ableh__txt {
+  font-size: clamp(0.95rem, 1.06vw, 1.06rem);
+  line-height: 1.55;
+  color: var(--ink-black);
+  text-wrap: pretty;
+}
+
+/* --- Responsive ----------------------------------------------------------- */
+/* Unter 880 px passen zwei Kästen nebeneinander nicht mehr. Dann läuft die
+   Linie am linken Rand durch und alle sechs Gründe hängen rechts daran —
+   dieselbe Logik, nur einspaltig. */
+@media (max-width: 880px) {
+  .ableh { --bogen: 22px; }
+  .ableh__start { width: 100%; }
+  .ableh__start-txt { white-space: normal; }
+  .ableh__abgang { margin-left: clamp(1.4rem, 5vw, 2.4rem); }
+
+  .ableh__stufe {
+    grid-template-columns: clamp(2.8rem, 10vw, 4.8rem) minmax(0, 1fr);
+    align-items: stretch;
+  }
+  .ableh__verbinder { grid-column: 1; grid-row: 1 / span 2; }
+  .ableh__verbinder::before { left: clamp(1.4rem, 5vw, 2.4rem); }
+  .ableh__stufe:last-child .ableh__verbinder::before { bottom: 75%; }
+
+  .ableh__kasten--links  { grid-column: 2; grid-row: 1; }
+  .ableh__kasten--rechts { grid-column: 2; grid-row: 2; }
+
+  /* Ein Arm je Kasten: von der Linie waagerecht nach rechts */
+  .ableh__arm {
+    left: clamp(1.4rem, 5vw, 2.4rem);
+    right: auto;
+    width: calc(100% - clamp(1.4rem, 5vw, 2.4rem));
+    border-right: 0;
+    border-left: 1px solid var(--linie);
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: var(--bogen);
+  }
+  .ableh__arm--links  { top: 0;   height: 25%; }
+  .ableh__arm--rechts { top: 50%; height: 25%; }
+  .ableh__arm::after {
+    left: auto;
+    right: -1px;
+    border-left-width: 0;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    transform: rotate(-45deg);
+  }
 }

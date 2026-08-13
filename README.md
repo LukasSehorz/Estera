@@ -206,9 +206,24 @@ nicht. Entscheidend ist, welche Objekte Estera bewusst nicht empfiehlt."
 Sämtliche Inhalte stehen wörtlich im Briefing — Kernaussage S. 11 und die
 sechs Ablehnungsgründe S. 11/12. Nichts ergänzt, nichts umformuliert.
 
-Bewusst **ohne Bild**: die beiden Abschnitte davor sind bildstark und
-linksbündig, hier bricht ein rein typografischer, mittiger Moment den
-Rhythmus. Und bewusst **kurz** — die sechs Prüfbereiche (Makrolage,
+Die sechs Gründe stehen als **Verzweigung** nach dem Vorbild von Imperias
+„Unsere Leistungen": ein Kasten oben, von dem die Wege ausgehen, danach drei
+Stufen mit je einem Kasten links und rechts, jeder mit Icon. Imperia zieht
+dort 1,5-px-Linien in Gold — übernommen ist die Strichsprache, nicht die
+Farbe: hier läuft alles in Navy.
+
+Die Verbinder sind **kein SVG**, sondern Rahmenkanten mit Eckenradius. Ein
+SVG müsste seine Koordinaten mit dem Raster in Deckung halten und bräche bei
+jeder Breitenänderung; Rahmen wachsen von selbst mit. Zwei Details dabei:
+die Linienfarbe ist deckend statt `rgba`, weil an den Bögen zwei Rahmenkanten
+exakt übereinanderliegen und sich mit Transparenz aufaddieren würden; und die
+Senkrechte sitzt bei `calc(50% - 1px)`, damit sie genau auf diesen Kanten
+liegt statt daneben — sonst wäre die Linie 2 px breit.
+
+Unter 880 px läuft die Linie am linken Rand durch und alle sechs Gründe
+hängen einspaltig rechts daran.
+
+Bewusst **kurz** — die sechs Prüfbereiche (Makrolage,
 Mikrolage, Objekt, Wirtschaftlichkeit, Finanzierbarkeit, Langfristigkeit)
 gehören laut Briefing S. 11 auf die Seite „Auswahl & Qualität".
 
