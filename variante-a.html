@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="assets/css/leistungen.css">
 <link rel="stylesheet" href="assets/css/auswahl.css">
 <link rel="stylesheet" href="assets/css/prinzip.css">
+<link rel="stylesheet" href="assets/css/vergleich.css">
+<link rel="stylesheet" href="assets/css/schluss.css">
 <link rel="stylesheet" href="assets/css/loop.css">
 </head>
 <body>
@@ -34,6 +36,7 @@
       <li><a href="#konzept">Ablauf</a></li>
       <li><a href="#auswahl">Auswahl</a></li>
       <li><a href="#prinzip">Prinzip</a></li>
+      <li><a href="#weg">Struktur</a></li>
       <li><a href="#werte">Werte</a></li>
     </ul>
   </nav>
@@ -578,6 +581,280 @@
   </div>
 </section>
 
+
+<!-- =====================================================================
+     SECTION 6 — VIELE BAUSTEINE. EIN STRUKTURIERTER WEG. (Briefing S.7, S.14)
+     "Ein Umschalter zeigt dieselben Themen in zwei Zustaenden: zunaechst
+      verteilt und offen, anschliessend klar geordnet und von Estera
+      begleitet. Empfohlene Labels: 'Selbst koordinieren' und
+      'Mit Estera begleitet'."
+
+     Die sechs Bausteine und BEIDE Textfassungen stehen woertlich in der
+     Tabelle auf Briefing S.14. Die Statuszeilen greifen den dort
+     vorgegebenen Wortlaut auf: erster Zustand "noch offen" und "noch
+     einzuordnen", Estera-Zustand "vorausgewaehlt", "aufbereitet",
+     "eingeordnet", "koordiniert".
+
+     Briefing S.7: "Die Wirkung entsteht durch konkrete Entlastung und
+     Kompetenz – nicht durch Angstkommunikation." S.14 ergaenzt: "Keine
+     Schockzahlen, Privatinsolvenz-Szenarien oder garantierten
+     Sicherheitsversprechen." Der erste Zustand ist deshalb nur unruhig
+     gesetzt, nicht bedrohlich.
+
+     Der Hinweis unter dem Vergleich steht ebenfalls im Briefing S.14 und
+     gehoert sichtbar auf die Seite, nicht nur ins interne Dokument.
+     ===================================================================== -->
+<section class="verg" id="weg" data-vergleich data-modus="selbst">
+  <div class="verg__inner">
+
+    <header class="verg__head" data-reveal>
+      <h2 class="display verg__h2">Viele Bausteine. Ein strukturierter Weg.</h2>
+      <p class="verg__lead">
+        Eine Kapitalanlage besteht nicht nur aus dem Objekt. Zugang, Lage, Kaufpreis,
+        Unterlagen, wirtschaftliche Einordnung, Finanzierung und Kaufprozess müssen
+        <span class="hl">zusammenpassen</span>.
+      </p>
+    </header>
+
+    <div class="verg__schalter" role="group" aria-label="Darstellung umschalten" data-reveal>
+      <span class="verg__schieber" aria-hidden="true"></span>
+      <button class="verg__knopf" type="button" data-modus-knopf="selbst" aria-pressed="true">Selbst koordinieren</button>
+      <button class="verg__knopf" type="button" data-modus-knopf="estera" aria-pressed="false">Mit Estera begleitet</button>
+    </div>
+
+    <ul class="verg__karten">
+      <span class="verg__band" aria-hidden="true"></span>
+        <li class="verg__karte" style="--v:0px">
+          <p class="verg__name">Objekt & Lage</p>
+          <div class="verg__texte">
+            <p class="verg__text verg__text--selbst">Objekte finden und vergleichen; Makro- und Mikrolage selbst einordnen.</p>
+            <p class="verg__text verg__text--estera">Passende Kapitalanlageimmobilien vorauswählen; Lage und Nachfrage strukturiert einordnen.</p>
+          </div>
+          <div class="verg__status">
+            <span class="verg__stand verg__stand--selbst">Noch zu vergleichen</span>
+            <span class="verg__stand verg__stand--estera">Vorausgewählt</span>
+          </div>
+        </li>
+        <li class="verg__karte" style="--v:26px">
+          <p class="verg__name">Wirtschaftlichkeit</p>
+          <div class="verg__texte">
+            <p class="verg__text verg__text--selbst">Kaufpreis, Miete, Hausgeld, laufende Kosten und eigenen Beitrag zusammenführen.</p>
+            <p class="verg__text verg__text--estera">Eckdaten und wirtschaftliche Zusammenhänge verständlich aufbereiten.</p>
+          </div>
+          <div class="verg__status">
+            <span class="verg__stand verg__stand--selbst">Kosten noch einzuordnen</span>
+            <span class="verg__stand verg__stand--estera">Eingeordnet</span>
+          </div>
+        </li>
+        <li class="verg__karte" style="--v:12px">
+          <p class="verg__name">Objektunterlagen</p>
+          <div class="verg__texte">
+            <p class="verg__text verg__text--selbst">Teilungserklärung, Energieausweis, Mietunterlagen und weitere Dokumente selbst sichten.</p>
+            <p class="verg__text verg__text--estera">Relevante Unterlagen bündeln, einordnen und offene Fragen sichtbar machen.</p>
+          </div>
+          <div class="verg__status">
+            <span class="verg__stand verg__stand--selbst">Unterlagen noch offen</span>
+            <span class="verg__stand verg__stand--estera">Aufbereitet</span>
+          </div>
+        </li>
+        <li class="verg__karte" style="--v:34px">
+          <p class="verg__name">WEG-Unterlagen</p>
+          <div class="verg__texte">
+            <p class="verg__text verg__text--selbst">Wirtschaftspläne, Jahresabrechnungen und WEG-Protokolle selbst sichten.</p>
+            <p class="verg__text verg__text--estera">Verfügbare WEG-Unterlagen einbeziehen und auffällige Punkte nachvollziehbar darstellen.</p>
+          </div>
+          <div class="verg__status">
+            <span class="verg__stand verg__stand--selbst">Noch zu sichten</span>
+            <span class="verg__stand verg__stand--estera">Einbezogen</span>
+          </div>
+        </li>
+        <li class="verg__karte" style="--v:8px">
+          <p class="verg__name">Finanzierung</p>
+          <div class="verg__texte">
+            <p class="verg__text verg__text--selbst">Finanzierungswege, Bankunterlagen und Konditionen selbst abstimmen.</p>
+            <p class="verg__text verg__text--estera">Finanzierung über das Netzwerk koordinieren und passend zum Objekt strukturieren.</p>
+          </div>
+          <div class="verg__status">
+            <span class="verg__stand verg__stand--selbst">Noch nicht abgestimmt</span>
+            <span class="verg__stand verg__stand--estera">Koordiniert</span>
+          </div>
+        </li>
+        <li class="verg__karte" style="--v:22px">
+          <p class="verg__name">Kaufprozess</p>
+          <div class="verg__texte">
+            <p class="verg__text verg__text--selbst">Ansprechpartner, Unterlagen, Fristen und Schritte bis zum Notar zusammenhalten.</p>
+            <p class="verg__text verg__text--estera">Beteiligte und Schritte von der Objektvorstellung bis zum Notar zusammenführen.</p>
+          </div>
+          <div class="verg__status">
+            <span class="verg__stand verg__stand--selbst">Noch zusammenzuhalten</span>
+            <span class="verg__stand verg__stand--estera">Zusammengeführt</span>
+          </div>
+        </li>
+    </ul>
+
+    <p class="verg__hinweis">
+      Die Übersicht ist eine Arbeitsgrundlage und kein pauschales Prüf- oder
+      Haftungsversprechen. Welche Unterlagen Estera selbst prüft, welche
+      strukturiert aufbereitet werden und wann rechtliche, steuerliche oder
+      technische Fachpartner eingebunden werden, klärt der konkrete
+      Leistungsumfang.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     SECTION 7 — WERTE UND SELEKTION (Briefing S.7, S.16)
+     "'Diskret. Strukturiert. Langfristig.' als starker Full-Width-
+      Markenmoment. Dazu die klare Aussage, dass Estera nicht fuer jeden
+      Kunden und nicht fuer jeden Deal arbeitet."
+     Die vier Punkte unter "Wann Estera bewusst Nein sagt" stehen woertlich
+     auf Briefing S.16.
+     ===================================================================== -->
+<section class="werte" id="werte">
+  <div class="werte__inner">
+
+    <p class="werte__kern" data-reveal>
+      <span class="werte__wort display">Diskret</span>
+      <span class="werte__punkt" aria-hidden="true"></span>
+      <span class="werte__wort display">Strukturiert</span>
+      <span class="werte__punkt" aria-hidden="true"></span>
+      <span class="werte__wort display">Langfristig</span>
+    </p>
+
+    <p class="werte__satz" data-reveal>
+      Estera arbeitet <span class="hl">nicht für jeden Kunden und nicht für jeden Deal</span>.
+      Wenn Situation, Finanzierung und Objekt nicht zusammenpassen, wird kein
+      Abschluss erzwungen.
+    </p>
+
+    <p class="werte__kicker" data-reveal><span>Wann Estera bewusst Nein sagt</span></p>
+
+    <ul class="werte__nein">
+        <li>Wenn eine Kapitalanlageimmobilie aktuell nicht zur Situation oder zu den Zielen des Interessenten passt.</li>
+        <li>Wenn die Finanzierung nicht tragfähig darstellbar ist.</li>
+        <li>Wenn das konkrete Objekt den Auswahlprozess nicht besteht.</li>
+        <li>Wenn die Erwartung nur auf schnellem Gewinn oder einem einzelnen Steuerargument beruht.</li>
+    </ul>
+
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     SECTION 9 — WISSEN, KARRIERE UND ABSCHLUSS (Briefing S.7, S.18, S.19)
+     "Ein kurzer Einstieg in Wissen & Fragen, ein kompakter Karriere-Teaser
+      und anschliessend ein klarer Abschluss-CTA: 'Erstgespraech
+      vereinbaren'. Kein umfangreiches oeffentliches Qualifikationsformular."
+
+     Hier stehen nur die FRAGEN, keine Antworten: die gehoeren laut S.3 auf
+     die Unterseite. Die Karriere-Aussage ist woertlich von S.19.
+     ===================================================================== -->
+<section class="schluss" id="wissen-teaser">
+  <div class="schluss__inner">
+
+    <div class="wissen__kopf" data-reveal>
+      <h2 class="display wissen__h2">Fragen, die vor der ersten Immobilie kommen.</h2>
+      <p class="wissen__lead">
+        Kurze, klare Antworten statt Fachbuch — und immer mit dem nächsten
+        Schritt am Ende.
+      </p>
+    </div>
+
+    <div class="wissen__fragen">
+        <a class="wissen__frage" href="wissen.html">Für wen kann eine Kapitalanlageimmobilie sinnvoll sein?</a>
+        <a class="wissen__frage" href="wissen.html">Ist Eigenkapital immer notwendig?</a>
+        <a class="wissen__frage" href="wissen.html">Welche Faktoren bestimmen, was Sie selbst tragen müssen?</a>
+        <a class="wissen__frage" href="wissen.html">Wie funktioniert die Abschreibung einer vermieteten Immobilie?</a>
+        <a class="wissen__frage" href="wissen.html">Woran erkennt Estera eine gute Makro- und Mikrolage?</a>
+        <a class="wissen__frage" href="wissen.html">Welche Unterstützung bleibt nach dem Kauf bestehen?</a>
+    </div>
+
+    <div class="karriere" data-reveal>
+      <p class="karriere__titel">Wir bauen Estera <em>langfristig</em> auf.</p>
+      <div>
+        <p class="karriere__satz">
+          Wir suchen Menschen, die Verantwortung übernehmen, hohe Ansprüche an ihre
+          Arbeit stellen und gemeinsam mit uns eine neue Generation der
+          Immobilienberatung aufbauen möchten.
+        </p>
+        <a class="karriere__link" href="karriere.html">Offene Positionen und Initiativbewerbung</a>
+      </div>
+    </div>
+
+    <div class="abschluss" id="erstgespraech" data-reveal>
+      <h2 class="display abschluss__h2">Der nächste Schritt ist ein Gespräch.</h2>
+      <p class="abschluss__satz">
+        Im Erstgespräch klären wir zuerst, ob eine Kapitalanlageimmobilie überhaupt
+        zu Ihrer Situation passt. Erst danach sprechen wir über Objekte.
+      </p>
+      <div class="abschluss__aktion">
+        <a class="btn" href="erstgespraech.html">Erstgespräch vereinbaren</a>
+        <a class="btn btn--ghost" href="#konzept">So funktioniert Estera</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     FUSS
+     Briefing S.5: "Recht: Impressum, Datenschutz, Cookie-Einstellungen,
+     regulatorisch notwendige Erstinformationen und passende
+     Risikohinweise." Der Partnerbereich darf laut S.5 im Fuss liegen.
+
+     ACHTUNG: Firmierung, Anschrift, Telefon, Registerangaben und Erlaubnis
+     nach Paragraph 34c GewO sind PLATZHALTER und muessen von Estera
+     geliefert werden. Ein falsches Impressum ist abmahnfaehig.
+     ===================================================================== -->
+<footer class="fuss" id="kontakt">
+  <div class="fuss__inner">
+
+    <div class="fuss__marke">
+      <span class="wordmark">
+        <span class="wordmark__name">ESTERA</span>
+        <span class="wordmark__sub">Immobilien</span>
+      </span>
+      <p class="fuss__anker">Diskret. Strukturiert. Langfristig.</p>
+    </div>
+
+    <div>
+      <p class="fuss__titel">Kontakt</p>
+      <div class="fuss__liste">
+        <a href="mailto:info@estera.immobilien">info@estera.immobilien</a>
+        <span>Telefon — folgt</span>
+        <span>Anschrift — folgt</span>
+        <a href="partner.html">Für Partner</a>
+      </div>
+    </div>
+
+    <div>
+      <p class="fuss__titel">Rechtliches</p>
+      <div class="fuss__liste">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="cookies.html">Cookie-Einstellungen</a>
+        <a href="erstinformation.html">Erstinformation</a>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="fuss__risiko">
+    Kapitalanlageimmobilien sind langfristige Investitionen. Wertentwicklung,
+    Vermietbarkeit und steuerliche Wirkung hängen vom Einzelfall ab und können
+    nicht zugesichert werden. Diese Website ersetzt keine steuerliche,
+    rechtliche oder finanzielle Beratung.
+  </p>
+
+  <div class="fuss__unten">
+    <span>© 2026 Estera GmbH</span>
+    <span>Firmierung, Anschrift, Register und Erlaubnis nach § 34c GewO folgen.</span>
+  </div>
+</footer>
+
 <!-- =====================================================================
      MENÜ-OVERLAY
      ===================================================================== -->
@@ -604,7 +881,9 @@
       <li><a class="menu__link" href="#konzept"><span class="num">02</span> Ablauf</a></li>
       <li><a class="menu__link" href="#auswahl"><span class="num">03</span> Auswahl</a></li>
       <li><a class="menu__link" href="#prinzip"><span class="num">04</span> Prinzip</a></li>
-      <li><a class="menu__link" href="#werte"><span class="num">05</span> Werte</a></li>
+      <li><a class="menu__link" href="#weg"><span class="num">05</span> Struktur</a></li>
+      <li><a class="menu__link" href="#werte"><span class="num">06</span> Werte</a></li>
+      <li><a class="menu__link" href="#erstgespraech"><span class="num">07</span> Erstgespräch</a></li>
     </ul>
     <p class="menu__gruppe">Seiten</p>
     <ul class="menu__nav">
@@ -642,7 +921,7 @@
 <!-- Nur für die interne Abstimmung -->
 <div class="variant-switch">
   <a href="./index.html">Variante B · Empfehlung</a>
-  <a href="./variante-a.html" aria-current="page">Variante A · Briefing · Build B-144</a>
+  <a href="./variante-a.html" aria-current="page">Variante A · Briefing · Build B-148</a>
 </div>
 
 <script src="assets/js/site.js"></script>

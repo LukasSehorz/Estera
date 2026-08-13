@@ -266,6 +266,22 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(setzeLinie);
   }
 
+  /* --- Umschalter im Vergleich -------------------------------------------
+     Setzt nur data-modus am Abschnitt; Reihenfolge, Versatz und
+     Verbindungslinie loest vergleich.css daraus ab.                        */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-vergleich]'), function (block) {
+    var knoepfe = block.querySelectorAll('[data-modus-knopf]');
+    Array.prototype.forEach.call(knoepfe, function (knopf) {
+      knopf.addEventListener('click', function () {
+        var modus = knopf.getAttribute('data-modus-knopf');
+        block.setAttribute('data-modus', modus);
+        Array.prototype.forEach.call(knoepfe, function (k) {
+          k.setAttribute('aria-pressed', String(k === knopf));
+        });
+      });
+    });
+  });
+
   /* --- Aufklappbare Zeilen ------------------------------------------------
      Die Hoehe animiert ueber grid-template-rows in auswahl-/prinzip.css;
      hier wird nur der Zustand umgeschaltet und aria-expanded nachgefuehrt. */

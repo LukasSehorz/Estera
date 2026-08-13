@@ -29,6 +29,8 @@ assets/css/
   leistungen.css    Section 3 — So funktioniert Estera
   auswahl.css       Section 4 — Warum Estera anders auswählt
   prinzip.css       Section 5 — Das finanzielle Prinzip
+  vergleich.css     Section 6 — Viele Bausteine. Ein strukturierter Weg.
+  schluss.css       Section 7, 9 und Fuß
   loop.css          Lemniskaten-Variante des Ablaufs, derzeit nicht eingebunden
 assets/js/site.js   Kopfnavigation, Menü, Sticky-Header, Rotator, Reveal,
                     Linienlänge, Referenzen-Akkordeon
@@ -299,6 +301,54 @@ eins sitzt und drei der Symbole (Bank, Waage, Balken) dieselben gewesen wären.
 Der lange steuerliche Absatz aus S. 10 steht **nicht** hier: er gehört laut
 S. 3 auf „Wissen & Fragen", und das Briefing verlangt für ihn ausdrücklich
 eine steuerliche und rechtliche Prüfung.
+
+---
+
+## Section 6 — viele Bausteine, ein strukturierter Weg
+
+Briefing S. 7 und S. 14. Ein Umschalter zeigt dieselben sechs Bausteine in
+zwei Zuständen: „Selbst koordinieren" und „Mit Estera begleitet". Beide
+Textfassungen stehen wörtlich in der Tabelle auf S. 14, die Statuszeilen
+greifen den dort vorgegebenen Wortlaut auf.
+
+Die sichtbare Veränderung ist die Aussage: im ersten Zustand stehen die
+Karten gegeneinander versetzt und ohne Verbindung, im zweiten fluchten sie
+auf einer Linie und sind durch eine Haarlinie verbunden. Gemessen wandern
+sie von 490/516/502 auf 490/490/490.
+
+S. 7 verlangt ausdrücklich Entlastung statt Angstkommunikation, S. 14
+verbietet Schockzahlen und Insolvenzszenarien. Der erste Zustand ist
+deshalb nur unruhig gesetzt, nicht bedrohlich.
+
+---
+
+## Section 7 — Werte und Selektion
+
+Der einzige Abschnitt in voller Navy-Fläche. S. 20: „Dunkle Vollflächen nur
+als bewusste Spannungsmomente." Deshalb eine gefärbte Fläche und kein Bild —
+die beiden Bildbänder in Abschnitt 5 sind bereits dunkel.
+
+Die drei Markenworte müssen in **eine** Zeile passen, sonst bricht das letzte
+um und der zugehörige Goldstrich hängt am Zeilenende ins Leere. Die Größe ist
+daraus gerechnet (rund 3,3 vw); unter 900 px stehen die Worte untereinander.
+
+Die vier Punkte unter „Wann Estera bewusst Nein sagt" stehen wörtlich auf S. 16.
+
+---
+
+## Section 9 — Wissen, Karriere und Abschluss
+
+S. 18/19. Nur die **Fragen**, keine Antworten — die gehören laut S. 3 auf die
+Unterseite. Die Karriere-Aussage ist wörtlich von S. 19. Danach der
+Abschluss-CTA „Erstgespräch vereinbaren".
+
+---
+
+## Fuß
+
+Kontakt, Rechtliches und ein Risikohinweis. **Firmierung, Anschrift, Telefon,
+Registerangaben und die Erlaubnis nach § 34c GewO sind Platzhalter** und
+müssen von Estera geliefert werden — ein falsches Impressum ist abmahnfähig.
 
 ---
 

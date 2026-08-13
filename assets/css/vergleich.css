@@ -1,0 +1,248 @@
+/* ===========================================================================
+   SECTION 6 — VIELE BAUSTEINE. EIN STRUKTURIERTER WEG. (Briefing S.7, S.14)
+   „Ein Umschalter zeigt dieselben Themen in zwei Zuständen: zunächst
+    verteilt und offen, anschließend klar geordnet und von Estera begleitet."
+
+   Die sichtbare Veränderung ist die Aussage. Deshalb ändert der Umschalter
+   nicht nur den Text, sondern die ORDNUNG: im ersten Zustand stehen die
+   sechs Bausteine gegeneinander versetzt und ohne Verbindung, im zweiten
+   fluchten sie auf einer Linie und sind durch eine Haarlinie verbunden.
+
+   Briefing S.7: „Die Wirkung entsteht durch konkrete Entlastung und
+   Kompetenz – nicht durch Angstkommunikation." Und S.14: „Keine
+   Schockzahlen, Privatinsolvenz-Szenarien oder garantierten
+   Sicherheitsversprechen." Der linke Zustand ist deshalb nicht bedrohlich
+   gesetzt, sondern nur unruhig — mehr Einzelteile, kein Alarm.
+   =========================================================================== */
+
+.verg {
+  --linie: #8CA0B8;
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  padding: clamp(3.5rem, 9vh, 7rem) 0 clamp(4rem, 10vh, 8rem);
+}
+
+.verg__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* --- Kopf ----------------------------------------------------------------- */
+.verg__head {
+  max-width: 940px;
+  margin: 0 auto;
+  text-align: center;
+}
+.verg__h2 {
+  font-size: clamp(1.9rem, 3.2vw, 3.2rem);
+  line-height: 1.12;
+}
+.verg__lead {
+  margin: clamp(1.6rem, 3.4vh, 2.4rem) auto 0;
+  max-width: 46rem;
+  font-size: clamp(1.12rem, 1.42vw, 1.42rem);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+.verg__lead .hl { color: var(--ink-black); }
+
+/* --- Der Umschalter ------------------------------------------------------- */
+/* Zwei Schaltflächen in einer Fassung, dahinter ein wandernder Schieber.
+   Der Schieber liegt als eigenes Element hinter den Beschriftungen und
+   wird per transform bewegt — dadurch läuft er weich, ohne dass sich das
+   Raster verschiebt. */
+.verg__schalter {
+  position: relative;
+  width: max-content;
+  max-width: 100%;
+  margin: clamp(2.4rem, 6vh, 4rem) auto 0;
+  display: grid;
+  grid-auto-flow: column;
+  padding: 5px;
+  border: 1px solid var(--line-gold);
+  border-radius: 999px;
+  background: var(--paper);
+}
+.verg__schieber {
+  position: absolute;
+  z-index: 0;
+  top: 5px;
+  bottom: 5px;
+  left: 5px;
+  width: calc(50% - 5px);
+  border-radius: 999px;
+  background: var(--navy-800);
+  transition: transform 0.55s var(--ease-soft);
+}
+.verg[data-modus='estera'] .verg__schieber { transform: translateX(100%); }
+
+.verg__knopf {
+  position: relative;
+  z-index: 1;
+  padding: clamp(0.7rem, 1.6vh, 1rem) clamp(1.2rem, 2.6vw, 2.2rem);
+  border: 0;
+  background: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: clamp(0.78rem, 0.88vw, 0.9rem);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink-mute);
+  transition: color 0.4s var(--ease);
+}
+.verg__knopf[aria-pressed='true'] { color: #fff; }
+.verg__knopf:focus-visible { outline: 1px solid var(--navy-600); outline-offset: 4px; }
+
+/* --- Die sechs Bausteine -------------------------------------------------- */
+.verg__karten {
+  position: relative;
+  margin: clamp(2.6rem, 6vh, 4.2rem) auto 0;
+  max-width: 1180px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.2rem, 2.2vw, 2rem);
+}
+
+/* Die Verbindungslinie erscheint erst im Estera-Zustand: dort sind die
+   Bausteine nicht mehr einzelne Aufgaben, sondern ein Ablauf. */
+.verg__band {
+  position: absolute;
+  z-index: 0;
+  left: 0; right: 0;
+  top: calc(50% - 1.5px);
+  height: 3px;
+  background: linear-gradient(to bottom,
+    var(--linie) 0 1px, transparent 1px 2px, var(--linie) 2px 3px);
+  opacity: 0;
+  transform: scaleX(0.82);
+  transition: opacity 0.5s var(--ease) 0.15s, transform 0.6s var(--ease-soft) 0.15s;
+}
+.verg[data-modus='estera'] .verg__band { opacity: 1; transform: scaleX(1); }
+
+.verg__karte {
+  position: relative;
+  z-index: 1;
+  padding: clamp(1.3rem, 2.2vw, 1.9rem) clamp(1.3rem, 2.2vw, 1.8rem);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-img);
+  background: var(--paper);
+  /* Im ersten Zustand stehen die Karten versetzt — „verteilt und offen".
+     Der Versatz kommt aus --v und wird beim Umschalten auf null gefahren. */
+  transform: translateY(var(--v, 0px));
+  transition: transform 0.6s var(--ease-soft), border-color 0.5s var(--ease);
+}
+.verg[data-modus='estera'] .verg__karte {
+  transform: translateY(0);
+  border-color: rgba(30, 66, 112, 0.28);
+}
+
+.verg__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.08rem, 1.3vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ink-black);
+}
+
+/* Beide Fassungen liegen übereinander in derselben Rasterzelle. Dadurch ist
+   die Karte immer so hoch wie die längere von beiden und springt beim
+   Umschalten nicht. */
+.verg__texte {
+  display: grid;
+  margin-top: clamp(0.7rem, 1.6vh, 1rem);
+}
+.verg__text {
+  grid-area: 1 / 1;
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  line-height: 1.56;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+.verg:not([data-modus='estera']) .verg__text--selbst { opacity: 1; }
+.verg[data-modus='estera'] .verg__text--estera { opacity: 1; }
+
+/* --- Statuszeile ---------------------------------------------------------- */
+/* Wortlaut aus Briefing S.14: erster Zustand „noch offen", „noch
+   einzuordnen"; Estera-Zustand „vorausgewählt", „aufbereitet",
+   „eingeordnet", „koordiniert". */
+.verg__status {
+  display: grid;
+  margin-top: clamp(1rem, 2.2vh, 1.4rem);
+  padding-top: clamp(0.8rem, 1.8vh, 1.1rem);
+  border-top: 1px solid var(--line-soft);
+}
+.verg__stand {
+  grid-area: 1 / 1;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: clamp(0.7rem, 0.78vw, 0.78rem);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-indent: 0.14em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+.verg__stand::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 7px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+}
+.verg__stand--selbst { color: var(--ink-mute); }
+.verg__stand--estera { color: var(--gold-text); }
+.verg__stand--estera::before { background: var(--gold); border-color: var(--gold); }
+.verg:not([data-modus='estera']) .verg__stand--selbst { opacity: 1; }
+.verg[data-modus='estera'] .verg__stand--estera { opacity: 1; }
+
+/* --- Hinweis unter dem Vergleich ----------------------------------------- */
+/* Briefing S.14: „Die Tabelle ist eine Arbeitsgrundlage und kein pauschales
+   Prüf- oder Haftungsversprechen." Das gehört sichtbar auf die Seite. */
+.verg__hinweis {
+  margin: clamp(2.2rem, 5vh, 3.4rem) auto 0;
+  max-width: 52rem;
+  text-align: center;
+  font-size: clamp(0.86rem, 0.94vw, 0.94rem);
+  line-height: 1.6;
+  color: var(--ink-mute);
+}
+.verg__hinweis::before {
+  content: '';
+  display: block;
+  width: 34px;
+  height: 1px;
+  margin: 0 auto 1rem;
+  background: var(--line-gold);
+}
+
+/* --- Responsive ----------------------------------------------------------- */
+@media (max-width: 1000px) {
+  .verg__karten { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .verg__band { display: none; }
+}
+@media (max-width: 640px) {
+  .verg__karten { grid-template-columns: 1fr; }
+  .verg__karte { transform: none; }
+  .verg__schalter { width: 100%; }
+  .verg__knopf { padding-inline: 0.8rem; font-size: 0.74rem; letter-spacing: 0.1em; }
+  .verg__h2 { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .verg__karte, .verg__band, .verg__schieber, .verg__text, .verg__stand {
+    transition: none;
+  }
+  .verg__karte { transform: none; }
+}

@@ -1,0 +1,325 @@
+/* ===========================================================================
+   SECTION 7 — WERTE UND SELEKTION (Briefing S.7, S.16)
+   „‚Diskret. Strukturiert. Langfristig.‘ als starker Full-Width-Marken-
+    moment. Dazu die klare Aussage, dass Estera nicht für jeden Kunden und
+    nicht für jeden Deal arbeitet."
+
+   Der einzige Abschnitt in voller Navy-Fläche. Briefing S.20: „Dunkle
+   Vollflächen nur als bewusste Spannungsmomente." Deshalb hier eine
+   gefärbte Fläche und KEIN Bild — die beiden Bildbänder in Abschnitt 5
+   sind bereits dunkel; ein drittes Foto hintereinander nutzt die Geste ab.
+   =========================================================================== */
+
+.werte {
+  position: relative;
+  z-index: 1;
+  background: var(--navy-900);
+  padding: clamp(4.5rem, 12vh, 9rem) var(--gutter);
+  text-align: center;
+}
+
+.werte__inner { max-width: 1080px; margin: 0 auto; }
+
+/* Die drei Worte sind der Markenkern und stehen deshalb allein, gross und
+   durch Goldhaarlinien getrennt — nicht als Satz mit Punkten. */
+.werte__kern {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.9rem, 2.4vw, 2.2rem);
+}
+.werte__wort {
+  font-family: var(--font-display);
+  /* Alle drei Worte muessen in EINE Zeile passen. Sonst bricht das letzte
+     um und der zugehoerige Goldstrich haengt am Zeilenende ins Leere.
+     Gerechnet: 15 em Wortlaenge + 2 Striche + 4 Abstaende gegen 1080 px
+     Spaltenbreite ergibt rund 3,3 vw als Obergrenze. */
+  font-size: clamp(1.5rem, 3.3vw, 3.3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+.werte__punkt {
+  width: clamp(28px, 4vw, 64px);
+  height: 1px;
+  background: rgba(168, 135, 79, 0.65);
+}
+
+.werte__satz {
+  margin: clamp(2rem, 4.5vh, 3.2rem) auto 0;
+  max-width: 44rem;
+  font-size: clamp(1.12rem, 1.42vw, 1.42rem);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+  text-wrap: pretty;
+}
+.werte__satz .hl { color: #fff; }
+
+/* --- Wann Estera bewusst Nein sagt ---------------------------------------- */
+.werte__kicker {
+  margin-top: clamp(3rem, 7vh, 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.9rem, 2vw, 1.6rem);
+}
+.werte__kicker::before,
+.werte__kicker::after {
+  content: '';
+  width: clamp(28px, 6vw, 90px);
+  height: 1px;
+  background: rgba(168, 135, 79, 0.5);
+}
+.werte__kicker span {
+  font-size: clamp(0.8rem, 0.86vw, 0.89rem);
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  text-transform: uppercase;
+  color: rgba(200, 172, 122, 0.95);
+  white-space: nowrap;
+}
+
+.werte__nein {
+  margin: clamp(2rem, 4.5vh, 3rem) auto 0;
+  max-width: 940px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.4rem, 3vh, 2.2rem) clamp(2rem, 5vw, 4rem);
+  text-align: left;
+}
+.werte__nein li {
+  padding-top: clamp(0.9rem, 2vh, 1.3rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: clamp(0.96rem, 1.06vw, 1.06rem);
+  line-height: 1.58;
+  color: rgba(255, 255, 255, 0.82);
+  text-wrap: pretty;
+}
+
+/* ===========================================================================
+   SECTION 9 — WISSEN, KARRIERE UND ABSCHLUSS (Briefing S.7, S.18, S.19)
+   „Ein kurzer Einstieg in Wissen & Fragen, ein kompakter Karriere-Teaser
+    und anschliessend ein klarer Abschluss-CTA."
+   =========================================================================== */
+
+.schluss {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  padding: clamp(3.5rem, 9vh, 7rem) 0 0;
+}
+.schluss__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* --- Wissen & Fragen ------------------------------------------------------ */
+.wissen__kopf { max-width: 900px; }
+.wissen__h2 {
+  font-size: clamp(1.7rem, 2.7vw, 2.7rem);
+  line-height: 1.14;
+}
+.wissen__lead {
+  margin-top: clamp(1rem, 2.4vh, 1.5rem);
+  max-width: 40rem;
+  font-size: clamp(1.02rem, 1.14vw, 1.14rem);
+  line-height: 1.58;
+  color: var(--ink-soft);
+}
+
+/* Nur die Fragen, keine Antworten: die Antworten gehoeren laut Briefing S.3
+   auf die Unterseite, nicht auf die Startseite. */
+.wissen__fragen {
+  margin-top: clamp(2rem, 4.5vh, 3rem);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(2rem, 5vw, 4.5rem);
+}
+.wissen__frage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(1rem, 2.2vh, 1.4rem) 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.16vw, 1.16rem);
+  line-height: 1.35;
+  color: var(--ink-black);
+  transition: color 0.4s var(--ease);
+}
+.wissen__frage::after {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: var(--line-gold);
+  transition: width 0.4s var(--ease-soft);
+}
+.wissen__frage:hover { color: var(--navy-600); }
+.wissen__frage:hover::after { width: 30px; }
+.wissen__frage[aria-disabled='true'] { cursor: default; }
+
+/* --- Karriere ------------------------------------------------------------- */
+.karriere {
+  margin-top: clamp(3.5rem, 9vh, 6.5rem);
+  padding: clamp(2rem, 4.5vw, 3.6rem);
+  border: 1px solid var(--line-gold);
+  border-radius: var(--radius-img);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: clamp(1.4rem, 4vw, 3.4rem);
+  align-items: center;
+}
+.karriere__titel {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.1vw, 2.1rem);
+  font-weight: 400;
+  line-height: 1.18;
+  color: var(--ink-black);
+}
+.karriere__titel em { font-style: italic; color: var(--ink-mute); }
+.karriere__satz {
+  font-size: clamp(1rem, 1.1vw, 1.1rem);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+.karriere__link {
+  display: inline-block;
+  margin-top: clamp(1rem, 2.2vh, 1.4rem);
+  position: relative;
+  padding-bottom: 0.4em;
+  font-family: var(--font-display);
+  font-size: clamp(0.98rem, 1.1vw, 1.1rem);
+  font-weight: 500;
+  color: var(--navy-800);
+}
+.karriere__link::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--line-gold);
+  transition: background 0.4s var(--ease);
+}
+.karriere__link:hover::after { background: var(--gold); }
+.karriere__link[aria-disabled='true'] { cursor: default; }
+
+/* --- Abschluss ------------------------------------------------------------ */
+.abschluss {
+  margin-top: clamp(3.5rem, 9vh, 6.5rem);
+  padding: clamp(3rem, 8vh, 6rem) 0 clamp(3.5rem, 9vh, 7rem);
+  border-top: 1px solid var(--line-soft);
+  text-align: center;
+}
+.abschluss__h2 {
+  font-size: clamp(1.9rem, 3.2vw, 3.2rem);
+  line-height: 1.12;
+}
+.abschluss__satz {
+  margin: clamp(1.2rem, 2.8vh, 1.8rem) auto 0;
+  max-width: 40rem;
+  font-size: clamp(1.02rem, 1.16vw, 1.16rem);
+  line-height: 1.58;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+.abschluss__aktion {
+  margin-top: clamp(1.8rem, 4vh, 2.6rem);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ===========================================================================
+   FUSS
+   Briefing S.5: „Recht: Impressum, Datenschutz, Cookie-Einstellungen,
+   regulatorisch notwendige Erstinformationen und passende Risikohinweise."
+   Der Partnerbereich darf laut S.5 im Fuss liegen.
+   =========================================================================== */
+.fuss {
+  background: var(--navy-900);
+  color: rgba(255, 255, 255, 0.7);
+  padding: clamp(3rem, 7vh, 5rem) var(--gutter) clamp(1.8rem, 4vh, 2.6rem);
+}
+.fuss__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 5vw, 4rem);
+}
+.fuss__marke .wordmark__name { color: #fff; }
+.fuss__marke .wordmark__sub  { color: rgba(255, 255, 255, 0.45); }
+.fuss__anker {
+  margin-top: clamp(1rem, 2.4vh, 1.5rem);
+  font-family: var(--font-display);
+  font-size: clamp(0.94rem, 1.04vw, 1.04rem);
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.62);
+}
+.fuss__titel {
+  margin-bottom: clamp(0.9rem, 2vh, 1.3rem);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  text-transform: uppercase;
+  color: rgba(200, 172, 122, 0.9);
+}
+.fuss__liste { display: grid; gap: 0.55rem; }
+.fuss__liste a, .fuss__liste span {
+  font-size: clamp(0.9rem, 0.98vw, 0.98rem);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.72);
+  transition: color 0.35s var(--ease);
+}
+.fuss__liste a:hover { color: #fff; }
+.fuss__liste a[aria-disabled='true'] { cursor: default; }
+
+.fuss__unten {
+  max-width: 1180px;
+  margin: clamp(2.4rem, 6vh, 4rem) auto 0;
+  padding-top: clamp(1.2rem, 3vh, 1.8rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem clamp(1.2rem, 3vw, 2.4rem);
+  justify-content: space-between;
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+/* Risikohinweis: gehoert sichtbar auf die Seite, aber nicht als Warnblock
+   auf die Startseite (Briefing S.17 verbietet „endlose Disclaimer"). */
+.fuss__risiko {
+  max-width: 1180px;
+  margin: clamp(1.2rem, 3vh, 1.8rem) auto 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+/* --- Responsive ----------------------------------------------------------- */
+@media (max-width: 900px) {
+  .werte__nein { grid-template-columns: 1fr; }
+  .wissen__fragen { grid-template-columns: 1fr; }
+  .karriere { grid-template-columns: 1fr; text-align: left; }
+  .fuss__inner { grid-template-columns: 1fr 1fr; }
+  .fuss__marke { grid-column: 1 / -1; }
+}
+/* Unter 900 px passen die drei Worte nicht mehr nebeneinander. Dann
+   untereinander, die Striche werden zu waagerechten Trennern. */
+@media (max-width: 900px) {
+  .werte__kern { flex-direction: column; gap: clamp(0.7rem, 2vh, 1.1rem); }
+  .werte__wort { font-size: clamp(1.9rem, 7vw, 2.8rem); }
+  .werte__punkt { width: clamp(40px, 12vw, 70px); }
+}
+
+@media (max-width: 560px) {
+  .fuss__inner { grid-template-columns: 1fr; }
+}
