@@ -136,25 +136,62 @@
      genau das lässt den Fries über die ganze Seite laufen. */
   margin-inline: calc(-1 * min(var(--ref-pad), var(--gutter)));
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  /* Logo / Person / Zitat — die drei Linien, auf die subgrid unten bindet */
-  grid-template-rows: auto auto auto;
+  /* Reine fr-Werte, KEIN minmax(): nur so lassen sich die Spalten beim
+     Aufklappen weich ineinander ueberfuehren. Das min-width:0 dafuer
+     steht an der Karte. */
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .ref__karte {
   position: relative;
+  min-width: 0;
+  overflow: hidden;
   padding: clamp(2.4rem, 4.5vh, 3.6rem) var(--ref-pad);
+  display: flex;
+  align-items: stretch;
+  text-align: left;
+}
+
+/* Die feste Spalte: Logo, Name, Taetigkeit, Strich, Portraet.
+   Sie behaelt beim Aufklappen ihre Breite — der zusaetzliche Platz geht
+   komplett an das Zitat rechts daneben. Deshalb `max-width` statt einer
+   Prozentbreite: bis dahin waechst sie mit, dann steht sie.
+   Alle Zeilen darin haben feste Hoehen bzw. genau eine Zeile — sie
+   fluchten dadurch ueber alle vier Spalten hinweg auch ohne subgrid. */
+.ref__inhalt {
+  /* Feste Basis, kein Wachstum: dadurch bekommt die linke Spalte im
+     Ruhezustand die ganze Karte (sie schrumpft auf deren Breite) und beim
+     Aufklappen geht der komplette Zuwachs an das Zitat rechts. */
+  flex: 0 1 clamp(180px, 19.5vw, 300px);
+  min-width: 0;
+  align-self: flex-start;
   display: grid;
   align-content: start;
-  justify-items: start;
-  text-align: left;
+  justify-items: stretch;
   gap: clamp(1.1rem, 2.4vh, 1.7rem);
 }
-@supports (grid-template-rows: subgrid) {
-  .ref__karte {
-    grid-row: span 3;
-    grid-template-rows: subgrid;
-  }
+
+/* Etwas mehr Luft zwischen Marke und Mensch als zwischen den Textzeilen —
+   das Logo gehoert der Firma, alles darunter der Person. */
+.ref__logo { margin-bottom: clamp(0.5rem, 1.3vh, 0.95rem); }
+
+/* Rechte Spalte. Sie ist schlicht der Rest der Karte: im Ruhezustand geht
+   die Karte in der Breite der linken Spalte auf, es bleibt nichts uebrig.
+   Klappt die Karte auf, waechst der Rest — ohne eigene Breitenanimation. */
+.ref__aussage {
+  flex: 1 1 0;
+  min-width: 0;
+  align-self: flex-end;
+  overflow: hidden;
+}
+
+/* Goldhaarlinie zwischen Unterschrift und Zitat — als eigenes Element,
+   damit sie beim Einklappen mit dem Zitat zusammen verschwindet. */
+.ref__strich {
+  width: 48px;
+  height: 1px;
+  background: var(--line-gold);
+  transition: opacity 0.4s var(--ease), width 0.6s var(--ease-soft);
 }
 
 /* Spaltenlinien, oben und unten eingerückt — sie sollen die Goldlinien
@@ -233,6 +270,13 @@
 
 /* --- Unterschrift --------------------------------------------------------- */
 .ref__person {
+  /* Hoehe fuer den GROSSEN Namen dauerhaft reservieren. Sonst waechst die
+     Karte beim Aufklappen um die Differenz der Schriftgroessen und die
+     ganze Seite darunter springt. Die Rechnung nutzt exakt dieselben
+     clamp-Werte wie .ref__name (Zeilenhoehe 1,25) und .ref__rolle
+     (0,5em Abstand + 1,5 Zeilenhoehe = 2em). */
+  min-height: calc(clamp(1.5rem, 1.95vw, 1.95rem) * 1.25
+                 + clamp(0.65rem, 0.71vw, 0.71rem) * 2);
   display: grid;
   justify-items: start;
   /* Ohne `start` verteilt der Grid-Container die Resthöhe der subgrid-Zeile
@@ -242,10 +286,11 @@
 }
 .ref__name {
   font-family: var(--font-display);
-  font-size: clamp(1.08rem, 1.3vw, 1.3rem);
+  font-size: var(--name-gr, clamp(1.08rem, 1.3vw, 1.3rem));
   font-weight: 500;
   line-height: 1.25;
   color: var(--ink-black);
+  transition: font-size 0.6s var(--ease-soft);
 }
 .ref__rolle {
   margin-top: 0.5em;
@@ -264,23 +309,43 @@
   font-size: clamp(1.15rem, 1.48vw, 1.48rem);
   line-height: 1.44;
   color: var(--ink-black);
-  max-width: 24rem;
+  /* FESTE Satzbreite, nicht 100 % der Spalte. Sonst umbricht der Text
+     waehrend des Aufklappens staendig neu — und im Ruhezustand, wo die
+     Spalte 0 px breit ist, laeuft er auf hunderte Zeilen und zieht die
+     ganze Karte auf. So bleibt der Zeilenfall konstant, die Spalte klippt
+     ihn nur. */
+  width: clamp(220px, 19.5vw, 330px);
   text-wrap: pretty;
+  /* Der Abstand sitzt am Text, nicht an der Spalte: so kann die Spalte im
+     Ruhezustand auf 0 zusammenlaufen, ohne dass ein Polster stehen bleibt. */
+  margin-left: clamp(1.4rem, 2.2vw, 2.4rem);
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
   /* Hängende Interpunktion: das öffnende „ wird in den linken Rand gezogen,
      damit der erste BUCHSTABE auf der Spaltenkante steht und nicht das
      Anführungszeichen. Nur die erste Zeile ist betroffen. */
   text-indent: -0.42em;
 }
-/* Kurze Goldhaarlinie über dem Zitat. Sie sitzt in der subgrid-Zeile des
-   Zitats und fluchtet dadurch über alle vier Spalten hinweg. */
-.ref__zitat::before {
-  content: '';
-  display: block;
-  width: 48px;
-  height: 1px;
-  margin-bottom: clamp(1rem, 2.2vh, 1.5rem);
-  background: var(--line-gold);
-  text-indent: 0;
+/* --- Porträt -------------------------------------------------------------- */
+/* FESTE Hoehe, keine aspect-ratio: waere die Hoehe an die Breite gekoppelt,
+   wuerde die Karte beim Auf- und Zuklappen hoeher und niedriger und der
+   ganze Abschnitt darunter wuerde springen. So bleibt die Bauhoehe gleich,
+   nur der Bildausschnitt aendert sich. */
+.ref__foto {
+  width: 100%;
+  height: clamp(190px, 18.5vw, 285px);
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--navy-800);
+}
+.ref__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 22%;
+  /* Fast entsaettigt: vier verschiedene Hauttoene und Hintergruende wuerden
+     sonst gegeneinander arbeiten. */
+  filter: grayscale(0.88) contrast(1.04);
 }
 
 /* --- Hinweis unter dem Fries --------------------------------------------- */
@@ -320,7 +385,11 @@
     height: 1px;
     background: var(--line-soft);
   }
-  .ref__zitat { max-width: 26rem; }
+  /* Ohne Akkordeon steht das Zitat einfach unter dem Bild. */
+  .ref__aussage { flex: 0 0 100%; align-self: auto; }
+  .ref__karte { flex-wrap: wrap; }
+  .ref__inhalt { flex: 0 1 min(300px, 100%); }
+  .ref__zitat { width: auto; max-width: 30rem; margin-left: 0; margin-top: clamp(1.2rem, 2.6vh, 1.8rem); opacity: 1; }
 }
 
 @media (max-width: 680px) {
@@ -339,7 +408,56 @@
     background: var(--line-soft);
   }
   .ref__h2 { font-size: clamp(1.7rem, 7vw, 2.2rem); }
-  .ref__zitat { max-width: none; font-size: clamp(1.15rem, 5vw, 1.35rem); }
+  .ref__zitat { width: auto; max-width: none; font-size: clamp(1.15rem, 5vw, 1.35rem); margin-left: 0; opacity: 1; }
+  .ref__inhalt { flex: 0 1 min(320px, 100%); }
+}
+
+
+/* ===========================================================================
+   AKKORDEON — eine Spalte faehrt auf, das Zitat kommt rechts neben das Bild
+   Nur ab 1201 px: darunter stehen zwei bzw. eine Spalte, da ist kein Platz.
+   Gesteuert ueber data-aktiv am Fries und data-offen an der Karte, gesetzt
+   in site.js — dadurch funktioniert es mit Maus, Tastatur UND Fingertipp,
+   nicht nur mit :hover.
+
+   Die Kartenhoehe aendert sich dabei NICHT: die linke Spalte bleibt gleich
+   hoch, das Zitat erscheint daneben statt darunter. Deshalb braucht der
+   Fries keine feste Bauhoehe und nichts darunter springt.
+   =========================================================================== */
+@media (min-width: 1201px) {
+  .ref__tafel { transition: grid-template-columns 0.72s var(--ease-soft); }
+  .ref__karte { cursor: pointer; }
+  .ref__karte:focus-visible { outline: 1px solid var(--navy-600); outline-offset: -4px; }
+
+  /* 2,5 zu 0,833 — die offene Spalte nimmt die Haelfte des Frieses ein. */
+  .ref__tafel[data-aktiv='1'] { grid-template-columns: 2.5fr 0.833fr 0.833fr 0.833fr; }
+  .ref__tafel[data-aktiv='2'] { grid-template-columns: 0.833fr 2.5fr 0.833fr 0.833fr; }
+  .ref__tafel[data-aktiv='3'] { grid-template-columns: 0.833fr 0.833fr 2.5fr 0.833fr; }
+  .ref__tafel[data-aktiv='4'] { grid-template-columns: 0.833fr 0.833fr 0.833fr 2.5fr; }
+
+  /* Eingeklappt: Name kleiner, Taetigkeit weg — in 17 % Spaltenbreite haette
+     die gesperrte Zeile keinen lesbaren Zeilenfall mehr. */
+  .ref__tafel[data-aktiv] .ref__karte { --name-gr: clamp(0.92rem, 1vw, 1rem); }
+  .ref__tafel[data-aktiv] .ref__karte .ref__rolle { opacity: 0; }
+
+  /* Aufgeklappt: Name deutlich groesser, Strich laenger, Zitat sichtbar. */
+  .ref__tafel[data-aktiv] .ref__karte[data-offen] { --name-gr: clamp(1.5rem, 1.95vw, 1.95rem); }
+  .ref__tafel[data-aktiv] .ref__karte[data-offen] .ref__rolle { opacity: 1; }
+  .ref__tafel[data-aktiv] .ref__karte[data-offen] .ref__strich { width: 72px; }
+  .ref__tafel[data-aktiv] .ref__karte[data-offen] .ref__zitat {
+    opacity: 1;
+    /* Erst einblenden, wenn die Spalte breit genug ist — sonst sieht man
+       den Text waehrend des Umbruchs zappeln. */
+    transition-delay: 0.26s;
+  }
+
+  .ref__rolle { transition: opacity 0.4s var(--ease); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ref__tafel, .ref__zitat, .ref__name, .ref__strich, .ref__rolle {
+    transition: none !important;
+  }
 }
 
 /* Auf Touch bleibt kein Hover übrig — dort stehen die Logos dauerhaft in

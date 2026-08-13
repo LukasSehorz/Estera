@@ -266,6 +266,48 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(setzeLinie);
   }
 
+  /* --- Referenzen-Akkordeon ----------------------------------------------
+     Eine Spalte faehrt auf, die anderen schrumpfen. Bewusst ueber Attribute
+     statt reinem :hover geloest: so greift dieselbe Logik fuer Maus,
+     Tastatur (Tab/Enter) und Fingertipp. Die Breiten selbst liegen in
+     referenzen.css und gelten erst ab 1201 px.                             */
+  var refTafel = document.querySelector('.ref__tafel');
+  if (refTafel) {
+    var refKarten = Array.prototype.slice.call(refTafel.querySelectorAll('.ref__karte'));
+    var hatHover = window.matchMedia('(hover: hover)').matches;
+
+    var refOeffne = function (index) {
+      refKarten.forEach(function (karte, n) {
+        if (n === index) karte.setAttribute('data-offen', '');
+        else karte.removeAttribute('data-offen');
+      });
+      if (index === null) refTafel.removeAttribute('data-aktiv');
+      else refTafel.setAttribute('data-aktiv', String(index + 1));
+    };
+
+    refKarten.forEach(function (karte, i) {
+      if (hatHover) {
+        karte.addEventListener('mouseenter', function () { refOeffne(i); });
+      }
+      karte.addEventListener('focus', function () { refOeffne(i); });
+      /* Tippen und Enter schalten um — ohne Zeigegeraet gibt es kein
+         Verlassen, also muss man auch wieder zuklappen koennen. */
+      karte.addEventListener('click', function () {
+        refOeffne(karte.hasAttribute('data-offen') ? null : i);
+      });
+      karte.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          refOeffne(karte.hasAttribute('data-offen') ? null : i);
+        }
+      });
+    });
+
+    if (hatHover) {
+      refTafel.addEventListener('mouseleave', function () { refOeffne(null); });
+    }
+  }
+
   /* --- Sanfte Parallaxe des Bildbands (dezent, nur Desktop) --------------- */
   var band = document.querySelector('[data-parallax]');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

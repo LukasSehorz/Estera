@@ -121,9 +121,26 @@ gemeinsame Linien. Eine negative Außenmarge in Höhe des Spalten-Innenabstands
 sorgt dafür, dass der Text der ersten Spalte auf dem Seitenrand steht und
 trotzdem alle vier Spalten dieselbe Zeilenbreite behalten.
 
+**Akkordeon.** In Ruhe zeigt jede Spalte Logo, Name, Tätigkeit, Haarlinie
+und Porträt. Fährt man eine an, wächst sie auf die halbe Friesbreite, der
+Name wird deutlich größer und das Zitat erscheint **rechts neben dem Bild**;
+die anderen drei rücken nach rechts und schrumpfen.
+
+Zwei Dinge halten die Bauhöhe dabei konstant, damit nichts darunter springt:
+das Porträt hat eine feste Höhe statt eines Seitenverhältnisses, und die
+Namenszeile reserviert dauerhaft die Höhe der großen Schriftgröße. Das Zitat
+hat eine feste Satzbreite — die Spalte klippt es nur, statt es bei jedem
+Zwischenschritt neu umbrechen zu lassen. Gemessen: 0 px Sprung auf allen vier
+Karten von 1201 bis 1920 px.
+
+Gesteuert über `data-aktiv`/`data-offen` aus `site.js`, nicht über `:hover` —
+so greift dieselbe Logik für Maus, Tastatur und Fingertipp. Unterhalb von
+1201 px ist das Akkordeon aus; dort steht das Zitat unter dem Bild.
+
 **Alle Inhalte sind Platzhalter.** Die Logos unter `assets/img/logos/` sind
-Beispiele fremder Marken, nur zur lokalen Ansicht — der Ordner ist per
-`.gitignore` vom Repo ausgeschlossen. Vor der Freischaltung wird je Referenz
+Beispiele fremder Marken, die Porträts unter `assets/img/personen/` sind
+KI-generiert — keine echten Personen, aber sie hängen an erfundenen Zitaten.
+Beide Ordner sind per `.gitignore` vom Repo ausgeschlossen. Vor der Freischaltung wird je Referenz
 gebraucht: Logo als SVG, Name und Funktion, der Satz wörtlich, und eine
 schriftliche Freigabe für alle drei.
 

@@ -9,3 +9,6 @@ node_modules/
 
 # Beispiel-Logos fremder Marken — NUR lokal zur Ansicht, nie ins oeffentliche Repo
 assets/img/logos/
+# KI-generierte Demo-Portraets: keine echten Personen, aber sie haengen an
+# erfundenen Zitaten — gehoert nicht in ein oeffentliches Repo
+assets/img/personen/
