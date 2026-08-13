@@ -1,33 +1,34 @@
 /* ===========================================================================
-   REFERENZEN — Unternehmer, die mit Estera arbeiten
-   Aufbau nach der Referenz (Imperia „Sie kennen uns aus"): EINE gerahmte
-   Tafel mit Goldhaarlinie und großem Radius, darin die Logos nebeneinander.
+   KUNDEN, DIE UNS VERTRAUEN
+   Ein Fries über die volle Breite: oben und unten eine Goldhaarlinie,
+   dazwischen vier Spalten, durch Haarlinien getrennt.
 
-   Drei Dinge sind bewusst anders gelöst als in der Referenz:
+   Bewusst KEIN gerahmter Kasten mit Radius wie in der Referenz. Ein
+   abgerundetes Rechteck mit heller Kontur ist die Formsprache eines
+   UI-Baukastens; der Rest der Seite arbeitet mit gestochenen Haarlinien.
 
-   1. Die Logos stehen dort in Originalfarbe — acht Sender- und Magazinlogos
-      in Rot, Blau, Grün, Orange nebeneinander. Das ist ein Logo-Salat und
-      zieht mehr Aufmerksamkeit als der Satz daneben. Hier liegen sie als
-      EINE Tonstufe (grau, 62 % Deckkraft) und kommen erst bei Hover in
-      Farbe. Die Tafel bleibt dadurch ruhig, die Marken bleiben erkennbar.
-
-   2. Statt vier abgesetzter Kästen trennen Haarlinien die Spalten — die
-      Tafel liest sich als eine Platte, nicht als vier Karten.
-
-   3. `subgrid` bindet Logo-, Namens- und Zitatzeile aller vier Spalten auf
-      gemeinsame Linien. Ohne das „schwimmen" Namen und Zitate, weil die
-      Logos unterschiedlich hoch sind.
+   Die vier Größenstufen tragen die Wirkung:
+     Zitat    groß, kursiv      — der eigentliche Inhalt
+     Name     mittel            — die Unterschrift darunter
+     Logo     klein, einfarbig  — die Marke, nicht der Held
+     Rolle    sehr klein, Kapitälchen mit Sperrsatz
+   Ohne diesen Kontrast liest sich die Tafel wie ein Formular.
    =========================================================================== */
 
 .ref {
+  /* Innenabstand der Spalten — steht hier oben, weil der Fries ihn unten
+     als negative Außenmarge wieder herauszieht. */
+  --ref-pad: clamp(1.6rem, 2.6vw, 2.8rem);
   position: relative;
   z-index: 1;
   background: var(--paper);
   padding: clamp(3.5rem, 9vh, 7rem) 0 clamp(2rem, 5vh, 4rem);
 }
 
+/* Deutlich breiter als die Textabschnitte — der Fries soll quer über die
+   Seite laufen, nicht in der Spalte stehen. */
 .ref__inner {
-  max-width: 1400px;
+  max-width: 1760px;
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
@@ -42,23 +43,23 @@
   font-size: clamp(1.9rem, 3.2vw, 3.2rem);
   line-height: 1.12;
 }
-.ref__unterzeile {
-  margin-top: clamp(1rem, 2.2vh, 1.5rem);
-  font-size: clamp(0.8rem, 0.86vw, 0.89rem);
-  font-weight: 500;
-  letter-spacing: 0.3em;
-  text-indent: 0.3em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-}
 
-/* --- Die Tafel ------------------------------------------------------------ */
+/* --- Der Fries ------------------------------------------------------------ */
 .ref__tafel {
-  margin-top: clamp(2.4rem, 6vh, 4.5rem);
-  border: 1px solid var(--line-gold);
-  /* Etwas größer als der Bildradius: die Tafel ist eine Fläche, kein Bild. */
-  border-radius: clamp(14px, 1.6vw, 22px);
-  background: var(--paper);
+  margin-top: clamp(2.6rem, 6.5vh, 4.5rem);
+  /* Zwei Goldhaarlinien fassen den Fries oben und unten ein.
+     Gold für die Klammer, Navy-Grau für die Spaltenlinien darin —
+     die Rangfolge muss auch in den Linien lesbar sein. */
+  border-top: 1px solid var(--line-gold);
+  border-bottom: 1px solid var(--line-gold);
+  /* Der Fries wird um genau den Spalten-Innenabstand nach außen gezogen.
+     Dadurch steht der Text der ersten Spalte exakt auf dem Seitenrand,
+     ALLE vier Spalten behalten aber dieselbe Zeilenbreite. Zog man
+     stattdessen nur außen das Padding ab, waren Spalte 1 und 4 breiter
+     und brachen anders um als 2 und 3.
+     Die Goldlinien laufen dadurch etwas über den Satzspiegel hinaus —
+     genau das lässt den Fries über die ganze Seite laufen. */
+  margin-inline: calc(-1 * min(var(--ref-pad), var(--gutter)));
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   /* Logo / Person / Zitat — die drei Linien, auf die subgrid unten bindet */
@@ -67,12 +68,12 @@
 
 .ref__karte {
   position: relative;
-  padding: clamp(2rem, 3.2vw, 3.2rem) clamp(1.1rem, 1.9vw, 2rem);
+  padding: clamp(2.4rem, 4.5vh, 3.6rem) var(--ref-pad);
   display: grid;
   align-content: start;
-  justify-items: center;
-  text-align: center;
-  gap: clamp(1rem, 2.2vh, 1.6rem);
+  justify-items: start;
+  text-align: left;
+  gap: clamp(1.1rem, 2.4vh, 1.7rem);
 }
 @supports (grid-template-rows: subgrid) {
   .ref__karte {
@@ -81,27 +82,26 @@
   }
 }
 
-/* Senkrechte Haarlinien zwischen den Spalten, oben und unten eingerückt —
-   so stoßen sie nicht an den gerundeten Rahmen. */
+/* Spaltenlinien, oben und unten eingerückt — sie sollen die Goldlinien
+   nicht berühren, sonst entsteht wieder ein Gitter. */
 .ref__karte + .ref__karte::before {
   content: '';
   position: absolute;
   left: 0;
-  top: clamp(1.6rem, 3vh, 2.6rem);
-  bottom: clamp(1.6rem, 3vh, 2.6rem);
+  top: clamp(1.8rem, 3.4vh, 2.8rem);
+  bottom: clamp(1.8rem, 3.4vh, 2.8rem);
   width: 1px;
   background: var(--line-soft);
 }
 
 /* --- Logo ----------------------------------------------------------------- */
-/* Feste Höhe, nicht feste Breite: Logos werden optisch über die Höhe
-   ausgeglichen. `--logo-scale` am <li> justiert einzelne Marken nach,
-   die trotz gleicher Höhe zu groß oder zu klein wirken. */
+/* Feste Höhe, nicht feste Breite: Logos gleicht man optisch über die Höhe
+   aus. `--logo-scale` am <li> justiert einzelne Marken nach, die trotz
+   gleicher Höhe zu groß oder zu klein wirken. */
 .ref__logo {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  height: clamp(38px, 3.6vw, 52px);
+  display: flex;
+  align-items: center;
+  height: clamp(36px, 3.4vw, 48px);
 }
 .ref__logo img,
 .ref__logo svg {
@@ -110,7 +110,10 @@
   width: auto;
   height: auto;
   transform: scale(var(--logo-scale, 1));
-  filter: grayscale(1) contrast(0.92) opacity(0.62);
+  transform-origin: left center;
+  /* Einfarbig im Ruhezustand: vier bunte Firmenlogos nebeneinander ziehen
+     mehr Blick als die Zitate und ergeben einen Logo-Salat. */
+  filter: grayscale(1) contrast(0.92) opacity(0.55);
   transition: filter 0.55s var(--ease);
 }
 .ref__karte:hover .ref__logo img,
@@ -118,26 +121,22 @@
   filter: grayscale(0) contrast(1) opacity(1);
 }
 
-/* Platzhalter, solange kein echtes Logo vorliegt: Monogramm im Haarlinienring
-   plus gesperrte Wortmarke. Ersetzt wird der GESAMTE Inhalt von .ref__logo
-   durch ein <img src="assets/img/logos/….svg" alt="Firmenname">. */
+/* Platzhalter, solange kein echtes Logo vorliegt. Ersetzt wird der GESAMTE
+   Inhalt von .ref__logo durch <img src="assets/img/logos/….svg" alt="Firma">. */
 .ref__logo--platzhalter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
+  gap: 0.62rem;
   color: var(--ink-mute);
 }
 .ref__logo-monogramm {
   display: grid;
   place-items: center;
   flex: 0 0 auto;
-  width: clamp(30px, 2.8vw, 38px);
+  width: clamp(28px, 2.6vw, 34px);
   aspect-ratio: 1;
   border-radius: 50%;
   border: 1px solid var(--line-gold);
   font-family: var(--font-display);
-  font-size: clamp(0.78rem, 0.9vw, 0.92rem);
+  font-size: clamp(0.74rem, 0.86vw, 0.88rem);
   font-weight: 500;
   letter-spacing: 0.06em;
   text-indent: 0.06em;
@@ -145,69 +144,68 @@
 }
 .ref__logo-wort {
   font-family: var(--font-display);
-  font-size: clamp(0.72rem, 0.82vw, 0.84rem);
+  font-size: clamp(0.7rem, 0.8vw, 0.82rem);
   font-weight: 500;
   letter-spacing: 0.22em;
   text-indent: 0.22em;
   text-transform: uppercase;
-  line-height: 1.25;
+  line-height: 1.28;
   white-space: nowrap;
 }
 
-/* --- Person --------------------------------------------------------------- */
+/* --- Unterschrift --------------------------------------------------------- */
 .ref__person {
   display: grid;
-  justify-items: center;
-  /* WICHTIG: ohne `start` verteilt der Grid-Container die Resthöhe der
-     subgrid-Zeile auf seine Zeilen — die Namen liefen dann um 8 px
-     auseinander, je nachdem wie lang die Rollenzeile daneben umbricht. */
+  justify-items: start;
+  /* Ohne `start` verteilt der Grid-Container die Resthöhe der subgrid-Zeile
+     auf seine Zeilen — die Namen liefen dann auseinander, je nachdem wie
+     lang die Rollenzeile daneben umbricht. */
   align-content: start;
-}
-
-/* Kurze Goldhaarlinie über dem Namen — dieselbe Zierform wie unter den
-   Bausteinen im Ablauf. Sie trennt Marke und Mensch. */
-.ref__person::before {
-  content: '';
-  width: 34px;
-  height: 1px;
-  margin-bottom: clamp(0.9rem, 2vh, 1.3rem);
-  background: var(--line-gold);
 }
 .ref__name {
   font-family: var(--font-display);
-  font-size: clamp(1.05rem, 1.24vw, 1.24rem);
+  font-size: clamp(1.08rem, 1.3vw, 1.3rem);
   font-weight: 500;
   line-height: 1.25;
   color: var(--ink-black);
 }
 .ref__rolle {
-  margin-top: 0.45em;
-  font-size: clamp(0.66rem, 0.72vw, 0.72rem);
-  letter-spacing: 0.16em;
+  margin-top: 0.5em;
+  font-size: clamp(0.65rem, 0.71vw, 0.71rem);
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   line-height: 1.5;
   color: var(--ink-mute);
-  text-wrap: balance;
 }
 
 /* --- Zitat ---------------------------------------------------------------- */
+/* Die größte Stufe im Abschnitt. Kursiv, weil es gesprochene Rede ist. */
 .ref__zitat {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(1rem, 1.14vw, 1.14rem);
-  line-height: 1.56;
-  color: var(--ink-soft);
+  font-size: clamp(1.15rem, 1.48vw, 1.48rem);
+  line-height: 1.44;
+  color: var(--ink-black);
+  max-width: 24rem;
   text-wrap: pretty;
+  /* Hängende Interpunktion: das öffnende „ wird in den linken Rand gezogen,
+     damit der erste BUCHSTABE auf der Spaltenkante steht und nicht das
+     Anführungszeichen. Nur die erste Zeile ist betroffen. */
+  text-indent: -0.42em;
+}
+/* Kurze Goldhaarlinie über dem Zitat. Sie sitzt in der subgrid-Zeile des
+   Zitats und fluchtet dadurch über alle vier Spalten hinweg. */
+.ref__zitat::before {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 1px;
+  margin-bottom: clamp(1rem, 2.2vh, 1.5rem);
+  background: var(--line-gold);
+  text-indent: 0;
 }
 
-/* --- Hinweis unter der Tafel --------------------------------------------- */
-.ref__hinweis {
-  margin-top: clamp(1.4rem, 3vh, 2.2rem);
-  text-align: center;
-  font-size: 0.86rem;
-  color: var(--ink-mute);
-}
-
+/* --- Hinweis unter dem Fries --------------------------------------------- */
 /* Nur solange Platzhalter stehen — fliegt mit den echten Referenzen raus. */
 .ref__platzhalter-hinweis {
   margin-top: clamp(1.4rem, 3vh, 2.2rem);
@@ -216,33 +214,25 @@
   letter-spacing: 0.02em;
   color: var(--gold-text);
 }
-.ref__platzhalter-hinweis::before {
-  content: '';
-  display: block;
-  width: 34px;
-  height: 1px;
-  margin: 0 auto 0.9rem;
-  background: var(--line-gold);
-}
 
 /* --- Responsive ----------------------------------------------------------- */
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .ref__tafel {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: repeat(6, auto);
   }
-  /* Erste Spalte jeder Reihe bekommt keine senkrechte Linie … */
+  /* Erste Spalte jeder Reihe ohne Senkrechte, dafür Waagerechte vor Reihe 2 */
   .ref__karte:nth-child(2n + 1)::before { display: none; }
-  /* … dafür trennt eine Waagerechte die zweite Reihe ab. */
   .ref__karte:nth-child(n + 3)::after {
     content: '';
     position: absolute;
     top: 0;
-    left: clamp(1.2rem, 3vw, 2.4rem);
-    right: clamp(1.2rem, 3vw, 2.4rem);
+    left: 0;
+    right: 0;
     height: 1px;
     background: var(--line-soft);
   }
+  .ref__zitat { max-width: 26rem; }
 }
 
 @media (max-width: 680px) {
@@ -250,23 +240,22 @@
     grid-template-columns: 1fr;
     grid-template-rows: repeat(12, auto);
   }
+  .ref__tafel { margin-inline: 0; }
+  .ref__karte { padding-left: 0; padding-right: 0; }
   .ref__karte::before { display: none; }
   .ref__karte:nth-child(n + 2)::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: clamp(1.2rem, 6vw, 2.4rem);
-    right: clamp(1.2rem, 6vw, 2.4rem);
+    top: 0; left: 0; right: 0;
     height: 1px;
     background: var(--line-soft);
   }
   .ref__h2 { font-size: clamp(1.7rem, 7vw, 2.2rem); }
-  /* Ohne Nachbarspalte darf der Satz breiter laufen als die Spalte */
-  .ref__zitat, .ref__person { max-width: 32rem; }
+  .ref__zitat { max-width: none; font-size: clamp(1.15rem, 5vw, 1.35rem); }
 }
 
-/* Auf Touch bleibt kein Hover übrig — dort stehen die Logos dauerhaft
-   in Farbe, sonst sähe man sie nie anders als grau. */
+/* Auf Touch bleibt kein Hover übrig — dort stehen die Logos dauerhaft in
+   Farbe, sonst sähe man sie nie anders als grau. */
 @media (hover: none) {
   .ref__logo img, .ref__logo svg { filter: grayscale(0) contrast(1) opacity(1); }
 }
