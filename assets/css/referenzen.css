@@ -10,9 +10,11 @@
    Die vier Größenstufen tragen die Wirkung:
      Zitat    groß, kursiv      — der eigentliche Inhalt
      Name     mittel            — die Unterschrift darunter
-     Logo     klein, einfarbig  — die Marke, nicht der Held
+     Logo     klein             — die Marke, nicht der Held
      Rolle    sehr klein, Kapitälchen mit Sperrsatz
-   Ohne diesen Kontrast liest sich die Tafel wie ein Formular.
+   Ohne diesen Kontrast liest sich die Tafel wie ein Formular. Die Rangfolge
+   macht die GRÖSSE, nicht die Entsättigung — Logos und Porträts stehen
+   deshalb in voller Farbe.
    =========================================================================== */
 
 .ref {
@@ -226,14 +228,6 @@
   object-position: left center;
   transform: scale(var(--logo-scale, 1));
   transform-origin: left center;
-  /* Einfarbig im Ruhezustand: vier bunte Firmenlogos nebeneinander ziehen
-     mehr Blick als die Zitate und ergeben einen Logo-Salat. */
-  filter: grayscale(1) contrast(0.92) opacity(0.55);
-  transition: filter 0.55s var(--ease);
-}
-.ref__karte:hover .ref__logo img,
-.ref__karte:hover .ref__logo svg {
-  filter: grayscale(0) contrast(1) opacity(1);
 }
 
 /* Platzhalter, solange kein echtes Logo vorliegt. Ersetzt wird der GESAMTE
@@ -343,9 +337,6 @@
   height: 100%;
   object-fit: cover;
   object-position: 50% 22%;
-  /* Fast entsaettigt: vier verschiedene Hauttoene und Hintergruende wuerden
-     sonst gegeneinander arbeiten. */
-  filter: grayscale(0.88) contrast(1.04);
 }
 
 /* --- Hinweis unter dem Fries --------------------------------------------- */
@@ -460,8 +451,3 @@
   }
 }
 
-/* Auf Touch bleibt kein Hover übrig — dort stehen die Logos dauerhaft in
-   Farbe, sonst sähe man sie nie anders als grau. */
-@media (hover: none) {
-  .ref__logo img, .ref__logo svg { filter: grayscale(0) contrast(1) opacity(1); }
-}

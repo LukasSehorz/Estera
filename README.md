@@ -111,10 +111,9 @@ Rechteck mit heller Kontur ist die Formsprache eines UI-Baukastens. Der Rest
 der Seite arbeitet mit gestochenen Haarlinien.
 
 Die Wirkung trägt der Größenkontrast: Zitat 1,48 rem kursiv, Name 1,3 rem,
-Rolle 0,71 rem gesperrte Versalien, Logo klein und einfarbig. Die Logos
-liegen im Ruhezustand auf einer Tonstufe (Graustufe, 55 % Deckkraft) und
-kommen erst bei Hover in Farbe — vier bunte Logos nebeneinander ziehen mehr
-Blick als die Zitate.
+Rolle 0,71 rem gesperrte Versalien, Logo klein. Die Rangfolge macht die
+**Größe**, nicht die Entsättigung — Logos und Porträts stehen in voller
+Farbe, entsättigt wirkte der Abschnitt kalt.
 
 `subgrid` bindet Logo-, Namens- und Zitatzeile aller vier Spalten auf
 gemeinsame Linien. Eine negative Außenmarge in Höhe des Spalten-Innenabstands
