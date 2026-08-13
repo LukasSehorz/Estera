@@ -261,6 +261,13 @@ Aussage für die Website". Geändert ist nur die Anrede („der Investor" → �
 pauschale monatliche Belastung, „ab 0 Euro", aggressive Rendite- und
 Steuerversprechen sowie jede individuelle Berechnung.
 
+Der Trenner zwischen den vier Trägern und den beiden unteren Posten ist
+**beschriftet**. Blank gelassen las er sich als Rechenstrich — vier
+Summanden oben, Summe unten. Das wäre inhaltlich falsch, und bei
+„Langfristigkeit" ergibt es keinen Sinn: die ist keine Folge, sondern eine
+Bedingung. Beide unteren Posten haben genau eines gemeinsam — sie hängen von
+der persönlichen Situation ab, und genau das steht jetzt auf der Linie.
+
 Bewusst **ohne Diagramm** — der Abschnitt davor ist genau das. Hier tragen
 Typografie und eine doppelte waagerechte Haarlinie: eine Tafel, kein
 Schaubild. Und bewusst **ohne Icons**, weil in Abschnitt 4 in jedem Kasten

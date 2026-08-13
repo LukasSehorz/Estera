@@ -111,17 +111,37 @@
   text-wrap: pretty;
 }
 
-/* --- Die Achse ------------------------------------------------------------ */
-/* Doppelte Haarlinie wie die Verbinder in Abschnitt 4 — dieselbe Sprache,
-   nur waagerecht und über die volle Breite. Sie trennt, was die Anlage
-   trägt, von dem, was daraus folgt. */
-.prinzip__achse {
-  display: block;
-  height: 3px;
+/* --- Der Trenner --------------------------------------------------------- */
+/* Die doppelte Haarlinie aus Abschnitt 4, waagerecht — aber MIT Beschriftung
+   in der Mitte. Blank gelassen las sie sich als Rechenstrich: vier Summanden
+   oben, Summe unten. Die Beschriftung nimmt diese Lesart heraus und benennt,
+   was die beiden unteren Posten verbindet.
+   Die Linien sind navy und doppelt, der Titel oben ist gold und einfach —
+   der eine ist ein Abschnittstitel, der andere eine Trennung im Satz. */
+.prinzip__trenner {
   margin: 0 auto;
   max-width: 1180px;
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.2vw, 1.8rem);
+}
+.prinzip__trenner::before,
+.prinzip__trenner::after {
+  content: '';
+  flex: 1 1 0;
+  height: 3px;
   background: linear-gradient(to bottom,
     var(--linie) 0 1px, transparent 1px 2px, var(--linie) 2px 3px);
+}
+.prinzip__trenner span {
+  flex: 0 0 auto;
+  font-size: clamp(0.8rem, 0.86vw, 0.89rem);
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-indent: 0.26em;
+  text-transform: uppercase;
+  color: var(--navy-800);
+  white-space: nowrap;
 }
 
 /* --- Was daraus folgt ----------------------------------------------------- */
@@ -238,6 +258,9 @@
 }
 
 @media (max-width: 680px) {
+  /* Der Titel braucht die ganze Breite, die Linien ruecken darunter. */
+  .prinzip__trenner { flex-wrap: wrap; justify-content: center; }
+  .prinzip__trenner span { order: -1; flex: 1 1 100%; text-align: center; white-space: normal; margin-bottom: 0.9rem; }
   .prinzip__traeger { grid-template-columns: 1fr; }
   .prinzip__posten { padding-left: 0; padding-right: 0; }
   .prinzip__posten::before { display: none; }
