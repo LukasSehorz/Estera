@@ -112,6 +112,8 @@
      wäre dunkler als der Rest der Linie. */
   --linie: #8CA0B8;
   --bogen: clamp(26px, 3vw, 46px);
+  /* Luft zwischen Pfeilspitze und Kasten */
+  --pfeil-luft: clamp(10px, 1.1vw, 18px);
   max-width: 1080px;
   margin: clamp(2.6rem, 6vh, 4.5rem) auto 0;
 }
@@ -141,7 +143,8 @@
   display: block;
   width: 1px;
   height: clamp(2rem, 5vh, 3.4rem);
-  margin: 0 auto;
+  /* Die Linie setzt nicht direkt an der Kastenkante an. */
+  margin: clamp(8px, 1vh, 14px) auto 0;
   background: var(--linie);
 }
 
@@ -176,28 +179,35 @@
   width: 1px;
   background: var(--linie);
 }
-/* Nach der letzten Stufe geht es nicht weiter — die Linie endet auf Höhe
-   der letzten beiden Kästen. */
-.ableh__stufe:last-child .ableh__verbinder::before { bottom: 50%; }
+/* Nach der letzten Stufe geht es nicht weiter. Die Linie endet DORT, WO DIE
+   BÖGEN ABZWEIGEN — also einen Bogenradius über der Waagerechten. Endete sie
+   erst auf Höhe der Pfeile, stünde unter dem Abzweig ein Stück Linie, an dem
+   nichts mehr hängt. */
+.ableh__stufe:last-child .ableh__verbinder::before {
+  bottom: calc(50% + var(--bogen));
+}
 
 /* Ein Arm ist ein Kasten, von dem nur zwei Rahmenkanten gezeichnet werden:
    die senkrechte auf der Mittellinie und die waagerechte zum Kasten hin.
    Der Eckenradius dazwischen ergibt den Bogen. */
 .ableh__arm {
+  --arm-farbe: var(--linie);
   position: absolute;
   top: 0;
   height: 50%;
-  width: 50%;
-  border-bottom: 1px solid var(--linie);
+  /* Nicht bis an den Kasten: die Pfeilspitze soll davor enden. */
+  width: calc(50% - var(--pfeil-luft));
+  border-bottom: 1px solid var(--arm-farbe);
+  transition: border-color 0.45s var(--ease);
 }
 .ableh__arm--links {
   right: 50%;
-  border-right: 1px solid var(--linie);
+  border-right: 1px solid var(--arm-farbe);
   border-bottom-right-radius: var(--bogen);
 }
 .ableh__arm--rechts {
   left: calc(50% - 1px);
-  border-left: 1px solid var(--linie);
+  border-left: 1px solid var(--arm-farbe);
   border-bottom-left-radius: var(--bogen);
 }
 /* Pfeilspitze am äußeren Ende, als gedrehter Winkel aus zwei Rahmenkanten */
@@ -208,7 +218,7 @@
   width: 9px;
   height: 9px;
   border-style: solid;
-  border-color: var(--linie);
+  border-color: var(--arm-farbe);
   border-width: 0;
 }
 .ableh__arm--links::after {
@@ -297,4 +307,79 @@
     border-bottom-width: 1px;
     transform: rotate(-45deg);
   }
+}
+
+
+/* ===========================================================================
+   AUFZIEHEN BEIM SCROLLEN
+   Der Weg zeichnet sich in der Reihenfolge, in der man ihn liest: Kasten,
+   Linie nach unten, Bögen nach außen, dann der Kasten am Ende des Pfeils.
+   Gesteuert über ein Attribut am Block, gesetzt von site.js — dadurch
+   laufen alle drei Stufen auf EINER Zeitachse. Beobachtete man jeden Kasten
+   einzeln, käme die Reihenfolge durcheinander, sobald der Block höher ist
+   als das Fenster.
+
+   Die Bögen ziehen über clip-path auf, nicht über die Breite: eine Änderung
+   der Breite würde den Eckenradius mitverzerren.
+   Die negativen Werte im inset() lassen die Pfeilspitze stehen — sie ragt
+   bewusst über die Kante des Arms hinaus und würde sonst abgeschnitten.
+   =========================================================================== */
+.ableh__start,
+.ableh__kasten {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.7s var(--ease-soft), transform 0.7s var(--ease-soft),
+              border-color 0.5s var(--ease);
+}
+.ableh__abgang,
+.ableh__verbinder::before {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.45s var(--ease-soft);
+}
+.ableh__arm {
+  clip-path: inset(0 0 -16px 100%);
+}
+.ableh__arm--rechts {
+  clip-path: inset(0 100% -16px 0);
+}
+.ableh__arm {
+  transition: clip-path 0.5s var(--ease-soft), border-color 0.45s var(--ease);
+}
+
+.ableh[data-gezeichnet='true'] .ableh__start { opacity: 1; transform: none; }
+.ableh[data-gezeichnet='true'] .ableh__abgang {
+  transform: scaleY(1);
+  transition-delay: 0.15s;
+}
+.ableh[data-gezeichnet='true'] .ableh__verbinder::before {
+  transform: scaleY(1);
+  transition-delay: calc(0.42s + var(--stufe, 0) * 0.34s);
+}
+.ableh[data-gezeichnet='true'] .ableh__arm {
+  clip-path: inset(0 -10px -16px -10px);
+  transition-delay: calc(0.7s + var(--stufe, 0) * 0.34s);
+}
+.ableh[data-gezeichnet='true'] .ableh__kasten {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(0.88s + var(--stufe, 0) * 0.34s);
+}
+
+/* --- Der angefahrene Weg wird kräftiger ---------------------------------- */
+/* Wer auf einen Grund zeigt, sieht den Weg dorthin. Ohne :has() müsste dafür
+   Markup verschoben oder JavaScript eingesetzt werden. */
+.ableh__stufe:has(.ableh__kasten--links:hover)  .ableh__arm--links,
+.ableh__stufe:has(.ableh__kasten--links:focus-within)  .ableh__arm--links,
+.ableh__stufe:has(.ableh__kasten--rechts:hover) .ableh__arm--rechts,
+.ableh__stufe:has(.ableh__kasten--rechts:focus-within) .ableh__arm--rechts {
+  --arm-farbe: var(--navy-600);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ableh__start, .ableh__kasten { opacity: 1; transform: none; }
+  .ableh__abgang, .ableh__verbinder::before { transform: scaleY(1); }
+  .ableh__arm { clip-path: none; }
+  .ableh__start, .ableh__kasten, .ableh__abgang,
+  .ableh__verbinder::before, .ableh__arm { transition: none; }
 }

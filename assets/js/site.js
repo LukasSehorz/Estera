@@ -266,6 +266,25 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(setzeLinie);
   }
 
+  /* --- Verzweigung der Ablehnungsgruende aufziehen -----------------------
+     Ein Beobachter fuer den GANZEN Block, nicht einer je Kasten: nur so
+     laufen Linie, Boegen und Kaesten auf einer gemeinsamen Zeitachse. Bei
+     einzelnen Beobachtern geriete die Reihenfolge durcheinander, sobald der
+     Block hoeher ist als das Fenster. Die Verzoegerungen stehen in
+     auswahl.css und leiten sich aus --stufe ab.                            */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-zeichnen]'), function (block) {
+    var zeigen = function () { block.setAttribute('data-gezeichnet', 'true'); };
+    if (!('IntersectionObserver' in window)) { zeigen(); return; }
+    var beob = new IntersectionObserver(function (eintraege) {
+      eintraege.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        zeigen();
+        beob.disconnect();
+      });
+    }, { rootMargin: '0px 0px -18% 0px', threshold: 0.08 });
+    beob.observe(block);
+  });
+
   /* --- Kopfnavigation: noch nicht gebaute Ziele sperren -------------------
      Die Navigation zeigt die vollstaendige Struktur aus dem Masterbriefing.
      Abschnitte 4, 5 und 7 der Startseite und die Unterseiten gibt es aber
