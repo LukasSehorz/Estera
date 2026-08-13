@@ -1,0 +1,138 @@
+/* ===========================================================================
+   SECTION 4 — WARUM ESTERA ANDERS AUSWÄHLT (Briefing S.7)
+   „Kurzer Qualitätsmoment: Off-Market-Zugang allein reicht nicht.
+    Entscheidend ist, welche Objekte Estera bewusst nicht empfiehlt."
+
+   Bewusst OHNE Bild. Die beiden Abschnitte davor sind bildstark und
+   linksbündig; hier bricht ein rein typografischer, mittiger Moment den
+   Rhythmus. Der Abschnitt ist außerdem kurz gehalten — die sechs
+   Prüfbereiche (Makrolage, Mikrolage, Objekt, Wirtschaftlichkeit,
+   Finanzierbarkeit, Langfristigkeit) gehören laut Briefing S.11 auf die
+   Seite „Auswahl & Qualität", nicht auf die Startseite.
+   =========================================================================== */
+
+.wahl {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  padding: clamp(3.5rem, 9vh, 7rem) 0 clamp(4rem, 10vh, 8rem);
+}
+
+/* Das Querbild aus Abschnitt 3 hängt mit 71 % seiner Höhe in diesen
+   Abschnitt hinein. Ohne diesen Vorlauf läge es über der Überschrift.
+   Rechnung: Bildbreite 46,6 vw, Verhältnis 3:2, davon 71 % Überstand
+   = 0,221 × Fensterbreite. Darauf noch Luft. */
+@media (min-width: 1101px) {
+  .wahl { padding-top: calc(22.1vw + 3.5rem); }
+}
+
+.wahl__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* --- Kopf ----------------------------------------------------------------- */
+.wahl__head {
+  max-width: 940px;
+  margin: 0 auto;
+  text-align: center;
+}
+.wahl__h2 {
+  font-size: clamp(1.9rem, 3.2vw, 3.2rem);
+  line-height: 1.12;
+}
+.wahl__unterzeile {
+  margin-top: clamp(1rem, 2.2vh, 1.5rem);
+  font-size: clamp(0.8rem, 0.86vw, 0.89rem);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.wahl__lead {
+  margin: clamp(1.6rem, 3.4vh, 2.4rem) auto 0;
+  max-width: 46rem;
+  font-size: clamp(1.12rem, 1.42vw, 1.42rem);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+.wahl__lead .hl { color: var(--ink-black); }
+
+/* --- Zwischentitel zwischen zwei Goldhaarlinien -------------------------- */
+.wahl__kicker {
+  margin-top: clamp(2.8rem, 7vh, 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.9rem, 2vw, 1.6rem);
+}
+.wahl__kicker::before,
+.wahl__kicker::after {
+  content: '';
+  width: clamp(28px, 6vw, 90px);
+  height: 1px;
+  background: var(--line-gold);
+}
+.wahl__kicker span {
+  font-size: clamp(0.8rem, 0.86vw, 0.89rem);
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+  white-space: nowrap;
+}
+
+/* --- Die Ablehnungsgründe ------------------------------------------------- */
+/* Zwei Spalten, nicht drei: der dritte Grund ist deutlich länger als die
+   anderen und bräuchte in einer schmalen Spalte fünf Zeilen. */
+.wahl__gruende {
+  margin: clamp(2.2rem, 5vh, 3.4rem) auto 0;
+  max-width: 1080px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.8rem, 4vh, 2.8rem) clamp(2.2rem, 5vw, 4.5rem);
+}
+.wahl__grund {
+  padding-top: clamp(1rem, 2.2vh, 1.5rem);
+  border-top: 1px solid var(--line-soft);
+  font-size: clamp(1rem, 1.14vw, 1.14rem);
+  line-height: 1.58;
+  color: var(--ink-black);
+  text-wrap: pretty;
+}
+
+/* --- Verweis auf die Vertiefung ------------------------------------------ */
+.wahl__mehr {
+  margin-top: clamp(2.4rem, 6vh, 4rem);
+  text-align: center;
+}
+.wahl__mehr a {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.4em;
+  font-family: var(--font-display);
+  font-size: clamp(0.98rem, 1.1vw, 1.1rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--navy-800);
+}
+.wahl__mehr a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--line-gold);
+  transition: background 0.4s var(--ease);
+}
+.wahl__mehr a:hover::after { background: var(--gold); }
+.wahl__mehr a[aria-disabled='true'] { cursor: default; }
+
+/* --- Responsive ----------------------------------------------------------- */
+@media (max-width: 780px) {
+  .wahl__gruende { grid-template-columns: 1fr; }
+  .wahl__h2 { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+}

@@ -26,7 +26,8 @@ assets/css/
   hero-a.css        Bildband + eingelegter Kasten
   hero-b.css        Imperia-Geometrie
   referenzen.css    Kunden, die uns vertrauen
-  leistungen.css    Ablauf (senkrechte Linie + zwei Bilder)
+  leistungen.css    Section 3 — So funktioniert Estera
+  auswahl.css       Section 4 — Warum Estera anders auswählt
   loop.css          Lemniskaten-Variante des Ablaufs, derzeit nicht eingebunden
 assets/js/site.js   Kopfnavigation, Menü, Sticky-Header, Rotator, Reveal,
                     Linienlänge, Referenzen-Akkordeon
@@ -194,6 +195,28 @@ Die Überschrift lautet **nicht** „Ein strukturierter Weg." — dieser Satz
 gehört im Briefing zu Punkt 6 (interaktiver Vergleich „Selbst koordinieren"
 gegen „Mit Estera strukturiert begleitet"). Hier steht stattdessen der
 Wortlaut des sekundären Hero-CTA, der genau hierher springt.
+
+---
+
+## Section 4 — warum Estera anders auswählt
+
+Briefing S. 7: „Kurzer Qualitätsmoment: Off-Market-Zugang allein reicht
+nicht. Entscheidend ist, welche Objekte Estera bewusst nicht empfiehlt."
+
+Sämtliche Inhalte stehen wörtlich im Briefing — Kernaussage S. 11 und die
+sechs Ablehnungsgründe S. 11/12. Nichts ergänzt, nichts umformuliert.
+
+Bewusst **ohne Bild**: die beiden Abschnitte davor sind bildstark und
+linksbündig, hier bricht ein rein typografischer, mittiger Moment den
+Rhythmus. Und bewusst **kurz** — die sechs Prüfbereiche (Makrolage,
+Mikrolage, Objekt, Wirtschaftlichkeit, Finanzierbarkeit, Langfristigkeit)
+gehören laut Briefing S. 11 auf die Seite „Auswahl & Qualität".
+
+Das Querbild aus Abschnitt 3 hängt mit 71 % seiner Höhe hier hinein. Der
+Vorlauf ist deshalb aus der Bildgeometrie gerechnet
+(`padding-top: calc(22.1vw + 3.5rem)`, hergeleitet aus 46,6 vw Breite bei
+3:2 und 71 % Überstand) statt geschätzt — gemessen bleiben von 1101 bis
+1920 px konstant 107 px Luft zwischen Bildunterkante und Überschrift.
 
 ---
 
