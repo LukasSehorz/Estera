@@ -32,6 +32,43 @@
   padding: 0 var(--gutter);
 }
 
+/* --- Signet über der Überschrift ----------------------------------------- */
+/* Aufbau wie in der Referenz: fast geschlossener Ring, in der Mitte ein
+   Zeichen, darunter Kicker und Überschrift. Zwei konzentrische Ringe statt
+   eines — dieselbe doppelte Haarlinie wie bei den Verbindern unten. */
+.wahl__signet {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(112px, 11.4vw, 158px);
+  aspect-ratio: 1;
+  /* Der Text setzt DIREKT unter dem Ring an. Der Abstand ist bewusst fast
+     null: der Ring ist unten offen, dadurch endet sein sichtbarer Bogen
+     schon rund 6 % der Höhe über der Kastenkante — diese Lücke zählt
+     optisch bereits als Abstand. */
+  margin: 0 auto clamp(0.15rem, 0.5vh, 0.4rem);
+}
+.wahl__signet-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+/* Kein vector-effect: non-scaling-stroke. Die Strichlänge steht über
+   pathLength in eigenen Einheiten; beides zusammen rechnet in
+   unterschiedlichen Maßstäben und die Lücke säße nicht mehr unten. */
+.wahl__signet-ring circle {
+  fill: none;
+  stroke: var(--line-gold);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+.wahl__signet-icon {
+  width: 34%;
+  height: 34%;
+  color: var(--navy-700, var(--navy-800));
+}
+
 /* --- Kopf ----------------------------------------------------------------- */
 .wahl__head {
   max-width: 940px;
@@ -42,8 +79,11 @@
   font-size: clamp(1.9rem, 3.2vw, 3.2rem);
   line-height: 1.12;
 }
+/* Steht jetzt ÜBER der Überschrift, zwischen Signet und Zeile — sonst
+   stünde zwischen Zeichen und Überschrift nichts und das Signet schwebte
+   für sich. */
 .wahl__unterzeile {
-  margin-top: clamp(1rem, 2.2vh, 1.5rem);
+  margin-bottom: clamp(0.9rem, 2vh, 1.3rem);
   font-size: clamp(0.8rem, 0.86vw, 0.89rem);
   font-weight: 500;
   letter-spacing: 0.3em;
@@ -233,14 +273,21 @@
 /* Pfeilspitze am äußeren Ende. Sie besteht aus ZWEI ineinanderliegenden
    Winkeln im selben Abstand wie die beiden Linien — eine einfache Spitze an
    einer doppelten Linie sieht aus, als gehörte sie nicht dazu.
-   Der Versatz von 2,5 px ist die Parallele zum Winkel: bei 45 Grad ergibt
-   ein Abstand von 2,5 px auf der Achse rund 1,8 px senkrecht zum Strich —
-   also denselben Abstand, den die beiden Linien zueinander haben. */
+   Zwei Groessen sind hier gerechnet, nicht geschaetzt:
+
+   1. Die HOEHE. Der Bezugspunkt von `bottom` ist die Innenkante des
+      Rahmens, nicht dessen Mitte. Der 3 px starke Doppelstrich liegt also
+      UNTER dem Nullpunkt; seine Mitte sitzt 1,5 px darunter. Bei 8 px
+      Spitzenhoehe muss die Unterkante damit auf 1,5 + 4 = 5,5 px liegen.
+      Vorher stand dort 3 px — die Spitzen schwebten 2,5 px ueber der Linie.
+
+   2. Der VERSATZ. Die Mitten der beiden Linien liegen 2 px auseinander.
+      Bei 45 Grad braucht es dafuer 2 x Wurzel(2) = 2,83 px auf der Achse. */
 .ableh__arm::before,
 .ableh__arm::after {
   content: '';
   position: absolute;
-  bottom: -3px;
+  bottom: -5.5px;
   width: 8px;
   height: 8px;
   border-style: solid;
@@ -253,8 +300,8 @@
   border-bottom-width: 1px;
   transform: rotate(45deg);
 }
-.ableh__arm--links::before { left: -1.5px; }
-.ableh__arm--links::after  { left: 1px; }
+.ableh__arm--links::before { left: -2px; }
+.ableh__arm--links::after  { left: 0.83px; }
 
 .ableh__arm--rechts::before,
 .ableh__arm--rechts::after {
@@ -262,8 +309,8 @@
   border-bottom-width: 1px;
   transform: rotate(-45deg);
 }
-.ableh__arm--rechts::before { right: -1.5px; }
-.ableh__arm--rechts::after  { right: 1px; }
+.ableh__arm--rechts::before { right: -2px; }
+.ableh__arm--rechts::after  { right: 0.83px; }
 
 /* --- Die Kästen ----------------------------------------------------------- */
 .ableh__kasten {
