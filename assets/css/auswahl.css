@@ -119,33 +119,48 @@
 }
 
 /* --- Der Kasten oben, von dem die Wege ausgehen -------------------------- */
+/* Deckendes Navy statt Weiß mit Rahmen. Vorher hatte der Startkasten
+   dasselbe Gewicht wie die sechs darunter — es gab keinen Ursprung, von dem
+   der Weg ausgeht. Jetzt ist er der einzige dunkle Punkt auf weißem Papier
+   und liest sich als Stempel, aus dem alles hervorgeht.
+   Der Goldring liegt als zweite Linie außen herum, wie die Randung einer
+   Urkunde. */
 .ableh__start {
+  position: relative;
   width: max-content;
   max-width: 100%;
   margin: 0 auto;
-  padding: clamp(0.9rem, 2vh, 1.25rem) clamp(1.4rem, 3vw, 2.4rem);
-  border: 1px solid var(--linie);
+  padding: clamp(1rem, 2.2vh, 1.4rem) clamp(1.8rem, 3.6vw, 3rem);
   border-radius: var(--radius-img);
-  background: var(--paper);
+  background: var(--navy-800);
   text-align: center;
+}
+.ableh__start::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border: 1px solid var(--line-gold);
+  border-radius: calc(var(--radius-img) + 6px);
+  pointer-events: none;
 }
 .ableh__start-txt {
   font-size: clamp(0.82rem, 0.9vw, 0.93rem);
   font-weight: 500;
-  letter-spacing: 0.26em;
-  text-indent: 0.26em;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
   text-transform: uppercase;
-  color: var(--navy-800);
+  color: #fff;
   white-space: nowrap;
 }
 /* Kurzes Stück Linie zwischen Startkasten und erster Stufe */
 .ableh__abgang {
   display: block;
-  width: 1px;
+  width: 3px;
   height: clamp(2rem, 5vh, 3.4rem);
   /* Die Linie setzt nicht direkt an der Kastenkante an. */
-  margin: clamp(8px, 1vh, 14px) auto 0;
-  background: var(--linie);
+  margin: clamp(12px, 1.4vh, 18px) auto 0;
+  background: linear-gradient(to right,
+    var(--linie) 0 1px, transparent 1px 2px, var(--linie) 2px 3px);
 }
 
 /* --- Die drei Stufen ------------------------------------------------------ */
@@ -173,11 +188,16 @@
   /* -1px, damit die Senkrechte GENAU auf den Rahmenkanten der beiden Bögen
      liegt. Ohne das steht die Kante des linken Bogens links daneben, die des
      rechten rechts daneben — die Linie wäre dann 2 px breit. */
-  left: calc(50% - 1px);
+  left: calc(50% - 1.5px);
   top: 0;
   bottom: 0;
-  width: 1px;
-  background: var(--linie);
+  width: 3px;
+  /* DOPPELTE Haarlinie: 1 px Linie, 1 px Luft, 1 px Linie. Eine einzelne
+     Linie ist eine Verbindung; zwei parallele sind eine Randung — dieselbe
+     Sprache wie auf einem Wertpapier. Die Bögen ziehen dasselbe über
+     `border-style: double`. */
+  background: linear-gradient(to right,
+    var(--linie) 0 1px, transparent 1px 2px, var(--linie) 2px 3px);
 }
 /* Nach der letzten Stufe geht es nicht weiter. Die Linie endet DORT, WO DIE
    BÖGEN ABZWEIGEN — also einen Bogenradius über der Waagerechten. Endete sie
@@ -196,25 +216,25 @@
   top: 0;
   height: 50%;
   /* Nicht bis an den Kasten: die Pfeilspitze soll davor enden. */
-  width: calc(50% - var(--pfeil-luft));
-  border-bottom: 1px solid var(--arm-farbe);
+  width: calc(50% + 1.5px - var(--pfeil-luft));
+  border-bottom: 3px double var(--arm-farbe);
   transition: border-color 0.45s var(--ease);
 }
 .ableh__arm--links {
-  right: 50%;
-  border-right: 1px solid var(--arm-farbe);
+  right: calc(50% - 1.5px);
+  border-right: 3px double var(--arm-farbe);
   border-bottom-right-radius: var(--bogen);
 }
 .ableh__arm--rechts {
-  left: calc(50% - 1px);
-  border-left: 1px solid var(--arm-farbe);
+  left: calc(50% - 1.5px);
+  border-left: 3px double var(--arm-farbe);
   border-bottom-left-radius: var(--bogen);
 }
 /* Pfeilspitze am äußeren Ende, als gedrehter Winkel aus zwei Rahmenkanten */
 .ableh__arm::after {
   content: '';
   position: absolute;
-  bottom: -5px;
+  bottom: -3px;
   width: 9px;
   height: 9px;
   border-style: solid;
@@ -236,11 +256,12 @@
 
 /* --- Die Kästen ----------------------------------------------------------- */
 .ableh__kasten {
+  position: relative;
   display: flex;
-  align-items: flex-start;
-  gap: clamp(0.8rem, 1.4vw, 1.15rem);
+  align-items: center;
+  gap: clamp(0.9rem, 1.6vw, 1.35rem);
   margin: clamp(0.7rem, 1.8vh, 1.3rem) 0;
-  padding: clamp(1rem, 1.9vw, 1.5rem) clamp(1.1rem, 2vw, 1.6rem);
+  padding: clamp(1.1rem, 2.1vw, 1.7rem) clamp(1.2rem, 2.2vw, 1.8rem);
   border: 1px solid rgba(16, 41, 73, 0.16);
   border-radius: var(--radius-img);
   background: var(--paper);
@@ -249,17 +270,48 @@
 }
 .ableh__kasten:hover { border-color: var(--linie); }
 
+/* Medaillon mit Goldring — dieselbe Form wie das Siegel im Ablauf und die
+   Initialen bei den Kundenstimmen. Ohne Ring saß das Icon frei im Kasten und
+   hatte kein Gewicht. */
 .ableh__icon {
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  width: clamp(30px, 3vw, 38px);
+  width: clamp(42px, 3.9vw, 52px);
   aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--line-gold);
   color: var(--navy-600);
+  transition: border-color 0.5s var(--ease);
 }
-.ableh__icon svg { width: 100%; height: 100%; display: block; }
+.ableh__icon svg { width: 54%; height: 54%; display: block; }
+.ableh__kasten:hover .ableh__icon { border-color: var(--gold); }
+
+/* Tafelziffer als Prägung: groß, sehr blass, oben rechts. Sie macht aus
+   sechs gleichen Kästen sechs nummerierte Tafeln — und stiehlt dem Text
+   trotzdem nichts, weil sie fast nicht da ist. */
+.ableh__nr {
+  position: absolute;
+  top: clamp(0.5rem, 1.2vh, 0.9rem);
+  right: clamp(0.8rem, 1.4vw, 1.2rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 3.6vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  /* Cormorant setzt von Haus aus Mediävalziffern — die Null hat dann
+     Versalhöhe, die Eins keine Grundserife, und „01" liest sich als „OI".
+     Versalziffern erzwingen. */
+  font-variant-numeric: lining-nums;
+  font-feature-settings: 'lnum' 1, 'onum' 0;
+  color: rgba(16, 41, 73, 0.07);
+  pointer-events: none;
+  user-select: none;
+}
 
 .ableh__txt {
+  /* Platz für die Tafelziffer oben rechts */
+  padding-right: clamp(1.4rem, 2.6vw, 2.6rem);
   font-size: clamp(0.95rem, 1.06vw, 1.06rem);
   line-height: 1.55;
   color: var(--ink-black);
