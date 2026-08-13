@@ -1,0 +1,7 @@
+# Netlify: Die Startadresse zeigt Variante A.
+# Ohne diese Zeile liefert Netlify index.html — das ist Variante B, der
+# alte Hero-Entwurf. Die eigentliche Arbeit liegt in variante-a.html.
+# 200 statt 301: die Adresse bleibt "/", der Inhalt kommt aus variante-a.html.
+# Vor dem Launch wird variante-a.html zur echten index.html; dann faellt
+# diese Datei weg.
+/            /variante-a.html   200
