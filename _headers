@@ -1,0 +1,5 @@
+# Der gesamte Prototyp bleibt aus Suchmaschinen heraus. Die HTML-Seiten
+# tragen bereits <meta name="robots" content="noindex, nofollow">; dieser
+# Header deckt zusaetzlich Bilder und Logos ab.
+/*
+  X-Robots-Tag: noindex, nofollow

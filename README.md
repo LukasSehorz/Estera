@@ -140,9 +140,18 @@ so greift dieselbe Logik für Maus, Tastatur und Fingertipp. Unterhalb von
 1201 px ist das Akkordeon aus; dort steht das Zitat unter dem Bild.
 
 **Alle Inhalte sind Platzhalter.** Die Logos unter `assets/img/logos/` sind
-Beispiele fremder Marken, die Porträts unter `assets/img/personen/` sind
-KI-generiert — keine echten Personen, aber sie hängen an erfundenen Zitaten.
-Beide Ordner sind per `.gitignore` vom Repo ausgeschlossen. Vor der Freischaltung wird je Referenz
+Beispiele fremder Marken (Apple, Adidas), die Porträts unter
+`assets/img/personen/` sind KI-generiert — keine echten Personen, aber sie
+hängen an erfundenen Zitaten.
+
+Beides liegt im Repo, damit die Vorschau auf Netlify vollständig ist. Die
+Seiten tragen `noindex, nofollow`, und `_headers` setzt denselben Hinweis als
+HTTP-Header, damit auch Bilder und Logos nicht in Suchmaschinen landen.
+
+**Vor der Veröffentlichung müssen beide Ordner gegen echtes Material getauscht
+werden.** Fremde Marken unter der Überschrift „Kunden, die uns vertrauen"
+wären sonst eine Falschbehauptung — und Logo, Name und Zitat brauchen je eine
+schriftliche Freigabe. Vor der Freischaltung wird je Referenz
 gebraucht: Logo als SVG, Name und Funktion, der Satz wörtlich, und eine
 schriftliche Freigabe für alle drei.
 
