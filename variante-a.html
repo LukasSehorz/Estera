@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/hero-a.css">
+<link rel="stylesheet" href="assets/css/referenzen.css">
 <link rel="stylesheet" href="assets/css/reviews.css">
 <link rel="stylesheet" href="assets/css/leistungen.css">
 <link rel="stylesheet" href="assets/css/loop.css">
@@ -76,6 +77,92 @@
     </figure>
   </div>
 
+</section>
+
+
+<!-- =====================================================================
+     REFERENZEN — Unternehmer, die mit Estera arbeiten
+     Aufbau nach imperiaimmobilien.de „Sie kennen uns aus": eine gerahmte
+     Tafel mit Goldhaarlinie, darin die Marken nebeneinander.
+
+     ACHTUNG — alles hier ist PLATZHALTER.
+     Briefing S.3: „Nur echte Bewertungen, Nachweise, Zahlen, Partnerschaften
+     und Zertifikate." Erfundene Firmen, Namen oder Zitate dürfen hier nicht
+     stehen bleiben. Vor der Freischaltung wird je Referenz gebraucht:
+       — Logo als SVG (ersetzt den kompletten Inhalt von .ref__logo)
+       — Name und Funktion, wie die Person genannt werden will
+       — der Satz WÖRTLICH, so wie er gesagt oder freigegeben wurde
+       — eine schriftliche Freigabe für Logo, Name und Zitat
+     Danach ersetzen: .ref__logo-Inhalt, .ref__name, .ref__rolle, .ref__zitat
+     und den Hinweis .ref__platzhalter-hinweis löschen.
+     ===================================================================== -->
+<section class="ref" id="referenzen">
+  <div class="ref__inner">
+
+    <header class="ref__head" data-reveal>
+      <h2 class="display ref__h2">Unternehmer, die mit uns arbeiten.</h2>
+      <p class="ref__unterzeile">Referenzen</p>
+    </header>
+
+    <ul class="ref__tafel">
+
+      <li class="ref__karte" data-reveal style="--i:0">
+        <!-- PLATZHALTER — hier kommt <img src="assets/img/logos/….svg" alt="…" hin -->
+        <span class="ref__logo ref__logo--platzhalter" aria-hidden="true">
+          <span class="ref__logo-monogramm">MP</span>
+          <span class="ref__logo-wort">Mustermann<br>&amp; Partner</span>
+        </span>
+        <div class="ref__person">
+          <p class="ref__name">Andreas Mustermann</p>
+          <p class="ref__rolle">Geschäftsführer</p>
+        </div>
+        <p class="ref__zitat">„Platzhalter für den freigegebenen Satz der Referenz — hier stehen zwei bis drei Zeilen.“</p>
+      </li>
+
+      <li class="ref__karte" data-reveal style="--i:1">
+        <span class="ref__logo ref__logo--platzhalter" aria-hidden="true">
+          <span class="ref__logo-monogramm">BB</span>
+          <span class="ref__logo-wort">Beispiel<br>Bau</span>
+        </span>
+        <div class="ref__person">
+          <p class="ref__name">Claudia Beispiel</p>
+          <p class="ref__rolle">Geschäftsführerin</p>
+        </div>
+        <p class="ref__zitat">„Platzhalter für den freigegebenen Satz der Referenz — hier stehen zwei bis drei Zeilen.“</p>
+      </li>
+
+      <li class="ref__karte" data-reveal style="--i:2">
+        <span class="ref__logo ref__logo--platzhalter" aria-hidden="true">
+          <span class="ref__logo-monogramm">ML</span>
+          <span class="ref__logo-wort">Musterfeld<br>Logistik</span>
+        </span>
+        <div class="ref__person">
+          <p class="ref__name">Stefan Musterfeld</p>
+          <p class="ref__rolle">Geschäftsführer</p>
+        </div>
+        <p class="ref__zitat">„Platzhalter für den freigegebenen Satz der Referenz — hier stehen zwei bis drei Zeilen.“</p>
+      </li>
+
+      <li class="ref__karte" data-reveal style="--i:3">
+        <span class="ref__logo ref__logo--platzhalter" aria-hidden="true">
+          <span class="ref__logo-monogramm">PM</span>
+          <span class="ref__logo-wort">Platzhalter<br>Medizintechnik</span>
+        </span>
+        <div class="ref__person">
+          <p class="ref__name">Jonas Platzhalter</p>
+          <p class="ref__rolle">Geschäftsführer</p>
+        </div>
+        <p class="ref__zitat">„Platzhalter für den freigegebenen Satz der Referenz — hier stehen zwei bis drei Zeilen.“</p>
+      </li>
+
+    </ul>
+
+    <!-- Fliegt mit den echten Referenzen raus -->
+    <p class="ref__platzhalter-hinweis">
+      Platzhalter — vier echte Referenzen mit schriftlicher Freigabe folgen.
+    </p>
+
+  </div>
 </section>
 
 
@@ -293,14 +380,15 @@
 
   <div class="menu__body">
     <ul class="menu__nav">
-      <li><a class="menu__link" href="#konzept"><span class="num">01</span> Unser Konzept</a></li>
-      <li><a class="menu__link" href="#qualitaet"><span class="num">02</span> Auswahl &amp; Qualität</a></li>
-      <li><a class="menu__link" href="#wissen"><span class="num">03</span> Wissen &amp; Fragen</a></li>
-      <li><a class="menu__link" href="#ueber"><span class="num">04</span> Über Estera</a></li>
-      <li><a class="menu__link" href="#stimmen"><span class="num">05</span> Kundenstimmen</a></li>
-      <li><a class="menu__link" href="#karriere"><span class="num">06</span> Karriere</a></li>
-      <li><a class="menu__link" href="#partner"><span class="num">07</span> Für Partner</a></li>
-      <li><a class="menu__link" href="#kontakt"><span class="num">08</span> Kontakt</a></li>
+      <li><a class="menu__link" href="#referenzen"><span class="num">01</span> Referenzen</a></li>
+      <li><a class="menu__link" href="#konzept"><span class="num">02</span> Unser Konzept</a></li>
+      <li><a class="menu__link" href="#qualitaet"><span class="num">03</span> Auswahl &amp; Qualität</a></li>
+      <li><a class="menu__link" href="#wissen"><span class="num">04</span> Wissen &amp; Fragen</a></li>
+      <li><a class="menu__link" href="#ueber"><span class="num">05</span> Über Estera</a></li>
+      <li><a class="menu__link" href="#stimmen"><span class="num">06</span> Kundenstimmen</a></li>
+      <li><a class="menu__link" href="#karriere"><span class="num">07</span> Karriere</a></li>
+      <li><a class="menu__link" href="#partner"><span class="num">08</span> Für Partner</a></li>
+      <li><a class="menu__link" href="#kontakt"><span class="num">09</span> Kontakt</a></li>
     </ul>
 
     <aside class="menu__aside">
@@ -330,7 +418,7 @@
 <!-- Nur für die interne Abstimmung -->
 <div class="variant-switch">
   <a href="./index.html">Variante B · Empfehlung</a>
-  <a href="./variante-a.html" aria-current="page">Variante A · Briefing · Build B-112</a>
+  <a href="./variante-a.html" aria-current="page">Variante A · Briefing · Build B-114</a>
 </div>
 
 <script src="assets/js/site.js"></script>
