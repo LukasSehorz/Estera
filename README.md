@@ -162,7 +162,13 @@ dadurch exakt mittig, obwohl links fünf und rechts sechs Punkte stehen
 (gemessen 0 px Versatz von 1440 bis 1920 px).
 
 Ab 1440 px steht die Navigation waagerecht, darunter übernimmt wieder das
-Burger-Overlay — elf Punkte nebeneinander brauchen gemessen rund 1430 px.
+Burger-Overlay — elf Punkte nebeneinander brauchen gemessen rund 1420 px.
+
+Unter dem Kopf liegt ein weicher Verlauf nach Navy, der auf null ausläuft.
+Ohne ihn steht die weiße Schrift über dem Bildband stellenweise auf einer
+hellen Fassade und ist schlicht nicht lesbar. Gemessen liegt der Kontrast
+damit zwischen 11,9:1 und 16,6:1, der schlechteste Einzelpixel im ganzen
+Kopf bei 9,74:1 — deutlich über der AAA-Anforderung von 7:1.
 
 `site.js` sperrt Verweise, deren Ziel es noch nicht gibt (Startseiten-
 Abschnitte 4, 5 und 7 sowie sämtliche Unterseiten), und gibt sie automatisch
@@ -223,6 +229,8 @@ Seitenrand zurück.
 - Abstand Fließtext ↔ Hochbild: mindestens 32 px auf allen Breiten.
 - Kein horizontales Scrollen von 390 px bis 1920 px, keine Konsolenfehler.
 - Farbton beider Ablauf-Bilder angeglichen: Rot/Blau-Verhältnis 1,023 zu 1,001.
+- Kopfnavigation über dem Bildband: 11,9:1 bis 16,6:1, schlechtester
+  Einzelpixel 9,74:1.
 - Kontraste nach WCAG AA gemessen: Headline schwarz 13.6:1, Headline blau
   10.2:1, `--ink-mute` `#5F6E85` bei 5.20:1, Gold als Schrift `#86693A` bei
   4.82:1 — alles über der Anforderung.

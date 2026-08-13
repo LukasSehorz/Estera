@@ -247,6 +247,28 @@ ul, ol { list-style: none; }
 }
 .site-header > * { pointer-events: auto; }
 
+/* Traeger fuer die helle Schrift. Ueber dem Bildband steht der Kopf mal auf
+   dunklem Himmel, mal auf einer hellen Fassade — ohne diesen Verlauf ist
+   Weiss auf Weiss schlicht nicht lesbar. Er reicht bewusst weiter nach unten
+   als der Kopf selbst und laeuft auf null aus, damit keine Kante entsteht.
+   Im gescrollten Zustand traegt der weisse Balken, dort ist er aus. */
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: calc(var(--header-h) * 1.85);
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+    rgba(10, 25, 46, 0.50) 0%,
+    rgba(10, 25, 46, 0.30) 48%,
+    rgba(10, 25, 46, 0.10) 78%,
+    rgba(10, 25, 46, 0) 100%);
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
+}
+.site-header--invert:not(.site-header--sticky)::before { opacity: 1; }
+
 .site-header--sticky {
   position: fixed;
   background: rgba(255, 255, 255, 0.88);
@@ -277,17 +299,19 @@ ul, ol { list-style: none; }
 .kopfnav ul {
   display: flex;
   align-items: center;
-  gap: clamp(0.72rem, 0.98vw, 0.8rem);
+  gap: clamp(0.7rem, 0.95vw, 0.82rem);
 }
 .kopfnav a {
   position: relative;
   display: block;
   padding: 0.55rem 0;
   font-family: var(--font-display);
-  font-size: clamp(0.7rem, 0.76vw, 0.72rem);
+  font-size: clamp(0.78rem, 0.85vw, 0.83rem);
   font-weight: 500;
-  letter-spacing: 0.12em;
-  text-indent: 0.12em;
+  /* Sperrsatz zurueckgenommen: die groessere Schrift braucht die Breite,
+     die vorher der Buchstabenabstand verbraucht hat. */
+  letter-spacing: 0.085em;
+  text-indent: 0.085em;
   text-transform: uppercase;
   white-space: nowrap;
   color: var(--navy-800);
@@ -338,8 +362,8 @@ ul, ol { list-style: none; }
   .kopfnav { display: block; }
   /* Luft um die Wortmarke. Sie geht zulasten beider Rasterspalten
      gleichermassen, das Logo bleibt dadurch mittig. */
-  .kopfnav--links  { grid-column: 1; justify-self: end;   margin-right: clamp(1.1rem, 2.2vw, 2.4rem); }
-  .kopfnav--rechts { grid-column: 3; justify-self: start; margin-left:  clamp(1.1rem, 2.2vw, 2.4rem); }
+  .kopfnav--links  { grid-column: 1; justify-self: end;   margin-right: clamp(0.9rem, 1.8vw, 1.9rem); }
+  .kopfnav--rechts { grid-column: 3; justify-self: start; margin-left:  clamp(0.9rem, 1.8vw, 1.9rem); }
   /* Zwei Klassen, weil die .burger-Grundregel weiter unten in dieser Datei
      steht und bei gleicher Spezifitaet sonst gewinnen wuerde. */
   .site-header .burger { display: none; }
