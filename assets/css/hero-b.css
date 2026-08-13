@@ -1,0 +1,108 @@
+/* ===========================================================================
+   VARIANTE B — Geometrie 1:1 nach imperiaimmobilien.de
+   Im Browser gemessen bei 1600 × 1000:
+     Hero          1600 × 646, padding 160px 80px 48px
+     Inhalt        1440 breit  (80 → 1520)
+     Textspalte    826,7   Gap 32   Bildspalte 581,3
+     Bild          581,3 × 387,5  → 3:2, border-radius 12px
+     Bildoberkante bündig zur Headline-Oberkante (beide y = 160)
+     CTA           48px hoch, radius 8px, 12px Abstand zueinander
+     Abstände      Headline → Subline 32px, Subline → CTA 40px
+   Übernommen ist die Anordnung; Schrift, Farbe und Duktus sind Estera.
+   =========================================================================== */
+
+.heroB {
+  position: relative;
+  background: var(--paper);
+  /* Imperia: 160px oben, 48px unten */
+  padding: clamp(7rem, 10vw, 10rem) 0 clamp(2.5rem, 6.15vw, 6.15rem);
+}
+
+.heroB__inner {
+  /* Block läuft fast über die volle Breite — schmalere Seitenränder als
+     Imperia, damit Textspalte UND Bild größer werden. */
+  --heroB-gutter: clamp(1.5rem, 3vw, 3rem);
+  max-width: calc(1800px + var(--heroB-gutter) * 2);
+  margin: 0 auto;
+  padding: 0 var(--heroB-gutter);
+  display: grid;
+  /* Bild bekommt mehr Gewicht als bei Imperia (dort 58,7 : 41,3) */
+  grid-template-columns: minmax(0, 57fr) minmax(0, 43fr);
+  gap: clamp(1.75rem, 2.6vw, 3rem);
+  align-items: start;
+}
+
+/* --- Textspalte ----------------------------------------------------------- */
+.heroB__text {
+  display: grid;
+  align-content: start;
+}
+
+.heroB__h1 {
+  /* 1:1 Imperia: 44px, line-height 48,4 (= 1.1) */
+  font-size: clamp(1.9rem, 2.75vw, 2.75rem);
+  line-height: 1.1;
+  font-weight: 300;
+}
+
+.heroB__lead {
+  /* Nur wenig kleiner als die Headline — bewusst keine große Stufe */
+  margin-top: 32px;
+  max-width: 100%;
+  /* Imperia setzt 24px in Open Sans (x-Höhe 0,535em). Jost hat nur 0,46em —
+     bei gleicher Punktgröße wirken die Kleinbuchstaben 16 % kleiner.
+     28px gleichen das aus: 24 × 0,535 / 0,46 = 27,9. */
+  font-size: clamp(1.37rem, 2.08vw, 2.08rem);
+  line-height: 1.34;
+  font-weight: 400;
+  color: var(--ink-black);
+  text-wrap: pretty;
+}
+
+.heroB__actions {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;              /* Imperia: 12px */
+}
+
+/* --- Bildspalte ----------------------------------------------------------- */
+.heroB__figure {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-img);
+  background: var(--navy-800);
+  aspect-ratio: 581.3 / 387.5;      /* exakt Imperias Bildformat */
+}
+.heroB__figure img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 50% 52%;
+  filter: saturate(0.82) contrast(1.02);
+  transform: scale(1.01);
+  transition: transform 2.4s var(--ease-soft);
+}
+.heroB__figure:hover img { transform: scale(1.05); }
+
+/* --- Responsive ----------------------------------------------------------- */
+@media (max-width: 980px) {
+  .heroB { padding-top: calc(var(--header-h) + 2.5rem); }
+  .heroB__inner { grid-template-columns: 1fr; gap: clamp(1.6rem, 4vw, 2.4rem); }
+  .heroB__h1 { font-size: clamp(2.1rem, 5.6vw, 2.8rem); }
+  .heroB__lead { margin-top: 24px; font-size: clamp(1.05rem, 2.4vw, 1.3rem); }
+  .heroB__actions { margin-top: 28px; }
+  .heroB__figure { aspect-ratio: 16 / 10; }
+}
+
+@media (max-width: 620px) {
+  /* „Kapitalanlageimmobilien" ist ein sehr langes Kompositum — Silbentrennung
+     als Sicherheitsnetz, damit es auf 360px nicht aus dem Raster läuft. */
+  .heroB__h1 {
+    font-size: clamp(1.45rem, 6.4vw, 2.4rem);
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
+  .heroB__actions { flex-direction: column; align-items: stretch; }
+  .heroB__actions .btn { justify-content: center; }
+}

@@ -1,0 +1,232 @@
+/* ===========================================================================
+   VARIANTE A — Bildband + eingelegter Kasten
+   Prinzip MLP: niedriges, vollbreites Bildband.
+   Prinzip Imperia: Text links, Objektbild rechts, Headline zweizeilig mit
+   farbig abgesetzter zweiter Zeile.
+   Der Kasten ist bewusst breit und flach — er soll das Band rahmen,
+   nicht ersetzen.
+   =========================================================================== */
+
+.heroA {
+  --panel-pad: clamp(1.8rem, 5vw, 5rem);
+  position: relative;
+  background: var(--paper-warm);
+  padding-bottom: clamp(2rem, 5vh, 4rem);
+}
+
+/* --- Bildband ------------------------------------------------------------- */
+.heroA__band {
+  position: relative;
+  height: clamp(340px, 48vh, 540px);
+  overflow: hidden;
+  background: var(--navy-800);
+}
+.heroA__band img {
+  width: 100%;
+  height: 112%;
+  object-fit: cover;
+  object-position: 50% 46%;
+  transform: translateY(var(--shift, 0));
+  /* Das Band ist Tonträger — hell und scharf bleibt nur das Objektbild. */
+  filter: saturate(0.24) contrast(1.12) brightness(0.76);
+  will-change: transform;
+}
+.heroA__band::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* EIN durchgehender vertikaler Verlauf — ein zweiter, seitlicher Verlauf
+     erzeugte eine sichtbare Kante bei ~65 % Breite. */
+  background: linear-gradient(to bottom,
+    rgba(10,25,46,0.66) 0%, rgba(10,25,46,0.40) 44%, rgba(10,25,46,0.52) 100%);
+  pointer-events: none;
+}
+
+/* --- Der eingelegte Kasten ------------------------------------------------ */
+.heroA__panel {
+  position: relative;
+  z-index: 3;
+  /* Flacher Überstand: der Kasten sitzt tiefer, damit mehr Band sichtbar
+     bleibt. Er beißt nur noch mit knapp einem Drittel seiner Höhe hinein. */
+  margin: clamp(-150px, -14vh, -95px) auto 0;
+  max-width: 1460px;
+  width: calc(100% - var(--gutter) * 2);
+  background: none;
+  display: grid;
+  /* Textspalte dominiert — der Satz soll in die Breite laufen, nicht stapeln */
+  grid-template-columns: minmax(0, 58fr) minmax(0, 42fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+  /* nur oben rund — unten läuft der Kasten in die Seite aus */
+  border-radius: var(--radius-img) var(--radius-img) 0 0;
+  isolation: isolate;
+}
+
+/* Der Kasten ist in drei Zonen aufgebaut:
+   oben deckendes Weiß (er liegt auf dem dunklen Bildband und muss decken),
+   in der Mitte die Marmorierung,
+   unten löst er sich in das Seitenpapier auf — dadurch gibt es keine
+   sichtbare Kante und keine optisch getrennten Abschnitte.
+
+   Bewusst ohne mask-image/mask-composite aufgebaut: Mehrschicht-Masken mit
+   Composite-Modus rendern in Safari und älteren Engines abweichend. Hier
+   liegt stattdessen der Marmor als Vollfläche unten und wird von oben mit
+   ganz normalen Verläufen abgedeckt — das funktioniert überall gleich. */
+
+/* Schicht 1: Marmor, volle Fläche */
+.heroA__panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  /* Calacatta mit feiner, scharf gezeichneter Äderung. Bewusst OHNE
+     Multiply-Verdopplung: die hat die Fläche flächig angeschmutzt statt die
+     Adern zu schärfen — das sah nach Schmutzspur aus, nicht nach Stein. */
+  background: #FFFFFF url('../img/marble2.jpg') center / cover no-repeat;
+}
+
+/* Schicht 2: Verläufe darüber.
+   REIHENFOLGE IST ENTSCHEIDEND: In der background-Kurzschreibweise liegt der
+   zuerst genannte Verlauf oben. Der senkrechte muss deshalb zuerst stehen —
+   sonst überschreibt das deckende Weiß des waagerechten die Auflösung ins
+   Seitenpapier auf der rechten Seite, und der Kasten bekommt unter dem Bild
+   wieder eine sichtbare Kante. */
+.heroA__panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    /* senkrecht — oben deckendes Weiß, unten Seitenpapier, über die VOLLE Breite */
+    linear-gradient(to bottom,
+      #FFFFFF 0%,
+      #FFFFFF 11%,
+      rgba(255,255,255,0.42) 28%,
+      rgba(255,255,255,0.42) 56%,
+      rgba(252,250,247,0.72) 76%,
+      var(--paper-warm) 91%,
+      var(--paper-warm) 100%),
+    /* waagerecht darunter — nimmt den Marmor zur Bildspalte hin zurück */
+    linear-gradient(100deg,
+      rgba(255,255,255,0) 34%,
+      rgba(255,255,255,0.78) 62%,
+      #FFFFFF 80%);
+}
+
+/* Umrandung als eigene Lage: oben und an den Seiten sichtbar, nach unten
+   ausblendend. Eine geschlossene Linie würde die Auflösung des Kastens in
+   die Seite zunichtemachen — deshalb die Maske. */
+.heroA__rahmen {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border: 1px solid rgba(16, 41, 73, 0.22);
+  /* Unten KEINE Linie: dort soll der Kasten einfach weiterlaufen. */
+  border-bottom: 0;
+  border-radius: inherit;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, rgba(0,0,0,0.35) 76%, transparent 92%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 52%, rgba(0,0,0,0.35) 76%, transparent 92%);
+}
+
+.heroA__text, .heroA__figure { position: relative; z-index: 2; }
+
+.heroA__text {
+  display: grid;
+  align-content: center;
+  padding: var(--panel-pad) 0 var(--panel-pad) var(--panel-pad);
+}
+
+.heroA__h1 {
+  /* Zwei Zeilen — Größe so gebunden, dass Zeile 1 nicht umbricht */
+  font-size: clamp(1.9rem, 2.75vw, 2.75rem);
+  line-height: 1.1;
+  font-weight: 300;
+  max-width: 100%;
+}
+.heroA__h1 .accent {
+  display: block;
+  color: var(--accent);
+}
+
+.heroA__lead {
+  margin-top: 32px;
+  max-width: 100%;
+  /* Optischer Ausgleich der kleineren x-Höhe von Jost — siehe hero-b.css */
+  font-size: clamp(1.37rem, 2.08vw, 2.08rem);
+  line-height: 1.34;
+  font-weight: 400;
+  color: var(--ink-black);
+  text-wrap: pretty;
+}
+
+.heroA__actions {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+/* --- Objektbild rechts, Querformat --------------------------------------- */
+.heroA__figure {
+  position: relative;
+  padding: var(--panel-pad) var(--panel-pad) var(--panel-pad) 0;
+}
+.heroA__figure > div {
+  position: relative;
+  aspect-ratio: 5 / 4;      /* etwas höher als 4:3 — Gebäude steht trotzdem vollständig */
+  overflow: hidden;
+  border-radius: var(--radius-btn);
+  background: var(--navy-800);
+}
+.heroA__figure img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 50% 55%;
+  /* Einziger heller, scharfer Bildträger — bewusst nicht so dunkel wie das Band */
+  filter: saturate(0.44) contrast(1.05);
+  transform: scale(1.02);
+  transition: transform 2.2s var(--ease-soft);
+}
+.heroA__panel:hover .heroA__figure img { transform: scale(1.055); }
+.heroA__figure figcaption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 3rem 1.2rem 1rem;
+  background: linear-gradient(to top, rgba(10,25,46,0.86) 0%, rgba(10,25,46,0.5) 45%, rgba(10,25,46,0) 100%);
+  color: #fff;
+  font-size: 0.77rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* --- Responsive ----------------------------------------------------------- */
+@media (max-width: 980px) {
+  .heroA { --panel-pad: clamp(1.4rem, 5vw, 2.2rem); }
+  .heroA__panel {
+    grid-template-columns: 1fr;
+    margin-top: clamp(-120px, -12vh, -70px);
+    gap: 0;
+  }
+  /* Text und Bild auf EINER gemeinsamen linken Kante */
+  .heroA__text   { padding: var(--panel-pad) var(--panel-pad) 0; }
+  .heroA__figure { padding: var(--panel-pad); }
+  .heroA__h1 { font-size: clamp(1.95rem, 5.2vw, 2.5rem); }
+}
+
+@media (max-width: 620px) {
+  .heroA__band { height: 300px; }
+  .heroA__h1 {
+    font-size: clamp(1.45rem, 6.4vw, 2.3rem);
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
+  .heroA__actions { flex-direction: column; align-items: stretch; }
+  .heroA__actions .btn { justify-content: center; }
+}
