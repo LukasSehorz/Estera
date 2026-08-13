@@ -268,6 +268,20 @@ Summanden oben, Summe unten. Das wäre inhaltlich falsch, und bei
 Bedingung. Beide unteren Posten haben genau eines gemeinsam — sie hängen von
 der persönlichen Situation ab, und genau das steht jetzt auf der Linie.
 
+Aufbau: ein Kopfband über die volle Fensterbreite mit dunklem Objektbild,
+Überschrift und Subline in Weiß darauf. Darunter vier ineinandergreifende
+Ringe nach dem Vorbild der Audi-Ringe (213 px breit, 35 px Überschneidung =
+16,4 %) mit den Namen Finanzierung, Miete, Tilgung und Steuern. Dann ein
+zweites dunkles Objektbild, auf dem „Ihr eigener Beitrag" und
+„Langfristigkeit" stehen. Zum Schluss „Was bewusst offenbleibt" als eine
+Zeile zum Aufklappen.
+
+Die Lesespalte ist 900 px breit, deutlich schmaler als die übrigen
+Abschnitte. Beide Bilder sind über `brightness(1.5)` angehoben — im Original
+war die blaue Stunde so dunkel, dass die Fassaden verschwanden. Die Verläufe
+decken nur dort, wo Schrift steht. Gemessen: Kopfband 17,8:1 im Mittel und
+6,7:1 an der hellsten Stelle, Bildbeschriftung 18,5:1 und 9,6:1.
+
 Bewusst **ohne Diagramm** — der Abschnitt davor ist genau das. Hier tragen
 Typografie und eine doppelte waagerechte Haarlinie: eine Tafel, kein
 Schaubild. Und bewusst **ohne Icons**, weil in Abschnitt 4 in jedem Kasten
