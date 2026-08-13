@@ -1,7 +1,12 @@
 # Netlify: Die Startadresse zeigt Variante A.
-# Ohne diese Zeile liefert Netlify index.html — das ist Variante B, der
-# alte Hero-Entwurf. Die eigentliche Arbeit liegt in variante-a.html.
+# Ohne diese Zeile liefert Netlify index.html — das ist Variante B, der alte
+# Hero-Entwurf. Die eigentliche Arbeit liegt in variante-a.html.
+#
+# Das Ausrufezeichen hinter 200 ist entscheidend: ohne es liefert Netlify
+# zuerst vorhandene Dateien aus und die Regel greift nie, weil index.html
+# existiert. Mit "200!" gilt die Regel auch dann.
 # 200 statt 301: die Adresse bleibt "/", der Inhalt kommt aus variante-a.html.
+#
 # Vor dem Launch wird variante-a.html zur echten index.html; dann faellt
 # diese Datei weg.
-/            /variante-a.html   200
+/            /variante-a.html   200!
