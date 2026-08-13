@@ -23,14 +23,15 @@
 }
 
 .prinzip__inner {
-  max-width: 1400px;
+  /* Deutlich schmaler als die uebrigen Abschnitte — eine Lesespalte wie in
+     der Referenz, nicht die volle Seitenbreite. */
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
 
 /* --- Kopf ----------------------------------------------------------------- */
 .prinzip__head {
-  max-width: 940px;
   margin: 0 auto;
   text-align: center;
 }
@@ -73,139 +74,189 @@
   white-space: nowrap;
 }
 
-/* --- Die vier Träger ------------------------------------------------------ */
+/* --- Die vier Ringe ------------------------------------------------------- */
+/* Nach dem Vorbild der Audi-Ringe: vier Kreise, die ineinandergreifen.
+   Jeder Ring ist 120 % seiner Rasterspalte breit und ragt mit je 10 % nach
+   beiden Seiten heraus — daraus ergibt sich die Ueberschneidung von rund
+   17 % der Ringbreite. Bewusst kein SVG: so waechst alles mit der Spalte,
+   ohne dass Koordinaten nachgefuehrt werden muessen. */
 .prinzip__traeger {
-  margin: clamp(2.2rem, 5vh, 3.4rem) auto 0;
-  max-width: 1180px;
+  margin: clamp(2.4rem, 5.5vh, 3.6rem) auto 0;
+  /* Platz fuer den Ueberstand der beiden aeusseren Ringe */
+  padding-inline: 2.6%;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 0;
 }
-.prinzip__posten {
+.prinzip__posten { min-width: 0; }
+
+.prinzip__ring {
   position: relative;
-  padding: 0 clamp(1.1rem, 2vw, 2rem) clamp(1.8rem, 4vh, 2.8rem);
+  display: grid;
+  place-items: center;
+  width: 120%;
+  margin-inline: -10%;
+  aspect-ratio: 1;
+  border: 2px solid var(--linie);
+  border-radius: 50%;
+  transition: border-color 0.5s var(--ease);
 }
-.prinzip__posten:first-child { padding-left: 0; }
-.prinzip__posten:last-child  { padding-right: 0; }
-/* Spaltenlinien, oben eingerückt — sie sollen die Achse unten nicht berühren */
-.prinzip__posten + .prinzip__posten::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.35em;
-  bottom: clamp(1.4rem, 3vh, 2.2rem);
-  width: 1px;
-  background: var(--line-soft);
-}
-.prinzip__name {
-  font-family: var(--font-display);
-  font-size: clamp(1.15rem, 1.45vw, 1.45rem);
+.prinzip__posten:hover .prinzip__ring { border-color: var(--navy-600); }
+
+.prinzip__ring-name {
+  /* Bleibt innerhalb von rund 170 px und stoesst dadurch nicht an den
+     Strich des Nachbarrings. */
+  max-width: 78%;
+  text-align: center;
+  font-size: clamp(0.66rem, 0.78vw, 0.78rem);
   font-weight: 500;
-  line-height: 1.2;
-  color: var(--ink-black);
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--navy-800);
 }
+
 .prinzip__satz {
-  margin-top: clamp(0.6rem, 1.4vh, 0.9rem);
-  font-size: clamp(0.94rem, 1.04vw, 1.04rem);
-  line-height: 1.58;
+  margin-top: clamp(1rem, 2.4vh, 1.6rem);
+  padding-inline: clamp(0.3rem, 0.8vw, 0.7rem);
+  font-size: clamp(0.82rem, 0.92vw, 0.92rem);
+  line-height: 1.55;
   color: var(--ink-soft);
+  text-align: center;
   text-wrap: pretty;
 }
 
-/* --- Der Trenner --------------------------------------------------------- */
-/* Die doppelte Haarlinie aus Abschnitt 4, waagerecht — aber MIT Beschriftung
-   in der Mitte. Blank gelassen las sie sich als Rechenstrich: vier Summanden
-   oben, Summe unten. Die Beschriftung nimmt diese Lesart heraus und benennt,
-   was die beiden unteren Posten verbindet.
-   Die Linien sind navy und doppelt, der Titel oben ist gold und einfach —
-   der eine ist ein Abschnittstitel, der andere eine Trennung im Satz. */
-.prinzip__trenner {
-  margin: 0 auto;
-  max-width: 1180px;
-  display: flex;
-  align-items: center;
-  gap: clamp(1rem, 2.2vw, 1.8rem);
-}
-.prinzip__trenner::before,
-.prinzip__trenner::after {
-  content: '';
-  flex: 1 1 0;
-  height: 3px;
-  background: linear-gradient(to bottom,
-    var(--linie) 0 1px, transparent 1px 2px, var(--linie) 2px 3px);
-}
-.prinzip__trenner span {
-  flex: 0 0 auto;
-  font-size: clamp(0.8rem, 0.86vw, 0.89rem);
-  font-weight: 500;
-  letter-spacing: 0.26em;
-  text-indent: 0.26em;
-  text-transform: uppercase;
-  color: var(--navy-800);
-  white-space: nowrap;
-}
+/* --- Zweiter Zwischentitel ------------------------------------------------ */
+.prinzip__kicker--zweit { margin-top: clamp(3rem, 7vh, 5rem); }
 
-/* --- Was daraus folgt ----------------------------------------------------- */
-.prinzip__folgen {
-  margin: clamp(2rem, 4.5vh, 3.2rem) auto 0;
-  max-width: 1180px;
+/* --- Das Bild mit den beiden Posten -------------------------------------- */
+.prinzip__bild {
+  position: relative;
+  margin-top: clamp(2.2rem, 5vh, 3.4rem);
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  border-radius: var(--radius-img);
+  background: #0A121F;
+}
+.prinzip__bild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%;
+}
+/* Traeger fuer die weisse Schrift. Das Bild ist bereits dunkel; der Verlauf
+   sichert die Lesbarkeit unabhaengig davon, wo Lichter im Bild sitzen. */
+.prinzip__bild::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top,
+    rgba(6, 14, 26, 0.92) 0%,
+    rgba(6, 14, 26, 0.78) 34%,
+    rgba(6, 14, 26, 0.30) 62%,
+    rgba(6, 14, 26, 0.12) 100%);
+}
+.prinzip__bild-txt {
+  position: absolute;
+  z-index: 2;
+  left: 0; right: 0; bottom: 0;
+  padding: clamp(1.4rem, 3.2vw, 2.6rem);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2rem, 5vw, 4.5rem);
+  gap: clamp(1.4rem, 3.4vw, 2.8rem);
 }
 .prinzip__folge-name {
   font-family: var(--font-display);
-  font-size: clamp(1.45rem, 1.95vw, 1.95rem);
+  font-size: clamp(1.25rem, 1.7vw, 1.7rem);
   font-weight: 500;
   line-height: 1.2;
-  color: var(--ink-black);
+  color: #fff;
 }
 .prinzip__folge-satz {
-  margin-top: clamp(0.7rem, 1.6vh, 1rem);
-  max-width: 32rem;
-  font-size: clamp(1rem, 1.1vw, 1.1rem);
-  line-height: 1.58;
-  color: var(--ink-soft);
+  margin-top: clamp(0.5rem, 1.2vh, 0.8rem);
+  font-size: clamp(0.86rem, 0.96vw, 0.96rem);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.8);
   text-wrap: pretty;
 }
 
-/* --- Was bewusst offenbleibt --------------------------------------------- */
-/* Steht bewusst als eigene Tafel und nicht kleingedruckt am Rand. Das
-   Briefing verbietet pauschale Belastungsangaben und Null-Euro-Aussagen;
-   offen zu benennen, was die Seite NICHT beantwortet, ist der belastbarste
-   Teil des Abschnitts. */
-.prinzip__offen {
-  margin: clamp(3rem, 7vh, 5rem) auto 0;
-  max-width: 1180px;
-  padding: clamp(1.6rem, 3.4vw, 2.8rem) clamp(1.6rem, 3.4vw, 3rem);
-  border: 1px solid var(--line-gold);
-  border-radius: var(--radius-img);
-  background: var(--paper);
+/* --- Eine Zeile zum Aufklappen ------------------------------------------- */
+.offen {
+  margin-top: clamp(2.6rem, 6vh, 4.2rem);
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+}
+.offen__kopf {
+  width: 100%;
+  padding: clamp(1.4rem, 3vh, 2.2rem) 0;
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
-  gap: clamp(1.2rem, 3vw, 3rem);
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr) auto;
+  align-items: center;
+  gap: clamp(1.2rem, 3vw, 2.6rem);
+  text-align: left;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
 }
-.prinzip__offen-titel {
-  font-size: clamp(0.8rem, 0.86vw, 0.89rem);
-  font-weight: 500;
-  letter-spacing: 0.26em;
-  text-indent: 0.26em;
-  text-transform: uppercase;
-  line-height: 1.5;
-  color: var(--gold-text);
+.offen__titel {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.1vw, 2.1rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--ink-black);
 }
-.prinzip__offen-liste {
+.offen__titel em {
+  font-style: italic;
+  color: var(--ink-mute);
+}
+.offen__beisatz {
+  font-size: clamp(0.86rem, 0.96vw, 0.96rem);
+  line-height: 1.55;
+  color: var(--ink-mute);
+}
+.offen__knopf {
+  display: grid;
+  place-items: center;
+  width: clamp(40px, 3.6vw, 50px);
+  aspect-ratio: 1;
+  border: 1px solid var(--line-gold);
+  border-radius: 50%;
+  color: var(--navy-800);
+  transition: transform 0.5s var(--ease-soft), border-color 0.4s var(--ease),
+              background 0.4s var(--ease);
+}
+.offen__knopf svg { width: 44%; height: 44%; }
+.offen__kopf:hover .offen__knopf { border-color: var(--gold); }
+.offen[data-offen] .offen__knopf { transform: rotate(90deg); background: rgba(168,135,79,0.08); }
+.offen__kopf:focus-visible { outline: 1px solid var(--navy-600); outline-offset: 4px; }
+
+/* Aufklappen ueber die Rasterzeile: 0fr auf 1fr laesst sich weich
+   ueberfuehren, eine Hoehe von auto nicht. */
+.offen__inhalt {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s var(--ease-soft);
+}
+.offen__innen { overflow: hidden; }
+.offen[data-offen] .offen__inhalt { grid-template-rows: 1fr; }
+
+.offen__liste {
   display: grid;
   gap: clamp(0.7rem, 1.6vh, 1.05rem);
+  padding-bottom: clamp(1rem, 2.4vh, 1.6rem);
 }
-.prinzip__offen-liste li {
+.offen__liste li {
   position: relative;
   padding-left: 1.15em;
   font-size: clamp(0.96rem, 1.06vw, 1.06rem);
   line-height: 1.55;
   color: var(--ink-black);
 }
-.prinzip__offen-liste li::before {
+.offen__liste li::before {
   content: '';
   position: absolute;
   left: 0;
@@ -214,8 +265,9 @@
   height: 1px;
   background: var(--gold);
 }
-.prinzip__offen-fuss {
-  margin-top: clamp(1rem, 2.2vh, 1.5rem);
+.offen__fuss {
+  padding-bottom: clamp(1.4rem, 3vh, 2.2rem);
+  max-width: 44rem;
   font-size: clamp(0.9rem, 0.98vw, 0.98rem);
   line-height: 1.55;
   color: var(--ink-mute);
@@ -247,23 +299,19 @@
 .prinzip__mehr a[aria-disabled='true'] { cursor: default; }
 
 /* --- Responsive ----------------------------------------------------------- */
-@media (max-width: 1000px) {
-  .prinzip__traeger { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  /* Bei zwei Spalten hat nur die zweite eine Senkrechte */
-  .prinzip__posten { padding-left: clamp(1.1rem, 2vw, 2rem); padding-right: clamp(1.1rem, 2vw, 2rem); }
-  .prinzip__posten:nth-child(2n + 1) { padding-left: 0; }
-  .prinzip__posten:nth-child(2n)     { padding-right: 0; }
-  .prinzip__posten:nth-child(2n + 1)::before { display: none; }
-  .prinzip__offen { grid-template-columns: 1fr; }
+@media (max-width: 760px) {
+  /* Vier Ringe nebeneinander werden zu klein — zwei Reihen zu zwei. */
+  .prinzip__traeger {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: clamp(1.8rem, 4vh, 2.6rem);
+  }
+  .prinzip__bild { aspect-ratio: 4 / 5; }
+  .prinzip__bild-txt { grid-template-columns: 1fr; gap: clamp(1.1rem, 3vh, 1.6rem); }
+  .offen__kopf { grid-template-columns: minmax(0, 1fr) auto; }
+  .offen__beisatz { grid-column: 1 / -1; grid-row: 2; }
+  .prinzip__h2 { font-size: clamp(1.7rem, 7vw, 2.2rem); }
 }
 
-@media (max-width: 680px) {
-  /* Der Titel braucht die ganze Breite, die Linien ruecken darunter. */
-  .prinzip__trenner { flex-wrap: wrap; justify-content: center; }
-  .prinzip__trenner span { order: -1; flex: 1 1 100%; text-align: center; white-space: normal; margin-bottom: 0.9rem; }
-  .prinzip__traeger { grid-template-columns: 1fr; }
-  .prinzip__posten { padding-left: 0; padding-right: 0; }
-  .prinzip__posten::before { display: none; }
-  .prinzip__folgen { grid-template-columns: 1fr; gap: clamp(1.6rem, 4vh, 2.4rem); }
-  .prinzip__h2 { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+@media (prefers-reduced-motion: reduce) {
+  .offen__inhalt, .offen__knopf { transition: none; }
 }

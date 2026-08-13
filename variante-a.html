@@ -500,59 +500,72 @@
 
     <p class="prinzip__kicker" data-reveal><span>Was die Anlage trägt</span></p>
 
+    <!-- Vier ineinandergreifende Ringe nach dem Vorbild der Audi-Ringe.
+         Jeder Ring traegt seinen Namen in der Mitte, der Satz steht darunter.
+         Die Ringe sind 120 % ihrer Rasterspalte breit und ragen mit je 10 %
+         nach beiden Seiten heraus — daraus ergibt sich die Ueberschneidung
+         von rund 17 % der Ringbreite. Kein SVG, damit alles mitwaechst. -->
     <ul class="prinzip__traeger">
       <li class="prinzip__posten" data-reveal style="--i:0">
-        <p class="prinzip__name">Finanzierung</p>
+        <span class="prinzip__ring"><span class="prinzip__ring-name">Finanzierung</span></span>
         <p class="prinzip__satz">Bankkapital kann den Erwerb einer Immobilie ermöglichen; Eigenkapitalbedarf und Konditionen hängen vom Einzelfall ab.</p>
       </li>
       <li class="prinzip__posten" data-reveal style="--i:1">
-        <p class="prinzip__name">Miete</p>
+        <span class="prinzip__ring"><span class="prinzip__ring-name">Miete</span></span>
         <p class="prinzip__satz">Die laufende Miete trägt einen Teil der Finanzierung und Kosten.</p>
       </li>
       <li class="prinzip__posten" data-reveal style="--i:2">
-        <p class="prinzip__name">Tilgung</p>
+        <span class="prinzip__ring"><span class="prinzip__ring-name">Tilgung</span></span>
         <p class="prinzip__satz">Mit jeder Tilgungsleistung sinkt die Darlehensschuld; dadurch kann langfristig Eigentum aufgebaut werden.</p>
       </li>
       <li class="prinzip__posten" data-reveal style="--i:3">
-        <p class="prinzip__name">Steuern</p>
+        <span class="prinzip__ring"><span class="prinzip__ring-name">Steuern</span></span>
         <p class="prinzip__satz">Bei einer vermieteten Kapitalanlage können der abschreibungsfähige Gebäudeanteil und bestimmte Aufwendungen steuerlich berücksichtigt werden.</p>
       </li>
     </ul>
 
-    <!-- Beschrifteter Trenner statt blanker Linie. Ein nackter Strich unter
-         vier Posten und ueber einem Ergebnis liest sich als Rechenstrich —
-         vier Summanden oben, Summe unten. Das waere inhaltlich falsch, und
-         bei "Langfristigkeit" ergibt es keinen Sinn: die ist keine Folge,
-         sondern eine Bedingung. Beide unteren Posten haben genau eines
-         gemeinsam — sie haengen von der persoenlichen Situation ab. -->
-    <p class="prinzip__trenner" data-reveal><span>Was von Ihrer Situation abhängt</span></p>
+    <p class="prinzip__kicker prinzip__kicker--zweit" data-reveal><span>Was von Ihrer Situation abhängt</span></p>
 
-    <ul class="prinzip__folgen">
-      <li data-reveal style="--i:0">
-        <p class="prinzip__folge-name">Ihr eigener Beitrag</p>
-        <p class="prinzip__folge-satz">Was Sie selbst aufbringen müssen, ergibt sich aus Finanzierung, Miete, Kosten, Rücklagen und individueller Steuerwirkung.</p>
-      </li>
-      <li data-reveal style="--i:1">
-        <p class="prinzip__folge-name">Langfristigkeit</p>
-        <p class="prinzip__folge-satz">Kapitalanlageimmobilien sind langfristig gedacht. Finanzierung, Rücklagen und künftige Flexibilität müssen zur individuellen Situation passen.</p>
-      </li>
-    </ul>
+    <figure class="prinzip__bild" data-reveal>
+      <img src="assets/img/prinzip-nacht.jpg" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+      <figcaption class="prinzip__bild-txt">
+        <div>
+          <p class="prinzip__folge-name">Ihr eigener Beitrag</p>
+          <p class="prinzip__folge-satz">Was Sie selbst aufbringen müssen, ergibt sich aus Finanzierung, Miete, Kosten, Rücklagen und individueller Steuerwirkung.</p>
+        </div>
+        <div>
+          <p class="prinzip__folge-name">Langfristigkeit</p>
+          <p class="prinzip__folge-satz">Kapitalanlageimmobilien sind langfristig gedacht. Finanzierung, Rücklagen und künftige Flexibilität müssen zur individuellen Situation passen.</p>
+        </div>
+      </figcaption>
+    </figure>
 
-    <aside class="prinzip__offen" data-reveal>
-      <p class="prinzip__offen-titel">Was bewusst offenbleibt</p>
-      <div>
-        <ul class="prinzip__offen-liste">
-        <li>Die konkrete Finanzierbarkeit und das notwendige Eigenkapital.</li>
-        <li>Der tatsächliche eigene monatliche Beitrag.</li>
-        <li>Die individuelle Steuerwirkung.</li>
-        </ul>
-        <p class="prinzip__offen-fuss">
-          Diese drei Punkte hängen von Ihrer persönlichen Situation ab und
-          werden erst bei der Objektvorstellung eingeordnet — nicht auf einer
-          Website.
-        </p>
+    <!-- Eine Zeile zum Aufklappen, Aufbau nach der Referenz: Titel links,
+         Beisatz daneben, runder Knopf rechts. -->
+    <div class="offen" data-aufklapp>
+      <button class="offen__kopf" type="button" aria-expanded="false" aria-controls="offen-inhalt">
+        <span class="offen__titel">Was bewusst <em>offenbleibt</em></span>
+        <span class="offen__beisatz">Drei Punkte, die diese Seite nicht beantwortet — und auch nicht beantworten kann.</span>
+        <span class="offen__knopf" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="offen__inhalt" id="offen-inhalt">
+        <div class="offen__innen">
+          <ul class="offen__liste">
+            <li>Die konkrete Finanzierbarkeit und das notwendige Eigenkapital.</li>
+            <li>Der tatsächliche eigene monatliche Beitrag.</li>
+            <li>Die individuelle Steuerwirkung.</li>
+          </ul>
+          <p class="offen__fuss">
+            Diese drei Punkte hängen von Ihrer persönlichen Situation ab und werden
+            erst bei der Objektvorstellung eingeordnet — nicht auf einer Website.
+          </p>
+        </div>
       </div>
-    </aside>
+    </div>
 
     <p class="prinzip__mehr" data-reveal><a href="wissen.html">Finanzierung und Steuern im Detail</a></p>
 
@@ -623,7 +636,7 @@
 <!-- Nur für die interne Abstimmung -->
 <div class="variant-switch">
   <a href="./index.html">Variante B · Empfehlung</a>
-  <a href="./variante-a.html" aria-current="page">Variante A · Briefing · Build B-140</a>
+  <a href="./variante-a.html" aria-current="page">Variante A · Briefing · Build B-141</a>
 </div>
 
 <script src="assets/js/site.js"></script>

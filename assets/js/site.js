@@ -266,6 +266,20 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(setzeLinie);
   }
 
+  /* --- Aufklappbare Zeilen ------------------------------------------------
+     Die Hoehe animiert ueber grid-template-rows in auswahl-/prinzip.css;
+     hier wird nur der Zustand umgeschaltet und aria-expanded nachgefuehrt. */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-aufklapp]'), function (block) {
+    var knopf = block.querySelector('button[aria-expanded]');
+    if (!knopf) return;
+    knopf.addEventListener('click', function () {
+      var offen = block.hasAttribute('data-offen');
+      if (offen) block.removeAttribute('data-offen');
+      else block.setAttribute('data-offen', '');
+      knopf.setAttribute('aria-expanded', String(!offen));
+    });
+  });
+
   /* --- Verzweigung der Ablehnungsgruende aufziehen -----------------------
      Ein Beobachter fuer den GANZEN Block, nicht einer je Kasten: nur so
      laufen Linie, Boegen und Kaesten auf einer gemeinsamen Zeitachse. Bei
