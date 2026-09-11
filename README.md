@@ -146,9 +146,14 @@ Beispiele fremder Marken (Apple, Adidas), die Porträts unter
 `assets/img/personen/` sind KI-generiert — keine echten Personen, aber sie
 hängen an erfundenen Zitaten.
 
-Beides liegt im Repo, damit die Vorschau auf Netlify vollständig ist. Die
-Seiten tragen `noindex, nofollow`, und `_headers` setzt denselben Hinweis als
-HTTP-Header, damit auch Bilder und Logos nicht in Suchmaschinen landen.
+Beides liegt im Repo, damit die Vorschau auf Netlify vollständig ist. Bis zum
+11.09.2026 trugen alle Seiten `noindex, nofollow`, und `_headers` setzte
+denselben Hinweis als HTTP-Header, damit auch Bilder und Logos nicht in
+Suchmaschinen landen. **Seit dem Livegang auf estera.immobilien am 11.09.2026
+ist beides entfernt — die Seite wird indexiert.** Die Logos unter
+`assets/img/logos/` und die Porträts unter `assets/img/personen/` sind seither
+von keiner Seite mehr eingebunden; die Startseite zeigt echte
+Google-Bewertungen mit Initialen statt Porträts.
 
 **Vor der Veröffentlichung müssen beide Ordner gegen echtes Material getauscht
 werden.** Fremde Marken unter der Überschrift „Kunden, die uns vertrauen"
@@ -444,6 +449,13 @@ Wording: nicht „ausgewählte Wohnimmobilien", sondern
 
 ## Offen / vom Kunden benötigt
 
+- **Mitarbeiterstimmen auf karriere.html sind erfunden.** Acht Platzhalter
+  unter „Das sagt unser Team", am 29.08.2026 vom Kunden so beauftragt (siehe
+  Kommentar im Markup). Seit der Freigabe für Suchmaschinen am 11.09.2026 —
+  Entscheidung des Kunden, in Kenntnis dieses Punkts — sind sie indexierbar.
+  Erfundene Mitarbeiterstimmen sind irreführende Werbung; sie gehören so bald
+  wie möglich durch echte Aussagen echter Mitarbeiter mit deren Zustimmung
+  ersetzt.
 - **Leistungsumfang.** Briefing S. 14: Estera muss den tatsächlichen Umfang vor
   Veröffentlichung bestätigen. Die sechs Schritte bilden den *Ablauf* ab, nicht
   einen zugesicherten Leistungskatalog.

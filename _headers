@@ -1,5 +1,7 @@
-# Der gesamte Prototyp bleibt aus Suchmaschinen heraus. Die HTML-Seiten
-# tragen bereits <meta name="robots" content="noindex, nofollow">; dieser
-# Header deckt zusaetzlich Bilder und Logos ab.
-/*
-  X-Robots-Tag: noindex, nofollow
+# Bis zum 11.09.2026 stand hier fuer alle Pfade:
+#     X-Robots-Tag: noindex, nofollow
+# Der Prototyp sollte aus Suchmaschinen herausbleiben; dieselbe Anweisung
+# trugen alle Seiten als <meta name="robots">. Seit dem Livegang auf
+# estera.immobilien (11.09.2026) ist beides entfernt — die Seite darf
+# indexiert werden. Diese Datei bleibt als Ort fuer kuenftige Header stehen;
+# ohne aktive Regel ist sie fuer Netlify wirkungslos.
