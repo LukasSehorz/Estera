@@ -781,6 +781,11 @@
   inset: var(--abl-pp);
   display: block;
   border-radius: 9px;
+  /* Erst hidden, dann clip: Safari vor 16 kennt clip nicht und liesse die
+     Ecken des Bildes sonst ueber den Radius hinausstehen. Hier ist hidden
+     als Rueckfall unbedenklich — im Bildrahmen gibt es nichts, das ein
+     Rollbereich verschieben koennte. 11.09.2026 */
+  overflow: hidden;
   overflow: clip;
   background: #EFEBE6;               /* der Platz, bevor das Bild da ist */
 }

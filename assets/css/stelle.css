@@ -3078,6 +3078,10 @@
 }
 .abl__spur[data-schiene='an']::before {
   height: var(--abl-schiene-hoehe, 0);
+  /* Erst der feste Wert, dann color-mix: Safari vor 16.2 kennt color-mix
+     nicht und liesse die Flaeche sonst ganz leer. rgba(138, 90, 32, 0.18)
+     ist dasselbe Bronze zu 18 % — 11.09.2026. */
+  background: rgba(138, 90, 32, 0.18);
   background: color-mix(in srgb, var(--stl-erw-bronze, #8A5A20) 18%, transparent);
 }
 .abl__spur[data-schiene='an']::after {

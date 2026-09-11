@@ -33,3 +33,7 @@ Bilder/video-entwuerfe/
 # Sie sind aus Briefing/bildauftraege-baender.json jederzeit neu erzeugbar;
 # ausgeliefert werden ohnehin nur die beschnittenen webp/jpg daneben.
 assets/img/karriere/band/.original/
+
+# Ausgabe der Seitenpruefung (tools/seiten-pruefung.mjs): Screenshots und
+# Berichte, jederzeit neu erzeugbar.
+tools/pruefung-ausgabe/

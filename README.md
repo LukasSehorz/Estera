@@ -381,6 +381,52 @@ Seitenrand zurück.
 
 ---
 
+## Vor jedem Push
+
+Zwei Prüfungen, seit dem 11.09.2026. Anlass: Auf dem Telefon des Kunden lagen
+die vier Karten von „Warum Immobilien" über der Tafel darunter — auf keinem
+Gerät des Teams zu sehen. Ursache war eine Desktop-Regel, die ohne Media-Query
+hinter dem Mobile-Block stand und dessen `aspect-ratio: auto` aufhob. Chrome
+und neuere WebKit-Fassungen verdecken so etwas, indem sie die Box trotzdem auf
+ihren Inhalt wachsen lassen; das WebKit des Kunden tat das nicht.
+
+**1. CSS-Leck-Prüfung** — findet genau diese Fehlerklasse:
+
+```
+python3 tools/css-leck-pruefung.py
+```
+
+Meldet jede Handy-Regel (`@media (max-width: …)`), die später in derselben
+Datei ohne Media-Query für denselben Selektor anders gesetzt wird. Das sind
+Kandidaten, keine Urteile: Jede Stelle lesen. Gewollte Überschreibungen stehen
+im Kommentar davor (Stand 11.09.2026 fünf: `.stl-zwei--bieten`, `.wi__vgl`,
+`.kar-karte__art`, `.kar-karte__bereiche`, `.stl-aus__kasten` unter
+`--system`). Ist eine nicht gewollt, gehört sie in einen
+`@media (min-width: …)`-Block.
+
+**2. Seitenprüfung in Chrome mit echter Geräte-Emulation** — misst je Seite
+horizontalen Überlauf, sammelt Laufzeitfehler der Konsole und legt einen
+Ganzseiten-Screenshot ab:
+
+```
+python3 -m http.server 8000          # im Repo-Verzeichnis
+node tools/seiten-pruefung.mjs 390 variante-a.html kontakt.html karriere.html
+REDUCE=1 node tools/seiten-pruefung.mjs 390 variante-a.html   # mit „Bewegung reduzieren"
+```
+
+`--window-size` in Headless-Chrome reicht dafür NICHT — Chrome legt dann ein
+500 px breites Fenster an und emuliert kein Telefon. Das Skript geht über das
+DevTools-Protokoll und setzt Breite, Touch und iPhone-Kennung wirklich.
+
+**Und auf dem Gerät:** Ein Test auf zwei ähnlichen iPhones deckt Randfälle
+nicht ab. Vor einer Abnahme einmal mit **Stromsparmodus** (blockiert jedes
+Autoplay — die Filme tauschen dann auf ihr Standbild), einmal mit
+**„Bewegung reduzieren"** und, wenn greifbar, auf einem **älteren iOS**
+durchsehen. Nach jeder CSS- oder JS-Änderung die Cache-Marke (`?v=…`) in
+allen Seiten heben, sonst liefert der Browser des Kunden den alten Stand.
+
+---
+
 ## Grundsatz zum Inhalt
 
 Briefing S. 3: **„Nur echte Bewertungen, Nachweise, Zahlen, Partnerschaften und
