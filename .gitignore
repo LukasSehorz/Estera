@@ -7,6 +7,16 @@ Thumbs.db
 node_modules/
 *.log
 
+# Geheimnisse gehoeren NICHT ins Repository. Dieses Repo ist oeffentlich
+# (Netlify: "Public"), ein hier eingecheckter Resend-Schluessel waere binnen
+# Stunden abgegriffen und wuerde ueber die Domain Spam versenden.
+# Der Schluessel liegt in den Netlify-Umgebungsvariablen und wird von der
+# Funktion zur Laufzeit ueber process.env gelesen — eine .env im Repo waere
+# dort ohnehin wirkungslos.
+.env
+.env.*
+!.env.example
+
 # Rohmaterial der Videos — Ausgangsdateien des Kunden, nicht die
 # ausgelieferten Fassungen. Sie liegen im Ordner Bilder/ und werden nur zum
 # Neurendern gebraucht; zusammen rund 31 MB, die das Repository unnoetig

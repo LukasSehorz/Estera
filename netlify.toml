@@ -1,0 +1,27 @@
+# =====================================================================
+# NETLIFY — BAU UND FUNKTIONEN
+# =====================================================================
+# Bis zum 11.09.2026 gab es diese Datei nicht. Netlify hat das Repository
+# ohne Bauschritt ausgeliefert, was fuer reines HTML auch richtig ist.
+# Neu ist allein der Ordner netlify/functions: dort liegt die Gegenstelle,
+# die das Kontaktformular entgegennimmt und per Resend weiterschickt.
+#
+# publish = "." — die Seiten liegen im Wurzelverzeichnis, es wird nichts
+# gebaut und nichts in einen Unterordner geschrieben.
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# esbuild bindet die Abhaengigkeit (resend) mit ein. Ohne diese Zeile
+# muesste node_modules mitgeliefert werden.
+[functions]
+  node_bundler = "esbuild"
+
+# Die Formularstrecke schickt an /api/anfrage; das ist die lesbare Adresse
+# fuer die Funktion darunter. Ohne diese Umschreibung muesste im Formular
+# der technische Pfad /.netlify/functions/anfrage stehen.
+[[redirects]]
+  from = "/api/anfrage"
+  to = "/.netlify/functions/anfrage"
+  status = 200
+  force = true

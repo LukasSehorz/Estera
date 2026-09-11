@@ -1981,3 +1981,59 @@
   }
   .kf__voll .kf__nav        { margin-top: 10px; }
 }
+
+/* =====================================================================
+   EINWILLIGUNG UND FALLE — 11.09.2026, mit der Anbindung dazugekommen
+   =====================================================================
+   Bis dahin gab es im ganzen Projekt kein einziges Kreuzfeld; entsprechend
+   fehlte jede Regel dafuer. Beides steht hier zusammen, weil beides nur
+   in den Formularstrecken vorkommt.
+
+   .kf__falle nimmt den Eintrag fuer Automaten auf. Sie ist NICHT mit
+   display:none versteckt: manche Automaten ueberspringen genau das und
+   fuellen den Rest. Stattdessen steht sie ausserhalb des Bildes.
+   =====================================================================*/
+.kf__falle {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Das Kreuz sitzt in der ersten Zeile neben dem Text, nicht darueber —
+   deshalb Raster statt Fluss. align-items:start haelt es auf Hoehe der
+   ersten Zeile, auch wenn der Text drei Zeilen lang wird. */
+.kf__einwilligung label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  cursor: pointer;
+  font: 400 0.82rem/1.55 var(--schrift-text, Helvetica, Arial, sans-serif);
+  color: var(--navy-70, #4a5568);
+}
+
+/* margin-top rueckt das Kreuz auf die Mittellinie der ersten Textzeile.
+   accent-color faerbt es im Sand der Seite, ohne das Feld nachzubauen —
+   ein nachgebautes Kreuz verliert die Bedienung per Tastatur. */
+.kf__einwilligung input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  margin: 3px 0 0;
+  accent-color: var(--sand, #c9a227);
+  flex: none;
+  cursor: pointer;
+}
+
+.kf__einwilligung a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.kf__einwilligung a:hover { color: var(--sand, #c9a227); }
+
+/* Die angemahnte Einwilligung: derselbe Ton wie bei den uebrigen Feldern,
+   den das Skript ueber aria-invalid setzt. */
+.kf__einwilligung input[aria-invalid="true"] { outline: 2px solid var(--fehler, #b3261e); outline-offset: 2px; }
+.kf__einwilligung .kf__fehler { display: block; margin-top: 6px; }

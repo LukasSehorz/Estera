@@ -90,6 +90,10 @@
     fehltVor:    'Bitte trag deinen Vornamen ein.',
     fehltNach:   'Bitte trag deinen Nachnamen ein.',
     fehltMail:   'Bitte trag deine E-Mail-Adresse ein.',
+    /* Neu am 11.09.2026 mit der Einwilligung. Sie braucht eine eigene
+       Meldung: „Fülle die Pflichtfelder aus" schickt bei einem Kreuzfeld
+       auf die Suche nach einem Feld, in das man etwas schreiben koennte. */
+    fehltDsgvo:  'Ohne deine Einwilligung dürfen wir die Angaben nicht verarbeiten.',
     formMail:    'Diese E-Mail-Adresse sieht nicht vollständig aus. Fehlt das @?',
     fehltTel:    'Bitte trag eine Telefonnummer ein, unter der wir dich erreichen.',
     fehltJahr:   'Ein Jahr genügt — zum Beispiel „2016".',
@@ -539,6 +543,13 @@
 
     function fehlt(feld) {
       if (feld.type === 'radio') return gruppenWert(form, feld.name) === '';
+      /* Ein Kreuzfeld traegt seinen value AUCH UNANGEKREUZT — die Pruefung
+         auf leeren value unten wuerde es also immer durchwinken. Gefragt
+         ist checked, nicht value. Ohne diese Zeile liesse sich die
+         Einwilligung im Browser umgehen; die Gegenstelle lehnte die Anfrage
+         dann ab, und der Besucher saehe nur eine Fehlermeldung, ohne zu
+         erfahren, welches Feld gemeint ist. — 11.09.2026 */
+      if (feld.type === 'checkbox') return !feld.checked;
       if ((feld.value || '').trim() === '') return true;
       /* Die Form der E-Mail-Adresse fragen wir den Browser, statt eine
          eigene Regel zu erfinden. Jede handgeschriebene sperrt frueher oder
@@ -567,6 +578,9 @@
        Meldung, die die Frage noch einmal stellt. */
     function meldungFuer(feld) {
       var leer = (feld.value || '').trim() === '';
+      /* Vor der Pruefung auf type: ein Kreuzfeld traegt seinen value auch
+         unangekreuzt, `leer` waere hier also stets falsch. */
+      if (feld.type === 'checkbox') return TEXT.fehltDsgvo;
       if (feld.type === 'email') return leer ? TEXT.fehltMail : TEXT.formMail;
       if (feld.type === 'tel') return TEXT.fehltTel;
       if (feld.name === 'vorname') return TEXT.fehltVor;

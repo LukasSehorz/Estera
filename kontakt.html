@@ -199,14 +199,17 @@
      KEIN method, keinen Dienst, kein mailto. Der Knopf war type="button"
      und disabled, onsubmit gab false zurueck. Es gab also nie einen
      Empfaenger, der sich uebernehmen liesse.
-     Deshalb steht hier action="" — die Anfrage geht nirgendwohin. Vor dem
-     Livegang MUSS eingetragen werden:
-       1  Empfaenger und Versandweg (Postfach, Dienst oder eigener
-          Endpunkt) in action und method,
-       2  Datenschutzerklaerung (datenschutz.html) samt Einwilligungstext,
-       3  Schutz gegen automatisierte Eintraege.
-     Solange 1 fehlt, sagt der Vermerk unter jedem Knopf das auch dem
-     Besucher.
+     ERLEDIGT AM 11.09.2026 — die drei Bedingungen sind eingetragen:
+       1  action="/api/anfrage" (umgeschrieben in netlify.toml auf
+          netlify/functions/anfrage.js, Versand ueber Resend an
+          info@estera.immobilien),
+       2  Einwilligung als Pflichtfeld am Ende jeder Strecke, mit Verweis
+          auf datenschutz.html; die Gegenstelle prueft sie ein zweites Mal,
+          weil eine Pruefung allein im Browser umgehbar ist,
+       3  ein unsichtbares Feld („website") faengt automatisierte
+          Eintraege ab.
+     Der historische Wortlaut steht unten weiter, damit nachvollziehbar
+     bleibt, was vorher galt.
      ===================================================================== -->
 <!-- ZWEIMAL AN EINEM TAG GEAENDERT — DAS IST KEIN VERSEHEN.
      Der Grund dieses Abschnitts hat am 31.08.2026 zwei Ansagen desselben
@@ -550,8 +553,17 @@
              Lebenslauf angehaengt werden kann.
              ============================================================== -->
         <form class="kf__formular" id="kf-formular-1" data-funnel tabindex="-1"
-              action="" method="post" aria-labelledby="kf-t1">
+              action="/api/anfrage" method="post" enctype="multipart/form-data"
+              aria-labelledby="kf-t1">
           <input type="hidden" name="anliegen" value="Kapitalanlage-Immobilie">
+          <input type="hidden" name="formular" value="kontakt">
+          <!-- Falle fuer Automaten: unsichtbar, deshalb bleibt sie bei
+               Menschen leer. Ist sie gefuellt, verwirft die Gegenstelle die
+               Anfrage still. aria-hidden + tabindex haelt sie auch aus der
+               Tastaturfolge und der Vorlesesoftware heraus. -->
+          <div class="kf__falle" aria-hidden="true">
+            <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
 
           <div class="kf__formular__kopf">
             <!-- DIESE UEBERSCHRIFT IST NICHT MEHR ZU SEHEN — SIE IST NUR NOCH
@@ -813,6 +825,26 @@
                      die Hauptaktion beim Schrittwechsel nicht.
                      Nur `btn`: die Sandflaeche mit weisser Schrift kommt
                      seit dem 31.08.2026 zentral aus base.css. -->
+                <!-- EINWILLIGUNG — 11.09.2026, mit der Anbindung eingebaut.
+                     Der Kommentar oben bei Strecke 1 nennt sie als eine von
+                     drei Bedingungen vor dem Livegang. Sie steht hier und
+                     nicht frueher, weil erst dieser Schritt die Angaben
+                     zusammenfuehrt, die weggeschickt werden.
+                     Dieses Formular erhebt Nettoeinkommen und Eigenkapital —
+                     deshalb nennt der Text sie ausdruecklich. -->
+                <p class="kf__feld kf__einwilligung">
+                  <label for="f1-datenschutz">
+                    <input type="checkbox" id="f1-datenschutz" name="datenschutz"
+                           value="ja" required aria-describedby="f1-datenschutz-f">
+                    <span>Ich willige ein, dass meine Angaben — einschließlich
+                    Nettoeinkommen und Eigenkapital — zur Bearbeitung meiner
+                    Anfrage verarbeitet werden. Einzelheiten in der
+                    <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.
+                    Die Einwilligung ist jederzeit widerrufbar.</span>
+                  </label>
+                  <span class="kf__fehler" id="f1-datenschutz-f" role="alert"></span>
+                </p>
+
                 <button class="btn" type="submit" data-funnel-senden>Absenden</button>
               </div>
             </fieldset>
@@ -941,17 +973,24 @@
                     ebenso die Datenschutzerklärung. Bis dahin erreichst du
                     Estera zuverlässig per E-Mail."
 
-               DER SACHVERHALT IST UNVERAENDERT, NUR NICHT MEHR ZU LESEN.
-               action="" heisst: die Anfrage geht nirgendwohin. Das Skript
-               zeigt in diesem Fall das Dankebild, damit die Strecke
-               vollstaendig vorfuehrbar ist — versendet wird nichts.
-               VOR DEM LIVEGANG ZWINGEND:
-                 1  Empfaenger und Versandweg in action und method,
-                 2  Datenschutzerklaerung samt Einwilligung, darin ein eigener
-                    Absatz zu Einkommen und Eigenkapital,
-                 3  Schutz gegen automatisierte Eintraege.
-               Sobald action gefuellt ist, laesst kontakt-funnel.js das
-               Formular von selbst wirklich absenden (siehe absenden()). -->
+               SEIT DEM 11.09.2026 GILT DAS NICHT MEHR: action zeigt auf
+               /api/anfrage, die Strecke versendet wirklich. Das Dankebild
+               erscheint nur noch nach einer angenommenen Anfrage — die
+               Bedingung dafuer steht unveraendert in absenden():
+               bei gefuelltem action laesst das Skript los.
+
+               Die drei Punkte von damals sind erledigt:
+                 1  Empfaenger info@estera.immobilien, Versand ueber Resend
+                    in netlify/functions/anfrage.js,
+                 2  Einwilligung als Pflichtfeld am Ende dieser Strecke; sie
+                    nennt den Lebenslauf ausdruecklich, die Strecke 1 nennt
+                    Einkommen und Eigenkapital,
+                 3  unsichtbares Feld „website" gegen automatisierte
+                    Eintraege, geprueft in der Gegenstelle.
+
+               NOCH OFFEN: datenschutz.html braucht einen eigenen Absatz zu
+               Einkommen und Eigenkapital — die Einwilligung verweist
+               darauf. -->
         </form>
 
         <!-- ==============================================================
@@ -965,8 +1004,12 @@
              Bewerbungen leer ankommen.
              ============================================================== -->
         <form class="kf__formular" id="kf-formular-2" data-funnel tabindex="-1"
-              action="" method="post" enctype="multipart/form-data"
+              action="/api/anfrage" method="post" enctype="multipart/form-data"
               aria-labelledby="kf-t2">
+          <input type="hidden" name="formular" value="bewerbung-vertrieb">
+          <div class="kf__falle" aria-hidden="true">
+            <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
           <!-- Wert und Dialogname heissen wie die Rolle im Kasten — 01.09.2026,
                Optimierungsbriefing, Abschnitt 12. Der Empfaenger sieht spaeter im
                Feld „anliegen" dieselbe Bezeichnung, die der Bewerber gedrueckt hat.
@@ -1191,6 +1234,22 @@
                          accept=".pdf,.doc,.docx,.rtf,.odt,application/pdf">
                 </p>
 
+                <!-- EINWILLIGUNG — wie bei Strecke 1. Hier nennt der Text
+                     den Lebenslauf statt der Finanzangaben: das ist es, was
+                     diese Strecke zusaetzlich uebertraegt. -->
+                <p class="kf__feld kf__einwilligung">
+                  <label for="f2-datenschutz">
+                    <input type="checkbox" id="f2-datenschutz" name="datenschutz"
+                           value="ja" required aria-describedby="f2-datenschutz-f">
+                    <span>Ich willige ein, dass meine Bewerbungsangaben und
+                    gegebenenfalls mein Lebenslauf zur Bearbeitung meiner
+                    Bewerbung verarbeitet werden. Einzelheiten in der
+                    <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.
+                    Die Einwilligung ist jederzeit widerrufbar.</span>
+                  </label>
+                  <span class="kf__fehler" id="f2-datenschutz-f" role="alert"></span>
+                </p>
+
                 <button class="btn" type="submit" data-funnel-senden>Kontaktdaten übermitteln</button>
               </div>
             </fieldset>
@@ -1244,8 +1303,12 @@
              und nicht vom Kunden — sie sind unten einzeln vermerkt.
              ============================================================== -->
         <form class="kf__formular" id="kf-formular-3" data-funnel tabindex="-1"
-              action="" method="post" enctype="multipart/form-data"
+              action="/api/anfrage" method="post" enctype="multipart/form-data"
               aria-labelledby="kf-t3">
+          <input type="hidden" name="formular" value="bewerbung-backoffice">
+          <div class="kf__falle" aria-hidden="true">
+            <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
           <!-- Wie bei Strecke 2: Wert heisst wie die Rolle im Kasten — 01.09.2026,
                Optimierungsbriefing, Abschnitt 12. Vorher: value="Back-Office-Manager" -->
           <input type="hidden" name="anliegen" value="Backoffice Manager (m/w/d)">
@@ -1426,6 +1489,20 @@
                   <label for="f3-lebenslauf">Lebenslauf hochladen</label>
                   <input type="file" id="f3-lebenslauf" name="lebenslauf"
                          accept=".pdf,.doc,.docx,.rtf,.odt,application/pdf">
+                </p>
+
+                <!-- EINWILLIGUNG — wortgleich mit Strecke 2. -->
+                <p class="kf__feld kf__einwilligung">
+                  <label for="f3-datenschutz">
+                    <input type="checkbox" id="f3-datenschutz" name="datenschutz"
+                           value="ja" required aria-describedby="f3-datenschutz-f">
+                    <span>Ich willige ein, dass meine Bewerbungsangaben und
+                    gegebenenfalls mein Lebenslauf zur Bearbeitung meiner
+                    Bewerbung verarbeitet werden. Einzelheiten in der
+                    <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.
+                    Die Einwilligung ist jederzeit widerrufbar.</span>
+                  </label>
+                  <span class="kf__fehler" id="f3-datenschutz-f" role="alert"></span>
                 </p>
 
                 <button class="btn" type="submit" data-funnel-senden>Kontaktdaten übermitteln</button>

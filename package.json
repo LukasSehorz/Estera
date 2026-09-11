@@ -1,0 +1,9 @@
+{
+  "name": "estera-webseite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Estera Immobilien — Webseite. Reines HTML/CSS/JS; die einzige Abhaengigkeit ist der Mailversand der Kontaktstrecke.",
+  "dependencies": {
+    "resend": "^6.27.0"
+  }
+}
