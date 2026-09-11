@@ -114,7 +114,15 @@
        Wer sieht, sah nichts passieren. Jetzt steht der Satz unter den Kacheln,
        im Behaelter .kf__fehler--gruppe des Schritts.
        VON ESTERA BESTAETIGEN LASSEN. */
-    fehltWahl:   'Bitte wähl eine Antwort aus.'
+    fehltWahl:   'Bitte wähl eine Antwort aus.',
+    /* Neu am 11.09.2026 mit dem echten Versand. Bis dahin konnte gar nichts
+       schiefgehen, weil nichts weggeschickt wurde. Jetzt kann die Leitung
+       abreissen oder die Gegenstelle antworten, dass sie die Anfrage nicht
+       annimmt — und dann darf NICHT das Dankebild erscheinen.
+       Der Satz nennt den zweiten Weg, damit niemand vor einer Sackgasse
+       steht: die E-Mail-Adresse steht ohnehin auf derselben Seite. */
+    sendeFehler: 'Das Absenden hat gerade nicht geklappt. Versuch es bitte noch einmal — oder schreib uns an info@estera.immobilien.',
+    sendeLaeuft: 'Wird gesendet …'
   };
 
   /* Ein Werkzeug, kein Vorgriff: erspart zehn createElement-Dreizeiler. */
@@ -833,6 +841,10 @@
       zeigen(true);
     }
 
+    /* Sperre gegen den Doppelklick: ohne sie gehen zwei gleiche Anfragen
+       raus, weil der Knopf waehrend des Versands noch reagiert. */
+    var sendetGerade = false;
+
     function absenden(ev) {
       var stufe = stufen[stufen.length - 1];
       var luecken = pflichtfelder(stufe).filter(fehlt);
@@ -849,21 +861,85 @@
         return;
       }
 
-      /* IST EIN EMPFAENGER EINGETRAGEN, LAESST DAS SKRIPT LOS.
-         Dann sendet das Formular wirklich, der Server antwortet, und das
-         Schlussbild hier waere eine Luege ueber etwas, das er selbst besser
-         weiss. Nur solange `action` leer ist — also solange nichts
-         weggeschickt wird —, uebernimmt die Strecke das Schlussbild der
-         Vorlage.
-         Der Vorbehalt dazu stand bis zum 31.08.2026 sichtbar unter jedem
-         Formular und ist auf Kundenwunsch entfernt worden; er steht jetzt als
-         Kommentar im HTML bei Strecke 1. */
+      /* BIS ZUM 11.09.2026 STAND HIER `if (ziel !== '') return;` — das
+         Skript liess bei gefuelltem action los, das Formular schickte im
+         Browserverfahren ab, und der Besucher landete auf der Antwort der
+         Gegenstelle: einer weissen Seite mit {"ok":true,...}. Technisch
+         richtig gesendet, fuer den Besucher ein Fehlerbild.
+
+         Jetzt geht die Anfrage per fetch weg und die Seite bleibt stehen.
+         Erst wenn die Gegenstelle bestaetigt hat, erscheint das Dankebild —
+         es sagt damit weiterhin nur, was wirklich passiert ist. Scheitert
+         der Versand, bleibt der letzte Schritt stehen und sagt es. */
       var ziel = (form.getAttribute('action') || '').trim();
-      if (ziel !== '') return;
 
       ev.preventDefault();
-      schluss = 'danke';
-      zeigen(true);
+
+      /* Ohne Ziel wie frueher: Dankebild ohne Versand, damit die Strecke
+         auch als Ansichtsfassung vollstaendig vorfuehrbar bleibt. */
+      if (ziel === '') {
+        schluss = 'danke';
+        zeigen(true);
+        return;
+      }
+
+      if (sendetGerade) return;
+      sendetGerade = true;
+
+      var knopf = form.querySelector('[data-funnel-senden]');
+      var knopfText = knopf ? knopf.textContent : '';
+      if (knopf) {
+        knopf.disabled = true;
+        knopf.textContent = TEXT.sendeLaeuft;
+      }
+      sendeFehlerWeg();
+
+      /* FormData nimmt die Datei mit; ohne enctype-Kopfzeile von Hand —
+         die setzt der Browser selbst, samt boundary. Wer sie hier setzt,
+         zerbricht den Upload. */
+      fetch(ziel, { method: 'post', body: new FormData(form) })
+        .then(function (antwort) {
+          if (!antwort.ok) throw new Error('Status ' + antwort.status);
+          sendetGerade = false;
+          schluss = 'danke';
+          zeigen(true);
+        })
+        .catch(function (fehler) {
+          sendetGerade = false;
+          if (knopf) {
+            knopf.disabled = false;
+            knopf.textContent = knopfText;
+          }
+          sendeFehlerZeigen();
+          if (window.console) console.error('Versand gescheitert:', fehler);
+        });
+    }
+
+    /* Die Meldung zum gescheiterten Versand haengt am letzten Schritt, nicht
+       an einem einzelnen Feld: es liegt an keinem von ihnen. */
+    function sendeFehlerBehaelter() {
+      var stufe = stufen[stufen.length - 1];
+      var b = stufe.querySelector('[data-sende-fehler]');
+      if (!b) {
+        b = document.createElement('p');
+        b.setAttribute('data-sende-fehler', '');
+        b.className = 'kf__fehler kf__fehler--senden';
+        b.setAttribute('role', 'alert');
+        stufe.appendChild(b);
+      }
+      return b;
+    }
+
+    function sendeFehlerZeigen() {
+      var b = sendeFehlerBehaelter();
+      b.textContent = TEXT.sendeFehler;
+      b.focus && b.focus();
+    }
+
+    function sendeFehlerWeg() {
+      var stufe = stufen[stufen.length - 1];
+      var b = stufe.querySelector('[data-sende-fehler]');
+      if (b) b.textContent = '';
     }
 
     /* --- Horchen ----------------------------------------------------------- */

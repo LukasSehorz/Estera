@@ -2037,3 +2037,29 @@
    den das Skript ueber aria-invalid setzt. */
 .kf__einwilligung input[aria-invalid="true"] { outline: 2px solid var(--fehler, #b3261e); outline-offset: 2px; }
 .kf__einwilligung .kf__fehler { display: block; margin-top: 6px; }
+
+/* =====================================================================
+   SCHLUSSBILD: WEITERWEG UND VERSANDFEHLER — 11.09.2026
+   =====================================================================
+   Beides kam mit dem echten Versand dazu. Vorher endete die Strecke im
+   Dankebild ohne Ausgang, und scheitern konnte nichts, weil nichts
+   weggeschickt wurde.
+   =====================================================================*/
+.kf__ende__weiter {
+  margin: 22px 0 0;
+}
+
+/* Die Meldung zum gescheiterten Versand haengt am ganzen Schritt, nicht an
+   einem Feld — deshalb mehr Luft darueber als bei .kf__fehler und die
+   volle Breite. */
+.kf__fehler--senden {
+  display: block;
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  border-left: 2px solid var(--fehler, #b3261e);
+  background: rgba(179, 38, 30, 0.06);
+  line-height: 1.55;
+}
+.kf__fehler--senden:empty {
+  display: none;
+}
