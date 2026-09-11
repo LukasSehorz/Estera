@@ -37,3 +37,6 @@ assets/img/karriere/band/.original/
 # Ausgabe der Seitenpruefung (tools/seiten-pruefung.mjs): Screenshots und
 # Berichte, jederzeit neu erzeugbar.
 tools/pruefung-ausgabe/
+
+# Python-Bytecode der Pruefwerkzeuge.
+__pycache__/
