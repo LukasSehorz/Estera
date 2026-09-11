@@ -1475,6 +1475,15 @@
 @media (max-width: 1000px) {
   .wi__feld {
     aspect-ratio: auto;
+    /* Die Hoehe kommt hier allein aus dem Inhalt — ausdruecklich gesetzt,
+       seit am 11.09.2026 eine spaete Desktop-Regel weiter unten das
+       Seitenverhaeltnis auch auf dem Telefon gesetzt hatte (siehe dort,
+       „NUR AUF DEM DESKTOP"). Beide Zeilen sind die Grundwerte und aendern
+       nichts, solange nichts anderes dazwischenfunkt; sie stehen hier,
+       damit ein zweiter Ausrutscher dieser Art nicht wieder die Karten
+       ueber die Tafel schiebt. */
+    height: auto;
+    min-height: 0;
     display: grid;
     gap: clamp(0.8rem, 2.2vw, 1.3rem);
     margin-top: clamp(1.2rem, 3vh, 2rem);
@@ -2353,8 +2362,25 @@
    oben, und der leere Streifen, den das Schild hinterlassen hat, ist weg.
    Die Verbindungslinien gehen unveraendert mit, weil sie im selben Feld
    und in denselben Prozentwerten rechnen.
-   =========================================================================== */
-.wi__feld { aspect-ratio: 1240 / 295; }
+
+   NUR AUF DEM DESKTOP — 11.09.2026. Diese Zeile stand bis dahin ohne
+   Media-Query und damit HINTER dem Mobile-Block (max-width: 1000px), der
+   das Seitenverhaeltnis mit `aspect-ratio: auto` aufhebt, weil die Karten
+   dort untereinander im Fluss stehen. Gleiche Spezifitaet, spaeter im
+   Quelltext: sie hat das `auto` auf jedem Telefon ueberschrieben, und das
+   Feld bekam auch dort ein Seitenverhaeltnis von 1240 : 295 — bei 393 px
+   Breite rund 94 px Hoehe fuer Haus und vier Karten.
+
+   WARUM DAS MONATELANG NIEMAND SAH: Chrome, Firefox und neuere WebKit-
+   Fassungen lassen eine Box mit `aspect-ratio` auf ihren Inhalt wachsen
+   (automatische Mindesthoehe). Das WebKit auf dem Telefon des Kunden tut
+   das nicht: das Feld blieb kurz, die Karten quollen unten heraus und
+   lagen — z-index 3 aus dem Grundsatz — ueber der Tafel und dem Knopf
+   darunter. Aufgenommen im Video des Kunden vom 11.09.2026, 22:30 Uhr.
+   Auf den Telefonen des Teams war es nie zu sehen. */
+@media (min-width: 1001px) {
+  .wi__feld { aspect-ratio: 1240 / 295; }
+}
 
 /* ALLE VIER KNOEPFE GLEICH BREIT — 04.09.2026, Kundenwunsch woertlich: „Bei
    der nächsten Section ist wichtig, dass du die Buttons mit ‚Mehr erfahren‘

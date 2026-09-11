@@ -558,4 +558,45 @@
     }, { passive: true });
     update();
   }
+
+  /* --------------------------------------------------------------------
+     AUTOPLAY, DAS NICHT SPIELEN DARF — 11.09.2026
+
+     iOS blockiert im Stromsparmodus jedes Autoplay, auch stumm und inline.
+     Safari legt dann einen grossen Abspielknopf ueber den Film — mitten
+     ins Kopfbild der Startseite, in den Kontaktfilm und den Karrierekopf.
+     Aufgenommen im Video des Kunden vom 11.09.2026 (gelbes Batteriesymbol
+     in der Statusleiste). Auf Telefonen ohne Stromsparmodus tritt es nicht
+     auf, deshalb hat es im Team niemand gesehen.
+
+     WAS HIER PASSIERT: play() gibt ein Versprechen zurueck, das bei
+     verweigertem Autoplay abgelehnt wird. Genau dann wird der Film gegen
+     sein eigenes Poster getauscht — ein <img> mit denselben Klassen, das
+     die Regeln des Films erbt (.heroA__band img steht ausdruecklich neben
+     .heroA__band video; .kf-film__video und .kar-kopf__video sind
+     Klassen). Kein Knopf, kein Sprung, dasselbe Bild, nur unbewegt.
+
+     Ohne poster gibt es nichts zu tauschen; dann bleibt der Film, wie er
+     ist. Filme mit `controls` sind nicht gemeint — dort ist der Knopf
+     Absicht — und tragen ohnehin kein autoplay.
+     -------------------------------------------------------------------- */
+  Array.prototype.forEach.call(document.querySelectorAll('video[autoplay]'), function (film) {
+    var poster = film.getAttribute('poster');
+    if (!poster) return;
+    var versprechen;
+    try { versprechen = film.play(); } catch (e) { return; }
+    if (!versprechen || typeof versprechen.then !== 'function') return;
+    versprechen.then(null, function () {
+      if (!film.parentNode) return;
+      var bild = document.createElement('img');
+      bild.src = poster;
+      bild.alt = '';
+      bild.className = film.className;
+      bild.setAttribute('aria-hidden', 'true');
+      bild.setAttribute('data-film-poster', '');
+      if (film.hasAttribute('width'))  bild.setAttribute('width',  film.getAttribute('width'));
+      if (film.hasAttribute('height')) bild.setAttribute('height', film.getAttribute('height'));
+      film.parentNode.replaceChild(bild, film);
+    });
+  });
 })();
