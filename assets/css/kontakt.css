@@ -2063,3 +2063,26 @@
 .kf__fehler--senden:empty {
   display: none;
 }
+
+/* ---------------------------------------------------------------------------
+   DER WEG-VON-HIER-KNOPF AUF NAVY — 11.09.2026
+
+   .btn--weiss kehrt sich beim Ueberfahren um: Navy-Flaeche, weisse Schrift.
+   Das ist auf hellem Grund richtig und dort auch gemessen (15,51:1). Hier
+   steht der Knopf aber IM Navy-Vollbild der Strecke, und Navy auf Navy
+   verschwindet: --navy-800 (#102949) gegen den Grund --navy-900 (#0A192E)
+   sind keine zwei Handbreit Helligkeit auseinander. Der Knopf waere beim
+   Daraufzeigen fast weg — derselbe Fehler wie beim --ghost davor, nur eine
+   Bewegung spaeter.
+
+   Deshalb bleibt er hier weiss und wird beim Ueberfahren nur eine Spur
+   waermer (--paper-warm, dieselbe Tonung wie .btn--weiss sie auf hellem
+   Grund als ersten Schritt nimmt). Die Navy-Schrift bleibt stehen.
+--------------------------------------------------------------------------- */
+.kf__ende__weiter .btn--weiss:hover,
+.kf__ende__weiter .btn--weiss:focus-visible {
+  --btn-fg: var(--navy-800);
+  --btn-bg: #F4F1EC;
+  background: #F4F1EC;
+  border-color: rgba(16, 41, 73, 0.6);
+}
