@@ -17,12 +17,24 @@
      Estera Schriftzug". Bis dahin gab es gar keins; Google zeigte im
      Treffer einen generischen Buchstaben und der Browser-Tab blieb leer.
 
-     ZWEI DATEIEN UND WARUM. Beide tragen Navy #102949 und die Wortmarke in
-     Cormorant Garamond 500 — als PFADE, nicht als <text>: ein Zeichen laedt
-     keine Webschrift, ein <text> erschiene bei Google in einer beliebigen
+     RUND UND NAVY AUF WEISS — nachgeschaerft am 12.09.2026, 19:27 Uhr:
+     „wenn es reinpasst kann sein dass wir es auf kreis anpassen muessen".
+     Der Kunde hat den Schriftzug dunkel auf Weiss geliefert; Google
+     beschneidet das Zeichen ohnehin rund. Der Kreis steht deshalb
+     ausdruecklich IM Bild, damit es auch dort rund aussieht, wo nicht
+     beschnitten wird, und eine Navy-Haarlinie zu 14 % haelt den weissen
+     Kreis gegen weissen Grund — ohne sie verschwaende er dort.
+     NACHGERECHNET, ob der Zug in den Kreis passt: er misst 410 x 51 px,
+     seine Ecke liegt damit 206 px von der Mitte, der Radius ist 256 px.
+     Er passt, nichts wird abgeschnitten.
+
+     ZWEI DATEIEN UND WARUM. Beide tragen die Wortmarke in Cormorant
+     Garamond 500 — als PFADE, nicht als <text>: ein Zeichen laedt keine
+     Webschrift, ein <text> erschiene bei Google in einer beliebigen
      Systemschrift.
        estera-icon.svg  der volle Schriftzug ESTERA. Google zeigt das
-                        Zeichen mit 48 px und mehr; dort ist er lesbar.
+                        Zeichen mit 48 px und mehr; dort ist er lesbar,
+                        wenn auch knapp.
        favicon.svg      nur das E. Im Browser-Tab sind 16 px ueblich — der
                         volle Schriftzug waere dort ein grauer Strich
                         (nachgesehen, nicht vermutet).
@@ -32,8 +44,8 @@
      KEIN .ico. Das Format braucht heute niemand mehr, und ein zweites
      Zeichen, das jemand beim naechsten Logowechsel uebersieht, ist eine
      Fehlerquelle mehr. -->
-<link rel="icon" href="assets/img/favicon.svg?v=c05e" type="image/svg+xml" sizes="any">
-<link rel="apple-touch-icon" href="assets/img/estera-icon.svg?v=c05e">
+<link rel="icon" href="assets/img/favicon.svg?v=c05f" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/estera-icon.svg?v=c05f">
 <meta name="theme-color" content="#102949">
 <link rel="preload" href="assets/fonts/CormorantGaramond-300-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Jost-400-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -51,11 +63,11 @@
      seiten.css ueberschneiden, gewinnt bewusst die spaetere Datei —
      Begruendung steht dort.
      Keine bestehende CSS-Datei wurde fuer diese Seite veraendert. -->
-<link rel="stylesheet" href="assets/css/fonts.css?v=c05e">
-<link rel="stylesheet" href="assets/css/base.css?v=c05e">
-<link rel="stylesheet" href="assets/css/schluss.css?v=c05e">
-<link rel="stylesheet" href="assets/css/seiten.css?v=c05e">
-<link rel="stylesheet" href="assets/css/ueber.css?v=c05e">
+<link rel="stylesheet" href="assets/css/fonts.css?v=c05f">
+<link rel="stylesheet" href="assets/css/base.css?v=c05f">
+<link rel="stylesheet" href="assets/css/schluss.css?v=c05f">
+<link rel="stylesheet" href="assets/css/seiten.css?v=c05f">
+<link rel="stylesheet" href="assets/css/ueber.css?v=c05f">
 </head>
 <body>
 
@@ -162,13 +174,13 @@
        das gelieferte 16:9), damit beim Laden nichts springt. -->
   <div class="uhero__bild" aria-hidden="true">
     <picture>
-      <source srcset="assets/img/ueber-hero.webp?v=c05e" type="image/webp">
-      <img class="uhero__grau" src="assets/img/ueber-hero.jpg?v=c05e" alt=""
+      <source srcset="assets/img/ueber-hero.webp?v=c05f" type="image/webp">
+      <img class="uhero__grau" src="assets/img/ueber-hero.jpg?v=c05f" alt=""
            width="1672" height="940" fetchpriority="high" decoding="async">
     </picture>
     <picture>
-      <source srcset="assets/img/ueber-hero.webp?v=c05e" type="image/webp">
-      <img class="uhero__farbe" src="assets/img/ueber-hero.jpg?v=c05e" alt=""
+      <source srcset="assets/img/ueber-hero.webp?v=c05f" type="image/webp">
+      <img class="uhero__farbe" src="assets/img/ueber-hero.jpg?v=c05f" alt=""
            width="1672" height="940" fetchpriority="high" decoding="async"
            data-hero-farbe>
     </picture>
@@ -524,8 +536,8 @@
 
       <figure class="uhalt__bild" style="--d:0">
         <picture>
-          <source srcset="assets/img/fassade-vert.webp?v=c05e" type="image/webp">
-          <img src="assets/img/fassade-vert.jpg?v=c05e" alt="" width="1100" height="1650"
+          <source srcset="assets/img/fassade-vert.webp?v=c05f" type="image/webp">
+          <img src="assets/img/fassade-vert.jpg?v=c05f" alt="" width="1100" height="1650"
                loading="lazy" decoding="async">
         </picture>
       </figure>
@@ -767,7 +779,7 @@
      vorher in neun Fassungen da, die sich in Kleinigkeiten unterschieden —
      `#warum-immobilien` auf der Startseite gegen
      `variante-a.html#warum-immobilien` sonst, ein Cache-Anhaengsel
-     `?v=c05e` nur auf den drei Karriereseiten, `aria-current="page"` je
+     `?v=c05f` nur auf den drei Karriereseiten, `aria-current="page"` je
      nach Seite an anderer Stelle, und unter „Naechster Schritt" zwei
      verschiedene Wortlaute. Wer eine Zeile aenderte, musste neun Stellen
      treffen — und hat es nachweislich nicht immer getan.
@@ -946,7 +958,7 @@
      ein Werkzeug der internen Abstimmung zwischen zwei Startseitenentwuerfen
      und hat auf einer Unterseite keine Bedeutung. -->
 
-<script src="assets/js/site.js?v=c05e"></script>
+<script src="assets/js/site.js?v=c05f"></script>
 <!-- Muss NACH site.js laufen: die Datei haengt sich an die
      Schliessen-Schaltflaeche des Menues, die site.js bedient. Begruendung,
      warum es sie ueberhaupt gibt, steht in der Datei selbst. -->
@@ -959,6 +971,6 @@
      [data-uab] prueft und ohne Treffer sofort zurueckkehrt. Die Datei
      wurde deshalb NICHT angefasst.
      Reihenfolge ist gleichgueltig — die Datei haengt an nichts aus site.js. -->
-<script src="assets/js/ueber.js?v=c05e"></script>
+<script src="assets/js/ueber.js?v=c05f"></script>
 </body>
 </html>
