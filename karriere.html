@@ -20,12 +20,34 @@
      Zwischenspeicher, wenn der Besucher von dort kommt — vorgeladen wird
      trotzdem, weil man auch direkt hier landen kann.
 
-     OHNE ?v=c05d, und das ist Absicht. Die Adresse muss Zeichen fuer
+     OHNE ?v=c05e, und das ist Absicht. Die Adresse muss Zeichen fuer
      Zeichen mit der in fonts.css stehen (@font-face, src: url(...)),
      sonst gilt es dem Browser als zweite Datei: er laedt den Schnitt
      zweimal und die Vorladung ist wertlos. fonts.css gehoert allen
      Seiten und war fuer diesen Auftrag nicht anzufassen. Alle uebrigen
      Verweise dieser Seite tragen den Stempel. -->
+<!-- DAS ZEICHEN — 12.09.2026, Kundenwunsch: „und das Logo/ icon unser
+     Estera Schriftzug". Bis dahin gab es gar keins; Google zeigte im
+     Treffer einen generischen Buchstaben und der Browser-Tab blieb leer.
+
+     ZWEI DATEIEN UND WARUM. Beide tragen Navy #102949 und die Wortmarke in
+     Cormorant Garamond 500 — als PFADE, nicht als <text>: ein Zeichen laedt
+     keine Webschrift, ein <text> erschiene bei Google in einer beliebigen
+     Systemschrift.
+       estera-icon.svg  der volle Schriftzug ESTERA. Google zeigt das
+                        Zeichen mit 48 px und mehr; dort ist er lesbar.
+       favicon.svg      nur das E. Im Browser-Tab sind 16 px ueblich — der
+                        volle Schriftzug waere dort ein grauer Strich
+                        (nachgesehen, nicht vermutet).
+     Die Reihenfolge entscheidet: sizes="any" am ersten Eintrag laesst den
+     Browser das E nehmen, Google folgt dem groesseren apple-touch-icon.
+
+     KEIN .ico. Das Format braucht heute niemand mehr, und ein zweites
+     Zeichen, das jemand beim naechsten Logowechsel uebersieht, ist eine
+     Fehlerquelle mehr. -->
+<link rel="icon" href="assets/img/favicon.svg?v=c05e" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/estera-icon.svg?v=c05e">
+<meta name="theme-color" content="#102949">
 <link rel="preload" href="assets/fonts/CormorantGaramond-300-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Jost-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -38,7 +60,7 @@
      den Kopfbereich, solange die Videospur noch laedt.
      Die beiden Stellenbilder werden bewusst NICHT vorgeladen — sie stehen
      weit unterhalb des ersten Bildschirms. -->
-<link rel="preload" as="image" href="assets/video/kar-hero-poster.jpg?v=c05d" type="image/jpeg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/video/kar-hero-poster.jpg?v=c05e" type="image/jpeg" fetchpriority="high">
 
 <!-- REIHENFOLGE IST ABSICHT
      fonts.css und base.css tragen Token, Kopfleiste, Wortmarke, Menue und
@@ -55,10 +77,10 @@
      auf dieser Seite keine einzige wirksame Regel mehr. Sie bleiben
      unveraendert im Projekt und werden von den anderen Seiten weiter
      benutzt — hier sind nur die zwei <link> entfallen. -->
-<link rel="stylesheet" href="assets/css/fonts.css?v=c05d">
-<link rel="stylesheet" href="assets/css/base.css?v=c05d">
-<link rel="stylesheet" href="assets/css/schluss.css?v=c05d">
-<link rel="stylesheet" href="assets/css/karriere.css?v=c05d">
+<link rel="stylesheet" href="assets/css/fonts.css?v=c05e">
+<link rel="stylesheet" href="assets/css/base.css?v=c05e">
+<link rel="stylesheet" href="assets/css/schluss.css?v=c05e">
+<link rel="stylesheet" href="assets/css/karriere.css?v=c05e">
 </head>
 <body>
 
@@ -120,8 +142,8 @@
        <section class="abl" id="ablauf">. -->
   <nav class="kopfnav kopfnav--links" aria-label="Abschnitte dieser Seite">
     <ul>
-      <li><a href="variante-a.html?v=c05d#warum-immobilien">Warum Immobilien</a></li>
-      <li><a href="variante-a.html?v=c05d#leistungen">Warum Estera</a></li>
+      <li><a href="variante-a.html?v=c05e#warum-immobilien">Warum Immobilien</a></li>
+      <li><a href="variante-a.html?v=c05e#leistungen">Warum Estera</a></li>
     </ul>
   </nav>
 
@@ -132,9 +154,9 @@
 
   <nav class="kopfnav kopfnav--rechts" aria-label="Seiten">
     <ul>
-      <li><a href="variante-a.html?v=c05d#ablauf">Ablauf</a></li>
-      <li><a href="karriere.html?v=c05d" aria-current="page">Karriere</a></li>
-      <li class="kopfnav__cta"><a href="kontakt.html?v=c05d">Kontakt</a></li>
+      <li><a href="variante-a.html?v=c05e#ablauf">Ablauf</a></li>
+      <li><a href="karriere.html?v=c05e" aria-current="page">Karriere</a></li>
+      <li class="kopfnav__cta"><a href="kontakt.html?v=c05e">Kontakt</a></li>
     </ul>
   </nav>
 
@@ -188,11 +210,11 @@
   <div class="kar-kopf__grund" aria-hidden="true">
     <video class="kar-kopf__video"
            autoplay muted loop playsinline preload="auto"
-           poster="assets/video/kar-hero-poster.jpg?v=c05d"
+           poster="assets/video/kar-hero-poster.jpg?v=c05e"
            width="1920" height="1080"
            tabindex="-1" data-hero-video>
-      <source src="assets/video/kar-hero.webm?v=c05d" type="video/webm">
-      <source src="assets/video/kar-hero.mp4?v=c05d" type="video/mp4">
+      <source src="assets/video/kar-hero.webm?v=c05e" type="video/webm">
+      <source src="assets/video/kar-hero.mp4?v=c05e" type="video/mp4">
     </video>
   </div>
 
@@ -543,8 +565,8 @@
              genau fuer diesen Fall. Kein neuer Baustein. -->
         <figure class="kar-wer__bild" data-auf>
           <picture>
-            <source srcset="assets/img/karriere/kar-zusammenarbeit.webp?v=c05d" type="image/webp">
-            <img src="assets/img/karriere/kar-zusammenarbeit.png?v=c05d"
+            <source srcset="assets/img/karriere/kar-zusammenarbeit.webp?v=c05e" type="image/webp">
+            <img src="assets/img/karriere/kar-zusammenarbeit.png?v=c05e"
                  width="1254" height="1254" loading="lazy" decoding="async"
                  alt="Mehrere Personen am runden Tisch beugen sich über einen Grundriss und Notizbücher">
           </picture>
@@ -955,8 +977,8 @@
            vorhandenen Motiven ist das das einzige, das BERATUNG zeigt —
            kar-zusammenarbeit (Haende ueber Plaenen) zeigt Zusammenarbeit
            und stuetzt deshalb „Mehr als ein Arbeitsplatz".
-           Vorher: <source srcset="assets/img/karriere/stelle-berater.webp?v=c05d" type="image/webp">
-                   <img class="kar-karte__bild" src="assets/img/karriere/stelle-berater.jpg?v=c05d" width="1024" height="1280" loading="lazy" decoding="async" alt="Aufgeräumter Schreibtisch mit Laptop und Ledermappe vor einem Bürofenster">
+           Vorher: <source srcset="assets/img/karriere/stelle-berater.webp?v=c05e" type="image/webp">
+                   <img class="kar-karte__bild" src="assets/img/karriere/stelle-berater.jpg?v=c05e" width="1024" height="1280" loading="lazy" decoding="async" alt="Aufgeräumter Schreibtisch mit Laptop und Ledermappe vor einem Bürofenster">
            Die Klasse --klick macht die ganze Karte klickbar (Briefing
            Abschnitt 19; Bauart in karriere.css und karriere.js). -->
       <li class="kar-karte kar-karte--klick" style="--i:0">
@@ -970,9 +992,9 @@
              die Dateien bleiben im Projekt liegen, falls zurueckgetauscht
              werden soll. -->
         <picture>
-          <source srcset="assets/img/karriere/kar-berater-headset.webp?v=c05d" type="image/webp">
+          <source srcset="assets/img/karriere/kar-berater-headset.webp?v=c05e" type="image/webp">
           <img class="kar-karte__bild"
-               src="assets/img/karriere/kar-berater-headset.jpg?v=c05d"
+               src="assets/img/karriere/kar-berater-headset.jpg?v=c05e"
                width="1536" height="1024" loading="lazy" decoding="async"
                alt="Immobilienberater Mitte dreißig mit Headset am Schreibtisch vor einem aufgeklappten Laptop, lächelnd im Gespräch">
         </picture>
@@ -1094,8 +1116,8 @@
                          aria-label="Mehr erfahren über die Stelle Immobilienberater / Sales-Manager"
                  data-karte-ziel markiert den Verweis, den karriere.js bei
                  einem Klick auf die Kartenflaeche ausloest (Briefing 19). -->
-            <a class="kar-knopf kar-knopf--voll" href="kontakt.html?v=c05d" aria-label="Als Immobilienberater / Sales Manager bewerben">Jetzt bewerben</a>
-            <a class="kar-knopf kar-knopf--linie" href="karriere-immobilienberater.html?v=c05d" aria-label="Mehr erfahren über die Stelle Immobilienberater / Sales Manager" data-karte-ziel>Mehr erfahren</a>
+            <a class="kar-knopf kar-knopf--voll" href="kontakt.html?v=c05e" aria-label="Als Immobilienberater / Sales Manager bewerben">Jetzt bewerben</a>
+            <a class="kar-knopf kar-knopf--linie" href="karriere-immobilienberater.html?v=c05e" aria-label="Mehr erfahren über die Stelle Immobilienberater / Sales Manager" data-karte-ziel>Mehr erfahren</a>
           </p>
         </div>
       </li>
@@ -1107,9 +1129,9 @@
            Rechnung in karriere.css bei .kar-karte__bild--oben. -->
       <li class="kar-karte kar-karte--klick" style="--i:1">
         <picture>
-          <source srcset="assets/img/karriere/stelle-backoffice.webp?v=c05d" type="image/webp">
+          <source srcset="assets/img/karriere/stelle-backoffice.webp?v=c05e" type="image/webp">
           <img class="kar-karte__bild kar-karte__bild--oben"
-               src="assets/img/karriere/stelle-backoffice.jpg?v=c05d"
+               src="assets/img/karriere/stelle-backoffice.jpg?v=c05e"
                width="1206" height="1506" loading="lazy" decoding="async"
                alt="Mitarbeiterin aus dem Back Office am Laptop an ihrem Arbeitsplatz">
         </picture>
@@ -1144,8 +1166,8 @@
                    <p class="kar-karte__bereiche">Du hältst Unterlagen, Fristen und Beteiligte zusammen und sorgst dafür, dass jeder Kauf von der Reservierung bis nach dem Notartermin sauber begleitet wird.</p>
                Wortgleich weiterhin auf karriere-backoffice.html. -->
           <p class="kar-karte__knoepfe">
-            <a class="kar-knopf kar-knopf--voll" href="kontakt.html?v=c05d" aria-label="Als Backoffice Manager bewerben">Jetzt bewerben</a>
-            <a class="kar-knopf kar-knopf--linie" href="karriere-backoffice.html?v=c05d" aria-label="Mehr erfahren über die Stelle Backoffice Manager" data-karte-ziel>Mehr erfahren</a>
+            <a class="kar-knopf kar-knopf--voll" href="kontakt.html?v=c05e" aria-label="Als Backoffice Manager bewerben">Jetzt bewerben</a>
+            <a class="kar-knopf kar-knopf--linie" href="karriere-backoffice.html?v=c05e" aria-label="Mehr erfahren über die Stelle Backoffice Manager" data-karte-ziel>Mehr erfahren</a>
           </p>
         </div>
       </li>
@@ -1391,7 +1413,7 @@
      vorher in neun Fassungen da, die sich in Kleinigkeiten unterschieden —
      `#warum-immobilien` auf der Startseite gegen
      `variante-a.html#warum-immobilien` sonst, ein Cache-Anhaengsel
-     `?v=c05d` nur auf den drei Karriereseiten, `aria-current="page"` je
+     `?v=c05e` nur auf den drei Karriereseiten, `aria-current="page"` je
      nach Seite an anderer Stelle, und unter „Naechster Schritt" zwei
      verschiedene Wortlaute. Wer eine Zeile aenderte, musste neun Stellen
      treffen — und hat es nachweislich nicht immer getan.
@@ -1570,7 +1592,7 @@
      ein Werkzeug der internen Abstimmung zwischen zwei Startseitenentwuerfen
      und hat auf einer Unterseite keine Bedeutung. -->
 
-<script src="assets/js/site.js?v=c05d"></script>
+<script src="assets/js/site.js?v=c05e"></script>
 <!-- faq.js ist seit dem Neubau nicht mehr eingebunden: die Seite hat
      keinen Aufklapper mehr. Die Datei selbst ist unveraendert und wird von
      den anderen Seiten weiter benutzt.
@@ -1582,11 +1604,11 @@
      Einblendregeln haengen an [data-js='an'], und dieses Merkmal setzt
      erst diese Datei; die Knoepfe in den Karten sind gewoehnliche
      Verweise und gehen auch ohne Skript. -->
-<script src="assets/js/karriere.js?v=c05d"></script>
+<script src="assets/js/karriere.js?v=c05e"></script>
 <!-- Derselbe Aufklapper wie auf der Startseite, unveraendert nachgenutzt —
      04.09.2026. Er sucht `[data-faq]` und findet die Faecher ueber
      `aria-controls`; beides traegt die Fragenliste dieser Seite. Kein
      zweites Skript, keine Abwandlung. -->
-<script src="assets/js/faq.js?v=c05d"></script>
+<script src="assets/js/faq.js?v=c05e"></script>
 </body>
 </html>

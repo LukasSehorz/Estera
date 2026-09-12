@@ -13,6 +13,28 @@
 <!-- Dieselben zwei Schriftschnitte wie die Startseite. Sie liegen bereits im
      Zwischenspeicher, wenn der Besucher von dort kommt — vorgeladen wird
      trotzdem, weil man auch direkt hier landen kann. -->
+<!-- DAS ZEICHEN — 12.09.2026, Kundenwunsch: „und das Logo/ icon unser
+     Estera Schriftzug". Bis dahin gab es gar keins; Google zeigte im
+     Treffer einen generischen Buchstaben und der Browser-Tab blieb leer.
+
+     ZWEI DATEIEN UND WARUM. Beide tragen Navy #102949 und die Wortmarke in
+     Cormorant Garamond 500 — als PFADE, nicht als <text>: ein Zeichen laedt
+     keine Webschrift, ein <text> erschiene bei Google in einer beliebigen
+     Systemschrift.
+       estera-icon.svg  der volle Schriftzug ESTERA. Google zeigt das
+                        Zeichen mit 48 px und mehr; dort ist er lesbar.
+       favicon.svg      nur das E. Im Browser-Tab sind 16 px ueblich — der
+                        volle Schriftzug waere dort ein grauer Strich
+                        (nachgesehen, nicht vermutet).
+     Die Reihenfolge entscheidet: sizes="any" am ersten Eintrag laesst den
+     Browser das E nehmen, Google folgt dem groesseren apple-touch-icon.
+
+     KEIN .ico. Das Format braucht heute niemand mehr, und ein zweites
+     Zeichen, das jemand beim naechsten Logowechsel uebersieht, ist eine
+     Fehlerquelle mehr. -->
+<link rel="icon" href="assets/img/favicon.svg?v=c05e" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/estera-icon.svg?v=c05e">
+<meta name="theme-color" content="#102949">
 <link rel="preload" href="assets/fonts/CormorantGaramond-300-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Jost-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -29,11 +51,11 @@
      seiten.css ueberschneiden, gewinnt bewusst die spaetere Datei —
      Begruendung steht dort.
      Keine bestehende CSS-Datei wurde fuer diese Seite veraendert. -->
-<link rel="stylesheet" href="assets/css/fonts.css?v=c05d">
-<link rel="stylesheet" href="assets/css/base.css?v=c05d">
-<link rel="stylesheet" href="assets/css/schluss.css?v=c05d">
-<link rel="stylesheet" href="assets/css/seiten.css?v=c05d">
-<link rel="stylesheet" href="assets/css/ueber.css?v=c05d">
+<link rel="stylesheet" href="assets/css/fonts.css?v=c05e">
+<link rel="stylesheet" href="assets/css/base.css?v=c05e">
+<link rel="stylesheet" href="assets/css/schluss.css?v=c05e">
+<link rel="stylesheet" href="assets/css/seiten.css?v=c05e">
+<link rel="stylesheet" href="assets/css/ueber.css?v=c05e">
 </head>
 <body>
 
@@ -140,13 +162,13 @@
        das gelieferte 16:9), damit beim Laden nichts springt. -->
   <div class="uhero__bild" aria-hidden="true">
     <picture>
-      <source srcset="assets/img/ueber-hero.webp?v=c05d" type="image/webp">
-      <img class="uhero__grau" src="assets/img/ueber-hero.jpg?v=c05d" alt=""
+      <source srcset="assets/img/ueber-hero.webp?v=c05e" type="image/webp">
+      <img class="uhero__grau" src="assets/img/ueber-hero.jpg?v=c05e" alt=""
            width="1672" height="940" fetchpriority="high" decoding="async">
     </picture>
     <picture>
-      <source srcset="assets/img/ueber-hero.webp?v=c05d" type="image/webp">
-      <img class="uhero__farbe" src="assets/img/ueber-hero.jpg?v=c05d" alt=""
+      <source srcset="assets/img/ueber-hero.webp?v=c05e" type="image/webp">
+      <img class="uhero__farbe" src="assets/img/ueber-hero.jpg?v=c05e" alt=""
            width="1672" height="940" fetchpriority="high" decoding="async"
            data-hero-farbe>
     </picture>
@@ -502,8 +524,8 @@
 
       <figure class="uhalt__bild" style="--d:0">
         <picture>
-          <source srcset="assets/img/fassade-vert.webp?v=c05d" type="image/webp">
-          <img src="assets/img/fassade-vert.jpg?v=c05d" alt="" width="1100" height="1650"
+          <source srcset="assets/img/fassade-vert.webp?v=c05e" type="image/webp">
+          <img src="assets/img/fassade-vert.jpg?v=c05e" alt="" width="1100" height="1650"
                loading="lazy" decoding="async">
         </picture>
       </figure>
@@ -745,7 +767,7 @@
      vorher in neun Fassungen da, die sich in Kleinigkeiten unterschieden —
      `#warum-immobilien` auf der Startseite gegen
      `variante-a.html#warum-immobilien` sonst, ein Cache-Anhaengsel
-     `?v=c05d` nur auf den drei Karriereseiten, `aria-current="page"` je
+     `?v=c05e` nur auf den drei Karriereseiten, `aria-current="page"` je
      nach Seite an anderer Stelle, und unter „Naechster Schritt" zwei
      verschiedene Wortlaute. Wer eine Zeile aenderte, musste neun Stellen
      treffen — und hat es nachweislich nicht immer getan.
@@ -924,7 +946,7 @@
      ein Werkzeug der internen Abstimmung zwischen zwei Startseitenentwuerfen
      und hat auf einer Unterseite keine Bedeutung. -->
 
-<script src="assets/js/site.js?v=c05d"></script>
+<script src="assets/js/site.js?v=c05e"></script>
 <!-- Muss NACH site.js laufen: die Datei haengt sich an die
      Schliessen-Schaltflaeche des Menues, die site.js bedient. Begruendung,
      warum es sie ueberhaupt gibt, steht in der Datei selbst. -->
@@ -937,6 +959,6 @@
      [data-uab] prueft und ohne Treffer sofort zurueckkehrt. Die Datei
      wurde deshalb NICHT angefasst.
      Reihenfolge ist gleichgueltig — die Datei haengt an nichts aus site.js. -->
-<script src="assets/js/ueber.js?v=c05d"></script>
+<script src="assets/js/ueber.js?v=c05e"></script>
 </body>
 </html>

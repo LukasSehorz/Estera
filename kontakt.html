@@ -19,14 +19,36 @@
      VON ESTERA BESTAETIGEN LASSEN. -->
 <meta name="description" content="Wähl dein Anliegen und schreib Estera: Kapitalanlage-Immobilie, Bewerbung als Immobilienberater / Sales Manager (m/w/d) oder als Backoffice Manager (m/w/d). Dazu die Kontaktwege.">
 
+<!-- DAS ZEICHEN — 12.09.2026, Kundenwunsch: „und das Logo/ icon unser
+     Estera Schriftzug". Bis dahin gab es gar keins; Google zeigte im
+     Treffer einen generischen Buchstaben und der Browser-Tab blieb leer.
+
+     ZWEI DATEIEN UND WARUM. Beide tragen Navy #102949 und die Wortmarke in
+     Cormorant Garamond 500 — als PFADE, nicht als <text>: ein Zeichen laedt
+     keine Webschrift, ein <text> erschiene bei Google in einer beliebigen
+     Systemschrift.
+       estera-icon.svg  der volle Schriftzug ESTERA. Google zeigt das
+                        Zeichen mit 48 px und mehr; dort ist er lesbar.
+       favicon.svg      nur das E. Im Browser-Tab sind 16 px ueblich — der
+                        volle Schriftzug waere dort ein grauer Strich
+                        (nachgesehen, nicht vermutet).
+     Die Reihenfolge entscheidet: sizes="any" am ersten Eintrag laesst den
+     Browser das E nehmen, Google folgt dem groesseren apple-touch-icon.
+
+     KEIN .ico. Das Format braucht heute niemand mehr, und ein zweites
+     Zeichen, das jemand beim naechsten Logowechsel uebersieht, ist eine
+     Fehlerquelle mehr. -->
+<link rel="icon" href="assets/img/favicon.svg?v=c05e" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/estera-icon.svg?v=c05e">
+<meta name="theme-color" content="#102949">
 <link rel="preload" href="assets/fonts/CormorantGaramond-300-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Jost-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-<link rel="stylesheet" href="assets/css/fonts.css?v=c05d">
-<link rel="stylesheet" href="assets/css/base.css?v=c05d">
-<link rel="stylesheet" href="assets/css/schluss.css?v=c05d">
-<link rel="stylesheet" href="assets/css/seiten.css?v=c05d">
-<link rel="stylesheet" href="assets/css/kontakt.css?v=c05d">
+<link rel="stylesheet" href="assets/css/fonts.css?v=c05e">
+<link rel="stylesheet" href="assets/css/base.css?v=c05e">
+<link rel="stylesheet" href="assets/css/schluss.css?v=c05e">
+<link rel="stylesheet" href="assets/css/seiten.css?v=c05e">
+<link rel="stylesheet" href="assets/css/kontakt.css?v=c05e">
 
 <!-- OHNE JAVASCRIPT BLEIBT NICHTS UNSICHTBAR HAENGEN
      base.css setzt [data-anim] und seiten.css setzt [data-reveal] auf
@@ -269,11 +291,11 @@
   <div class="kf-film" aria-hidden="true">
     <video class="kf-film__video"
            autoplay muted loop playsinline preload="auto"
-           poster="assets/video/kar-hero-poster.jpg?v=c05d"
+           poster="assets/video/kar-hero-poster.jpg?v=c05e"
            width="1920" height="1080"
            tabindex="-1">
-      <source src="assets/video/kar-hero.webm?v=c05d" type="video/webm">
-      <source src="assets/video/kar-hero.mp4?v=c05d" type="video/mp4">
+      <source src="assets/video/kar-hero.webm?v=c05e" type="video/webm">
+      <source src="assets/video/kar-hero.mp4?v=c05e" type="video/mp4">
     </video>
     <span class="kf-film__schleier"></span>
   </div>
@@ -1759,7 +1781,7 @@
      vorher in neun Fassungen da, die sich in Kleinigkeiten unterschieden —
      `#warum-immobilien` auf der Startseite gegen
      `variante-a.html#warum-immobilien` sonst, ein Cache-Anhaengsel
-     `?v=c05d` nur auf den drei Karriereseiten, `aria-current="page"` je
+     `?v=c05e` nur auf den drei Karriereseiten, `aria-current="page"` je
      nach Seite an anderer Stelle, und unter „Naechster Schritt" zwei
      verschiedene Wortlaute. Wer eine Zeile aenderte, musste neun Stellen
      treffen — und hat es nachweislich nicht immer getan.
@@ -1934,7 +1956,7 @@
      trotzdem unter dem Vorhang (89 gegen 90). -->
 <div class="menu-schleier" data-menu-schleier></div>
 
-<script src="assets/js/site.js?v=c05d"></script>
+<script src="assets/js/site.js?v=c05e"></script>
 <!-- kontakt-funnel.js tut zweierlei: es schiebt die drei Strecken beim Laden
      in ein <dialog> und oeffnet darin die, deren Kasten gedrueckt wurde; und
      es faltet die Schritte INNERHALB einer Strecke zur Folge zusammen.
@@ -1953,6 +1975,6 @@
      nur noch `novalidate` gesetzt — also die Pruefung des Browsers
      abgeschaltet, ohne selbst zu pruefen. Die Datei liegt unveraendert unter
      assets/js/kontakt.js und wird von keiner Seite mehr geladen. -->
-<script src="assets/js/kontakt-funnel.js?v=c05d"></script>
+<script src="assets/js/kontakt-funnel.js?v=c05e"></script>
 </body>
 </html>

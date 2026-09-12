@@ -30,16 +30,38 @@
      vor dem Livegang zu entfernen. Entfernt, ebenso der gleichlautende
      X-Robots-Tag in _headers. -->
 
-<!-- Dieselben zwei Schriftschnitte wie alle Seiten. OHNE ?v=c05d, und das ist
+<!-- Dieselben zwei Schriftschnitte wie alle Seiten. OHNE ?v=c05e, und das ist
      Absicht: die Adresse muss Zeichen fuer Zeichen mit der in fonts.css
      stehen, sonst laedt der Browser den Schnitt zweimal und die Vorladung
      ist wertlos. Alle uebrigen Verweise dieser Seite tragen den Stempel. -->
+<!-- DAS ZEICHEN — 12.09.2026, Kundenwunsch: „und das Logo/ icon unser
+     Estera Schriftzug". Bis dahin gab es gar keins; Google zeigte im
+     Treffer einen generischen Buchstaben und der Browser-Tab blieb leer.
+
+     ZWEI DATEIEN UND WARUM. Beide tragen Navy #102949 und die Wortmarke in
+     Cormorant Garamond 500 — als PFADE, nicht als <text>: ein Zeichen laedt
+     keine Webschrift, ein <text> erschiene bei Google in einer beliebigen
+     Systemschrift.
+       estera-icon.svg  der volle Schriftzug ESTERA. Google zeigt das
+                        Zeichen mit 48 px und mehr; dort ist er lesbar.
+       favicon.svg      nur das E. Im Browser-Tab sind 16 px ueblich — der
+                        volle Schriftzug waere dort ein grauer Strich
+                        (nachgesehen, nicht vermutet).
+     Die Reihenfolge entscheidet: sizes="any" am ersten Eintrag laesst den
+     Browser das E nehmen, Google folgt dem groesseren apple-touch-icon.
+
+     KEIN .ico. Das Format braucht heute niemand mehr, und ein zweites
+     Zeichen, das jemand beim naechsten Logowechsel uebersieht, ist eine
+     Fehlerquelle mehr. -->
+<link rel="icon" href="assets/img/favicon.svg?v=c05e" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/estera-icon.svg?v=c05e">
+<meta name="theme-color" content="#102949">
 <link rel="preload" href="assets/fonts/CormorantGaramond-300-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Jost-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <!-- Das Standbild des Kopfvideos traegt den ersten Bildschirm, solange das
      Video laedt — und bei prefers-reduced-motion: reduce dauerhaft. -->
-<link rel="preload" as="image" href="assets/video/kar-hero-poster.jpg?v=c05d" fetchpriority="high">
+<link rel="preload" as="image" href="assets/video/kar-hero-poster.jpg?v=c05e" fetchpriority="high">
 
 <!-- REIHENFOLGE IST ABSICHT
      fonts.css und base.css tragen Token, Kopfleiste, Wortmarke, Menue und
@@ -52,11 +74,11 @@
      karriere.css wird hier bewusst NICHT geladen: sie gehoert der
      Uebersichtsseite und traegt einen anderen Seitenkopf.
      Keine bestehende CSS-Datei wurde fuer diese Seite veraendert. -->
-<link rel="stylesheet" href="assets/css/fonts.css?v=c05d">
-<link rel="stylesheet" href="assets/css/base.css?v=c05d">
-<link rel="stylesheet" href="assets/css/schluss.css?v=c05d">
-<link rel="stylesheet" href="assets/css/seiten.css?v=c05d">
-<link rel="stylesheet" href="assets/css/stelle.css?v=c05d">
+<link rel="stylesheet" href="assets/css/fonts.css?v=c05e">
+<link rel="stylesheet" href="assets/css/base.css?v=c05e">
+<link rel="stylesheet" href="assets/css/schluss.css?v=c05e">
+<link rel="stylesheet" href="assets/css/seiten.css?v=c05e">
+<link rel="stylesheet" href="assets/css/stelle.css?v=c05e">
 <!-- DIE EINZIGE EIGENE ZEILE CSS DIESER SEITE, und sie ist eine Reparatur,
      keine Gestaltung: das Bild im Abschlussabschnitt wurde an KEINER
      Breite gemalt, obwohl es geladen war und sein Feld die richtigen
@@ -67,7 +89,7 @@
      keine neue Gestaltung ist, stehen in der Datei.
      Sie gehoert dieser Seite allein — stelle.css bleibt unberuehrt, weil
      sich beide Stellenseiten sie teilen. -->
-<link rel="stylesheet" href="assets/css/wording-berater.css?v=c05d">
+<link rel="stylesheet" href="assets/css/wording-berater.css?v=c05e">
 </head>
 <body class="stl">
 
@@ -112,21 +134,21 @@
            nur die Beschriftung sagt jetzt, was den Leser dort erwartet.
            Vorher: „Vorteile" (#warum-immobilien) und „Leistungen"
            (#leistungen). Dieselben zwei Namen stehen im Klappmenue. -->
-      <li><a href="variante-a.html?v=c05d#warum-immobilien">Warum Immobilien</a></li>
-      <li><a href="variante-a.html?v=c05d#leistungen">Warum Estera</a></li>
+      <li><a href="variante-a.html?v=c05e#warum-immobilien">Warum Immobilien</a></li>
+      <li><a href="variante-a.html?v=c05e#leistungen">Warum Estera</a></li>
     </ul>
   </nav>
 
-  <a class="wordmark" href="./variante-a.html?v=c05d" aria-label="Estera — Startseite">
+  <a class="wordmark" href="./variante-a.html?v=c05e" aria-label="Estera — Startseite">
     <span class="wordmark__name">ESTERA</span>
     <span class="wordmark__sub">Immobilien</span>
   </a>
 
   <nav class="kopfnav kopfnav--rechts" aria-label="Seiten">
     <ul>
-      <li><a href="variante-a.html?v=c05d#ablauf">Ablauf</a></li>
-      <li><a href="karriere.html?v=c05d" aria-current="page">Karriere</a></li>
-      <li class="kopfnav__cta"><a href="kontakt.html?v=c05d">Kontakt</a></li>
+      <li><a href="variante-a.html?v=c05e#ablauf">Ablauf</a></li>
+      <li><a href="karriere.html?v=c05e" aria-current="page">Karriere</a></li>
+      <li class="kopfnav__cta"><a href="kontakt.html?v=c05e">Kontakt</a></li>
     </ul>
   </nav>
 
@@ -163,15 +185,15 @@
          dauerhaft — dort wird das Video per CSS ausgeblendet und von
          stelle.js zusaetzlich angehalten. Ohne Javascript bleibt es beim
          reinen CSS-Weg: das Bild steht, das Video ist unsichtbar. -->
-    <img class="stl-hero__still" src="assets/video/kar-hero-poster.jpg?v=c05d"
+    <img class="stl-hero__still" src="assets/video/kar-hero-poster.jpg?v=c05e"
          alt="" width="1920" height="1080" fetchpriority="high" decoding="async">
     <video class="stl-hero__video"
            autoplay muted loop playsinline preload="auto"
-           poster="assets/video/kar-hero-poster.jpg?v=c05d"
+           poster="assets/video/kar-hero-poster.jpg?v=c05e"
            width="1920" height="1080"
            aria-hidden="true" tabindex="-1">
-      <source src="assets/video/kar-hero.webm?v=c05d" type="video/webm">
-      <source src="assets/video/kar-hero.mp4?v=c05d" type="video/mp4">
+      <source src="assets/video/kar-hero.webm?v=c05e" type="video/webm">
+      <source src="assets/video/kar-hero.mp4?v=c05e" type="video/mp4">
     </video>
   </div>
   <div class="stl-hero__schleier" aria-hidden="true"></div>
@@ -245,7 +267,7 @@
          Die 59 % in der letzten Telefonzeile sind die Reserve: es passt
          noch eine knappe halbe Zeile dazu, bevor eine vierte entsteht. -->
     <p class="stl-hero__unter">Du führst Interessenten vom ersten Gespräch bis zur fundierten Kaufentscheidung. Wir geben dir ausgewählte Kapitalanlageimmobilien, verständliche Unterlagen, klare Abläufe und ein Team, das Finanzierung und Abwicklung mit dir zusammenführt.</p>
-    <a class="btn stl-hero__btn" href="kontakt.html?v=c05d">Als Immobilienberater bewerben</a>
+    <a class="btn stl-hero__btn" href="kontakt.html?v=c05e">Als Immobilienberater bewerben</a>
   </div>
 
   <!-- AUS V01 NICHT UEBERNOMMEN, WEIL DER KOPFBEREICH DAFUER KEINEN PLATZ
@@ -503,34 +525,34 @@
 <section class="stl-band stl-band--a" aria-hidden="true">
   <div class="stl-band__spur">
     <div class="stl-band__satz">
-      <picture><source srcset="assets/img/karriere/band/band-a-1.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-1.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="1536"></picture><!-- Altbaufassade -->
-      <picture><source srcset="assets/img/karriere/band/band-a-2.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-2.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Neubau mit Olivenbaum -->
-      <picture><source srcset="assets/img/karriere/band/band-a-4.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-4.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="935" height="1402"></picture><!-- Treppenhaus mit Gelaender -->
-      <picture><source srcset="assets/img/karriere/band/band-a-5.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-5.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- leerer Parkettraum am Fenster -->
-      <picture><source srcset="assets/img/karriere/band/band-a-8.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-a-8.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Stadtdaecher -->
-      <picture><source srcset="assets/img/karriere/band/band-a-3.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-3.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Schluessel auf Ledermappe -->
-      <picture><source srcset="assets/img/karriere/band/band-a-7.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-a-7.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- leerer Besprechungsraum -->
-      <picture><source srcset="assets/img/karriere/band/band-a-6.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-6.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Grundriss mit Fueller und Espresso -->
+      <picture><source srcset="assets/img/karriere/band/band-a-1.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-1.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="1536"></picture><!-- Altbaufassade -->
+      <picture><source srcset="assets/img/karriere/band/band-a-2.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-2.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Neubau mit Olivenbaum -->
+      <picture><source srcset="assets/img/karriere/band/band-a-4.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-4.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="935" height="1402"></picture><!-- Treppenhaus mit Gelaender -->
+      <picture><source srcset="assets/img/karriere/band/band-a-5.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-5.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- leerer Parkettraum am Fenster -->
+      <picture><source srcset="assets/img/karriere/band/band-a-8.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-a-8.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Stadtdaecher -->
+      <picture><source srcset="assets/img/karriere/band/band-a-3.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-3.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Schluessel auf Ledermappe -->
+      <picture><source srcset="assets/img/karriere/band/band-a-7.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-a-7.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- leerer Besprechungsraum -->
+      <picture><source srcset="assets/img/karriere/band/band-a-6.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-6.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Grundriss mit Fueller und Espresso -->
     </div>
     <div class="stl-band__satz">
-      <picture><source srcset="assets/img/karriere/band/band-a-1.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-1.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="1536"></picture><!-- Altbaufassade -->
-      <picture><source srcset="assets/img/karriere/band/band-a-2.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-2.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Neubau mit Olivenbaum -->
-      <picture><source srcset="assets/img/karriere/band/band-a-4.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-4.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="935" height="1402"></picture><!-- Treppenhaus mit Gelaender -->
-      <picture><source srcset="assets/img/karriere/band/band-a-5.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-5.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- leerer Parkettraum am Fenster -->
-      <picture><source srcset="assets/img/karriere/band/band-a-8.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-a-8.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Stadtdaecher -->
-      <picture><source srcset="assets/img/karriere/band/band-a-3.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-3.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Schluessel auf Ledermappe -->
-      <picture><source srcset="assets/img/karriere/band/band-a-7.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-a-7.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- leerer Besprechungsraum -->
-      <picture><source srcset="assets/img/karriere/band/band-a-6.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-6.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Grundriss mit Fueller und Espresso -->
+      <picture><source srcset="assets/img/karriere/band/band-a-1.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-1.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="1536"></picture><!-- Altbaufassade -->
+      <picture><source srcset="assets/img/karriere/band/band-a-2.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-2.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Neubau mit Olivenbaum -->
+      <picture><source srcset="assets/img/karriere/band/band-a-4.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-4.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="935" height="1402"></picture><!-- Treppenhaus mit Gelaender -->
+      <picture><source srcset="assets/img/karriere/band/band-a-5.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-5.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- leerer Parkettraum am Fenster -->
+      <picture><source srcset="assets/img/karriere/band/band-a-8.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-a-8.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Stadtdaecher -->
+      <picture><source srcset="assets/img/karriere/band/band-a-3.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-3.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Schluessel auf Ledermappe -->
+      <picture><source srcset="assets/img/karriere/band/band-a-7.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-a-7.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- leerer Besprechungsraum -->
+      <picture><source srcset="assets/img/karriere/band/band-a-6.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-6.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Grundriss mit Fueller und Espresso -->
     </div>
     <div class="stl-band__satz">
-      <picture><source srcset="assets/img/karriere/band/band-a-1.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-1.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="1536"></picture><!-- Altbaufassade -->
-      <picture><source srcset="assets/img/karriere/band/band-a-2.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-2.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Neubau mit Olivenbaum -->
-      <picture><source srcset="assets/img/karriere/band/band-a-4.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-4.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="935" height="1402"></picture><!-- Treppenhaus mit Gelaender -->
-      <picture><source srcset="assets/img/karriere/band/band-a-5.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-5.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- leerer Parkettraum am Fenster -->
-      <picture><source srcset="assets/img/karriere/band/band-a-8.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-a-8.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Stadtdaecher -->
-      <picture><source srcset="assets/img/karriere/band/band-a-3.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-3.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Schluessel auf Ledermappe -->
-      <picture><source srcset="assets/img/karriere/band/band-a-7.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-a-7.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- leerer Besprechungsraum -->
-      <picture><source srcset="assets/img/karriere/band/band-a-6.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-6.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Grundriss mit Fueller und Espresso -->
+      <picture><source srcset="assets/img/karriere/band/band-a-1.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-1.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="1536"></picture><!-- Altbaufassade -->
+      <picture><source srcset="assets/img/karriere/band/band-a-2.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-2.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Neubau mit Olivenbaum -->
+      <picture><source srcset="assets/img/karriere/band/band-a-4.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-4.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="935" height="1402"></picture><!-- Treppenhaus mit Gelaender -->
+      <picture><source srcset="assets/img/karriere/band/band-a-5.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-5.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- leerer Parkettraum am Fenster -->
+      <picture><source srcset="assets/img/karriere/band/band-a-8.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-a-8.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Stadtdaecher -->
+      <picture><source srcset="assets/img/karriere/band/band-a-3.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-3.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Schluessel auf Ledermappe -->
+      <picture><source srcset="assets/img/karriere/band/band-a-7.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-a-7.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- leerer Besprechungsraum -->
+      <picture><source srcset="assets/img/karriere/band/band-a-6.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--hoch" src="assets/img/karriere/band/band-a-6.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="683" height="1024"></picture><!-- Grundriss mit Fueller und Espresso -->
     </div>
   </div>
 </section>
@@ -658,14 +680,14 @@
         <figure class="stl-aus__bild stl-aus__bild--reden">
           <span class="stl-aus__lage stl-aus__lage--hinten">
             <picture>
-              <source srcset="assets/img/stelle/teil/reden-hinten.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/reden-hinten.png?v=c05d" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/reden-hinten.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/reden-hinten.png?v=c05e" alt="" width="1536" height="1024" loading="lazy" decoding="async">
             </picture>
           </span>
           <span class="stl-aus__lage stl-aus__lage--vorn">
             <picture>
-              <source srcset="assets/img/stelle/teil/reden-vorn.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/reden-vorn.png?v=c05d" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/reden-vorn.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/reden-vorn.png?v=c05e" alt="" width="1536" height="1024" loading="lazy" decoding="async">
             </picture>
           </span>
         </figure>
@@ -701,14 +723,14 @@
         <figure class="stl-aus__bild stl-aus__bild--waage">
           <span class="stl-aus__lage stl-aus__lage--balken">
             <picture>
-              <source srcset="assets/img/stelle/teil/waage-balken.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/waage-balken.png?v=c05d" alt="" width="1374" height="1145" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/waage-balken.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/waage-balken.png?v=c05e" alt="" width="1374" height="1145" loading="lazy" decoding="async">
             </picture>
           </span>
           <span class="stl-aus__lage stl-aus__lage--stand">
             <picture>
-              <source srcset="assets/img/stelle/teil/waage-stand.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/waage-stand.png?v=c05d" alt="" width="1374" height="1145" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/waage-stand.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/waage-stand.png?v=c05e" alt="" width="1374" height="1145" loading="lazy" decoding="async">
             </picture>
           </span>
         </figure>
@@ -742,14 +764,14 @@
         <figure class="stl-aus__bild stl-aus__bild--buch">
           <span class="stl-aus__lage stl-aus__lage--buch">
             <picture>
-              <source srcset="assets/img/stelle/teil/buch-grund.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/buch-grund.png?v=c05d" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/buch-grund.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/buch-grund.png?v=c05e" alt="" width="1536" height="1024" loading="lazy" decoding="async">
             </picture>
           </span>
           <span class="stl-aus__lage stl-aus__lage--hut">
             <picture>
-              <source srcset="assets/img/stelle/teil/buch-hut.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/buch-hut.png?v=c05d" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/buch-hut.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/buch-hut.png?v=c05e" alt="" width="1536" height="1024" loading="lazy" decoding="async">
             </picture>
           </span>
           <!-- DIE BLAETTERNDE SEITE — aufgelegt, nicht geschnitten (Weg b).
@@ -780,14 +802,14 @@
         <figure class="stl-aus__bild stl-aus__bild--blatt">
           <span class="stl-aus__lage stl-aus__lage--grund">
             <picture>
-              <source srcset="assets/img/stelle/teil/blatt-grund.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/blatt-grund.png?v=c05d" alt="" width="1312" height="1199" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/blatt-grund.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/blatt-grund.png?v=c05e" alt="" width="1312" height="1199" loading="lazy" decoding="async">
             </picture>
           </span>
           <span class="stl-aus__lage stl-aus__lage--haken">
             <picture>
-              <source srcset="assets/img/stelle/teil/blatt-haken.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/blatt-haken.png?v=c05d" alt="" width="1312" height="1199" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/blatt-haken.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/blatt-haken.png?v=c05e" alt="" width="1312" height="1199" loading="lazy" decoding="async">
             </picture>
           </span>
         </figure>
@@ -820,20 +842,20 @@
         <figure class="stl-aus__bild stl-aus__bild--schloss">
           <span class="stl-aus__lage stl-aus__lage--schild">
             <picture>
-              <source srcset="assets/img/stelle/teil/schloss-schild.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/schloss-schild.png?v=c05d" alt="" width="1024" height="1536" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/schloss-schild.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/schloss-schild.png?v=c05e" alt="" width="1024" height="1536" loading="lazy" decoding="async">
             </picture>
           </span>
           <span class="stl-aus__lage stl-aus__lage--buegel">
             <picture>
-              <source srcset="assets/img/stelle/teil/schloss-buegel.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/schloss-buegel.png?v=c05d" alt="" width="1024" height="1536" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/schloss-buegel.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/schloss-buegel.png?v=c05e" alt="" width="1024" height="1536" loading="lazy" decoding="async">
             </picture>
           </span>
           <span class="stl-aus__lage stl-aus__lage--koerper">
             <picture>
-              <source srcset="assets/img/stelle/teil/schloss-koerper.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/schloss-koerper.png?v=c05d" alt="" width="1024" height="1536" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/schloss-koerper.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/schloss-koerper.png?v=c05e" alt="" width="1024" height="1536" loading="lazy" decoding="async">
             </picture>
           </span>
         </figure>
@@ -854,20 +876,20 @@
         <figure class="stl-aus__bild stl-aus__bild--sand">
           <span class="stl-aus__lage stl-aus__lage--sand-glas">
             <picture>
-              <source srcset="assets/img/stelle/teil/sand-glas.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/sand-glas.png?v=c05d" alt="" width="1024" height="1536" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/sand-glas.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/sand-glas.png?v=c05e" alt="" width="1024" height="1536" loading="lazy" decoding="async">
             </picture>
           </span>
           <span class="stl-aus__lage stl-aus__lage--sand-oben">
             <picture>
-              <source srcset="assets/img/stelle/teil/sand-oben.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/sand-oben.png?v=c05d" alt="" width="1024" height="1536" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/sand-oben.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/sand-oben.png?v=c05e" alt="" width="1024" height="1536" loading="lazy" decoding="async">
             </picture>
           </span>
           <span class="stl-aus__lage stl-aus__lage--sand-unten">
             <picture>
-              <source srcset="assets/img/stelle/teil/sand-unten.webp?v=c05d" type="image/webp">
-              <img src="assets/img/stelle/teil/sand-unten.png?v=c05d" alt="" width="1024" height="1536" loading="lazy" decoding="async">
+              <source srcset="assets/img/stelle/teil/sand-unten.webp?v=c05e" type="image/webp">
+              <img src="assets/img/stelle/teil/sand-unten.png?v=c05e" alt="" width="1024" height="1536" loading="lazy" decoding="async">
             </picture>
           </span>
           <!-- DIE FALLENDEN KOERNER — aufgelegt (Weg b), ueber dem Strahl.
@@ -915,31 +937,31 @@
 <section class="stl-band stl-band--b" aria-hidden="true">
   <div class="stl-band__spur">
     <div class="stl-band__satz">
-      <picture><source srcset="assets/img/karriere/band/band-b-1.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-1.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- Laptop mit Headset -->
-      <picture><source srcset="assets/img/karriere/band/band-b-6.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--sechsfuenf" src="assets/img/karriere/band/band-b-6.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="853"></picture><!-- offenes Notizbuch mit Kaffee -->
-      <picture><source srcset="assets/img/karriere/band/band-b-2.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-2.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- zwei Sessel an Glaswand -->
-      <picture><source srcset="assets/img/karriere/band/band-b-4.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-4.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Empfang mit Steintresen -->
-      <picture><source srcset="assets/img/karriere/band/band-b-5.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-5.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Schreibtischreihe am Fenster -->
-      <picture><source srcset="assets/img/karriere/band/band-b-3.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-3.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Ledermappe mit Blaettern und Fueller -->
-      <picture><source srcset="assets/img/karriere/band/band-b-7.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--sechsfuenf" src="assets/img/karriere/band/band-b-7.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1229" height="1024"></picture><!-- geschlossener Laptop mit Tasse am Fenster -->
+      <picture><source srcset="assets/img/karriere/band/band-b-1.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-1.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- Laptop mit Headset -->
+      <picture><source srcset="assets/img/karriere/band/band-b-6.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--sechsfuenf" src="assets/img/karriere/band/band-b-6.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="853"></picture><!-- offenes Notizbuch mit Kaffee -->
+      <picture><source srcset="assets/img/karriere/band/band-b-2.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-2.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- zwei Sessel an Glaswand -->
+      <picture><source srcset="assets/img/karriere/band/band-b-4.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-4.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Empfang mit Steintresen -->
+      <picture><source srcset="assets/img/karriere/band/band-b-5.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-5.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Schreibtischreihe am Fenster -->
+      <picture><source srcset="assets/img/karriere/band/band-b-3.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-3.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Ledermappe mit Blaettern und Fueller -->
+      <picture><source srcset="assets/img/karriere/band/band-b-7.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--sechsfuenf" src="assets/img/karriere/band/band-b-7.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1229" height="1024"></picture><!-- geschlossener Laptop mit Tasse am Fenster -->
     </div>
     <div class="stl-band__satz">
-      <picture><source srcset="assets/img/karriere/band/band-b-1.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-1.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- Laptop mit Headset -->
-      <picture><source srcset="assets/img/karriere/band/band-b-6.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--sechsfuenf" src="assets/img/karriere/band/band-b-6.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="853"></picture><!-- offenes Notizbuch mit Kaffee -->
-      <picture><source srcset="assets/img/karriere/band/band-b-2.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-2.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- zwei Sessel an Glaswand -->
-      <picture><source srcset="assets/img/karriere/band/band-b-4.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-4.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Empfang mit Steintresen -->
-      <picture><source srcset="assets/img/karriere/band/band-b-5.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-5.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Schreibtischreihe am Fenster -->
-      <picture><source srcset="assets/img/karriere/band/band-b-3.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-3.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Ledermappe mit Blaettern und Fueller -->
-      <picture><source srcset="assets/img/karriere/band/band-b-7.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--sechsfuenf" src="assets/img/karriere/band/band-b-7.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1229" height="1024"></picture><!-- geschlossener Laptop mit Tasse am Fenster -->
+      <picture><source srcset="assets/img/karriere/band/band-b-1.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-1.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- Laptop mit Headset -->
+      <picture><source srcset="assets/img/karriere/band/band-b-6.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--sechsfuenf" src="assets/img/karriere/band/band-b-6.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="853"></picture><!-- offenes Notizbuch mit Kaffee -->
+      <picture><source srcset="assets/img/karriere/band/band-b-2.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-2.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- zwei Sessel an Glaswand -->
+      <picture><source srcset="assets/img/karriere/band/band-b-4.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-4.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Empfang mit Steintresen -->
+      <picture><source srcset="assets/img/karriere/band/band-b-5.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-5.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Schreibtischreihe am Fenster -->
+      <picture><source srcset="assets/img/karriere/band/band-b-3.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-3.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Ledermappe mit Blaettern und Fueller -->
+      <picture><source srcset="assets/img/karriere/band/band-b-7.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--sechsfuenf" src="assets/img/karriere/band/band-b-7.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1229" height="1024"></picture><!-- geschlossener Laptop mit Tasse am Fenster -->
     </div>
     <div class="stl-band__satz">
-      <picture><source srcset="assets/img/karriere/band/band-b-1.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-1.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- Laptop mit Headset -->
-      <picture><source srcset="assets/img/karriere/band/band-b-6.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--sechsfuenf" src="assets/img/karriere/band/band-b-6.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="853"></picture><!-- offenes Notizbuch mit Kaffee -->
-      <picture><source srcset="assets/img/karriere/band/band-b-2.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-2.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- zwei Sessel an Glaswand -->
-      <picture><source srcset="assets/img/karriere/band/band-b-4.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-4.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Empfang mit Steintresen -->
-      <picture><source srcset="assets/img/karriere/band/band-b-5.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-5.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Schreibtischreihe am Fenster -->
-      <picture><source srcset="assets/img/karriere/band/band-b-3.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-3.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Ledermappe mit Blaettern und Fueller -->
-      <picture><source srcset="assets/img/karriere/band/band-b-7.webp?v=c05d" type="image/webp"><img class="stl-band__bild stl-band__bild--sechsfuenf" src="assets/img/karriere/band/band-b-7.jpg?v=c05d" alt="" loading="lazy" decoding="async" width="1229" height="1024"></picture><!-- geschlossener Laptop mit Tasse am Fenster -->
+      <picture><source srcset="assets/img/karriere/band/band-b-1.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-1.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- Laptop mit Headset -->
+      <picture><source srcset="assets/img/karriere/band/band-b-6.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--sechsfuenf" src="assets/img/karriere/band/band-b-6.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="853"></picture><!-- offenes Notizbuch mit Kaffee -->
+      <picture><source srcset="assets/img/karriere/band/band-b-2.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-2.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1536" height="1024"></picture><!-- zwei Sessel an Glaswand -->
+      <picture><source srcset="assets/img/karriere/band/band-b-4.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-4.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Empfang mit Steintresen -->
+      <picture><source srcset="assets/img/karriere/band/band-b-5.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-5.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Schreibtischreihe am Fenster -->
+      <picture><source srcset="assets/img/karriere/band/band-b-3.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--quer" src="assets/img/karriere/band/band-b-3.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1024" height="683"></picture><!-- Ledermappe mit Blaettern und Fueller -->
+      <picture><source srcset="assets/img/karriere/band/band-b-7.webp?v=c05e" type="image/webp"><img class="stl-band__bild stl-band__bild--sechsfuenf" src="assets/img/karriere/band/band-b-7.jpg?v=c05e" alt="" loading="lazy" decoding="async" width="1229" height="1024"></picture><!-- geschlossener Laptop mit Tasse am Fenster -->
     </div>
   </div>
 </section>
@@ -1160,8 +1182,8 @@ GEAENDERT AM 31.08.2026 — KUNDENWUNSCH, ZWEIMAL AN EINEM TAG.
          Motiv aus dem erzeugten Bestand, ohne Menschen. -->
     <div class="stl-bilder">
       <picture>
-        <source srcset="assets/img/karriere/band/band-a-7.webp?v=c05d" type="image/webp">
-        <img src="assets/img/karriere/band/band-a-7.jpg?v=c05d" alt="Leerer Besprechungsraum mit Blick ins Freie" loading="lazy" decoding="async" width="1536" height="1024">
+        <source srcset="assets/img/karriere/band/band-a-7.webp?v=c05e" type="image/webp">
+        <img src="assets/img/karriere/band/band-a-7.jpg?v=c05e" alt="Leerer Besprechungsraum mit Blick ins Freie" loading="lazy" decoding="async" width="1536" height="1024">
       </picture>
       <!-- HIERHER GEWANDERT am 04.09.2026, Kundenwunsch: „Dieser Text soll
            unter dem Bild rechts stehen." Wortlaut unveraendert; er stammt
@@ -1235,11 +1257,11 @@ GEAENDERT AM 31.08.2026 — KUNDENWUNSCH, ZWEIMAL AN EINEM TAG.
       <h2 class="stl-h2 stl-h2--unterstrichen stl-h2--schluss" id="t-schluss">Wenn du ein Umfeld
          suchst, das deinen Anspruch nicht bremst, sondern größer macht.</h2>
       <div class="stl-schluss__aktionen">
-        <a class="btn" href="kontakt.html?v=c05d">Als Immobilienberater bewerben</a>
+        <a class="btn" href="kontakt.html?v=c05e">Als Immobilienberater bewerben</a>
         <!-- „Zurück zur Übersicht" ist kein Wording, sondern Navigation und
              steht deshalb nicht im Dokument: diese Seite haengt unter
              karriere.html und braucht den Weg zurueck. Sie bleibt. -->
-        <a class="stl-zurueck" href="karriere.html?v=c05d">Zurück zur Übersicht</a>
+        <a class="stl-zurueck" href="karriere.html?v=c05e">Zurück zur Übersicht</a>
       </div>
       <!-- DIE LEISE ZEILE TRAEGT DEN PFLICHTHINWEIS AUS V07, NICHT DIE
            MIKROZEILE AUS V11 — bewusst, und im Bericht gemeldet.
@@ -1274,8 +1296,8 @@ GEAENDERT AM 31.08.2026 — KUNDENWUNSCH, ZWEIMAL AN EINEM TAG.
            traegen Laden womoeglich nichts mehr. Fuer EIN Bild, das den
            Abschluss der Seite traegt, ist das der falsche Handel. -->
       <picture>
-        <source srcset="assets/img/karriere/kar-beratung.webp?v=c05d" type="image/webp">
-        <img src="assets/img/karriere/kar-beratung.png?v=c05d" alt="Beratungssituation am Besprechungstisch" decoding="async" width="1536" height="1024">
+        <source srcset="assets/img/karriere/kar-beratung.webp?v=c05e" type="image/webp">
+        <img src="assets/img/karriere/kar-beratung.png?v=c05e" alt="Beratungssituation am Besprechungstisch" decoding="async" width="1536" height="1024">
       </picture>
     </figure>
 
@@ -1480,9 +1502,9 @@ GEAENDERT AM 31.08.2026 — KUNDENWUNSCH, ZWEIMAL AN EINEM TAG.
     <div>
       <p class="fuss__titel">Rechtliches</p>
       <div class="fuss__liste">
-        <a href="impressum.html?v=c05d">Impressum</a>
-        <a href="datenschutz.html?v=c05d">Datenschutz</a>
-        <a href="cookies.html?v=c05d">Cookie-Einstellungen</a>
+        <a href="impressum.html?v=c05e">Impressum</a>
+        <a href="datenschutz.html?v=c05e">Datenschutz</a>
+        <a href="cookies.html?v=c05e">Cookie-Einstellungen</a>
         <!-- „ERSTINFORMATION" ENTFERNT 11.09.2026 — Kundenwunsch woertlich:
              „Erste Information: Lasst es einfach raus."
              erstinformation.html hat es nie gegeben; der Verweis lief auf
@@ -1524,7 +1546,7 @@ GEAENDERT AM 31.08.2026 — KUNDENWUNSCH, ZWEIMAL AN EINEM TAG.
      vorher in neun Fassungen da, die sich in Kleinigkeiten unterschieden —
      `#warum-immobilien` auf der Startseite gegen
      `variante-a.html#warum-immobilien` sonst, ein Cache-Anhaengsel
-     `?v=c05d` nur auf den drei Karriereseiten, `aria-current="page"` je
+     `?v=c05e` nur auf den drei Karriereseiten, `aria-current="page"` je
      nach Seite an anderer Stelle, und unter „Naechster Schritt" zwei
      verschiedene Wortlaute. Wer eine Zeile aenderte, musste neun Stellen
      treffen — und hat es nachweislich nicht immer getan.
@@ -1699,14 +1721,14 @@ GEAENDERT AM 31.08.2026 — KUNDENWUNSCH, ZWEIMAL AN EINEM TAG.
      trotzdem unter dem Vorhang (89 gegen 90). -->
 <div class="menu-schleier" data-menu-schleier></div>
 
-<script src="assets/js/site.js?v=c05d"></script>
+<script src="assets/js/site.js?v=c05e"></script>
 <!-- Einzige eigene Zeile Javascript dieser Seite: das Kopfvideo bei
      prefers-reduced-motion: reduce wirklich anhalten. Sichtbar ist es dort
      schon per CSS nicht mehr; ohne Javascript bleibt es dabei. -->
-<script src="assets/js/stelle.js?v=c05d"></script>
+<script src="assets/js/stelle.js?v=c05e"></script>
 <!-- Dieselbe Fortschrittsschiene wie im Ablauf der Startseite, unveraendert
      nachgenutzt — 04.09.2026, Kundenwunsch. Das Skript sucht `.abl__spur`
      und findet die Ziffern unter beiden Namen. -->
-<script src="assets/js/ablauf.js?v=c05d" defer></script>
+<script src="assets/js/ablauf.js?v=c05e" defer></script>
 </body>
 </html>
