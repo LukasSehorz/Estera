@@ -1,9 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Estera">
   <title>Estera</title>
-  <!-- Dasselbe rund und in denselben Farben, aber nur das E: im Browser-Tab sind 16 px ueblich, dort waere der volle Zug ein grauer Strich. -->
-  <circle cx="256" cy="256" r="256" fill="#FFFFFF"/>
-  <circle cx="256" cy="256" r="255" fill="none" stroke="#102949" stroke-opacity="0.14" stroke-width="2"/>
-  <g fill="#102949" transform="translate(152.34 379.64) scale(0.395636 -0.395636)">
+  <!-- Dasselbe Zeichen fuer den Browser-Tab, nur das E: bei 16 px waere der volle Zug ein grauer Strich. -->
+  <circle cx="256" cy="256" r="225.3" fill="#FFFFFF" stroke="#102949" stroke-width="7"/>
+  <g fill="#102949" transform="translate(145.07 388.31) scale(0.423398 -0.423398)">
     <path d="M457 0H44Q42 0 42.0 6.0Q42 12 44 12Q82 12 101.0 17.0Q120 22 126.5 37.0Q133 52 133 81V544Q133 573 126.5 587.5Q120 602 101.0 607.5Q82 613 44 613Q42 613 42.0 619.0Q42 625 44 625H440Q449 625 449 616L451 495Q451 492 445.5 492.0Q440 492 440 495Q440 547 413.0 576.5Q386 606 342 606H273Q236 606 217.5 601.0Q199 596 192.5 581.5Q186 567 186 538V85Q186 57 192.5 43.0Q199 29 217.5 24.0Q236 19 273 19H365Q405 19 434.0 54.0Q463 89 470 146Q470 149 476.0 148.5Q482 148 482 145Q478 119 475.5 82.5Q473 46 473 15Q473 0 457 0ZM401 235Q401 280 382.0 298.0Q363 316 315 316H161V335H318Q364 335 382.0 350.5Q400 366 400 404Q400 406 406.0 406.0Q412 406 412 404Q412 375 411.5 359.0Q411 343 411 325Q411 303 412.0 281.5Q413 260 413 235Q413 233 407.0 233.0Q401 233 401 235Z" transform="translate(0 0)"/>
   </g>
 </svg>

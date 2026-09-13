@@ -17,6 +17,13 @@
      Estera Schriftzug". Bis dahin gab es gar keins; Google zeigte im
      Treffer einen generischen Buchstaben und der Browser-Tab blieb leer.
 
+     NACH DER BILDVORLAGE DES KUNDEN vom 13.09.2026 — der Schriftzug steht
+     ENG, nicht in der Logo-Sperrung des Seitenkopfs. Daran scheiterte die
+     Fassung davor: mit 0.36em Sperrung wird der Zug 8:1 breit und die
+     Versalhoehe faellt auf 42 px; ungesperrt sind es 64 px, und so voll
+     steht er in der Vorlage. Kreis 88 % der Kachel mit deckendem
+     Navy-Ring (7 px) statt randlos mit Haarlinie.
+
      RUND UND NAVY AUF WEISS — nachgeschaerft am 12.09.2026, 19:27 Uhr:
      „wenn es reinpasst kann sein dass wir es auf kreis anpassen muessen".
      Der Kunde hat den Schriftzug dunkel auf Weiss geliefert; Google
@@ -44,8 +51,8 @@
      KEIN .ico. Das Format braucht heute niemand mehr, und ein zweites
      Zeichen, das jemand beim naechsten Logowechsel uebersieht, ist eine
      Fehlerquelle mehr. -->
-<link rel="icon" href="assets/img/favicon.svg?v=c05f" type="image/svg+xml" sizes="any">
-<link rel="apple-touch-icon" href="assets/img/estera-icon.svg?v=c05f">
+<link rel="icon" href="assets/img/favicon.svg?v=c05g" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/estera-icon.svg?v=c05g">
 <meta name="theme-color" content="#102949">
 <link rel="preload" href="assets/fonts/CormorantGaramond-300-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Jost-400-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -63,11 +70,11 @@
      seiten.css ueberschneiden, gewinnt bewusst die spaetere Datei —
      Begruendung steht dort.
      Keine bestehende CSS-Datei wurde fuer diese Seite veraendert. -->
-<link rel="stylesheet" href="assets/css/fonts.css?v=c05f">
-<link rel="stylesheet" href="assets/css/base.css?v=c05f">
-<link rel="stylesheet" href="assets/css/schluss.css?v=c05f">
-<link rel="stylesheet" href="assets/css/seiten.css?v=c05f">
-<link rel="stylesheet" href="assets/css/ueber.css?v=c05f">
+<link rel="stylesheet" href="assets/css/fonts.css?v=c05g">
+<link rel="stylesheet" href="assets/css/base.css?v=c05g">
+<link rel="stylesheet" href="assets/css/schluss.css?v=c05g">
+<link rel="stylesheet" href="assets/css/seiten.css?v=c05g">
+<link rel="stylesheet" href="assets/css/ueber.css?v=c05g">
 </head>
 <body>
 
@@ -174,13 +181,13 @@
        das gelieferte 16:9), damit beim Laden nichts springt. -->
   <div class="uhero__bild" aria-hidden="true">
     <picture>
-      <source srcset="assets/img/ueber-hero.webp?v=c05f" type="image/webp">
-      <img class="uhero__grau" src="assets/img/ueber-hero.jpg?v=c05f" alt=""
+      <source srcset="assets/img/ueber-hero.webp?v=c05g" type="image/webp">
+      <img class="uhero__grau" src="assets/img/ueber-hero.jpg?v=c05g" alt=""
            width="1672" height="940" fetchpriority="high" decoding="async">
     </picture>
     <picture>
-      <source srcset="assets/img/ueber-hero.webp?v=c05f" type="image/webp">
-      <img class="uhero__farbe" src="assets/img/ueber-hero.jpg?v=c05f" alt=""
+      <source srcset="assets/img/ueber-hero.webp?v=c05g" type="image/webp">
+      <img class="uhero__farbe" src="assets/img/ueber-hero.jpg?v=c05g" alt=""
            width="1672" height="940" fetchpriority="high" decoding="async"
            data-hero-farbe>
     </picture>
@@ -536,8 +543,8 @@
 
       <figure class="uhalt__bild" style="--d:0">
         <picture>
-          <source srcset="assets/img/fassade-vert.webp?v=c05f" type="image/webp">
-          <img src="assets/img/fassade-vert.jpg?v=c05f" alt="" width="1100" height="1650"
+          <source srcset="assets/img/fassade-vert.webp?v=c05g" type="image/webp">
+          <img src="assets/img/fassade-vert.jpg?v=c05g" alt="" width="1100" height="1650"
                loading="lazy" decoding="async">
         </picture>
       </figure>
@@ -779,7 +786,7 @@
      vorher in neun Fassungen da, die sich in Kleinigkeiten unterschieden —
      `#warum-immobilien` auf der Startseite gegen
      `variante-a.html#warum-immobilien` sonst, ein Cache-Anhaengsel
-     `?v=c05f` nur auf den drei Karriereseiten, `aria-current="page"` je
+     `?v=c05g` nur auf den drei Karriereseiten, `aria-current="page"` je
      nach Seite an anderer Stelle, und unter „Naechster Schritt" zwei
      verschiedene Wortlaute. Wer eine Zeile aenderte, musste neun Stellen
      treffen — und hat es nachweislich nicht immer getan.
@@ -958,7 +965,7 @@
      ein Werkzeug der internen Abstimmung zwischen zwei Startseitenentwuerfen
      und hat auf einer Unterseite keine Bedeutung. -->
 
-<script src="assets/js/site.js?v=c05f"></script>
+<script src="assets/js/site.js?v=c05g"></script>
 <!-- Muss NACH site.js laufen: die Datei haengt sich an die
      Schliessen-Schaltflaeche des Menues, die site.js bedient. Begruendung,
      warum es sie ueberhaupt gibt, steht in der Datei selbst. -->
@@ -971,6 +978,6 @@
      [data-uab] prueft und ohne Treffer sofort zurueckkehrt. Die Datei
      wurde deshalb NICHT angefasst.
      Reihenfolge ist gleichgueltig — die Datei haengt an nichts aus site.js. -->
-<script src="assets/js/ueber.js?v=c05f"></script>
+<script src="assets/js/ueber.js?v=c05g"></script>
 </body>
 </html>
