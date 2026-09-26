@@ -122,7 +122,6 @@ exports.handler = async (event) => {
     return { statusCode: 500, body: 'Der Versand ist nicht eingerichtet.' };
   }
 
-  const empfaenger = process.env.ANFRAGE_EMPFAENGER || 'info@estera.immobilien';
   const absender   = process.env.ANFRAGE_ABSENDER   || 'formular@estera.immobilien';
 
   /* multipart/form-data zerlegen. Netlify reicht den Rumpf bei Dateien
@@ -186,6 +185,22 @@ exports.handler = async (event) => {
 
   const istBewerbung = (werte['formular'] || '').startsWith('bewerbung');
   const felder = istBewerbung ? FELDER_BEWERBUNG : FELDER_KONTAKT;
+
+  /* LEADS UND BEWERBUNGEN IN GETRENNTE POSTFAECHER — 26.09.2026.
+     Bis dahin ging alles an info@. Estera hat dafuer zwei freigegebene
+     Postfaecher in Microsoft 365 angelegt: anfrage@ fuer das Kontaktformular,
+     karriere@ fuer beide Bewerbungsstrecken (bewerbung-vertrieb und
+     bewerbung-backoffice). Freigegeben und nicht persoenlich, weil der
+     Ausfall vom 15.09. genau daher kam: info@ leitete an das Postfach einer
+     Mitarbeiterin weiter, das geloescht wurde, und jede Mail kam zurueck.
+
+     Die Adressen stehen hier fest, damit niemand etwas in Netlify eintragen
+     muss. Die beiden Umgebungsvariablen sind NEU benannt: eine aeltere
+     ANFRAGE_EMPFAENGER (sie zeigte auf info@) soll die Trennung nicht still
+     aufheben koennen. */
+  const empfaenger = istBewerbung
+    ? (process.env.EMPFAENGER_BEWERBUNGEN || 'karriere@estera.immobilien')
+    : (process.env.EMPFAENGER_ANFRAGEN    || 'anfrage@estera.immobilien');
   const ueberschrift = istBewerbung
     ? 'Neue Bewerbung über das Karriere-Formular'
     : 'Neue Anfrage über das Kontaktformular';
