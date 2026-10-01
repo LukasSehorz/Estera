@@ -198,9 +198,22 @@
          „Ablauf" zeigt weiterhin auf #ablauf — eine Sprungmarke DIESER
          Seite. Es steht jetzt in der Navigation, die „Seiten" heisst; der
          Vorlesename dieser Navigation ist deshalb mitgeaendert. -->
+    <!-- UMSORTIERT AM 30.09.2026 — Kundenwunsch, der den Stand vom
+         31.08.2026 aufhebt:
+
+           links neben der Wortmarke:    Warum Immobilien · Warum Estera · Ablauf
+           rechts neben der Wortmarke:   Karriere · Ankaufsprofil · Kontakt
+
+         „Ablauf" ist damit zurueck in dieser Liste; „Kontakt" steht nicht
+         mehr abgesetzt am Rand, sondern als dritter Punkt der rechten Reihe.
+         Drei gegen drei, gleicher Abstand zur Wortmarke; die Wortmarke selbst
+         steht unveraendert (Begruendung und Messwerte in base.css beim
+         Abschnitt Kopfnavigation). Die rechte Navigation fuehrt wieder nur
+         Seiten und heisst deshalb wieder „Seiten". -->
     <ul>
       <li><a href="#warum-immobilien">Warum Immobilien</a></li>
       <li><a href="#leistungen">Warum Estera</a></li>
+      <li><a href="#ablauf">Ablauf</a></li>
     </ul>
   </nav>
 
@@ -225,27 +238,24 @@
        Die Kopfleiste verweist damit zum ersten Mal ausschliesslich auf
        vorhandene Ziele.
 
-       „Kontakt" behaelt die Rolle des Abschlusses (.kopfnav__cta): Steg
-       davor, Gold statt Navy. Es ist derselbe Platz, den vorher
-       „Erstgespräch" hatte — nur der Name und das Ziel haben gewechselt. -->
-  <nav class="kopfnav kopfnav--rechts" aria-label="Ablauf und weitere Seiten">
+       „Kontakt" behaelt die Rolle des Abschlusses (.kopfnav__cta): Gold
+       statt Navy, Unterstrich dauerhaft. Den Steg davor gibt es seit dem
+       30.09.2026 nicht mehr (Begruendung in base.css). -->
+  <nav class="kopfnav kopfnav--rechts" aria-label="Seiten">
     <!-- 30.08.2026: „Ueber Estera" ist auf Kundenwunsch aus der Navigation
          heraus. HINWEIS: ueber-estera.html bleibt vollstaendig bestehen und
          ist weiter ueber ihre Adresse erreichbar — sie hat nur keinen
          Eintrag mehr. Umgebaut wurde an der Seite nichts. -->
     <ul>
-      <!-- „Ablauf" steht seit dem 31.08.2026 hier, nicht mehr links —
-           Kundenwunsch. Es ist der einzige Eintrag dieser Gruppe, der auf
-           eine Sprungmarke DIESER Seite zeigt und nicht auf eine eigene
-           Seite; deshalb heisst die Navigation jetzt „Ablauf und weitere
-           Seiten" statt nur „Seiten". Ein falscher Vorlesename waere hier
-           die einzige echte Nebenwirkung des Umzugs. -->
-      <li><a href="#ablauf">Ablauf</a></li>
+      <!-- „Ablauf" stand vom 31.08. bis 30.09.2026 hier und hiess die
+           Navigation „Ablauf und weitere Seiten". Seit dem 30.09.2026 steht
+           es wieder links (siehe dort), der Vorlesename ist wieder „Seiten". -->
       <!-- Karriere ist seit dem 22.08.2026 keine eigene Seite mehr, sondern
            Abschnitt 4 von ueber-estera.html — Kundenwunsch: „eine Seite, die
            zwei Unterpunkte bleiben". karriere.html ist geloescht, _redirects
            leitet die alte Adresse dorthin um. -->
       <li><a href="karriere.html">Karriere</a></li>
+      <li><a href="ankaufsprofil.html">Ankaufsprofil</a></li>
       <li class="kopfnav__cta"><a href="kontakt.html">Kontakt</a></li>
     </ul>
 
@@ -5461,6 +5471,7 @@
       <li><a class="menu__link" href="variante-a.html#leistungen">Warum Estera</a></li>
       <li><a class="menu__link" href="variante-a.html#ablauf">Ablauf</a></li>
       <li><a class="menu__link" href="karriere.html">Karriere</a></li>
+      <li><a class="menu__link" href="ankaufsprofil.html">Ankaufsprofil</a></li>
       <li><a class="menu__link" href="kontakt.html">Kontakt</a></li>
     </ul>
 

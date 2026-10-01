@@ -473,13 +473,22 @@ ul, ol { list-style: none; }
 .kopfnav a:hover::after,
 .kopfnav a:focus-visible::after { transform: scaleX(1); }
 
-/* Erstgespraech als Abschluss der rechten Reihe, durch einen Steg
-   abgesetzt — im Briefing steht dort ein senkrechter Strich. */
-.kopfnav__cta {
-  padding-left: clamp(0.55rem, 0.85vw, 0.9rem);
-  margin-left: clamp(0.1rem, 0.3vw, 0.35rem);
-  border-left: 1px solid var(--line-soft);
-}
+/* „Kontakt" als Abschluss der rechten Reihe.
+   GEAENDERT 30.09.2026 — Kundenwunsch: „Das Kontakt soll vom Rand weg
+   rechts neben Ankaufsprofil geschoben werden."
+   Vorher stand Kontakt abgesetzt am rechten Rand, davor ein senkrechter
+   Steg (padding-left 0.55–0.9rem, margin-left 0.1–0.35rem, border-left
+   1px var(--line-soft); ueber dem Bildband rgba(255,255,255,0.28)).
+   Der Steg ENTFAELLT: Er trennte den Abschluss von einer Reihe, von der
+   er raeumlich weit weg stand. Direkt neben Ankaufsprofil waere er ein
+   Trenner mitten in einer Dreiergruppe — rechts stuende dann „2 | 1"
+   gegen links „3", die beiden Seiten waeren nicht mehr gleich gebaut, und
+   der Abstand Ankaufsprofil–Kontakt waere um Steg und Innenabstand groesser
+   als jeder andere Abstand der Leiste.
+   Gold und dauerhafter Unterstrich BLEIBEN: Sie markieren das eigentliche
+   Ziel der Leiste, ohne den Rhythmus zu stoeren — Kontakt steht als letzter
+   Punkt ohnehin am Ende der Reihe, die Auszeichnung liest sich dort als
+   Schlusspunkt, nicht als Fremdkoerper. */
 .kopfnav__cta a { color: var(--gold-text); }
 .kopfnav__cta a::after { transform: scaleX(1); }
 
@@ -487,7 +496,6 @@ ul, ol { list-style: none; }
 .site-header--invert:not(.site-header--sticky) .kopfnav a { color: rgba(255,255,255,0.86); }
 .site-header--invert:not(.site-header--sticky) .kopfnav a:hover { color: #fff; }
 .site-header--invert:not(.site-header--sticky) .kopfnav__cta a { color: #fff; }
-.site-header--invert:not(.site-header--sticky) .kopfnav__cta { border-left-color: rgba(255,255,255,0.28); }
 .site-header--invert:not(.site-header--sticky) .kopfnav a::after { background: rgba(255,255,255,0.5); }
 .site-header--invert .kopfnav a { transition: color 0.45s var(--ease); }
 
@@ -507,15 +515,19 @@ ul, ol { list-style: none; }
   /* Luft um die Wortmarke. Sie geht zulasten beider Rasterspalten
      gleichermassen, das Logo bleibt dadurch mittig. */
   .kopfnav--links  { grid-column: 1; justify-self: end;   margin-right: clamp(0.9rem, 1.8vw, 1.9rem); }
-  /* KONTAKT GANZ AN DEN RAND — 31.08.2026, Kundenwunsch: „Kontakt muss
-     ganz rechts im Header stehen, ganz rechts am Rand."
-     Dafuer nimmt die rechte Navigation die volle Spalte ein (`stretch`
-     statt `start`) und schiebt ihren letzten Punkt mit `margin-left:auto`
-     nach aussen. Ablauf und Karriere bleiben dadurch bei der Wortmarke,
-     Kontakt wandert an die Aussenkante. */
-  .kopfnav--rechts { grid-column: 3; justify-self: stretch; margin-left:  clamp(0.9rem, 1.8vw, 1.9rem); }
-  .kopfnav--rechts ul { width: 100%; }
-  .kopfnav--rechts .kopfnav__cta { margin-left: auto; }
+  /* DREI GEGEN DREI — 30.09.2026, Kundenwunsch. Links „Warum Immobilien
+     · Warum Estera · Ablauf", rechts „Karriere · Ankaufsprofil · Kontakt".
+     Hebt den Stand vom 31.08.2026 auf („Kontakt ganz rechts am Rand"):
+     damals nahm die rechte Navigation die volle Spalte ein (`stretch`,
+     ul `width:100%`) und schob Kontakt mit `margin-left:auto` nach aussen.
+     Jetzt sitzt die rechte Gruppe wieder geschlossen an der Wortmarke
+     (`start`), spiegelbildlich zur linken (`end`). Beide tragen denselben
+     Aussenabstand zur Wortmarke, dadurch ist die Luft links und rechts
+     gleich (gemessen: 14,4 px bis 1560 px, 30,4 px bei 1920 px).
+     Die Wortmarke steht in der mittleren Rasterspalte und wird von der
+     Anordnung nicht beruehrt — Position vorher/nachher bei 1340, 1440,
+     1560 und 1920 px auf 0 px gleich. */
+  .kopfnav--rechts { grid-column: 3; justify-self: start; margin-left:  clamp(0.9rem, 1.8vw, 1.9rem); }
   /* Zwei Klassen, weil die .burger-Grundregel weiter unten in dieser Datei
      steht und bei gleicher Spezifitaet sonst gewinnen wuerde. */
   .site-header .burger { display: none; }

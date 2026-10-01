@@ -418,9 +418,11 @@
      dort die Adresse unveraendert bleibt.
      `normalisiere` schneidet deshalb fuehrenden Schraegstrich, `./`,
      Abfrage, Sprungmarke und `.html` ab. */
+  /* 'ankaufsprofil' ergaenzt 29.09.2026 — neue Unterseite, Menuepunkt
+     neben „Karriere". Ohne diesen Eintrag waere der Verweis gesperrt. */
   var vorhandeneSeiten = [
     'variante-a', 'ueber-estera', 'karriere', 'kontakt',
-    'karriere-immobilienberater', 'karriere-backoffice'
+    'karriere-immobilienberater', 'karriere-backoffice', 'ankaufsprofil'
   ];
   function normalisiere(adresse) {
     return adresse

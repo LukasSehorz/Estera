@@ -1,0 +1,534 @@
+/* ===========================================================================
+   ESTERA — ANKAUFSPROFIL: INHALT DER ZWEI POP-UPS (30.09.2026)
+
+   Kundenwunsch: „Private Eigentuemer" und „Makler & Partner" (Mehr
+   erfahren) deutlich schoener darstellen, mit Abbildungen und Kaesten.
+   Vorbild ist „Wonach wir suchen" auf derselben Seite: weisse Kacheln mit
+   weichem Schatten auf Creme, Titel, kurzer Goldstrich, Szene als
+   Inline-SVG von Hand (Navy, Creme, Sand, feine Goldlinien, ein Akzent je
+   Szene, leichte Verlaeufe).
+
+   Kommt NACH ankauf.css. Oeffnen und Schliessen, X, Schleier, Rollsperre
+   und der Rueckfall ohne Javascript stehen weiter in ankauf.css und
+   ankauf.js und sind hier nicht wiederholt. Diese Datei setzt nur:
+     .apo-pop        das Pop-up darf breiter werden (bis 1100 px)
+     .apo-*          Aufbau: Kopf, Band mit Kacheln, Zeitleiste, Fusskasten
+     .ps / .ps-*     die Szenen und ihre Bewegung
+
+   BEWEGUNG
+   ankauf-popup.js setzt .apo-an am <dialog> (nur wenn Bewegung erlaubt
+   ist) und .ist-da an jedem [data-apo], sobald es im rollenden Kasten
+   sichtbar wird; beim Schliessen wird alles zurueckgesetzt, beim naechsten
+   Oeffnen laeuft es neu. Jeder Einzelschritt hoechstens 600 ms,
+   gestaffelt ueber --i (Kachel) und --d / --w (Teil der Szene).
+   Beim Ueberfahren bewegen sich nur die inneren Gruppen (.ps-h) per
+   Uebergang — die Einblendung haengt an der aeusseren Gruppe (.ps-e),
+   so kommen sich beide nie ins Gehege.
+   Ohne Javascript und bei prefers-reduced-motion: kein .apo-an, alles
+   steht sofort im Endzustand. Der Endzustand ist der Grundzustand der
+   Zeichnung.
+
+   SCHRIFT mindestens 16 px, Fliesstext 18 bis 19 px; Trefferflaechen
+   mindestens 44 px (Knoepfe 56 px, Textverweis 44 px).
+   =========================================================================== */
+
+/* --- Rahmen ---------------------------------------------------------------- */
+@media (min-width: 600px) {
+  .ank-pop.apo-pop { width: min(1100px, calc(100vw - 48px)); }
+}
+.ank-pop .apo {
+  --apo-pad: clamp(24px, 4.2vw, 60px);
+  --apo-unten: 48px;
+  padding: 60px var(--apo-pad) var(--apo-unten);
+}
+@media (max-width: 599px) {
+  .ank-pop .apo {
+    --apo-pad: 18px;
+    --apo-unten: 28px;
+    padding-top: 64px;
+  }
+}
+/* Ohne Javascript stehen die Pop-ups als Abschnitte auf der Seite
+   (ankauf.css); das Band laeuft dann bis an den Rand des Satzspiegels. */
+html:not(.ank-js) .apo {
+  --apo-pad: var(--ank-rand);
+  --apo-unten: var(--ank-luft);
+}
+html:not(.ank-js) .apo-band { border-radius: 14px; }
+
+.apo-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* :where — sonst schlaegt die Ruecksetzung die Abstaende der Listen. */
+:where(.apo) :where(ul, ol) { list-style: none; margin: 0; padding: 0; }
+
+/* --- Kopf: Text links, grosse Szene rechts ----------------------------------- */
+.apo-kopf {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+.apo-kopf .apo-kicker {
+  justify-content: flex-start;
+  text-indent: 0;
+  text-align: left;
+}
+.apo-kopf .apo-kicker::before { display: none; }
+.apo-kopf .apo-kicker::after { display: block; width: 40px; }
+.apo-titel {
+  margin-top: 14px;
+  text-align: left;
+  font-size: clamp(32px, calc(14px + 2.3vw), 48px);
+}
+.apo-titel em { display: block; }
+.apo-unterzeile {
+  max-width: none;
+  margin: 18px 0 0;
+  text-align: left;
+  font-size: 21px;
+  color: var(--ink-soft);
+}
+.apo-einleitung {
+  margin-top: 14px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-black);
+}
+.apo-kopf__bild {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+}
+/* Weicher Creme-Hof hinter der Szene. */
+.apo-kopf__bild::before {
+  content: '';
+  position: absolute;
+  inset: 4% 2% 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(217, 180, 133, 0.16), rgba(247, 243, 240, 0.6) 55%, rgba(247, 243, 240, 0));
+}
+.apo-kopf__bild > svg,
+.apo-kachel__bild > svg,
+.apo-fuss__bild > svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* --- Band auf Creme ---------------------------------------------------------- */
+.apo-band {
+  margin: clamp(36px, 4vw, 52px) calc(-1 * var(--apo-pad)) calc(-1 * var(--apo-unten));
+  padding: clamp(40px, 4.4vw, 60px) var(--apo-pad) calc(var(--apo-unten) + 4px);
+  background: linear-gradient(180deg, var(--fl-creme) 0%, #F3EEE8 100%);
+  border-top: 1px solid var(--line-soft);
+}
+.apo-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 2.6vw, 36px);
+  font-weight: 400;
+  line-height: 1.18;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--navy-800);
+}
+.apo-strich {
+  display: block;
+  width: clamp(28px, 2.4vw, 40px);
+  height: 1px;
+  margin: 12px auto 14px;
+  background: var(--gold);
+  transition: transform 0.45s var(--ease);
+}
+
+/* Zwischentitel im Band mit kurzem Goldstrich, wie die Kacheln. */
+.apo-band > .apo-h3::after {
+  content: '';
+  display: block;
+  width: clamp(28px, 2.4vw, 40px);
+  height: 1px;
+  margin: 14px auto 0;
+  background: var(--gold);
+}
+
+/* --- Kacheln ------------------------------------------------------------------ */
+.apo-raster {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.6vw, 22px);
+  margin-top: clamp(24px, 2.6vw, 34px);
+}
+.apo-kachel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  padding: 22px clamp(18px, 1.8vw, 26px) 26px;
+  text-align: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--ank-schatten);
+  transition: border-color 0.45s var(--ease), box-shadow 0.45s var(--ease), translate 0.45s var(--ease);
+}
+/* translate statt transform: die Einblendung haelt transform fest (fill
+   both), die eigene Eigenschaft translate kommt ihr nicht in die Quere. */
+.apo-kachel:hover {
+  border-color: rgba(168, 135, 79, 0.5);
+  box-shadow: var(--ank-schatten-hoch);
+  translate: 0 -3px;
+}
+.apo-kachel:hover .apo-strich { transform: scaleX(1.75); }
+.apo-kachel__bild {
+  width: 100%;
+  max-width: 220px;
+  height: 128px;
+  margin: 0 0 16px;
+}
+.apo-kachel__titel {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 1.8vw, 25px);
+  font-weight: 500;
+  line-height: 1.22;
+  color: var(--navy-800);
+  text-wrap: balance;
+}
+.apo-kachel .apo-strich { margin: 10px auto 12px; }
+.apo-kachel__punkte li {
+  font-size: 18px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+.apo-kachel__punkte li + li { margin-top: 6px; }
+
+/* --- Zeitleiste (Eigentuemer) ---------------------------------------------------- */
+.apo-ablauf {
+  margin-top: clamp(18px, 2vw, 26px);
+  padding: clamp(28px, 3vw, 40px) clamp(18px, 3vw, 40px) clamp(30px, 3vw, 42px);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--ank-schatten);
+}
+.apo-schritte {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 26px;
+}
+/* Die Goldlinie laeuft von Punkt 1 bis Punkt 5 (Spaltenmitten: 10 % und
+   90 % der Breite). */
+.apo-schritte::before {
+  content: '';
+  position: absolute;
+  top: 27px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-soft), var(--gold));
+  transform-origin: 0 50%;
+}
+.apo-schritte li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+.apo-schritt__nr {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  flex: none;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  background: linear-gradient(180deg, #FFFFFF, #F7F1E8);
+  box-shadow: 0 0 0 6px var(--paper), 0 6px 16px -6px rgba(16, 41, 73, 0.35);
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1;
+  font-variant-numeric: lining-nums;
+  color: var(--navy-800);
+  transition: translate 0.4s var(--ease), scale 0.4s var(--ease);
+}
+/* Der letzte Punkt — der Notartermin — ist der Akzent. */
+.apo-schritte li:last-child .apo-schritt__nr {
+  border-color: #B89259;
+  background: linear-gradient(180deg, #E8CBA4, #CCA46C);
+  color: #FFFFFF;
+}
+.apo-schritte li:hover .apo-schritt__nr { translate: 0 -3px; scale: 1.06; }
+.apo-schritt__text {
+  font-size: 18px;
+  line-height: 1.4;
+  color: var(--ink-black);
+  text-wrap: balance;
+}
+
+/* --- Fusskasten Navy ------------------------------------------------------------ */
+.apo-fuss {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(170px, 240px) minmax(0, 1fr);
+  gap: clamp(22px, 4vw, 52px);
+  align-items: center;
+  margin-top: clamp(18px, 2vw, 26px);
+  padding: clamp(26px, 3.2vw, 42px) clamp(22px, 3.6vw, 48px);
+  color: #fff;
+  background: radial-gradient(130% 150% at 0% 0%, #1C3A5E 0%, #102949 52%, #0B1D36 100%);
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(16, 41, 73, 0.14), 0 26px 50px -18px rgba(16, 41, 73, 0.45);
+}
+/* Feine Goldlinie innen, wie ein Passepartout. */
+.apo-fuss::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(217, 180, 133, 0.28);
+  border-radius: 9px;
+  pointer-events: none;
+}
+.apo-fuss__bild { margin: 0; aspect-ratio: 4 / 3; }
+.apo-fuss__titel {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 2.6vw, 34px);
+  font-weight: 400;
+  line-height: 1.18;
+  color: #fff;
+}
+.apo-fuss__satz {
+  margin-top: 10px;
+  max-width: 560px;
+  font-size: 19px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.86);
+}
+.apo-fuss__knoepfe {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 28px;
+  margin-top: 22px;
+}
+.apo-fuss__knoepfe .kar-knopf { flex: 0 1 auto; }
+
+/* --- Umbrueche --------------------------------------------------------------------- */
+@media (max-width: 899px) {
+  .apo-kopf { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .apo-kopf__bild { order: -1; width: min(100%, 420px); margin-inline: auto; }
+  .apo-raster { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 759px) {
+  /* Zeitleiste senkrecht: Linie links durch die Punkte. */
+  .apo-schritte { grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 18px; }
+  .apo-schritte::before {
+    top: 28px;
+    bottom: 28px;
+    left: 27px;
+    right: auto;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+    transform-origin: 50% 0;
+  }
+  .apo-schritte li { flex-direction: row; gap: 16px; text-align: left; }
+  .apo-schritt__text { text-wrap: pretty; }
+  .apo-fuss { grid-template-columns: minmax(0, 1fr); text-align: center; }
+  .apo-fuss__bild { width: min(100%, 230px); margin-inline: auto; }
+  .apo-fuss__satz { margin-inline: auto; }
+  .apo-fuss__knoepfe { justify-content: center; }
+}
+@media (max-width: 599px) {
+  .apo-unterzeile { font-size: 19px; }
+  .apo-kopf__bild { width: 100%; }
+  .apo-kopf .apo-kicker { gap: 12px; letter-spacing: 0.16em; }
+  .apo-kopf .apo-kicker::after { display: none; }
+  /* Senkrechte Zeitleiste: ohne weissen Hof, sonst verschwindet die Linie
+     zwischen den dicht stehenden Punkten. */
+  .apo-schritt__nr { box-shadow: 0 6px 16px -6px rgba(16, 41, 73, 0.35); }
+  /* Kacheln einspaltig, Szene links, Text rechts — sechs Kacheln bleiben
+     so ueberschaubar. */
+  .apo-raster { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .apo-kachel {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    column-gap: 16px;
+    align-items: start;
+    padding: 18px 18px 20px 14px;
+    text-align: left;
+  }
+  .apo-kachel__bild { grid-row: 1 / span 3; height: 78px; margin: 0; align-self: center; }
+  .apo-kachel__titel { font-size: 22px; }
+  .apo-kachel .apo-strich { margin: 8px 0 10px; transform-origin: 0 50%; }
+  .apo-kachel__punkte li { font-size: 17px; }
+  .apo-ablauf { padding-inline: 16px; }
+  .apo-fuss { padding: 26px 20px 28px; }
+  .apo-fuss__knoepfe .kar-knopf { flex: 1 1 100%; }
+  .apo-fuss__knoepfe { gap: 6px; }
+}
+
+/* ===========================================================================
+   SZENEN
+   =========================================================================== */
+.ps-e,
+.ps-h { transform-box: fill-box; transform-origin: 50% 50%; }
+.ps-faellt, .ps-huepft { transform-origin: 50% 100%; }
+.ps-strich { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.ps-ring { transform-box: fill-box; transform-origin: 50% 50%; }
+/* Drehpunkte, die nicht in der Mitte des Teils liegen: in Koordinaten der
+   Zeichnung. */
+.ps--haus .ps-pendel,
+.ps--haus .ps-faellt { transform-box: view-box; transform-origin: 303px 178px; }
+.ps--uhr .ps-zeiger,
+.ps--uhr .ps-zeiger-e { transform-box: view-box; transform-origin: 80px 60px; }
+.ps-schwingt { transform-origin: 50% 0; }
+
+/* --- Ueberfahren: Uebergaenge auf den inneren Gruppen ------------------------- */
+.ps-h { transition: transform 0.5s var(--ease); }
+.ps--uhr .ps-zeiger { transition-duration: 0.6s; }
+.ps-fenster { transition: fill 0.35s ease-out; }
+:is(.apo-kachel, .apo-kopf__bild, .apo-fuss):hover .ps-hebt        { transform: translateY(-5px); }
+:is(.apo-kachel, .apo-kopf__bild, .apo-fuss):hover .ps-hebt--mehr  { transform: translateY(-9px); }
+:is(.apo-kachel, .apo-kopf__bild, .apo-fuss):hover .ps-hebt-sanft  { transform: translateY(-4px); }
+:is(.apo-kachel, .apo-kopf__bild, .apo-fuss):hover .ps-dreht       { transform: rotate(18deg) scale(1.06); }
+:is(.apo-kachel, .apo-kopf__bild, .apo-fuss):hover .ps-dreht-klein { transform: rotate(-10deg); }
+:is(.apo-kachel, .apo-kopf__bild, .apo-fuss):hover .ps-tupf        { transform: scale(1.12); }
+:is(.apo-kachel, .apo-kopf__bild, .apo-fuss):hover .ps-tupf-klein  { transform: scale(0.93); }
+:is(.apo-kachel, .apo-kopf__bild, .apo-fuss):hover .ps-schwingt    { transform: rotate(5deg); }
+:is(.apo-kachel, .apo-kopf__bild, .apo-fuss):hover .ps-pendel      { transform: rotate(-10deg); }
+:is(.apo-kachel, .apo-kopf__bild, .apo-fuss):hover .ps-links       { transform: translate(-5px, -3px) rotate(-2deg); }
+:is(.apo-kachel, .apo-kopf__bild, .apo-fuss):hover .ps-rechts      { transform: translate(5px, -3px) rotate(2deg); }
+:is(.apo-kachel, .apo-kopf__bild, .apo-fuss):hover .ps-huepft      { transform: translateY(-8px); }
+:is(.apo-kachel, .apo-kopf__bild, .apo-fuss):hover .ps-zeiger      { transform: rotate(135deg); }
+.apo-kopf__bild:hover .ps-fenster:not(.ps-fenster--an)             { fill: #D9B485; }
+
+/* --- Bausteine ------------------------------------------------------------------- */
+@keyframes apo-auf {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes apo-text {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes apo-rein {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes apo-raus {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes apo-springt {
+  from { opacity: 0; transform: scale(0.2); }
+  60%  { opacity: 1; transform: scale(1.14); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes apo-faellt {
+  from { opacity: 0; transform: translateY(-40px) rotate(8deg); }
+  55%  { opacity: 1; transform: translateY(2px) rotate(-4deg); }
+  80%  { transform: translateY(-3px) rotate(2deg); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes apo-blende   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes apo-zeichnet { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes apo-fuellt   { from { fill: #E3E7ED; } to { fill: #D9B485; } }
+@keyframes apo-zeiger   { from { transform: rotate(-150deg); } to { transform: none; } }
+@keyframes apo-linie-x  { from { transform: scaleX(0); } to { transform: none; } }
+@keyframes apo-linie-y  { from { transform: scaleY(0); } to { transform: none; } }
+@keyframes apo-puls {
+  0%   { opacity: 0.9; transform: scale(0.85); }
+  70%  { opacity: 0; transform: scale(1.6); }
+  100% { opacity: 0; transform: scale(1.6); }
+}
+
+/* --- Einblenden ---------------------------------------------------------------- */
+.apo-an [data-apo]:not(.ist-da) { opacity: 0; }
+
+/* Startzeit der Teile einer Szene. */
+.apo [data-apo] { --t: calc(var(--i, 0) * 80ms + 200ms); }
+.apo .apo-kopf  { --t: 260ms; }
+
+/* Kopf: Text von oben nach unten, die Szene gleichzeitig */
+.apo-an .apo-kopf.ist-da .apo-kopf__text > * { animation: apo-text 0.5s var(--ease) both; }
+.apo-an .apo-kopf.ist-da .apo-kopf__text > :nth-child(2) { animation-delay: 70ms; }
+.apo-an .apo-kopf.ist-da .apo-kopf__text > :nth-child(3) { animation-delay: 140ms; }
+.apo-an .apo-kopf.ist-da .apo-kopf__text > :nth-child(4) { animation-delay: 210ms; }
+.apo-an .apo-kopf.ist-da .apo-kopf__bild::before { animation: apo-blende 0.6s ease-out both; }
+
+/* Kachel, Zeitleiste, Fusskasten, Zwischentitel: als Ganzes */
+.apo-an .apo-kachel.ist-da,
+.apo-an .apo-ablauf.ist-da,
+.apo-an .apo-fuss.ist-da,
+.apo-an .apo-h3.ist-da { animation: apo-auf 0.5s var(--ease) calc(var(--i, 0) * 80ms) both; }
+
+/* Teile der Szenen */
+.ps-spaet { --x: 180ms; }
+.apo-an .ist-da .ps-e.ps-auf      { animation: apo-auf 0.5s var(--ease) calc(var(--t) + var(--x, 0ms) + var(--d, 0) * 120ms) both; }
+.apo-an .ist-da .ps-e.ps-rein     { animation: apo-rein 0.45s var(--ease) calc(var(--t) + 260ms + var(--d, 0) * 110ms) both; }
+.apo-an .ist-da .ps-e.ps-raus     { animation: apo-raus 0.55s var(--ease) calc(var(--t) + 300ms) both; }
+.apo-an .ist-da .ps-e.ps-blende   { animation: apo-blende 0.45s ease-out calc(var(--t) + 300ms) both; }
+.apo-an .ist-da .ps-e.ps-springt  { animation: apo-springt 0.45s var(--ease) calc(var(--t) + 480ms + var(--x, 0ms) + var(--d, 0) * 120ms) both; }
+.apo-an .ist-da .ps-e.ps-faellt   { animation: apo-faellt 0.6s var(--ease) calc(var(--t) + 520ms) both; }
+.apo-an .ist-da .ps-e.ps-zeiger-e { animation: apo-zeiger 0.6s var(--ease) calc(var(--t) + 300ms) both; }
+.apo-an .ist-da .ps-siegel-e      { animation: apo-springt 0.45s var(--ease) calc(var(--t) + 900ms) both; }
+.apo-an .ist-da .ps-bogen-spitze  { animation: apo-springt 0.35s var(--ease) calc(var(--t) + 980ms) both; }
+.apo-an .ist-da .ps-fenster--an   { animation: apo-fuellt 0.35s ease-out calc(var(--t) + 480ms + var(--w, 0) * 110ms) both; }
+/* Linien, die sich zeichnen: Haken, Striche, Unterschriften, Boegen */
+.apo-an .ist-da .ps-strich              { animation: apo-zeichnet 0.4s var(--ease) calc(var(--t) + 620ms + var(--d, 0) * 160ms) both; }
+.apo-an .ist-da .ps-strich.ps-haken     { animation-delay: calc(var(--t) + 520ms + var(--d, 0) * 150ms); }
+.apo-an .ist-da .ps-strich.ps-unterschrift { animation-duration: 0.55s; animation-delay: calc(var(--t) + 560ms + var(--d, 0) * 220ms); }
+.apo-an .ist-da .ps-e.ps-zeichnet       { animation: apo-zeichnet 0.55s ease-in-out calc(var(--t) + 420ms) both; }
+
+/* Zeitleiste: die Linie zieht sich, die Punkte setzen nacheinander auf */
+.apo-an .apo-ablauf.ist-da .apo-schritte::before { animation: apo-linie-x 0.6s var(--ease) 250ms both; }
+.apo-an .apo-ablauf.ist-da .apo-schritt__nr { animation: apo-springt 0.45s var(--ease) calc(250ms + var(--i) * 120ms) both; }
+.apo-an .apo-ablauf.ist-da .apo-schritt__text { animation: apo-text 0.45s var(--ease) calc(320ms + var(--i) * 120ms) both; }
+@media (max-width: 759px) {
+  .apo-an .apo-ablauf.ist-da .apo-schritte::before { animation-name: apo-linie-y; }
+}
+
+/* Ruhe: nur die Ringe um die Abzeichen pulsieren sanft */
+.apo-an .ist-da .ps-ring { animation: apo-puls 2.8s ease-out calc(var(--t) + 1500ms) infinite; }
+
+/* Ruhige Darstellung: auch wer die Einstellung erst nach dem Oeffnen
+   umstellt, sieht sofort den Endzustand. */
+@media (prefers-reduced-motion: reduce) {
+  .apo *,
+  .apo *::before,
+  .apo-an [data-apo] { animation: none !important; transition: none !important; }
+  .apo-an [data-apo]:not(.ist-da) { opacity: 1; }
+  .apo .ps-h,
+  .apo-kachel:hover,
+  .apo-schritte li:hover .apo-schritt__nr { translate: none !important; scale: none !important; }
+}
+
+/* ZWEI ZEILEN, NIE DREI — Kundenwunsch 30.09.2026: „Ein verlaesslicher
+   Kaeufer / fuer deine Immobilienangebote. — das muss auf zwei Zeilen
+   stehen." Gemessen brach der zweite Teil bei 1920 und 360 px noch einmal
+   um („fuer deine" / „Immobilienangebote."). Der zweite Teil steht jetzt
+   als eigene Zeile und bricht in sich nicht mehr um. Damit er auf sehr
+   schmalen Telefonen trotzdem in die Zeile passt, darf die Ueberschrift
+   dort mit der Fensterbreite etwas kleiner werden. */
+#ank-makler-titel em {
+  display: block;
+  white-space: nowrap;
+}
+@media (max-width: 420px) {
+  #ank-makler-titel { font-size: min(1.9rem, 7.9vw); }
+}
+/* Ab 1441 px waechst die Ueberschrift auf 48 px; die zweite Zeile mass dort
+   504 px bei 499 px Platz. 46 px lassen ihr Luft. */
+@media (min-width: 1441px) {
+  #ank-makler-titel { font-size: min(46px, 3rem); }
+}

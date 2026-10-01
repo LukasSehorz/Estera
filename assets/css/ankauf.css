@@ -1,0 +1,1052 @@
+/* ===========================================================================
+   ESTERA — ANKAUFSPROFIL (ankaufsprofil.html)
+   Neu am 29.09.2026. Gehoert allein dieser Seite und kommt als letzte
+   Datei nach fonts.css, base.css, schluss.css und karriere.css.
+
+   WAS VON WOANDERS KOMMT (unveraendert mitbenutzt, hier nicht wiederholt):
+     base.css      Token (Navy, Sand, Gold, Creme), Kopfleiste, Menue
+     schluss.css   Fusszeile
+     karriere.css  .kar (Grundmasse), .kar-kopf* (Video, Standbild,
+                   Schleier), .kar-balken, .kar-titel/.kar-akzent,
+                   .kar-knopf*, .kar-kopf__knoepfe und die Einblendung
+                   [data-auf] -> .ist-da samt ruhiger Darstellung
+   UEBERARBEITUNG 29.09.2026: Kennzahlen als flache Leiste, „Zwei Wege"
+   mit den Rollenkaesten der Karriereseite, Eigentuemer und Makler als
+   Pop-ups (<dialog>). Die Regeln dafuer stehen am Ende dieser Datei.
+   WAS HIER STEHT: alles mit dem Vorsatz .ank-*, dazu die Anpassung des
+   Kopfbereichs (.ank-kopf) an diese Seite — ohne Sterne und Bildmarke,
+   dafuer mit Einleitung, deshalb kuerzer als auf der Karriereseite.
+
+   SCHRIFTGROESSEN: Fliesstext nirgends unter 16 px (Cormorant hat eine
+   kleine x-Hoehe, deshalb stehen die Texte bei 18 bis 20 px).
+   TREFFERFLAECHEN: alle Verweise und Knoepfe mindestens 44 px hoch.
+   =========================================================================== */
+
+.ank {
+  --ank-rand: var(--kar-rand);
+  --ank-luft: clamp(64px, 7vw, 104px);
+  --ank-fs-text: 19px;
+  /* Wie weit die Kennzahlkaesten in den Kopf hineinragen. */
+  --ank-ueber: 56px;
+  /* Schatten der hervorgehobenen Kaesten — in der Machart von
+     --wt-schatten (schluss.css), nur etwas tiefer, weil die Kennzahlen
+     halb auf Navy stehen. */
+  --ank-schatten: 0 2px 5px rgba(16, 41, 73, 0.10), 0 18px 40px -12px rgba(16, 41, 73, 0.20);
+  --ank-schatten-hoch: 0 4px 10px rgba(16, 41, 73, 0.12), 0 26px 54px -14px rgba(16, 41, 73, 0.26);
+}
+/* Etwa die halbe Kastenhoehe: nebeneinander (ab 1200 px) sind die Kaesten
+   rund 150 px hoch, mit dem Bild darueber (600 bis 1199 px) rund 225 px. */
+@media (min-width: 600px) { .ank { --ank-ueber: 110px; } }
+@media (min-width: 1200px) { .ank { --ank-ueber: 78px; } }
+
+/* --- Behaelter -------------------------------------------------------------
+   1200 px Satzbreite, Rand wie .kar-mitte (24 / 32 px). */
+.ank-mitte {
+  width: 100%;
+  max-width: calc(1200px + 2 * var(--ank-rand));
+  margin-inline: auto;
+  padding-inline: var(--ank-rand);
+}
+
+/* ===========================================================================
+   1  KOPFBEREICH
+   karriere.css setzt .kar-kopf auf 1013,7 px Mindesthoehe mit 298 px
+   Luft oben — das ist das Mass der Karriereseite mit Bildmarke und
+   Sternen. Hier fallen beide weg, der Stapel beginnt mit der Kennzeile.
+   =========================================================================== */
+.ank-kopf {
+  padding-top: calc(var(--header-h) + 72px);
+  /* Unten kommt dazu, was die Kennzahlkaesten in den Kopf hineinragen
+     (--ank-ueber, siehe Abschnitt 2). So bleibt zwischen der letzten
+     Zeile des Kopfes und der Oberkante der Kaesten dieselbe Luft wie
+     vorher, und kein Kasten liegt auf einem Knopf oder Text. */
+  padding-bottom: calc(48px + var(--ank-ueber));
+  min-height: 0;
+  justify-content: center;
+}
+@media (min-width: 900px) {
+  .ank-kopf {
+    padding-top: calc(var(--header-h) + 120px);
+    padding-bottom: calc(80px + var(--ank-ueber));
+    min-height: min(100vh, 860px);
+  }
+}
+/* Das Standbild im Grund — traegt den Kopf, solange das Video laedt, und
+   allein bei prefers-reduced-motion (dort blendet karriere.css das Video
+   aus). */
+.ank-kopf .kar-kopf__grund {
+  background-image: url('../video/ankauf-hero-poster.jpg?v=c05g');
+}
+.ank-kopf .kar-kopf__kennzeile { margin-top: 0; }
+
+.ank-kopf__einleitung {
+  max-width: 760px;
+  margin: 22px auto 0;
+  font-size: var(--kar-fs-lead);
+  line-height: 1.5;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.86);
+}
+@media (max-width: 899px) {
+  .ank-kopf__einleitung { font-size: 18px; margin-top: 16px; }
+}
+/* karriere.css setzt die Kleinzeile auf dem Telefon auf 15 px — hier gilt
+   die Untergrenze von 16 px. */
+@media (max-width: 899px) {
+  .ank-kopf .ank-kopf__zeile { font-size: 16px; letter-spacing: 0.1em; }
+}
+
+
+/* ===========================================================================
+   GEMEINSAME BAUSTEINE
+   =========================================================================== */
+.ank-abschnitt {
+  padding-block: var(--ank-luft);
+  background: var(--paper);
+}
+
+/* Kleinzeile wie im PDF: gesperrte Versalien in Gold, beidseitig eine
+   Haarlinie. */
+.ank-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-indent: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+.ank-kicker::before,
+.ank-kicker::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.7;
+}
+.ank-kicker--hell { color: var(--sand); }
+.ank-kicker--hell::before,
+.ank-kicker--hell::after { background: var(--sand); }
+
+.ank-titel {
+  margin-top: 14px;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(32px, calc(16px + 2.3vw), 52px);
+  line-height: 1.14;
+  letter-spacing: -0.004em;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--ink-black);
+}
+.ank-titel em { font-style: italic; color: var(--accent); }
+.ank-titel--hell { color: #fff; }
+.ank-titel--hell em { color: var(--sand); }
+
+.ank-unterzeile {
+  max-width: 760px;
+  margin: 18px auto 0;
+  text-align: center;
+  font-size: 21px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.ank-text {
+  font-size: var(--ank-fs-text);
+  line-height: 1.6;
+  color: var(--ink-black);
+}
+.ank-text + .ank-text { margin-top: 16px; }
+
+/* Textverweis mit Goldlinie — 44 px Trefferflaeche ueber den Innenabstand. */
+.ank-textlink {
+  min-height: 44px;
+  display: inline-block;
+  padding-block: 10px;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--navy-800);
+  background: linear-gradient(var(--gold), var(--gold)) 0 calc(100% - 8px) / 100% 1px no-repeat;
+  transition: color 0.3s var(--ease);
+}
+.ank-textlink:hover { color: var(--gold-text); }
+.ank-textlink__zusatz { font-weight: 400; color: var(--ink-mute); }
+.ank-textlink--hell { color: #fff; background-image: linear-gradient(var(--sand), var(--sand)); }
+.ank-textlink--hell:hover { color: var(--sand); }
+
+/* Listen: Punkt, Haken oder Kreuz vor jedem Eintrag, Haarlinie dazwischen
+   wie im PDF. */
+.ank-liste li {
+  position: relative;
+  padding: 10px 0 10px 28px;
+  font-size: var(--ank-fs-text);
+  line-height: 1.45;
+  color: var(--ink-black);
+  border-bottom: 1px solid var(--line-soft);
+}
+.ank-liste li:last-child { border-bottom: 0; }
+.ank-liste li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: calc(10px + 0.72em - 3px);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+/* Haken: zwei Kanten eines gedrehten Rechtecks. */
+.ank-liste--haken li::before {
+  left: 3px;
+  top: calc(10px + 0.72em - 7px);
+  width: 13px;
+  height: 7px;
+  border-radius: 0;
+  background: none;
+  border-left: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+  transform: rotate(-45deg);
+}
+/* ===========================================================================
+   4  ANKAUFSGEBIET
+   =========================================================================== */
+.ank-gebiet { background: var(--fl-creme); }
+.ank-gebiet__raster {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 88px);
+  align-items: center;
+}
+.ank-karte {
+  padding: clamp(24px, 3vw, 40px) clamp(20px, 3vw, 40px) 24px;
+  background: var(--paper-cool);
+  border-radius: var(--radius-img);
+}
+.ank-karte__bild {
+  position: relative;
+  max-width: 520px;
+  margin-inline: auto;
+}
+.ank-karte__bild img { width: 100%; height: auto; }
+/* Die Lage des Punkts in der SVG: x 87,78 / 165, y 124,83 / 172 —
+   53,2 % und 72,6 %. Die Beschriftung beginnt rechts daneben. */
+.ank-karte__ort {
+  position: absolute;
+  left: calc(53.2% + 9px);
+  top: 72.6%;
+  transform: translateY(-52%);
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.35vw, 20px);
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  pointer-events: none;
+}
+.ank-karte__legende {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  max-width: 520px;
+  margin: 18px auto 0;
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+.ank-karte__eintrag { display: inline-flex; align-items: center; gap: 10px; }
+.ank-karte__punkt {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(16, 41, 73, 0.4);
+}
+.ank-karte__punkt--sued { background: var(--navy-800); border-color: var(--navy-800); }
+
+.ank-gebiet__text .ank-kicker { justify-content: flex-start; text-indent: 0; }
+.ank-gebiet__text .ank-kicker::before { display: none; }
+.ank-titel--links { text-align: left; margin-bottom: 22px; }
+
+/* ===========================================================================
+   INHALT DER POP-UPS EIGENTUEMER UND MAKLER (Raster, Ablauf, Kasten)
+   =========================================================================== */
+.ank-bereich__raster {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+  margin-top: 48px;
+}
+.ank-bereich__links .ank-liste { margin-top: 20px; }
+.ank-bereich__rechts {
+  padding: 34px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--gold);
+  border-radius: var(--radius-img);
+}
+.ank-bereich__rechts--navy {
+  background: var(--navy-800);
+  border-color: var(--navy-800);
+  border-top-color: var(--sand);
+  color: #fff;
+}
+.ank-ablauf__titel {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--navy-800);
+}
+.ank-bereich__rechts--navy .ank-ablauf__titel { color: #fff; }
+.ank-bereich__satz {
+  margin-top: 14px;
+  font-size: var(--ank-fs-text);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.86);
+}
+.ank-bereich__pdf { margin-top: 14px; text-align: center; }
+
+.ank-ablauf { margin-top: 18px; counter-reset: none; }
+.ank-ablauf li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  font-size: var(--ank-fs-text);
+  line-height: 1.4;
+  color: var(--ink-black);
+  border-bottom: 1px solid var(--line-soft);
+}
+.ank-ablauf li:last-child { border-bottom: 0; }
+.ank-ablauf__nr {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--gold-text);
+}
+.ank-knopfreihe { margin-top: 26px; }
+
+/* ===========================================================================
+   8  ABSCHLUSS — wie der Fuss des PDF, laeuft in das Navy der Fusszeile
+   =========================================================================== */
+.ank-schluss {
+  padding-block: var(--ank-luft);
+  background: linear-gradient(var(--fl-navy800), var(--fl-navy900));
+  text-align: center;
+  color: #fff;
+}
+.ank-schluss__punkte {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 0;
+  margin-top: 22px;
+}
+.ank-schluss__punkte li {
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sand);
+}
+.ank-schluss__punkte li + li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  margin: 0 18px;
+  background: var(--sand);
+  opacity: 0.7;
+  transform: rotate(45deg);
+}
+.ank-schluss__satz {
+  max-width: 640px;
+  margin: 22px auto 0;
+  font-size: 20px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.86);
+}
+.ank-schluss__knoepfe { margin-top: 32px; }
+.ank-schluss__klein {
+  max-width: 620px;
+  margin: 28px auto 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ===========================================================================
+   MOBIL — Karte und Text untereinander, Kacheln einspaltig
+   =========================================================================== */
+@media (max-width: 899px) {
+  .ank-gebiet__raster,
+  .ank-bereich__raster { grid-template-columns: minmax(0, 1fr); }
+  .ank-bereich__raster { margin-top: 36px; }
+  .ank-unterzeile { font-size: 19px; }
+}
+@media (max-width: 599px) {
+  .ank-bereich__rechts { padding: 26px 22px; }
+  .ank-kicker::before,
+  .ank-kicker::after { width: 24px; }
+  .ank-kicker { gap: 12px; letter-spacing: 0.16em; text-indent: 0.16em; }
+  .ank-schluss__punkte { flex-direction: column; align-items: center; }
+  .ank-schluss__punkte li + li::before { display: none; }
+  .ank-kopf__einleitung { font-size: 18px; }
+}
+
+/* ===========================================================================
+   RUHIGE DARSTELLUNG — die Einblendung nimmt karriere.css zurueck (dort
+   Abschnitt 10); hier nur die eigenen Uebergaenge.
+   =========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .ank-textlink { transition: none; }
+}
+
+/* ===========================================================================
+   FEINSCHLIFF nach Sichtpruefung der Bildschirmfotos
+   =========================================================================== */
+/* Cormorant setzt Ziffern standardmaessig mediaeval („1" wie ein kleines
+   „I"). In Zahlenfeldern und Schrittnummern stehen Versalziffern. */
+.ank-zahl__wert,
+.ank-kachel__zahl,
+.ank-ablauf__nr { font-variant-numeric: lining-nums; }
+/* Der Akzent der Gebietsueberschrift steht als eigene Zeile, statt „Mit"
+   allein am Zeilenende haengen zu lassen. */
+.ank-titel--links em { display: block; }
+.ank-textlink__zusatz { white-space: nowrap; }
+/* Auf dem Telefon bricht die laengste Kleinzeile („Für Makler &
+   Immobilienpartner") in zwei Zeilen; die seitlichen Haarlinien stuenden
+   dann neben einem Block statt neben einer Zeile. Sie entfallen dort. */
+@media (max-width: 599px) {
+  .ank-kicker { text-align: center; }
+  .ank-kicker::before,
+  .ank-kicker::after { display: none; }
+}
+/* Die Kennzeile skaliert in karriere.css unter rund 520 px bis auf 14 px
+   herunter (dort fuer eine laengere Zeile noetig). „Ankaufsprofil" ist
+   kurz und bleibt bei mindestens 16 px. */
+.ank-kopf .kar-kopf__kennzeile { font-size: max(16px, var(--kar-fs-vorzeile)); }
+
+/* ===========================================================================
+   3  ZWEI WEGE — Rollenkaesten aus karriere.css, hier nur zwei Abweichungen
+   =========================================================================== */
+/* Kleinzeile der Karte: karriere.css setzt 12,5 bis 14 px. Auf dieser
+   Seite gilt 16 px als Untergrenze. */
+.ank-wege .kar-karte--klick .kar-karte__art { font-size: 16px; }
+.ank-wege__pdf { margin-top: 32px; text-align: center; }
+.ank-wege .ank-textlink__zusatz { color: rgba(255, 255, 255, 0.72); }
+
+/* ===========================================================================
+   POP-UPS (<dialog>) — 29.09.2026, Kundenwunsch
+   Weisser Kasten mit Sandkante oben, Navy-Schleier dahinter. Der Kasten
+   selbst rollt, das X bleibt stehen (es sitzt am <dialog>, nicht im
+   rollenden Kasten). Hintergrund rollt nicht mit: ankauf.js setzt
+   .ank-pop-offen auf <html>.
+   =========================================================================== */
+.ank-pop {
+  width: min(1040px, calc(100vw - 48px));
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  overflow: visible;
+}
+.ank-pop::backdrop { background: rgba(10, 25, 46, 0.74); }
+.ank-pop__kasten {
+  max-height: calc(100vh - 48px);
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 56px clamp(20px, 4vw, 56px) 44px;
+  background: var(--paper);
+  border-top: 3px solid var(--sand);
+  border-radius: var(--radius-img);
+}
+.ank-pop .ank-bereich__raster { margin-top: 36px; }
+.ank-pop .ank-bereich__rechts { border-top-width: 1px; }
+.ank-pop__zu {
+  position: absolute;
+  top: 12px;
+  right: 22px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--navy-800);
+  transition: background-color 0.25s var(--ease);
+}
+.ank-pop__zu svg { width: 22px; height: 22px; }
+.ank-pop__zu:hover { background: var(--fl-creme); }
+html.ank-pop-offen { overflow: hidden; }
+
+@keyframes ank-pop-auf {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes ank-schleier-auf {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.ank-pop[open] { animation: ank-pop-auf 0.35s var(--ease) both; }
+.ank-pop[open]::backdrop { animation: ank-schleier-auf 0.35s var(--ease) both; }
+
+/* Telefon: fast bildschirmfuellend, 8 px Rand. */
+@media (max-width: 599px) {
+  .ank-pop { width: calc(100vw - 16px); }
+  .ank-pop__kasten {
+    max-height: calc(100vh - 16px);
+    max-height: calc(100dvh - 16px);
+    padding: 64px 18px 28px;
+  }
+  .ank-pop__zu { top: 8px; right: 12px; }
+  .ank-pop .ank-bereich__raster { margin-top: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ank-pop[open],
+  .ank-pop[open]::backdrop { animation: none; }
+  .ank-pop__zu { transition: none; }
+}
+
+/* OHNE JAVASCRIPT: die beiden Pop-ups stehen als gewoehnliche Abschnitte
+   auf der Seite (Eigentuemer auf Creme, Makler auf Weiss), das X fehlt.
+   Die Sprungverweise der Karten (#eigentuemer, #makler) landen hier.
+   Die Regel schlaegt die eingebaute dialog:not([open]) { display: none }
+   ueber die hoehere Spezifitaet. */
+html:not(.ank-js) .ank-pop {
+  display: block;
+  position: static;
+  width: auto;
+  margin: 0;
+  background: var(--fl-creme);
+  scroll-margin-top: var(--header-h);
+}
+html:not(.ank-js) #makler { background: var(--paper); }
+html:not(.ank-js) .ank-pop__kasten {
+  max-width: calc(1200px + 2 * var(--ank-rand));
+  max-height: none;
+  margin-inline: auto;
+  overflow: visible;
+  padding: var(--ank-luft) var(--ank-rand);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+html:not(.ank-js) .ank-pop__zu { display: none; }
+/* Im weissen Pop-up traegt der Ablaufkasten Creme statt Weiss auf Weiss. */
+.ank-pop .ank-bereich__rechts:not(.ank-bereich__rechts--navy) {
+  background: var(--fl-creme);
+  border-color: transparent;
+  border-top: 2px solid var(--gold);
+}
+/* karriere.css haelt ab 780 px Titel und Kleinzeile der Karten auf zwei
+   Zeilen Hoehe, damit dort zweizeilige Stellenbezeichnungen auf einer
+   Linie stehen. Hier sind beide einzeilig; die Reserve waere Leerraum. */
+@media (min-width: 780px) {
+  .ank-wege .kar-karte__titel,
+  .ank-wege .kar-karte__art { min-height: 0; }
+}
+
+/* ===========================================================================
+   2  KENNZAHLEN ALS DREI KAESTEN — 30.09.2026, Kundenwunsch
+   Drei weisse Kaesten GENAU AUF DER GRENZE Kopf / „Zwei Wege": die Reihe
+   hat einen negativen oberen Rand von --ank-ueber und ragt so weit in den
+   Kopf; darunter liegt das Navy von „Zwei Wege" (der Block steht im
+   Markup als erster Teil von .kar-navy). Den Platz im Kopf haelt
+   .ank-kopf unten frei — kein Kasten liegt auf Knopf oder Text.
+
+   display: flow-root haelt den negativen Rand IN diesem Abschnitt. Ohne
+   das wuerde er durch Abschnitt und Navyflaeche hindurch „kollabieren",
+   und die ganze Navyflaeche rueckte um --ank-ueber in den Kopf.
+   z-index 3: Schleier (1) und Stapel (2) des Kopfes haengen im
+   Stapelkontext der Seite; die Kaesten muessen darueber liegen.
+   =========================================================================== */
+/* DIE NAHT: der Kopf endet auf #0A192E, „Zwei Wege" begann auf #102949.
+   Die Flaeche beginnt jetzt auf demselben #0A192E und erreicht ihr Navy
+   800 erst unterhalb der Kaesten; danach laeuft sie wie bisher (Verlauf
+   aus karriere.css) zum Fuss hin wieder ins Navy 900. Keine Kante. */
+.ank-wege {
+  background-image: linear-gradient(180deg,
+    var(--fl-navy900) 0,
+    var(--fl-navy800) clamp(240px, 24vw, 340px),
+    var(--fl-navy900) 100%);
+}
+.ank-zahlen { display: flow-root; }
+.ank-zahlen__reihe {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Vier gemeinsame Zeilen: Bild, Kleinzeile, Wert, Unterzeile. Jeder
+     Kasten erbt sie per subgrid — dadurch stehen die drei Kleinzeilen,
+     Werte und Unterzeilen auf derselben Hoehe, auch wenn eine davon
+     einmal umbricht. */
+  grid-template-rows: repeat(4, auto);
+  column-gap: clamp(16px, 2vw, 28px);
+  margin-top: calc(-1 * var(--ank-ueber));
+}
+.ank-zahl {
+  grid-row: span 4;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 16px;
+  padding: 22px 20px;
+  background: var(--paper);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(10, 25, 46, 0.18), 0 28px 56px -20px rgba(0, 0, 0, 0.55);
+}
+/* Waagerecht (ab 1200 px): Bild links ueber die drei Textzeilen. */
+.ank-zahl__bild {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  align-self: center;
+  width: clamp(96px, 7.8vw, 112px);
+  height: clamp(96px, 7.8vw, 112px);
+}
+.ank-zahl__art,
+.ank-zahl__wert,
+.ank-zahl__zusatz { grid-column: 2; }
+.ank-zahl__art { grid-row: 1; align-self: end; }
+.ank-zahl__wert { grid-row: 2; align-self: center; }
+.ank-zahl__zusatz { grid-row: 3; align-self: start; }
+.ank-zahl__art {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+.ank-zahl__wert {
+  margin-top: 2px;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 2.1vw, 31px);
+  font-weight: 500;
+  line-height: 1.1;
+  /* „bis 5 Mio. €" und „bis 20 Einheiten" nie umbrechen — zusaetzlich zu
+     den geschuetzten Leerzeichen im Markup. */
+  white-space: nowrap;
+  color: var(--navy-800);
+}
+.ank-zahl__zusatz {
+  margin-top: 4px;
+  font-size: 16px;
+  line-height: 1.35;
+  color: var(--ink-mute);
+}
+/* 600 bis 1199 px: Bild ueber dem Text, alles mittig — nebeneinander waere
+   fuer „bis 20 Einheiten" zu wenig Breite. Vier Zeilen, je eine Zeile je
+   Baustein, ueber alle drei Kaesten gleich. */
+@media (min-width: 600px) and (max-width: 1199px) {
+  .ank-zahl {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+    padding: 20px 14px 22px;
+  }
+  .ank-zahl__bild { grid-row: 1; margin-bottom: 8px; width: 104px; height: 104px; }
+  .ank-zahl__art,
+  .ank-zahl__wert,
+  .ank-zahl__zusatz { grid-column: 1; }
+  .ank-zahl__art { grid-row: 2; letter-spacing: 0.14em; }
+  .ank-zahl__wert { grid-row: 3; }
+  .ank-zahl__zusatz { grid-row: 4; }
+}
+/* Telefon: untereinander, Bild links. Nur der erste Kasten ragt in den
+   Kopf; die anderen stehen auf dem Navy. Ein gemeinsames Zeilenraster
+   braucht es hier nicht — die Kaesten stehen nicht nebeneinander. */
+@media (max-width: 599px) {
+  .ank-zahlen__reihe { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; row-gap: 14px; }
+  .ank-zahl { grid-row: auto; grid-template-rows: auto auto auto; padding: 16px 18px; }
+  .ank-zahl__bild { width: 92px; height: 92px; }
+  .ank-zahl__wert { font-size: 27px; }
+  .ank-zahl__art { letter-spacing: 0.16em; }
+}
+/* Unter 380 px passt „bis 20 Einheiten" in 27 px nicht neben das Bild. */
+@media (max-width: 379px) {
+  .ank-zahl { column-gap: 12px; padding-inline: 14px; }
+  .ank-zahl__bild { width: 80px; height: 80px; }
+  .ank-zahl__wert { font-size: 24px; }
+}
+/* „Zwei Wege" beginnt mit eigener Luft unter den Kaesten. */
+.ank-wege .kar-angebot { padding-top: clamp(56px, 6vw, 88px); }
+
+/* ===========================================================================
+   5  KRITERIEN — 30.09.2026, neu nach dem Vorbild „02 · Dein Profil"
+   (.stl-aus in stelle.css). Dasselbe Prinzip: zwoelf Spalten, neun
+   Zeilen, DREI BUENDEL (5 | 4 | 3 Spalten), jedes Buendel traegt genau zwei
+   Kaesten und ist 9 Zeilen hoch — die Flaeche ist ohne Luecke gedeckt, und
+   weil die Trennstelle je Buendel woanders liegt (nach 5, 4, 4 Zeilen),
+   entsteht der Versatz.
+
+       1 Objektarten        5 Spalten, 5 Zeilen   der groesste (laengster Text)
+       2 Zustand            4 Spalten, 4 Zeilen
+       3 Herausforderungen  3 Spalten, 4 Zeilen   der kleinste
+       4 Entwicklung        5 Spalten, 4 Zeilen   breit
+       5 Wohnungsgroessen   4 Spalten, 5 Zeilen   hoch, mit der grossen Zahl
+       6 Nicht gesucht      3 Spalten, 5 Zeilen   schmal und hoch
+
+   Zeilen sind minmax(--einheit, auto): braucht ein Text mehr Platz, waechst
+   die Zeile fuer alle drei Buendel, es reisst keine Luecke auf.
+   ABWEICHUNG VOM VORBILD, auf Wunsch des Kunden: die Kaesten heben sich
+   deutlich ab — weisse Flaeche auf Creme, Kante UND Schatten (dort nur eine
+   Haarlinie auf einem Hauch Sand). Die Zeilen sind hoeher (bis 80 statt
+   66 px), damit die Abbildung mehr Platz bekommt als der Text.
+   =========================================================================== */
+.ank-kriterien { background: var(--fl-creme) linear-gradient(180deg, var(--fl-creme), var(--fl-weiss)); }
+.ank-kriterien__raster {
+  --einheit: clamp(60px, 5.4vw, 80px);
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: minmax(var(--einheit), auto);
+  gap: clamp(16px, 1.5vw, 24px);
+  margin-top: clamp(36px, 3.4vw, 56px);
+}
+.ank-kachel:nth-child(1) { grid-column:  1 / span 5; grid-row: 1 / span 5; }
+.ank-kachel:nth-child(2) { grid-column:  6 / span 4; grid-row: 1 / span 4; }
+.ank-kachel:nth-child(3) { grid-column: 10 / span 3; grid-row: 1 / span 4; }
+.ank-kachel:nth-child(4) { grid-column:  1 / span 5; grid-row: 6 / span 4; }
+.ank-kachel:nth-child(5) { grid-column:  6 / span 4; grid-row: 5 / span 5; }
+.ank-kachel:nth-child(6) { grid-column: 10 / span 3; grid-row: 5 / span 5; }
+
+.ank-kachel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  padding: clamp(20px, 1.7vw, 28px) clamp(18px, 1.7vw, 28px);
+  text-align: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--ank-schatten);
+  transition: border-color 0.45s var(--ease), box-shadow 0.45s var(--ease);
+}
+.ank-kachel:hover {
+  border-color: rgba(168, 135, 79, 0.5);
+  box-shadow: var(--ank-schatten-hoch);
+}
+.ank-kachel__titel {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 1.75vw, 26px);
+  font-weight: 500;
+  line-height: 1.22;
+  color: var(--navy-800);
+  text-wrap: balance;
+}
+/* Der kurze Goldstrich — wie .stl-aus__strich, beim Ueberfahren laenger. */
+.ank-kachel__strich {
+  display: block;
+  flex: none;
+  width: clamp(28px, 2.4vw, 40px);
+  height: 1px;
+  margin: 12px 0 14px;
+  background: var(--gold);
+  transition: transform 0.45s var(--ease);
+}
+.ank-kachel:hover .ank-kachel__strich { transform: scaleX(1.75); }
+.ank-kachel .ank-bild {
+  /* Die Abbildung nimmt die Resthoehe des Kastens — flex-basis 0, damit
+     die Bildgroesse die Kastenhoehe nicht mitbestimmt (dieselbe Falle wie
+     beim Vorbild, dort ausfuehrlich beschrieben). */
+  flex: 1 1 0;
+  width: 100%;
+  min-height: clamp(130px, 11vw, 170px);
+}
+.ank-kachel__zahl {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: clamp(36px, 3vw, 46px);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--navy-800);
+}
+.ank-kachel__text {
+  margin-top: 12px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+.ank-kachel__zahl + .ank-kachel__text { margin-top: 6px; }
+
+/* Tablett: zwei Spalten, gleich hohe Zeilen; Telefon: eine Spalte. Das
+   versetzte Raster braucht die Breite — auf zwei Spalten gerechnet
+   bliebe es ein Schachbrett mit Loechern. */
+@media (max-width: 899px) {
+  .ank-kriterien__raster { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; }
+  .ank-kachel:nth-child(n) { grid-column: auto; grid-row: auto; }
+  .ank-kachel .ank-bild { flex: none; height: clamp(150px, 26vw, 190px); min-height: 0; }
+}
+@media (max-width: 599px) {
+  .ank-kriterien__raster { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .ank-kachel { padding: 22px 20px 24px; }
+  .ank-kachel .ank-bild { height: 170px; }
+}
+
+/* ===========================================================================
+   SZENEN — Kennzahlen und Kriterien, 30.09.2026
+   KUNDENWUNSCH: keine Icons, nichts Verspieltes, sondern kleine
+   Illustrationen in der Machart von imperiaimmobilien.de. Dort sind es
+   Lottie-Animationen; ihre Qualitaet kommt aus einfachen weissen Flaechen
+   (Blaetter, Karten) mit WEICHEM SCHATTEN, aus SCHICHTUNG (zwei Blaetter,
+   leicht gegeneinander verdreht), FEINEN LINIEN in einem Akzentton, EINEM
+   kraeftigen Akzent je Szene und viel Weissraum.
+
+   GEBAUT ALS INLINE-SVG VON HAND, nicht als Bild: gestochen scharf, exakt
+   in der Palette (Weiss/Creme fuer Flaechen, Navy fuer Linien und kraeftige
+   Formen, Sand/Gold als Akzent und fuer feine Linien, Grau, Rot nur fuer
+   die X bei „Nicht gesucht"), jedes Teil ein eigenes Element mit eigener
+   Klasse (.as-*).
+     Schatten   je SVG zwei Filter: as-sch-* (feDropShadow, zweistufig:
+                kurz und hart plus weit und weich, Navy statt Schwarz) und
+                as-blur-* fuer die eigenen Schattenflaechen unter den Karten.
+                Diese Flaechen sind eigene Elemente, damit der Schatten beim
+                Anheben einer Karte wachsen kann — ein Filter laesst sich
+                nicht ueberblenden, ein Element schon.
+   VEREDELUNG (Kundenwunsch „ein klein bisschen realistischer"): leichte
+   senkrechte Verlaeufe auf allen Flaechen (Oberkante heller, Unterkante
+   dunkler), Fenster mit einem hellen Glanz und einer Fensterbank mit
+   feinem Eigenschatten, Schattenstreifen unter Traufe, Balkonen und
+   Vordach, Muenzraender mit Querverlauf. Die Verlaeufe haengen je SVG in
+   <defs> (vg-*); eingefaerbt wird im Erzeugerskript, nicht hier.
+   Geschichte: erste Fassung KI-Bilder in Tonfigur-Optik, zweite Fassung
+   einfache Flaechenzeichnungen; beide verworfen. In der dritten Fassung
+   wurden Objektarten und Nicht gesucht von vier Karten auf EIN Gebaeude
+   reduziert und das Gebaeude aus Entwicklungspotenzial genommen (nur
+   noch das Diagramm, mit Pfeilspitze). Kaufpreis, Umfang,
+   Standort, „Auch mit Herausforderungen" und „Wohnungsgroessen" sind aus
+   der zweiten Fassung geblieben (Kunde: „sehr gut").
+
+   BEWEGUNG — drei Schichten
+   1  EINBLENDEN: ausgeloest ueber .ist-da am Kasten ([data-auf],
+      karriere.js). Einzelschritte hoechstens 600 ms, gestaffelt ueber --i
+      (Kasten) und --d / --w (Teil).
+   2  UEBERFAHREN: .ist-wieder am Kasten, gesetzt von ankauf.js beim
+      Ueberfahren mit der Maus, beim Antippen und bei Tastaturfokus, nach
+      1,6 s wieder entfernt. Die Gesten laufen dann EINMAL ganz durch und
+      enden, wo sie angefangen haben — kein Springen beim Verlassen.
+      Damit Einblenden und Ueberfahren sich nicht ins Gehege kommen, setzt
+      ankauf.js nach dem Einblenden .ist-fertig; die Einblend-Regeln gelten
+      nur fuer .ist-da:not(.ist-fertig).
+      Dazu zwei Gesten, die am Zeiger haengen (reines CSS, :hover): in
+      „Objektarten" hebt sich die Karte und ihre Fenster gehen an, in
+      „Nicht gesucht" schuettelt die Karte kurz „nein".
+   3  RUHE: nur die Ringe um Abzeichen und Nadel pulsieren sanft.
+   OHNE JAVASCRIPT und bei prefers-reduced-motion: kein [data-js='an'],
+   keine Animation, jede Szene steht im Endzustand. Der Endzustand ist der
+   Grundzustand der Zeichnung — nichts steht ausserhalb einer Animation auf
+   opacity 0. Bei „reduce" fallen auch die Ueberblendungen weg.
+   =========================================================================== */
+.ank-bild { position: relative; margin: 0; }
+.ank-bild > svg,
+.ank-zahl__karte {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.ank-zahl__karte { object-fit: contain; }
+/* Drehpunkte beziehen sich auf das Teil selbst. NUR AUF DEN BEWEGTEN
+   TEILEN: transform-origin wirkt auch auf ein transform-Attribut im Markup
+   (die gedrehten Blaetter) — allgemein gesetzt, rutschten sie aus ihrer
+   Lage (einmal gebaut und im Bild gesehen). */
+.as-karte, .as-blatt, .as-neu, .as-ring, .as-halo, .as-abzeichen, .as-punkt,
+.as-x, .as-muenze, .as-euro, .as-nadel, .as-marker, .as-schatten,
+.as-balken, .as-saeule, .as-spitze path { transform-box: fill-box; transform-origin: 50% 50%; }
+.as-balken, .as-saeule, .as-nadel { transform-origin: 50% 100%; }
+/* Linien, die sich zeichnen: pathLength="1" im Markup, ein Strich von der
+   Laenge 1 — bei Versatz 0 (Grundzustand) steht die ganze Linie da. */
+.as-strich { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.as-grau { opacity: 0.82; }
+
+/* --- Bausteine --------------------------------------------------------- */
+@keyframes as-auf {
+  from { opacity: 0; transform: translateY(12px) scale(0.95); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes as-zeichnet { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes as-waechst  { from { transform: scaleY(0); } to { transform: none; } }
+@keyframes as-springt {
+  from { opacity: 0; transform: scale(0.2); }
+  60%  { opacity: 1; transform: scale(1.14); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes as-blende   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes as-fuellt   { from { fill: #E3E7ED; } to { fill: #D9B485; } }
+@keyframes as-faellt {
+  from { opacity: 0; transform: translateY(-38px); }
+  55%  { opacity: 1; transform: translateY(2px); }
+  78%  { transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes as-legt {
+  from { opacity: 0; transform: translateY(-9px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes as-puls {
+  0%   { opacity: 0.9; transform: scale(0.85); }
+  70%  { opacity: 0; transform: scale(1.7); }
+  100% { opacity: 0; transform: scale(1.7); }
+}
+/* nur beim Ueberfahren */
+@keyframes as-hebt {
+  0%, 100% { transform: none; }
+  40%      { transform: translateY(-7px); }
+}
+@keyframes as-schatten-hebt {
+  0%, 100% { transform: none; opacity: 0.22; }
+  40%      { transform: translateY(3px) scale(1.06); opacity: 0.32; }
+}
+@keyframes as-licht {
+  0%, 100% { fill: #E3E7ED; }
+  25%, 70% { fill: #D9B485; }
+}
+@keyframes as-dreht {
+  0%   { transform: none; }
+  45%  { transform: rotate(200deg) scale(1.12); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes as-tupf {
+  0%, 100% { transform: none; }
+  45%      { transform: scale(1.22); }
+}
+@keyframes as-nein {
+  0%, 100% { transform: none; }
+  20%      { transform: translateX(-3px); }
+  45%      { transform: translateX(3px); }
+  70%      { transform: translateX(-2px); }
+}
+@keyframes as-puls-einmal {
+  0%   { opacity: 0.28; transform: none; }
+  50%  { opacity: 0.5; transform: scale(1.5); }
+  100% { opacity: 0.28; transform: none; }
+}
+/* Marker auf der Zustandsskala: von links an seinen Platz; beim
+   Ueberfahren laeuft er die Skala einmal ganz ab (links -61,5, rechts
+   +20,5 Einheiten von seinem Platz). */
+@keyframes as-marker-rein { from { transform: translateX(-61.5px); } to { transform: none; } }
+@keyframes as-marker-lauf {
+  0%, 100% { transform: none; }
+  35%      { transform: translateX(-61.5px); }
+  75%      { transform: translateX(20.5px); }
+}
+
+[data-js='an'] .ank-kachel[data-auf].ist-da,
+[data-js='an'] .ank-zahl[data-auf].ist-da { animation-delay: calc(var(--i) * 70ms); }
+.ank [data-auf] { --t: calc(var(--i, 0) * 70ms + 150ms); }
+
+/* === 1  EINBLENDEN ======================================================= */
+/* Objektarten: die Karte mit dem Haus kommt, dann gehen einzelne Lichter an */
+[data-js='an'] .ist-da:not(.ist-fertig) .as--objekt .as-karte { animation: as-auf 0.5s var(--ease) var(--t) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--objekt .as-fenster--an { animation: as-fuellt 0.35s ease-out calc(var(--t) + 450ms + var(--w) * 60ms) both; }
+/* Zustand: Blaetter, Fenster belegen sich, Marker wandert */
+[data-js='an'] .ist-da:not(.ist-fertig) .as--zustand .as-karte  { animation: as-auf 0.5s var(--ease) calc(var(--t) + var(--d) * 140ms) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--zustand .as-fenster--an { animation: as-fuellt 0.3s ease-out calc(var(--t) + 350ms + var(--w) * 45ms) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--zustand .as-marker { animation: as-marker-rein 0.6s var(--ease) calc(var(--t) + 800ms) both; }
+/* Herausforderungen: drei Haken, dann springt das Abzeichen auf */
+[data-js='an'] .ist-da:not(.ist-fertig) .as--pruef .as-karte     { animation: as-auf 0.45s var(--ease) var(--t) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--pruef .as-haken     { animation: as-zeichnet 0.35s var(--ease) calc(var(--t) + 350ms + var(--d) * 200ms) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--pruef .as-abzeichen { animation: as-springt 0.45s var(--ease) calc(var(--t) + 1050ms) both; }
+/* Entwicklung: Saeulen wachsen, Linie zeichnet sich, die Pfeilspitze setzt
+   am Ende an, Punkt mit Halo auf der Ziellinie */
+[data-js='an'] .ist-da:not(.ist-fertig) .as--entw .as-saeule   { animation: as-waechst 0.45s var(--ease) calc(var(--t) + var(--d) * 50ms) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--entw .as-linie    { animation: as-zeichnet 0.6s ease-in-out calc(var(--t) + 420ms) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--entw .as-spitze path { animation: as-springt 0.35s var(--ease) calc(var(--t) + 1000ms) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--entw .as-punkt,
+[data-js='an'] .ist-da:not(.ist-fertig) .as--entw .as-halo     { animation: as-springt 0.4s var(--ease) calc(var(--t) + 1040ms) both; }
+/* Wohnungsgroessen: Waende zeichnen sich, Raeume fuellen sich, Masse */
+[data-js='an'] .ist-da:not(.ist-fertig) .as--plan .as-wand  { animation: as-zeichnet 0.6s ease-in-out var(--t) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--plan .as-wand2 { animation: as-zeichnet 0.45s ease-in-out calc(var(--t) + 380ms) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--plan .as-raum  { animation: as-blende 0.4s ease-out calc(var(--t) + 500ms + var(--d) * 110ms) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--plan .as-mass  { animation: as-zeichnet 0.45s ease-out calc(var(--t) + 820ms) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--plan .as-enden { animation: as-blende 0.3s ease-out calc(var(--t) + 1150ms) both; }
+/* Nicht gesucht: die Karte mit dem Rohbau kommt, das rote X springt auf */
+[data-js='an'] .ist-da:not(.ist-fertig) .as--nicht .as-karte { animation: as-auf 0.45s var(--ease) var(--t) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--nicht .as-x     { animation: as-springt 0.4s var(--ease) calc(var(--t) + 520ms) both; }
+/* Kennzahlen */
+[data-js='an'] .ist-da:not(.ist-fertig) .as--geld .as-muenze  { animation: as-legt 0.3s var(--ease) calc(var(--t) + var(--d) * 45ms) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--geld .as-euro    { animation: as-faellt 0.55s var(--ease) calc(var(--t) + 560ms) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--einh .as-einheit { animation: as-fuellt 0.25s ease-out calc(var(--t) + 100ms + var(--w) * 28ms) both; }
+[data-js='an'] .ist-da:not(.ist-fertig) .as--ort .as-nadel    { animation: as-faellt 0.55s var(--ease) calc(var(--t) + 200ms) both; }
+
+/* === 3  RUHE ============================================================= */
+[data-js='an'] .ist-da .as--pruef .as-ring      { animation: as-puls 2.8s ease-out calc(var(--t) + 1600ms) infinite; }
+[data-js='an'] .ist-da .as--ort .as-ring--puls  { animation: as-puls 2.4s ease-out calc(var(--t) + 800ms) infinite; }
+
+/* === 2  UEBERFAHREN — einmal ganz durch ================================= */
+[data-js='an'] .ist-wieder .as--objekt .as-blatt    { animation: as-hebt 0.6s var(--ease) calc(var(--d) * 90ms); }
+[data-js='an'] .ist-wieder .as--objekt .as-schatten { animation: as-schatten-hebt 0.6s var(--ease) calc(var(--d) * 90ms); }
+[data-js='an'] .ist-wieder .as--objekt .as-fenster:not(.as-fenster--an) { animation: as-licht 1.1s ease-in-out calc(var(--w) * 25ms); }
+
+[data-js='an'] .ist-wieder .as--zustand .as-fenster--an { animation: as-fuellt 0.3s ease-out calc(var(--w) * 45ms) both; }
+[data-js='an'] .ist-wieder .as--zustand .as-marker      { animation: as-marker-lauf 1.4s ease-in-out; }
+
+[data-js='an'] .ist-wieder .as--pruef .as-haken     { animation: as-zeichnet 0.35s var(--ease) calc(var(--d) * 160ms) both; }
+[data-js='an'] .ist-wieder .as--pruef .as-abzeichen { animation: as-dreht 0.8s var(--ease) 0.45s; }
+
+[data-js='an'] .ist-wieder .as--entw .as-linie    { animation: as-zeichnet 0.6s ease-in-out both; }
+[data-js='an'] .ist-wieder .as--entw .as-spitze path { animation: as-springt 0.35s var(--ease) 0.55s both; }
+[data-js='an'] .ist-wieder .as--entw .as-halo     { animation: as-puls-einmal 0.6s ease-in-out 0.6s; }
+[data-js='an'] .ist-wieder .as--entw .as-punkt    { animation: as-tupf 0.4s var(--ease) 0.6s; }
+
+[data-js='an'] .ist-wieder .as--plan .as-mass  { animation: as-zeichnet 0.45s ease-out both; }
+[data-js='an'] .ist-wieder .as--plan .as-raum  { animation: as-blende 0.4s ease-out calc(var(--d) * 110ms) both; }
+
+[data-js='an'] .ist-wieder .as--nicht .as-blatt { animation: as-nein 0.3s ease-in-out calc(var(--d) * 90ms); }
+[data-js='an'] .ist-wieder .as--nicht .as-x     { animation: as-tupf 0.35s var(--ease) calc(var(--d) * 90ms + 0.1s); }
+
+[data-js='an'] .ist-wieder .as--geld .as-euro    { animation: as-faellt 0.55s var(--ease) both; }
+[data-js='an'] .ist-wieder .as--geld .as-muenze  { animation: as-legt 0.3s var(--ease) calc(var(--d) * 35ms) both; }
+[data-js='an'] .ist-wieder .as--einh .as-einheit { animation: as-fuellt 0.25s ease-out calc(var(--w) * 30ms) both; }
+[data-js='an'] .ist-wieder .as--ort .as-nadel    { animation: as-faellt 0.55s var(--ease) both; }
+
+/* Am Zeiger: Objektarten — die ueberfahrene Karte hebt sich, Licht geht an.
+   Nicht gesucht — die Karte schuettelt kurz „nein", das X tupft. */
+.as--objekt .as-blatt,
+.as--objekt .as-schatten { transition: transform 0.35s var(--ease), opacity 0.35s var(--ease); }
+.as--objekt .as-fenster { transition: fill 0.3s ease-out; transition-delay: calc(var(--w) * 20ms); }
+.as--objekt .as-karte:hover .as-blatt    { transform: translateY(-6px); }
+.as--objekt .as-karte:hover .as-schatten { transform: translateY(3px) scale(1.06); opacity: 0.34; }
+.as--objekt .as-karte:hover .as-fenster  { fill: #D9B485; }
+.ank-kachel:not(.ist-da) .as--nicht .as-karte:hover .as-blatt,
+.ank-kachel.ist-fertig .as--nicht .as-karte:hover .as-blatt { animation: as-nein 0.3s ease-in-out; }
+.ank-kachel:not(.ist-da) .as--nicht .as-karte:hover .as-x,
+.ank-kachel.ist-fertig .as--nicht .as-karte:hover .as-x { animation: as-tupf 0.35s var(--ease); }
+
+/* Ruhige Darstellung: auch wer die Einstellung erst nach dem Laden
+   umstellt, sieht sofort den Endzustand; keine Ueberblendung. */
+@media (prefers-reduced-motion: reduce) {
+  .as *,
+  [data-js='an'] .ist-da .as *,
+  [data-js='an'] .ist-wieder .as *,
+  .ank-kachel .as-karte:hover * { animation: none !important; transition: none !important; }
+  .as--objekt .as-karte:hover .as-blatt,
+  .as--objekt .as-karte:hover .as-schatten { transform: none; }
+  .ank-kachel,
+  .ank-kachel__strich { transition: none; }
+  .ank-kachel:hover .ank-kachel__strich { transform: none; }
+}

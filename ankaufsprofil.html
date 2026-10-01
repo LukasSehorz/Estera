@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- =====================================================================
+     ANKAUFSPROFIL — neue Unterseite, 29.09.2026.
+
+     QUELLEN: Estera_Ankaufsprofil_Bayern_2026.pdf (liegt unter
+     assets/pdf/) und die Kundentexte zum Ankaufsprofil. Kaufpreis „bis
+     5 Mio. €" wie im PDF, KEINE Untergrenze. Zwei getrennte Bereiche
+     (Eigentuemer / Makler), ein gemeinsames PDF, Kontakt nur per Mail an
+     ankauf@estera.immobilien, kein Formular.
+
+     BEWUSST NICHT AUF DER SEITE: die internen Punkte des Kunden
+     („Unsere Strategie", „Worauf wir bei der Pruefung besonders achten" —
+     Einkaufspreis, Projektmarge, Sicherheitsreserve, Exit). Sie sind
+     ausdruecklich intern und duerfen nicht veroeffentlicht werden.
+
+     ANREDE: DU. Die Kundentexte zum Ankauf waren im Sie geschrieben.
+     Entscheidung des Kunden vom 29.09.2026: die Seite wird durchgehend
+     geduzt, einheitlich mit der restlichen Website. Alle Kundentexte sind
+     sinngemaess ins Du uebertragen, auch Betreffzeilen der Mailknoepfe
+     und Alternativtexte.
+
+     AUFBAU nach dem Vorbild egeundgeiss.de (nur der Aufbau, nicht der
+     Stil). Seit der Ueberarbeitung vom 29.09.2026: Kopf mit Video ·
+     Kennzahlenleiste · zwei Wege (Navy, zwei Karten) · Ankaufsgebiet mit
+     Karte · Kriterien · Abschluss wie der Fuss des PDF. Die Bereiche
+     Eigentuemer und Makler sind Pop-ups (<dialog>), keine Abschnitte mehr.
+     ===================================================================== -->
+<title>Ankaufsprofil — Estera kauft Wohnimmobilien in Bayern</title>
+<meta name="description" content="Estera kauft Bestandsimmobilien mit Entwicklungspotenzial in ganz Bayern, Schwerpunkt Südbayern: bis 5 Mio. € Kaufpreis, bis 20 Einheiten. Für Eigentümer, Makler und Partner – diskret und unverbindlich.">
+<!-- SUCHMASCHINEN: wie auf allen uebrigen Seiten KEIN robots-Eintrag. Seit
+     dem Livegang am 11.09.2026 duerfen die Seiten indexiert werden; auch
+     _headers setzt keinen X-Robots-Tag mehr. -->
+<link rel="icon" href="assets/img/favicon.svg?v=c05g" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/estera-icon.svg?v=c05g">
+<meta name="theme-color" content="#102949">
+<!-- Ohne ?v=c05g — die Adresse muss Zeichen fuer Zeichen mit fonts.css
+     uebereinstimmen, sonst laedt der Browser den Schnitt doppelt. Gleiche
+     Begruendung wie auf karriere.html. -->
+<link rel="preload" href="assets/fonts/CormorantGaramond-300-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/Jost-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="assets/video/ankauf-hero-poster.jpg?v=c05g" type="image/jpeg" fetchpriority="high">
+
+<!-- REIHENFOLGE IST ABSICHT
+     fonts.css und base.css: Token, Kopfleiste, Wortmarke, Menue, Knoepfe.
+     schluss.css: die Fusszeile (.fuss__*).
+     karriere.css: Kopfbereich mit Video und Schleier (.kar-kopf*), die
+     Knoepfe (.kar-knopf*), der Balken (.kar-balken) und die Einblendung
+     beim Rollen ([data-auf] / .ist-da) — dieselbe Mechanik wie auf der
+     Karriereseite, nicht nachgebaut, sondern mitbenutzt.
+     ankauf.css kommt ZULETZT und gehoert allein dieser Seite.
+     Keine bestehende CSS-Datei wurde fuer diese Seite veraendert. -->
+<link rel="stylesheet" href="assets/css/fonts.css?v=c05g">
+<link rel="stylesheet" href="assets/css/base.css?v=c05g">
+<link rel="stylesheet" href="assets/css/schluss.css?v=c05g">
+<link rel="stylesheet" href="assets/css/karriere.css?v=c05g">
+<link rel="stylesheet" href="assets/css/ankauf.css?v=c05g">
+<link rel="stylesheet" href="assets/css/ankauf-popup.css?v=c05g"><!-- Inhalt der zwei Pop-ups, 30.09.2026 -->
+<!-- Merkt vor dem ersten Anstrich, dass Javascript laeuft. Nur dann
+     bleiben die zwei Pop-ups zu, bis jemand sie oeffnet; ohne Javascript
+     stehen sie als gewoehnliche Abschnitte auf der Seite (ankauf.css). -->
+<script>document.documentElement.classList.add('ank-js');</script>
+</head>
+<body>
+
+<!-- =====================================================================
+     KOPF — Zeichen fuer Zeichen wie auf karriere.html, mit dem neuen
+     Eintrag „Ankaufsprofil" rechts neben „Karriere".
+     site-header--invert, weil der Kopfbereich darunter dunkel ist (Video
+     mit Navy-Schleier) — dieselbe Lage wie auf der Karriereseite.
+     ===================================================================== -->
+<header class="site-header site-header--invert" data-header>
+
+  <!-- NAVIGATION UMSORTIERT 31.08.2026 (Kundenwunsch):
+       links   Vorteile · Leistungen
+       rechts  Ablauf · Karriere · Kontakt (Kontakt abgesetzt, .kopfnav__cta)
+       „Ablauf" stand bis heute LINKS und ist nach rechts vor „Karriere"
+       gewandert. Sonst hat sich an den Punkten nichts geaendert.
+
+       DAMIT STEHEN LINKS ZWEI UND RECHTS DREI PUNKTE. Die Wortmarke bleibt
+       trotzdem mittig: .site-header ist ein Raster aus
+       minmax(0,1fr) auto minmax(0,1fr) (base.css), die Wortmarke sitzt in
+       der Mittelspalte, und die beiden Navigationen draengen sie nicht.
+       Nachgemessen, dass keine Seite an die Wortmarke stoesst — die Werte
+       stehen in der Rueckmeldung. Unterhalb von 1340 px uebernimmt der
+       Burger (base.css, @media min-width 1340px).
+
+       Der Anker ist geprueft, nicht geraten: variante-a.html traegt
+       <section class="abl" id="ablauf">. -->
+  <nav class="kopfnav kopfnav--links" aria-label="Abschnitte dieser Seite">
+    <ul>
+      <li><a href="variante-a.html?v=c05g#warum-immobilien">Warum Immobilien</a></li>
+      <li><a href="variante-a.html?v=c05g#leistungen">Warum Estera</a></li>
+      <li><a href="variante-a.html?v=c05g#ablauf">Ablauf</a></li>
+    </ul>
+  </nav>
+
+  <a class="wordmark" href="./variante-a.html" aria-label="Estera — Startseite">
+    <span class="wordmark__name">ESTERA</span>
+    <span class="wordmark__sub">Immobilien</span>
+  </a>
+
+  <nav class="kopfnav kopfnav--rechts" aria-label="Seiten">
+    <ul>
+      <li><a href="karriere.html?v=c05g">Karriere</a></li>
+      <li><a href="ankaufsprofil.html?v=c05g" aria-current="page">Ankaufsprofil</a></li>
+      <li class="kopfnav__cta"><a href="kontakt.html?v=c05g">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <button class="burger" type="button" data-menu-open aria-expanded="false" aria-controls="hauptmenue">
+    <span class="burger__label">Menü</span>
+    <span class="burger__lines" aria-hidden="true"><span></span><span></span><span></span></span>
+  </button>
+</header>
+
+<main class="kar ank">
+
+<!-- =====================================================================
+     1  KOPFBEREICH — dieselbe Mechanik wie karriere.html
+     <video> muted autoplay loop playsinline mit Standbild, darueber der
+     Navy-Schleier aus karriere.css (.kar-kopf::before). Bei
+     prefers-reduced-motion blendet karriere.css das Video aus und das
+     Standbild im Grund (.kar-kopf__grund, Hintergrundbild in ankauf.css)
+     traegt allein; karriere.js haelt das Video zusaetzlich an.
+
+     DAS VIDEO: assets/video/ankauf-hero.mp4 / .webm, Standbild
+     ankauf-hero-poster.jpg — 1920 x 1080, 8,04 s, ohne Tonspur. Erzeugt
+     mit Kling 3.0 ueber kie.ai (Modell kling-3.0/video, pro, vier
+     Einstellungen zu je 2 s), danach farblich an kar-hero angeglichen per
+     ffmpeg (Saettigung 0,62, leicht abgedunkelt, Blauverschiebung).
+     WebM zuerst, MP4 als Rueckfall — Safari nimmt das MP4.
+
+     UEBERSCHRIFT (Kundenwunsch 29.09.2026): „Wir kaufen Immobilien.
+     Bayernweit." Im PDF steht „Wohnimmobilien"; der Kunde will hier das
+     allgemeinere Wort. Zweite Haelfte kursiv in Sand, dieselbe
+     Akzentregel wie im Kopf der Karriereseite.
+     EINLEITUNG (Kundenwunsch 29.09.2026): der oeffentliche Ein-Satz-
+     Wortlaut, gekuerzt; „mit Entwicklungs- und Optimierungspotenzial"
+     ist auf Wunsch des Kunden entfallen.
+     Kein „Herzlich willkommen" — das ist eine Unterseite.
+     ===================================================================== -->
+<section class="kar-kopf ank-kopf" aria-labelledby="ank-kopf-titel">
+
+  <div class="kar-kopf__grund" aria-hidden="true">
+    <video class="kar-kopf__video"
+           autoplay muted loop playsinline preload="auto"
+           poster="assets/video/ankauf-hero-poster.jpg?v=c05g"
+           width="1920" height="1080"
+           tabindex="-1" data-hero-video>
+      <source src="assets/video/ankauf-hero.webm?v=c05g" type="video/webm">
+      <source src="assets/video/ankauf-hero.mp4?v=c05g" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="kar-mitte">
+    <div class="kar-kopf__stapel">
+
+      <p class="kar-kopf__kennzeile" data-auf>
+        <span class="kar-balken kar-balken--hell">Ankaufsprofil</span>
+      </p>
+
+      <h1 class="kar-titel kar-kopf__titel ank-kopf__titel" id="ank-kopf-titel" data-auf>Wir kaufen Immobilien. <span class="kar-akzent">Bayernweit.</span></h1>
+
+      <p class="ank-kopf__einleitung" data-auf>Wir erwerben Bestandsimmobilien in Bayern – von einzelnen Eigentumswohnungen und Wohnungspaketen bis hin zu Mehrfamilienhäusern und Wohnanlagen.</p>
+
+      <!-- Primaer: das PDF in einem neuen Tab. Sekundaer: Mail an den
+           Ankauf, Betreff und Geruest im Du vorbelegt. -->
+      <p class="kar-kopf__knoepfe" data-auf>
+        <a class="kar-knopf kar-knopf--voll" href="assets/pdf/Estera_Ankaufsprofil_Bayern_2026.pdf" target="_blank" rel="noopener">Ankaufsprofil ansehen</a>
+        <a class="kar-knopf kar-knopf--linie" href="mailto:ankauf@estera.immobilien?subject=Objektangebot%20%E2%80%93%20Ankauf%20Estera&amp;body=Hallo%20Estera-Team%2C%0A%0Aich%20m%C3%B6chte%20euch%20eine%20Immobilie%20anbieten.%0A%0AOrt%20/%20Adresse%3A%0AObjektart%3A%0AWohnfl%C3%A4che%20/%20Anzahl%20Einheiten%3A%0AVermietet%20/%20leer%3A%0AKaufpreisvorstellung%3A%0A%0A">Objekt anbieten</a>
+      </p>
+
+      <p class="kar-karte__art ank-kopf__zeile" data-auf>Kurzfristig. Diskret. Unverbindlich.</p>
+
+    </div>
+  </div>
+</section>
+
+
+
+<!-- =====================================================================
+     3  ZWEI WEGE — Navy mit zwei cremefarbenen Karten
+     Umgebaut 29.09.2026 (Kundenwunsch) nach dem Vorbild von karriere.html,
+     Abschnitt „Zwei Rollen. Ein gemeinsamer Anspruch." Die Klassen sind
+     von dort UEBERNOMMEN, nicht nachgebaut (karriere.css ist eingebunden):
+       .kar-navy + .fl-navy800   die randlose Navyflaeche
+       .kar-angebot / __raute    Kapitelblatt mit Rautenpunkt, Titel weiss,
+                                 Akzent in Sand
+       .kar-stellen, .kar-liste[data-stellen], .kar-karte--klick
+                                 die zwei cremefarbenen Kaesten: Bild 3:2,
+                                 grosser fetter Titel, Kleinzeile, zwei
+                                 Knoepfe; Einblendung als Gruppe
+     Einzige Abweichung, in ankauf.css: die Kleinzeile steht bei 16 statt
+     12,5 bis 14 px (Untergrenze fuer Text auf dieser Seite).
+     Ein Klick auf die Kartenflaeche loest „Mehr erfahren" aus; das
+     erledigt karriere.js ueber [data-karte-ziel], unveraendert.
+     „Mehr erfahren" oeffnet das Pop-up (ankauf.js). OHNE JAVASCRIPT ist es
+     ein gewoehnlicher Sprungverweis auf #eigentuemer bzw. #makler; die
+     Pop-ups stehen dann als Abschnitte weiter unten.
+     Die Kleinzeile „Zwei Wege zu uns" ist auf Kundenwunsch entfallen.
+     KLEINZEILEN DER KARTEN: am 30.09.2026 probeweise ersetzt („Direkt
+     verkaufen · Ohne Inserat · Persoenlich begleitet" / „Klare Zu- oder
+     Absage · Direkt zum Entscheider · Kontakte geschuetzt") und auf
+     Kundenwunsch am selben Tag wieder zurueckgenommen. Es gilt wieder
+     „Direkt · Diskret · Persoenlich" und „Schnell · Klar · Verlaesslich".
+     BILDER: Standbilder aus ankauf-hero.mp4 (ffmpeg), auf 3:2
+     zugeschnitten, 1920 x 1280, webp + jpg. Eigentuemer: Aussenansicht bei
+     0,8 s. Makler: Innenansicht bei 7,5 s; neben der Aussenansicht wirkt
+     sie eigenstaendiger als die Fassade bei 3,5 s, die der ersten Karte
+     zu aehnlich gewesen waere.
+     ===================================================================== -->
+<div class="kar-navy fl-navy800 ank-wege">
+
+<!-- =====================================================================
+     2  KENNZAHLEN ALS DREI KAESTEN — 30.09.2026 (Kundenwunsch)
+     Ersetzt die flache weisse Leiste. Drei weisse Kaesten, die GENAU AUF
+     DER GRENZE zwischen Kopf und „Zwei Wege" sitzen: die obere Haelfte
+     ragt in den Kopf (negativer Rand, ankauf.css), die untere liegt auf dem
+     Navy von „Zwei Wege". Der Block steht deshalb als erster Teil IN der
+     Navyflaeche (.kar-navy).
+     DIE NAHT NAVY / NAVY: der Kopf endet auf #0A192E (Schleier aus
+     karriere.css), „Zwei Wege" begann auf #102949. Die Flaeche beginnt
+     jetzt auf demselben #0A192E und laeuft unter den Kaesten in ihr Navy
+     800 hinein (ankauf.css, .ank-wege) — es gibt keine Kante mehr.
+     Erste Fassung desselben Tages: Kaesten auf einem cremefarbenen
+     Streifen; vom Kunden verworfen („untere Haelfte auf Navy").
+     Die drei Kaesten teilen sich ein Raster (subgrid): Kleinzeile, Wert und
+     Unterzeile stehen in allen dreien auf derselben Hoehe.
+     ABBILDUNGEN: Inline-SVG von Hand, wie die Kriterien (siehe dort).
+     ===================================================================== -->
+<section class="ank-zahlen" aria-label="Eckdaten des Ankaufsprofils">
+  <div class="ank-mitte">
+    <ul class="ank-zahlen__reihe">
+      <li class="ank-zahl" data-auf style="--i:0">
+        <figure class="ank-bild ank-zahl__bild" aria-hidden="true"><svg class="as as--geld" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+<defs><linearGradient id="vg-creme-geld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF8F3"/><stop offset="1" stop-color="#EDE4D6"/></linearGradient><linearGradient id="vg-navy-geld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24406A"/><stop offset="1" stop-color="#0B203D"/></linearGradient><linearGradient id="vg-sand-geld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8CBA4"/><stop offset="1" stop-color="#CCA46C"/></linearGradient><linearGradient id="vg-grau-geld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1F3F6"/><stop offset="1" stop-color="#D5DBE3"/></linearGradient><linearGradient id="vg-weiss-geld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F4F1EC"/></linearGradient><linearGradient id="vg-sandhell-geld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5E8D5"/><stop offset="1" stop-color="#E8D3B3"/></linearGradient><linearGradient id="vg-glanz-geld" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.62"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.12"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient><linearGradient id="vg-rand-geld" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#94733F"/><stop offset="0.35" stop-color="#C19A62"/><stop offset="0.6" stop-color="#E2C596"/><stop offset="1" stop-color="#9C7B45"/></linearGradient><filter id="as-sch-geld" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#102949" flood-opacity="0.13"/></filter></defs>
+<g transform="translate(60 62) scale(1.12) translate(-60 -62)"><ellipse cx="60" cy="108" rx="46" ry="5" fill="#E3E7ED"/><g class="as-muenze" style="--d:0"><rect x="19" y="98" width="30" height="7" fill="url(#vg-rand-geld)"/><ellipse cx="34" cy="105" rx="15" ry="4.5" fill="url(#vg-rand-geld)"/><ellipse cx="34" cy="98" rx="15" ry="4.5" fill="url(#vg-sand-geld)" stroke="#A8874F" stroke-width="1"/></g><g class="as-muenze" style="--d:1"><rect x="19" y="90" width="30" height="7" fill="url(#vg-rand-geld)"/><ellipse cx="34" cy="97" rx="15" ry="4.5" fill="url(#vg-rand-geld)"/><ellipse cx="34" cy="90" rx="15" ry="4.5" fill="url(#vg-sand-geld)" stroke="#A8874F" stroke-width="1"/></g><g class="as-muenze" style="--d:2"><rect x="19" y="82" width="30" height="7" fill="url(#vg-rand-geld)"/><ellipse cx="34" cy="89" rx="15" ry="4.5" fill="url(#vg-rand-geld)"/><ellipse cx="34" cy="82" rx="15" ry="4.5" fill="url(#vg-sand-geld)" stroke="#A8874F" stroke-width="1"/></g><g class="as-muenze" style="--d:3"><rect x="19" y="74" width="30" height="7" fill="url(#vg-rand-geld)"/><ellipse cx="34" cy="81" rx="15" ry="4.5" fill="url(#vg-rand-geld)"/><ellipse cx="34" cy="74" rx="15" ry="4.5" fill="url(#vg-sand-geld)" stroke="#A8874F" stroke-width="1"/></g><g class="as-muenze" style="--d:4"><rect x="49" y="98" width="30" height="7" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="105" rx="15" ry="4.5" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="98" rx="15" ry="4.5" fill="url(#vg-sand-geld)" stroke="#A8874F" stroke-width="1"/></g><g class="as-muenze" style="--d:5"><rect x="49" y="90" width="30" height="7" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="97" rx="15" ry="4.5" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="90" rx="15" ry="4.5" fill="url(#vg-sand-geld)" stroke="#A8874F" stroke-width="1"/></g><g class="as-muenze" style="--d:6"><rect x="49" y="82" width="30" height="7" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="89" rx="15" ry="4.5" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="82" rx="15" ry="4.5" fill="url(#vg-sand-geld)" stroke="#A8874F" stroke-width="1"/></g><g class="as-muenze" style="--d:7"><rect x="49" y="74" width="30" height="7" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="81" rx="15" ry="4.5" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="74" rx="15" ry="4.5" fill="url(#vg-sand-geld)" stroke="#A8874F" stroke-width="1"/></g><g class="as-muenze" style="--d:8"><rect x="49" y="66" width="30" height="7" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="73" rx="15" ry="4.5" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="66" rx="15" ry="4.5" fill="url(#vg-sand-geld)" stroke="#A8874F" stroke-width="1"/></g><g class="as-muenze" style="--d:9"><rect x="49" y="58" width="30" height="7" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="65" rx="15" ry="4.5" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="58" rx="15" ry="4.5" fill="url(#vg-sand-geld)" stroke="#A8874F" stroke-width="1"/></g><g class="as-muenze" style="--d:10"><rect x="49" y="50" width="30" height="7" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="57" rx="15" ry="4.5" fill="url(#vg-rand-geld)"/><ellipse cx="64" cy="50" rx="15" ry="4.5" fill="url(#vg-sand-geld)" stroke="#A8874F" stroke-width="1"/></g><g class="as-euro"><circle cx="94" cy="84" r="17" fill="url(#vg-sand-geld)" stroke="#A8874F" stroke-width="2.4"/><circle cx="94" cy="84" r="12.5" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.8"/><path d="M99.5 77.5 A8 8 0 1 0 99.5 90.5 M85 82 H96 M85 86.5 H95" fill="none" stroke="#102949" stroke-width="2.2" stroke-linecap="round"/></g></g></svg></figure>
+        <p class="ank-zahl__art">Kaufpreis</p>
+        <p class="ank-zahl__wert">bis&nbsp;5&nbsp;Mio.&nbsp;€</p>
+        <p class="ank-zahl__zusatz">objektbezogene Prüfung</p>
+      </li>
+      <li class="ank-zahl" data-auf style="--i:1">
+        <figure class="ank-bild ank-zahl__bild" aria-hidden="true"><svg class="as as--einh" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+<defs><linearGradient id="vg-creme-einh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF8F3"/><stop offset="1" stop-color="#EDE4D6"/></linearGradient><linearGradient id="vg-navy-einh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24406A"/><stop offset="1" stop-color="#0B203D"/></linearGradient><linearGradient id="vg-sand-einh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8CBA4"/><stop offset="1" stop-color="#CCA46C"/></linearGradient><linearGradient id="vg-grau-einh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1F3F6"/><stop offset="1" stop-color="#D5DBE3"/></linearGradient><linearGradient id="vg-weiss-einh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F4F1EC"/></linearGradient><linearGradient id="vg-sandhell-einh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5E8D5"/><stop offset="1" stop-color="#E8D3B3"/></linearGradient><linearGradient id="vg-glanz-einh" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.62"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.12"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient><linearGradient id="vg-rand-einh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#94733F"/><stop offset="0.35" stop-color="#C19A62"/><stop offset="0.6" stop-color="#E2C596"/><stop offset="1" stop-color="#9C7B45"/></linearGradient><filter id="as-sch-einh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#102949" flood-opacity="0.13"/></filter></defs>
+<line x1="12" y1="108" x2="108" y2="108" stroke="#BCC5D1" stroke-width="2" stroke-linecap="round"/><rect x="24" y="16" width="72" height="92" rx="2" fill="url(#vg-creme-einh)" stroke="#102949" stroke-width="2.4"/><rect x="20" y="11" width="80" height="7" rx="2" fill="url(#vg-navy-einh)"/><rect class="as-einheit" style="--w:0" x="32" y="90" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="32" y="90" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="31.2" y="100" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="38" y1="90" x2="38" y2="100" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:1" x="47.5" y="90" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="47.5" y="90" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="46.7" y="100" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="53.5" y1="90" x2="53.5" y2="100" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:2" x="63" y="90" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="63" y="90" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="62.2" y="100" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="69" y1="90" x2="69" y2="100" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:3" x="78.5" y="90" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="78.5" y="90" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="77.7" y="100" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="84.5" y1="90" x2="84.5" y2="100" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:4" x="32" y="74" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="32" y="74" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="31.2" y="84" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="38" y1="74" x2="38" y2="84" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:5" x="47.5" y="74" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="47.5" y="74" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="46.7" y="84" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="53.5" y1="74" x2="53.5" y2="84" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:6" x="63" y="74" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="63" y="74" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="62.2" y="84" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="69" y1="74" x2="69" y2="84" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:7" x="78.5" y="74" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="78.5" y="74" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="77.7" y="84" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="84.5" y1="74" x2="84.5" y2="84" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:8" x="32" y="58" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="32" y="58" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="31.2" y="68" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="38" y1="58" x2="38" y2="68" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:9" x="47.5" y="58" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="47.5" y="58" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="46.7" y="68" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="53.5" y1="58" x2="53.5" y2="68" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:10" x="63" y="58" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="63" y="58" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="62.2" y="68" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="69" y1="58" x2="69" y2="68" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:11" x="78.5" y="58" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="78.5" y="58" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="77.7" y="68" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="84.5" y1="58" x2="84.5" y2="68" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:12" x="32" y="42" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="32" y="42" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="31.2" y="52" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="38" y1="42" x2="38" y2="52" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:13" x="47.5" y="42" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="47.5" y="42" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="46.7" y="52" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="53.5" y1="42" x2="53.5" y2="52" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:14" x="63" y="42" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="63" y="42" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="62.2" y="52" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="69" y1="42" x2="69" y2="52" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:15" x="78.5" y="42" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="78.5" y="42" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="77.7" y="52" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="84.5" y1="42" x2="84.5" y2="52" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:16" x="32" y="26" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="32" y="26" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="31.2" y="36" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="38" y1="26" x2="38" y2="36" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:17" x="47.5" y="26" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="47.5" y="26" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="46.7" y="36" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="53.5" y1="26" x2="53.5" y2="36" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:18" x="63" y="26" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="63" y="26" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="62.2" y="36" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="69" y1="26" x2="69" y2="36" stroke="#FFFFFF" stroke-width="1"/><rect class="as-einheit" style="--w:19" x="78.5" y="26" width="12" height="10" rx="1.5" fill="#D9B485"/><rect x="78.5" y="26" width="12" height="5.5" fill="url(#vg-glanz-einh)" pointer-events="none"/><rect x="77.7" y="36" width="13.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="84.5" y1="26" x2="84.5" y2="36" stroke="#FFFFFF" stroke-width="1"/></svg></figure>
+        <p class="ank-zahl__art">Umfang</p>
+        <p class="ank-zahl__wert">bis&nbsp;20&nbsp;Einheiten</p>
+        <p class="ank-zahl__zusatz">einzeln oder im Portfolio</p>
+      </li>
+      <li class="ank-zahl" data-auf style="--i:2">
+        <figure class="ank-bild ank-zahl__bild" aria-hidden="true"><img class="ank-zahl__karte" src="assets/img/ankauf/bayern-karte.svg?v=c05g" width="660" height="688" alt="" loading="lazy" decoding="async"><svg class="as as--ort" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><defs><linearGradient id="vg-navy-ort" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24406A"/><stop offset="1" stop-color="#0B203D"/></linearGradient></defs><defs><linearGradient id="vg-navy-ort" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24406A"/><stop offset="1" stop-color="#0B203D"/></linearGradient></defs><ellipse class="as-ring as-ring--puls" cx="53.1" cy="72.6" rx="7" ry="3" fill="#D9B485" fill-opacity="0.5"/><g class="as-nadel"><path d="M53.1 72.2 C49 64 44.5 60 44.5 54 A8.6 8.6 0 0 1 61.7 54 C61.7 60 57.2 64 53.1 72.2 Z" fill="url(#vg-navy-ort)" stroke="#FFFFFF" stroke-width="1.2"/><circle cx="53.1" cy="54" r="3.4" fill="#D9B485"/></g></svg></figure>
+        <p class="ank-zahl__art">Standort</p>
+        <p class="ank-zahl__wert">Bayern</p>
+        <p class="ank-zahl__zusatz">Schwerpunkt Südbayern</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+<section class="kar-angebot" aria-labelledby="ank-wege-titel">
+  <div class="kar-mitte">
+    <p class="kar-angebot__raute" aria-hidden="true" data-auf><span></span></p>
+    <h2 class="kar-titel" id="ank-wege-titel" data-auf>Du verkaufst selbst oder bringst ein Objekt ein? <span class="kar-akzent">Beides ist willkommen.</span></h2>
+  </div>
+</section>
+
+<section class="kar-stellen" aria-label="Zwei Wege zu Estera">
+  <div class="kar-mitte">
+    <ul class="kar-liste" data-stellen>
+      <li class="kar-karte kar-karte--klick" style="--i:0">
+        <picture>
+          <source srcset="assets/img/ankauf/weg-eigentuemer.webp?v=c05h" type="image/webp">
+          <img class="kar-karte__bild" src="assets/img/ankauf/weg-eigentuemer.jpg?v=c05h" width="1920" height="1280" loading="lazy" decoding="async" alt="Ein Eigentümer in Jeans begrüßt an seiner geöffneten Wohnungstür einen Mann im Anzug mit Handschlag">
+        </picture>
+        <div class="kar-karte__inhalt">
+          <h3 class="kar-karte__titel">Private Eigentümer</h3>
+          <p class="kar-karte__art">Direkt&nbsp;· Diskret&nbsp;· Persönlich</p>
+          <p class="kar-karte__knoepfe">
+            <a class="kar-knopf kar-knopf--voll" href="mailto:ankauf@estera.immobilien?subject=Immobilie%20verkaufen%20%E2%80%93%20Angebot%20von%20Eigent%C3%BCmer/in&amp;body=Hallo%20Estera-Team%2C%0A%0Aich%20m%C3%B6chte%20euch%20meine%20Immobilie%20unverbindlich%20anbieten.%0A%0AOrt%20/%20Adresse%3A%0AObjektart%3A%0AWohnfl%C3%A4che%20/%20Anzahl%20Einheiten%3A%0AVermietet%20/%20leer%3A%0AKaufpreisvorstellung%3A%0A%0A" aria-label="Immobilie per E-Mail anbieten">Immobilie anbieten</a>
+            <a class="kar-knopf kar-knopf--linie" href="#eigentuemer" data-pop="eigentuemer" data-karte-ziel aria-haspopup="dialog" aria-label="Mehr erfahren: Verkauf für private Eigentümer">Mehr erfahren</a>
+          </p>
+        </div>
+      </li>
+      <li class="kar-karte kar-karte--klick" style="--i:1">
+        <picture>
+          <source srcset="assets/img/ankauf/weg-makler.webp?v=c05h" type="image/webp">
+          <img class="kar-karte__bild" src="assets/img/ankauf/weg-makler.jpg?v=c05h" width="1920" height="1280" loading="lazy" decoding="async" alt="Zwei Männer im Anzug geben sich vor einem Mehrfamilienhaus die Hand">
+        </picture>
+        <div class="kar-karte__inhalt">
+          <h3 class="kar-karte__titel">Makler &amp; Partner</h3>
+          <p class="kar-karte__art">Schnell&nbsp;· Klar&nbsp;· Verlässlich</p>
+          <p class="kar-karte__knoepfe">
+            <a class="kar-knopf kar-knopf--voll" href="mailto:ankauf@estera.immobilien?subject=Objekt%20zur%20Pr%C3%BCfung%20%E2%80%93%20Angebot%20von%20Makler/Partner&amp;body=Hallo%20Estera-Team%2C%0A%0Aich%20reiche%20euch%20folgendes%20Objekt%20zur%20Pr%C3%BCfung%20ein.%0A%0AOrt%20/%20Adresse%3A%0AObjektart%3A%0AWohnfl%C3%A4che%20/%20Anzahl%20Einheiten%3A%0AKaufpreis%3A%0AProvision%3A%0AUnterlagen%20%28Expos%C3%A9%2C%20Mieterliste%2C%20Grundrisse%29%3A%0A%0A" aria-label="Objekt per E-Mail zur Prüfung einreichen">Objekt einreichen</a>
+            <a class="kar-knopf kar-knopf--linie" href="#makler" data-pop="makler" data-karte-ziel aria-haspopup="dialog" aria-label="Mehr erfahren: Zusammenarbeit für Makler und Partner">Mehr erfahren</a>
+          </p>
+        </div>
+      </li>
+    </ul>
+    <p class="ank-wege__pdf" data-auf>
+      <a class="ank-textlink ank-textlink--hell" href="assets/pdf/Estera_Ankaufsprofil_Bayern_2026.pdf" download>Unser Ankaufsprofil herunterladen <span class="ank-textlink__zusatz">(PDF, 380 kB)</span></a>
+    </p>
+  </div>
+</section>
+
+</div><!-- /.kar-navy -->
+
+
+<!-- =====================================================================
+     4  UNSER ANKAUFSGEBIET — links die Karte, rechts der Text
+
+     DIE KARTE IST VEKTORIELL AUS DEM PDF GEHOLT (PyMuPDF, get_drawings:
+     die sieben Regierungsbezirke als Pfade, Farben und Strichstaerken wie
+     im PDF). Datei: assets/img/ankauf/bayern-karte.svg — auf jedem
+     Bildschirm scharf, 50 kB. Suedbayern Navy, Rest Weiss mit feiner
+     Grenze, Punkt Muenchen in Sand.
+     Beschriftung „München" und Legende stehen als HTML ueber bzw. unter
+     der Grafik, damit sie in der Seitenschrift stehen; ein <text> in einer
+     per <img> eingebundenen SVG faende die Webschrift nicht.
+     ===================================================================== -->
+<section class="ank-abschnitt ank-gebiet" aria-labelledby="ank-gebiet-titel">
+  <div class="ank-mitte ank-gebiet__raster">
+
+    <figure class="ank-karte" data-auf>
+      <div class="ank-karte__bild">
+        <img src="assets/img/ankauf/bayern-karte.svg?v=c05g" width="660" height="688" alt="Karte von Bayern: Oberbayern, Niederbayern und Schwaben als Schwerpunktregion Südbayern dunkel hervorgehoben, die übrigen Regierungsbezirke hell. München ist markiert." loading="lazy" decoding="async">
+        <span class="ank-karte__ort" aria-hidden="true">München</span>
+      </div>
+      <figcaption class="ank-karte__legende">
+        <span class="ank-karte__eintrag"><span class="ank-karte__punkt ank-karte__punkt--sued" aria-hidden="true"></span>Schwerpunkt Süd</span>
+        <span class="ank-karte__eintrag"><span class="ank-karte__punkt" aria-hidden="true"></span>Bayernweit</span>
+      </figcaption>
+    </figure>
+
+    <div class="ank-gebiet__text">
+      <p class="ank-kicker" data-auf>Unser Ankaufsgebiet</p>
+      <h2 class="ank-titel ank-titel--links" id="ank-gebiet-titel" data-auf>Ganz Bayern. <em>Mit Fokus auf Südbayern.</em></h2>
+      <p class="ank-text" data-auf>Estera erwirbt Wohnimmobilien in ganz Bayern – mit Schwerpunkt Südbayern. Ob vermietet, leer oder mit Sanierungsbedarf: Wir kennen den bayerischen Markt, prüfen jedes Angebot selbst und melden uns zeitnah mit einer klaren Einschätzung.</p>
+      <p class="ank-text" data-auf>Wir kaufen nicht nach einem starren Schema. Entscheidend sind Standort, Substanz, Entwicklungspotenzial und eine wirtschaftlich tragfähige Gesamtstrategie.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     5  KRITERIEN — neu gebaut 30.09.2026 (Kundenwunsch)
+     Vorbild: „02 · Dein Profil" auf karriere-immobilienberater.html
+     (.stl-aus in stelle.css). Sechs verschieden grosse Kaesten in einem
+     versetzten Raster, je Kasten Ueberschrift, Goldstrich, eine plastische
+     Abbildung und ein kurzer Satz. Weniger Text als vorher: die langen
+     Listen stehen vollstaendig im PDF; hier steht je Punkt das Wesentliche.
+
+     WAS GEKUERZT IST, gegenueber der Fassung vom 29.09.2026:
+       Objektarten        vier Punkte zu einem Satz
+       Zustand            zwei Punkte zu einem Satz; der Hinweis auf
+                          Instandhaltungsstau ist ein eigener Kasten
+                          („Auch mit Herausforderungen")
+       Entwicklung        zehn Punkte zu sechs Stichworten; Einzel-
+                          veraeusserung, Mietoptimierung, zusaetzliche
+                          Wohnflaeche und Bewirtschaftung stehen im PDF
+       Wohnungsgroessen   Zahl gross, Satz gekuerzt
+       Nicht gesucht      unveraendert vier Punkte, als Satz; statt des
+                          roten Kreuzes eine Schranke — dezent, nicht knallig
+
+     DIE ABBILDUNGEN (zweite Fassung, 30.09.2026, Kundenwunsch): kleine
+     SZENEN als Inline-SVG von Hand, flach und realistisch-reduziert nach
+     der Machart von imperiaimmobilien.de (weisse Kacheln mit weichem
+     Schatten, Balken, Linie mit Markierungspunkt, Abzeichen). Palette nur
+     Navy, Creme, Sand/Gold, Grau; Rot allein fuer die X bei „Nicht
+     gesucht". Die Teile tragen Klassen (.as-*) und werden in ankauf.css
+     einzeln bewegt. Erste Fassung waren KI-Bilder in Tonfigur-Optik; vom
+     Kunden verworfen („keine Icons, nichts Verspieltes"), Dateien geloescht.
+     ===================================================================== -->
+<section class="ank-abschnitt ank-kriterien fl-creme-nach-weiss" aria-labelledby="ank-kriterien-titel">
+  <div class="ank-mitte">
+    <p class="ank-kicker" data-auf>Ankaufskriterien</p>
+    <h2 class="ank-titel" id="ank-kriterien-titel" data-auf>Wonach wir suchen.</h2>
+
+    <ul class="ank-kriterien__raster">
+      <li class="ank-kachel" data-auf style="--i:0">
+        <h3 class="ank-kachel__titel">Objektarten</h3>
+        <span class="ank-kachel__strich" aria-hidden="true"></span>
+        <figure class="ank-bild ank-bild--haus" aria-hidden="true"><svg class="as as--objekt" viewBox="20 0 220 218" aria-hidden="true" focusable="false"><defs><linearGradient id="vg-creme-objekt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF8F3"/><stop offset="1" stop-color="#EDE4D6"/></linearGradient><linearGradient id="vg-navy-objekt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24406A"/><stop offset="1" stop-color="#0B203D"/></linearGradient><linearGradient id="vg-sand-objekt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8CBA4"/><stop offset="1" stop-color="#CCA46C"/></linearGradient><linearGradient id="vg-grau-objekt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1F3F6"/><stop offset="1" stop-color="#D5DBE3"/></linearGradient><linearGradient id="vg-weiss-objekt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F4F1EC"/></linearGradient><linearGradient id="vg-sandhell-objekt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5E8D5"/><stop offset="1" stop-color="#E8D3B3"/></linearGradient><linearGradient id="vg-glanz-objekt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.62"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.12"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient><linearGradient id="vg-rand-objekt" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#94733F"/><stop offset="0.35" stop-color="#C19A62"/><stop offset="0.6" stop-color="#E2C596"/><stop offset="1" stop-color="#9C7B45"/></linearGradient><filter id="as-blur-objekt" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="4.5"/></filter><filter id="as-sch-objekt" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="1" stdDeviation="0.8" flood-color="#102949" flood-opacity="0.10"/><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#102949" flood-opacity="0.12"/></filter></defs><g class="as-karte" style="--d:0"><rect class="as-schatten" x="34" y="16" width="192" height="195" rx="8" fill="url(#vg-navy-objekt)" opacity="0.22" filter="url(#as-blur-objekt)"/><g class="as-blatt"><rect x="30" y="8" width="200" height="200" rx="8" fill="url(#vg-weiss-objekt)" stroke="#102949" stroke-opacity="0.07" stroke-width="0.8" filter="url(#as-sch-objekt)"/><line x1="46" y1="190" x2="214" y2="190" stroke="#C9A874" stroke-width="1.2"/><path d="M55 76 L80 46 H180 L205 76 Z" fill="url(#vg-navy-objekt)" stroke="#102949" stroke-width="1.4" stroke-linejoin="round"/><path d="M96 72 V59 L102 53 L108 59 V72 Z" fill="url(#vg-creme-objekt)" stroke="#102949" stroke-width="1.1" stroke-linejoin="round"/><rect class="as-fenster" style="--w:30" x="99" y="61" width="6" height="7" rx="0.6" fill="#E3E7ED"/><rect x="99" y="61" width="6" height="3.85" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="98.2" y="68" width="7.6" height="1.3" fill="#102949" fill-opacity="0.22"/><path d="M124 72 V59 L130 53 L136 59 V72 Z" fill="url(#vg-creme-objekt)" stroke="#102949" stroke-width="1.1" stroke-linejoin="round"/><rect class="as-fenster" style="--w:30" x="127" y="61" width="6" height="7" rx="0.6" fill="#E3E7ED"/><rect x="127" y="61" width="6" height="3.85" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="126.2" y="68" width="7.6" height="1.3" fill="#102949" fill-opacity="0.22"/><path d="M152 72 V59 L158 53 L164 59 V72 Z" fill="url(#vg-creme-objekt)" stroke="#102949" stroke-width="1.1" stroke-linejoin="round"/><rect class="as-fenster" style="--w:30" x="155" y="61" width="6" height="7" rx="0.6" fill="#E3E7ED"/><rect x="155" y="61" width="6" height="3.85" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="154.2" y="68" width="7.6" height="1.3" fill="#102949" fill-opacity="0.22"/><rect x="62" y="76" width="136" height="114" fill="url(#vg-creme-objekt)" stroke="#102949" stroke-width="1.5"/><rect x="57" y="75" width="146" height="4.5" rx="1" fill="url(#vg-navy-objekt)"/><rect x="62.8" y="79.5" width="134.4" height="3" fill="url(#vg-navy-objekt)" fill-opacity="0.12"/><rect x="62" y="183" width="136" height="7" fill="#BCC5D1"/><line x1="62" y1="104.5" x2="198" y2="104.5" stroke="#C9A874" stroke-width="0.7" stroke-opacity="0.7"/><line x1="62" y1="133" x2="198" y2="133" stroke="#C9A874" stroke-width="0.7" stroke-opacity="0.7"/><line x1="62" y1="161.5" x2="198" y2="161.5" stroke="#C9A874" stroke-width="0.7" stroke-opacity="0.7"/><rect class="as-fenster" style="--w:0" x="74" y="83" width="14" height="15" rx="0.8" fill="#E3E7ED"/><rect x="74" y="83" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="73.2" y="98" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="81" y1="83" x2="81" y2="98" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster as-fenster--an" style="--w:1" x="98" y="83" width="14" height="15" rx="0.8" fill="#D9B485"/><rect x="98" y="83" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="97.2" y="98" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="105" y1="83" x2="105" y2="98" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster" style="--w:2" x="122" y="83" width="14" height="15" rx="0.8" fill="#E3E7ED"/><rect x="122" y="83" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="121.2" y="98" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="129" y1="83" x2="129" y2="98" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster" style="--w:3" x="146" y="83" width="14" height="15" rx="0.8" fill="#E3E7ED"/><rect x="146" y="83" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="145.2" y="98" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="153" y1="83" x2="153" y2="98" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster" style="--w:4" x="170" y="83" width="14" height="15" rx="0.8" fill="#E3E7ED"/><rect x="170" y="83" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="169.2" y="98" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="177" y1="83" x2="177" y2="98" stroke="#FFFFFF" stroke-width="0.8"/><rect x="95" y="100" width="20" height="2.4" rx="0.6" fill="url(#vg-navy-objekt)"/><rect x="96" y="102.4" width="18" height="1.6" fill="url(#vg-navy-objekt)" fill-opacity="0.15"/><line x1="96" y1="94" x2="96" y2="100" stroke="#4C6A93" stroke-width="0.8"/><line x1="99.6" y1="94" x2="99.6" y2="100" stroke="#4C6A93" stroke-width="0.8"/><line x1="103.2" y1="94" x2="103.2" y2="100" stroke="#4C6A93" stroke-width="0.8"/><line x1="106.8" y1="94" x2="106.8" y2="100" stroke="#4C6A93" stroke-width="0.8"/><line x1="110.4" y1="94" x2="110.4" y2="100" stroke="#4C6A93" stroke-width="0.8"/><line x1="114" y1="94" x2="114" y2="100" stroke="#4C6A93" stroke-width="0.8"/><line x1="95" y1="94" x2="115" y2="94" stroke="#4C6A93" stroke-width="1"/><rect x="143" y="100" width="20" height="2.4" rx="0.6" fill="url(#vg-navy-objekt)"/><rect x="144" y="102.4" width="18" height="1.6" fill="url(#vg-navy-objekt)" fill-opacity="0.15"/><line x1="144" y1="94" x2="144" y2="100" stroke="#4C6A93" stroke-width="0.8"/><line x1="147.6" y1="94" x2="147.6" y2="100" stroke="#4C6A93" stroke-width="0.8"/><line x1="151.2" y1="94" x2="151.2" y2="100" stroke="#4C6A93" stroke-width="0.8"/><line x1="154.8" y1="94" x2="154.8" y2="100" stroke="#4C6A93" stroke-width="0.8"/><line x1="158.4" y1="94" x2="158.4" y2="100" stroke="#4C6A93" stroke-width="0.8"/><line x1="162" y1="94" x2="162" y2="100" stroke="#4C6A93" stroke-width="0.8"/><line x1="143" y1="94" x2="163" y2="94" stroke="#4C6A93" stroke-width="1"/><rect class="as-fenster as-fenster--an" style="--w:5" x="74" y="111.5" width="14" height="15" rx="0.8" fill="#D9B485"/><rect x="74" y="111.5" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="73.2" y="126.5" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="81" y1="111.5" x2="81" y2="126.5" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster" style="--w:6" x="98" y="111.5" width="14" height="15" rx="0.8" fill="#E3E7ED"/><rect x="98" y="111.5" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="97.2" y="126.5" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="105" y1="111.5" x2="105" y2="126.5" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster" style="--w:7" x="122" y="111.5" width="14" height="15" rx="0.8" fill="#E3E7ED"/><rect x="122" y="111.5" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="121.2" y="126.5" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="129" y1="111.5" x2="129" y2="126.5" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster as-fenster--an" style="--w:8" x="146" y="111.5" width="14" height="15" rx="0.8" fill="#D9B485"/><rect x="146" y="111.5" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="145.2" y="126.5" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="153" y1="111.5" x2="153" y2="126.5" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster" style="--w:9" x="170" y="111.5" width="14" height="15" rx="0.8" fill="#E3E7ED"/><rect x="170" y="111.5" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="169.2" y="126.5" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="177" y1="111.5" x2="177" y2="126.5" stroke="#FFFFFF" stroke-width="0.8"/><rect x="95" y="128.5" width="20" height="2.4" rx="0.6" fill="url(#vg-navy-objekt)"/><rect x="96" y="130.9" width="18" height="1.6" fill="url(#vg-navy-objekt)" fill-opacity="0.15"/><line x1="96" y1="122.5" x2="96" y2="128.5" stroke="#4C6A93" stroke-width="0.8"/><line x1="99.6" y1="122.5" x2="99.6" y2="128.5" stroke="#4C6A93" stroke-width="0.8"/><line x1="103.2" y1="122.5" x2="103.2" y2="128.5" stroke="#4C6A93" stroke-width="0.8"/><line x1="106.8" y1="122.5" x2="106.8" y2="128.5" stroke="#4C6A93" stroke-width="0.8"/><line x1="110.4" y1="122.5" x2="110.4" y2="128.5" stroke="#4C6A93" stroke-width="0.8"/><line x1="114" y1="122.5" x2="114" y2="128.5" stroke="#4C6A93" stroke-width="0.8"/><line x1="95" y1="122.5" x2="115" y2="122.5" stroke="#4C6A93" stroke-width="1"/><rect x="143" y="128.5" width="20" height="2.4" rx="0.6" fill="url(#vg-navy-objekt)"/><rect x="144" y="130.9" width="18" height="1.6" fill="url(#vg-navy-objekt)" fill-opacity="0.15"/><line x1="144" y1="122.5" x2="144" y2="128.5" stroke="#4C6A93" stroke-width="0.8"/><line x1="147.6" y1="122.5" x2="147.6" y2="128.5" stroke="#4C6A93" stroke-width="0.8"/><line x1="151.2" y1="122.5" x2="151.2" y2="128.5" stroke="#4C6A93" stroke-width="0.8"/><line x1="154.8" y1="122.5" x2="154.8" y2="128.5" stroke="#4C6A93" stroke-width="0.8"/><line x1="158.4" y1="122.5" x2="158.4" y2="128.5" stroke="#4C6A93" stroke-width="0.8"/><line x1="162" y1="122.5" x2="162" y2="128.5" stroke="#4C6A93" stroke-width="0.8"/><line x1="143" y1="122.5" x2="163" y2="122.5" stroke="#4C6A93" stroke-width="1"/><rect class="as-fenster" style="--w:10" x="74" y="140" width="14" height="15" rx="0.8" fill="#E3E7ED"/><rect x="74" y="140" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="73.2" y="155" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="81" y1="140" x2="81" y2="155" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster" style="--w:11" x="98" y="140" width="14" height="15" rx="0.8" fill="#E3E7ED"/><rect x="98" y="140" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="97.2" y="155" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="105" y1="140" x2="105" y2="155" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster as-fenster--an" style="--w:12" x="122" y="140" width="14" height="15" rx="0.8" fill="#D9B485"/><rect x="122" y="140" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="121.2" y="155" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="129" y1="140" x2="129" y2="155" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster" style="--w:13" x="146" y="140" width="14" height="15" rx="0.8" fill="#E3E7ED"/><rect x="146" y="140" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="145.2" y="155" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="153" y1="140" x2="153" y2="155" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster" style="--w:14" x="170" y="140" width="14" height="15" rx="0.8" fill="#E3E7ED"/><rect x="170" y="140" width="14" height="8.25" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="169.2" y="155" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="177" y1="140" x2="177" y2="155" stroke="#FFFFFF" stroke-width="0.8"/><rect x="95" y="157" width="20" height="2.4" rx="0.6" fill="url(#vg-navy-objekt)"/><rect x="96" y="159.4" width="18" height="1.6" fill="url(#vg-navy-objekt)" fill-opacity="0.15"/><line x1="96" y1="151" x2="96" y2="157" stroke="#4C6A93" stroke-width="0.8"/><line x1="99.6" y1="151" x2="99.6" y2="157" stroke="#4C6A93" stroke-width="0.8"/><line x1="103.2" y1="151" x2="103.2" y2="157" stroke="#4C6A93" stroke-width="0.8"/><line x1="106.8" y1="151" x2="106.8" y2="157" stroke="#4C6A93" stroke-width="0.8"/><line x1="110.4" y1="151" x2="110.4" y2="157" stroke="#4C6A93" stroke-width="0.8"/><line x1="114" y1="151" x2="114" y2="157" stroke="#4C6A93" stroke-width="0.8"/><line x1="95" y1="151" x2="115" y2="151" stroke="#4C6A93" stroke-width="1"/><rect x="143" y="157" width="20" height="2.4" rx="0.6" fill="url(#vg-navy-objekt)"/><rect x="144" y="159.4" width="18" height="1.6" fill="url(#vg-navy-objekt)" fill-opacity="0.15"/><line x1="144" y1="151" x2="144" y2="157" stroke="#4C6A93" stroke-width="0.8"/><line x1="147.6" y1="151" x2="147.6" y2="157" stroke="#4C6A93" stroke-width="0.8"/><line x1="151.2" y1="151" x2="151.2" y2="157" stroke="#4C6A93" stroke-width="0.8"/><line x1="154.8" y1="151" x2="154.8" y2="157" stroke="#4C6A93" stroke-width="0.8"/><line x1="158.4" y1="151" x2="158.4" y2="157" stroke="#4C6A93" stroke-width="0.8"/><line x1="162" y1="151" x2="162" y2="157" stroke="#4C6A93" stroke-width="0.8"/><line x1="143" y1="151" x2="163" y2="151" stroke="#4C6A93" stroke-width="1"/><rect class="as-fenster" style="--w:15" x="74" y="167.5" width="14" height="13" rx="0.8" fill="#E3E7ED"/><rect x="74" y="167.5" width="14" height="7.15" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="73.2" y="180.5" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><rect class="as-fenster" style="--w:16" x="98" y="167.5" width="14" height="13" rx="0.8" fill="#E3E7ED"/><rect x="98" y="167.5" width="14" height="7.15" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="97.2" y="180.5" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><rect class="as-fenster" style="--w:17" x="146" y="167.5" width="14" height="13" rx="0.8" fill="#E3E7ED"/><rect x="146" y="167.5" width="14" height="7.15" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="145.2" y="180.5" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><rect class="as-fenster" style="--w:18" x="170" y="167.5" width="14" height="13" rx="0.8" fill="#E3E7ED"/><rect x="170" y="167.5" width="14" height="7.15" fill="url(#vg-glanz-objekt)" pointer-events="none"/><rect x="169.2" y="180.5" width="15.6" height="1.3" fill="#102949" fill-opacity="0.22"/><rect x="122" y="166.5" width="16" height="16.5" rx="1" fill="url(#vg-navy-objekt)"/><rect x="127.5" y="169.5" width="5" height="8" rx="0.6" fill="#FFFFFF" fill-opacity="0.35"/><rect x="117" y="163.5" width="26" height="3" rx="1" fill="url(#vg-rand-objekt)"/><rect x="118" y="166.5" width="24" height="1.6" fill="url(#vg-navy-objekt)" fill-opacity="0.16"/><rect x="118" y="184" width="24" height="3" fill="#E3E7ED"/><rect x="115" y="187" width="30" height="3" fill="#BCC5D1"/><line x1="46" y1="190" x2="46" y2="176" stroke="#4C6A93" stroke-width="1.6"/><ellipse cx="46" cy="166" rx="9" ry="13" fill="url(#vg-sandhell-objekt)"/><line x1="212" y1="190" x2="212" y2="176" stroke="#4C6A93" stroke-width="1.6"/><ellipse cx="212" cy="166" rx="9" ry="13" fill="url(#vg-sandhell-objekt)"/></g></g></svg></figure>
+        <p class="ank-kachel__text">Eigentumswohnungen und Pakete, Mehrfamilienhäuser und Wohnanlagen, Wohn- und Geschäftshäuser sowie Gewerbe mit Umnutzungspotenzial.</p>
+      </li>
+      <li class="ank-kachel" data-auf style="--i:1">
+        <h3 class="ank-kachel__titel">Zustand</h3>
+        <span class="ank-kachel__strich" aria-hidden="true"></span>
+        <figure class="ank-bild ank-bild--wand" aria-hidden="true"><svg class="as as--zustand" viewBox="44 4 190 190" aria-hidden="true" focusable="false"><defs><linearGradient id="vg-creme-zustand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF8F3"/><stop offset="1" stop-color="#EDE4D6"/></linearGradient><linearGradient id="vg-navy-zustand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24406A"/><stop offset="1" stop-color="#0B203D"/></linearGradient><linearGradient id="vg-sand-zustand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8CBA4"/><stop offset="1" stop-color="#CCA46C"/></linearGradient><linearGradient id="vg-grau-zustand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1F3F6"/><stop offset="1" stop-color="#D5DBE3"/></linearGradient><linearGradient id="vg-weiss-zustand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F4F1EC"/></linearGradient><linearGradient id="vg-sandhell-zustand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5E8D5"/><stop offset="1" stop-color="#E8D3B3"/></linearGradient><linearGradient id="vg-glanz-zustand" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.62"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.12"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient><linearGradient id="vg-rand-zustand" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#94733F"/><stop offset="0.35" stop-color="#C19A62"/><stop offset="0.6" stop-color="#E2C596"/><stop offset="1" stop-color="#9C7B45"/></linearGradient><filter id="as-blur-zustand" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="4.5"/></filter><filter id="as-sch-zustand" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="1" stdDeviation="0.8" flood-color="#102949" flood-opacity="0.10"/><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#102949" flood-opacity="0.12"/></filter></defs><g class="as-karte" style="--d:0"><g transform="rotate(4 137 98)"><rect x="68" y="16" width="150" height="168" rx="3" fill="url(#vg-weiss-zustand)" filter="url(#as-sch-zustand)"/></g></g><g class="as-karte" style="--d:1"><g transform="rotate(-2 137 98)"><rect x="62" y="14" width="150" height="168" rx="3" fill="url(#vg-weiss-zustand)" filter="url(#as-sch-zustand)"/><rect x="90" y="42" width="94" height="62" fill="url(#vg-creme-zustand)" stroke="#102949" stroke-width="1.4"/><rect x="87" y="38" width="100" height="5" rx="1" fill="url(#vg-navy-zustand)"/><rect class="as-fenster as-fenster--an" style="--w:0" x="98" y="50" width="11" height="10" rx="1" fill="#D9B485"/><rect x="98" y="50" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="97.2" y="60" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="103.5" y1="50" x2="103.5" y2="60" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster" style="--w:1" x="114.5" y="50" width="11" height="10" rx="1" fill="#E3E7ED"/><rect x="114.5" y="50" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="113.7" y="60" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="120" y1="50" x2="120" y2="60" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster as-fenster--an" style="--w:2" x="131" y="50" width="11" height="10" rx="1" fill="#D9B485"/><rect x="131" y="50" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="130.2" y="60" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="136.5" y1="50" x2="136.5" y2="60" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster as-fenster--an" style="--w:3" x="147.5" y="50" width="11" height="10" rx="1" fill="#D9B485"/><rect x="147.5" y="50" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="146.7" y="60" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="153" y1="50" x2="153" y2="60" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster" style="--w:4" x="164" y="50" width="11" height="10" rx="1" fill="#E3E7ED"/><rect x="164" y="50" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="163.2" y="60" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="169.5" y1="50" x2="169.5" y2="60" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster" style="--w:5" x="98" y="65" width="11" height="10" rx="1" fill="#E3E7ED"/><rect x="98" y="65" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="97.2" y="75" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="103.5" y1="65" x2="103.5" y2="75" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster as-fenster--an" style="--w:6" x="114.5" y="65" width="11" height="10" rx="1" fill="#D9B485"/><rect x="114.5" y="65" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="113.7" y="75" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="120" y1="65" x2="120" y2="75" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster as-fenster--an" style="--w:7" x="131" y="65" width="11" height="10" rx="1" fill="#D9B485"/><rect x="131" y="65" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="130.2" y="75" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="136.5" y1="65" x2="136.5" y2="75" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster" style="--w:8" x="147.5" y="65" width="11" height="10" rx="1" fill="#E3E7ED"/><rect x="147.5" y="65" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="146.7" y="75" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="153" y1="65" x2="153" y2="75" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster as-fenster--an" style="--w:9" x="164" y="65" width="11" height="10" rx="1" fill="#D9B485"/><rect x="164" y="65" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="163.2" y="75" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="169.5" y1="65" x2="169.5" y2="75" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster" style="--w:10" x="98" y="80" width="11" height="10" rx="1" fill="#E3E7ED"/><rect x="98" y="80" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="97.2" y="90" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="103.5" y1="80" x2="103.5" y2="90" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster as-fenster--an" style="--w:11" x="114.5" y="80" width="11" height="10" rx="1" fill="#D9B485"/><rect x="114.5" y="80" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="113.7" y="90" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="120" y1="80" x2="120" y2="90" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster" style="--w:12" x="131" y="80" width="11" height="10" rx="1" fill="#E3E7ED"/><rect x="131" y="80" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="130.2" y="90" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="136.5" y1="80" x2="136.5" y2="90" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster as-fenster--an" style="--w:13" x="147.5" y="80" width="11" height="10" rx="1" fill="#D9B485"/><rect x="147.5" y="80" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="146.7" y="90" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="153" y1="80" x2="153" y2="90" stroke="#FFFFFF" stroke-width="0.9"/><rect class="as-fenster" style="--w:14" x="164" y="80" width="11" height="10" rx="1" fill="#E3E7ED"/><rect x="164" y="80" width="11" height="5.5" fill="url(#vg-glanz-zustand)" pointer-events="none"/><rect x="163.2" y="90" width="12.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="169.5" y1="80" x2="169.5" y2="90" stroke="#FFFFFF" stroke-width="0.9"/><rect x="131" y="95" width="12" height="9" fill="url(#vg-navy-zustand)"/><line x1="76" y1="110" x2="198" y2="110" stroke="#C9A874" stroke-width="1"/><line x1="82" y1="122" x2="192" y2="122" stroke="#C9A874" stroke-width="1"/><rect x="93" y="115" width="14" height="14" rx="1.5" fill="#FFFFFF" stroke="#4C6A93" stroke-width="1.1"/><line x1="100" y1="115" x2="100" y2="129" stroke="#4C6A93" stroke-width="0.9"/><rect x="130" y="115" width="14" height="14" rx="1.5" fill="#FFFFFF" stroke="#4C6A93" stroke-width="1.1"/><rect x="130" y="115" width="7" height="14" fill="#D9B485"/><line x1="137" y1="115" x2="137" y2="129" stroke="#FFFFFF" stroke-width="0.9"/><rect x="167" y="115" width="14" height="14" rx="1.5" fill="#FFFFFF" stroke="#4C6A93" stroke-width="1.1"/><rect x="167" y="115" width="14" height="14" rx="1.5" fill="#D9B485"/><line x1="174" y1="115" x2="174" y2="129" stroke="#FFFFFF" stroke-width="0.9"/><line x1="96" y1="156" x2="178" y2="156" stroke="#C9A874" stroke-width="1.2"/><line x1="96" y1="152" x2="96" y2="160" stroke="#C9A874" stroke-width="1"/><line x1="106.25" y1="153.5" x2="106.25" y2="158.5" stroke="#C9A874" stroke-width="1"/><line x1="116.5" y1="153.5" x2="116.5" y2="158.5" stroke="#C9A874" stroke-width="1"/><line x1="126.75" y1="153.5" x2="126.75" y2="158.5" stroke="#C9A874" stroke-width="1"/><line x1="137" y1="152" x2="137" y2="160" stroke="#C9A874" stroke-width="1"/><line x1="147.25" y1="153.5" x2="147.25" y2="158.5" stroke="#C9A874" stroke-width="1"/><line x1="157.5" y1="153.5" x2="157.5" y2="158.5" stroke="#C9A874" stroke-width="1"/><line x1="167.75" y1="153.5" x2="167.75" y2="158.5" stroke="#C9A874" stroke-width="1"/><line x1="178" y1="152" x2="178" y2="160" stroke="#C9A874" stroke-width="1"/><path d="M80 149 l4 5 l-3 3 l5 6" fill="none" stroke="#4C6A93" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M194 149 q1 6 7 7 q-6 1 -7 7 q-1 -6 -7 -7 q6 -1 7 -7 Z" fill="#D9B485"/><g class="as-marker"><circle class="as-halo" cx="157.5" cy="156" r="9" fill="url(#vg-navy-zustand)" fill-opacity="0.16"/><circle cx="157.5" cy="156" r="5" fill="url(#vg-navy-zustand)" stroke="#FFFFFF" stroke-width="1.6"/></g><line x1="76" y1="172" x2="132" y2="172" stroke="#C9A874" stroke-width="1"/></g></g></svg></figure>
+        <p class="ank-kachel__text">Leerstehend, teilvermietet oder vermietet – sanierungsbedürftig bis gepflegt.</p>
+      </li>
+      <li class="ank-kachel" data-auf style="--i:2">
+        <h3 class="ank-kachel__titel">Auch mit Herausforderungen</h3>
+        <span class="ank-kachel__strich" aria-hidden="true"></span>
+        <figure class="ank-bild ank-bild--werk" aria-hidden="true"><svg class="as as--pruef" viewBox="0 0 220 184" aria-hidden="true" focusable="false">
+<defs><linearGradient id="vg-creme-pruef" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF8F3"/><stop offset="1" stop-color="#EDE4D6"/></linearGradient><linearGradient id="vg-navy-pruef" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24406A"/><stop offset="1" stop-color="#0B203D"/></linearGradient><linearGradient id="vg-sand-pruef" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8CBA4"/><stop offset="1" stop-color="#CCA46C"/></linearGradient><linearGradient id="vg-grau-pruef" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1F3F6"/><stop offset="1" stop-color="#D5DBE3"/></linearGradient><linearGradient id="vg-weiss-pruef" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F4F1EC"/></linearGradient><linearGradient id="vg-sandhell-pruef" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5E8D5"/><stop offset="1" stop-color="#E8D3B3"/></linearGradient><linearGradient id="vg-glanz-pruef" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.62"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.12"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient><linearGradient id="vg-rand-pruef" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#94733F"/><stop offset="0.35" stop-color="#C19A62"/><stop offset="0.6" stop-color="#E2C596"/><stop offset="1" stop-color="#9C7B45"/></linearGradient><filter id="as-sch-pruef" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#102949" flood-opacity="0.13"/></filter></defs>
+<g class="as-karte" style="--d:0"><rect x="52" y="22" width="116" height="146" rx="9" fill="url(#vg-navy-pruef)" filter="url(#as-sch-pruef)"/><rect x="61" y="36" width="98" height="124" rx="4" fill="#FFFFFF"/><rect x="88" y="14" width="44" height="18" rx="6" fill="#D9B485"/><circle cx="110" cy="21" r="3" fill="url(#vg-navy-pruef)"/><rect x="72" y="56" width="13" height="13" rx="2.5" fill="#FFFFFF" stroke="#4C6A93" stroke-width="1.8"/><rect x="93" y="57" width="58" height="5" rx="2.5" fill="#BCC5D1"/><rect x="93" y="65" width="34" height="4" rx="2" fill="#E3E7ED"/><path class="as-strich as-haken" style="--d:0" pathLength="1" d="M74.5 62.5 L78 66 L84.5 58" fill="none" stroke="#A8874F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="72" y="88" width="13" height="13" rx="2.5" fill="#FFFFFF" stroke="#4C6A93" stroke-width="1.8"/><rect x="93" y="89" width="50" height="5" rx="2.5" fill="#BCC5D1"/><rect x="93" y="97" width="40" height="4" rx="2" fill="#E3E7ED"/><path class="as-strich as-haken" style="--d:1" pathLength="1" d="M74.5 94.5 L78 98 L84.5 90" fill="none" stroke="#A8874F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="72" y="120" width="13" height="13" rx="2.5" fill="#FFFFFF" stroke="#4C6A93" stroke-width="1.8"/><rect x="93" y="121" width="56" height="5" rx="2.5" fill="#BCC5D1"/><rect x="93" y="129" width="28" height="4" rx="2" fill="#E3E7ED"/><path class="as-strich as-haken" style="--d:2" pathLength="1" d="M74.5 126.5 L78 130 L84.5 122" fill="none" stroke="#A8874F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="72" y="146" width="40" height="4" rx="2" fill="#E3E7ED"/></g><g class="as-abzeichen"><circle class="as-ring" cx="160" cy="146" r="24" fill="none" stroke="#A8874F" stroke-width="1.6"/><circle cx="160" cy="146" r="19" fill="url(#vg-sand-pruef)" filter="url(#as-sch-pruef)"/><circle cx="160" cy="146" r="15" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-opacity="0.7"/><path d="M152.5 146.5 L158 152 L168 141" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g></svg></figure>
+        <p class="ank-kachel__text">Instandhaltungsstau oder Mietrückstände sind kein automatischer Ausschluss. Wir prüfen jeden Fall einzeln.</p>
+      </li>
+      <li class="ank-kachel" data-auf style="--i:3">
+        <h3 class="ank-kachel__titel">Entwicklungspotenzial</h3>
+        <span class="ank-kachel__strich" aria-hidden="true"></span>
+        <figure class="ank-bild ank-bild--auf" aria-hidden="true"><svg class="as as--entw" viewBox="0 0 360 180" aria-hidden="true" focusable="false"><defs><linearGradient id="vg-creme-entw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF8F3"/><stop offset="1" stop-color="#EDE4D6"/></linearGradient><linearGradient id="vg-navy-entw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24406A"/><stop offset="1" stop-color="#0B203D"/></linearGradient><linearGradient id="vg-sand-entw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8CBA4"/><stop offset="1" stop-color="#CCA46C"/></linearGradient><linearGradient id="vg-grau-entw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1F3F6"/><stop offset="1" stop-color="#D5DBE3"/></linearGradient><linearGradient id="vg-weiss-entw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F4F1EC"/></linearGradient><linearGradient id="vg-sandhell-entw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5E8D5"/><stop offset="1" stop-color="#E8D3B3"/></linearGradient><linearGradient id="vg-glanz-entw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.62"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.12"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient><linearGradient id="vg-rand-entw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#94733F"/><stop offset="0.35" stop-color="#C19A62"/><stop offset="0.6" stop-color="#E2C596"/><stop offset="1" stop-color="#9C7B45"/></linearGradient><filter id="as-blur-entw" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="4.5"/></filter><filter id="as-sch-entw" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="1" stdDeviation="0.8" flood-color="#102949" flood-opacity="0.10"/><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#102949" flood-opacity="0.12"/></filter></defs><rect class="as-saeule" style="--d:0" x="18" y="74" width="24" height="98" rx="2" fill="url(#vg-creme-entw)"/><rect class="as-saeule" style="--d:1" x="55.5" y="69" width="24" height="103" rx="2" fill="url(#vg-creme-entw)"/><rect class="as-saeule" style="--d:2" x="93" y="64" width="24" height="108" rx="2" fill="url(#vg-creme-entw)"/><rect class="as-saeule" style="--d:3" x="130.5" y="59" width="24" height="113" rx="2" fill="url(#vg-creme-entw)"/><rect class="as-saeule" style="--d:4" x="168" y="54" width="24" height="118" rx="2" fill="url(#vg-creme-entw)"/><rect class="as-saeule" style="--d:5" x="205.5" y="49" width="24" height="123" rx="2" fill="url(#vg-creme-entw)"/><rect class="as-saeule" style="--d:6" x="243" y="44" width="24" height="128" rx="2" fill="url(#vg-creme-entw)"/><rect class="as-saeule" style="--d:7" x="280.5" y="39" width="24" height="133" rx="2" fill="url(#vg-creme-entw)"/><rect class="as-saeule" style="--d:8" x="318" y="34" width="24" height="138" rx="2" fill="url(#vg-creme-entw)"/><line x1="8" y1="86" x2="352" y2="86" stroke="#BCC5D1" stroke-width="0.7" stroke-opacity="0.6"/><line x1="8" y1="114" x2="352" y2="114" stroke="#BCC5D1" stroke-width="0.7" stroke-opacity="0.6"/><line x1="8" y1="142" x2="352" y2="142" stroke="#BCC5D1" stroke-width="0.7" stroke-opacity="0.6"/><line x1="8" y1="58" x2="352" y2="58" stroke="#4C6A93" stroke-width="1" stroke-dasharray="3 3"/><line x1="8" y1="172" x2="352" y2="172" stroke="#BCC5D1" stroke-width="1.2"/><defs><linearGradient id="as-verlauf-entw" x1="0" x2="1"><stop offset="0" stop-color="#4C6A93"/><stop offset="0.55" stop-color="#A8874F"/><stop offset="1" stop-color="#D9B485"/></linearGradient></defs><path class="as-strich as-linie" pathLength="1" d="M22 158 C58 160 88 152 112 153 S158 150 178 144 S218 128 240 116 S276 88 292 70 L322 30" fill="none" stroke="url(#as-verlauf-entw)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><g class="as-spitze" transform="translate(322 30) rotate(-53.1301)"><path d="M-11 -7.5 L2 0 L-11 7.5 Z" fill="#D9B485" stroke="#D9B485" stroke-width="1.6" stroke-linejoin="round"/></g><circle class="as-halo as-halo--gross" cx="301" cy="58" r="16" fill="url(#vg-sand-entw)" fill-opacity="0.28"/><circle class="as-punkt" cx="301" cy="58" r="5.8" fill="url(#vg-navy-entw)" stroke="#FFFFFF" stroke-width="2"/></svg></figure>
+        <p class="ank-kachel__text">Sanierung, Aufteilung, Grundriss, Dachgeschoss, Aufstockung oder Umnutzung.</p>
+      </li>
+      <li class="ank-kachel" data-auf style="--i:4">
+        <h3 class="ank-kachel__titel">Wohnungsgrößen</h3>
+        <span class="ank-kachel__strich" aria-hidden="true"></span>
+        <figure class="ank-bild ank-bild--plan" aria-hidden="true"><svg class="as as--plan" viewBox="0 0 260 172" aria-hidden="true" focusable="false">
+<defs><linearGradient id="vg-creme-plan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF8F3"/><stop offset="1" stop-color="#EDE4D6"/></linearGradient><linearGradient id="vg-navy-plan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24406A"/><stop offset="1" stop-color="#0B203D"/></linearGradient><linearGradient id="vg-sand-plan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8CBA4"/><stop offset="1" stop-color="#CCA46C"/></linearGradient><linearGradient id="vg-grau-plan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1F3F6"/><stop offset="1" stop-color="#D5DBE3"/></linearGradient><linearGradient id="vg-weiss-plan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F4F1EC"/></linearGradient><linearGradient id="vg-sandhell-plan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5E8D5"/><stop offset="1" stop-color="#E8D3B3"/></linearGradient><linearGradient id="vg-glanz-plan" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.62"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.12"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient><linearGradient id="vg-rand-plan" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#94733F"/><stop offset="0.35" stop-color="#C19A62"/><stop offset="0.6" stop-color="#E2C596"/><stop offset="1" stop-color="#9C7B45"/></linearGradient><filter id="as-sch-plan" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#102949" flood-opacity="0.13"/></filter></defs>
+<rect class="as-raum" style="--d:0" x="44" y="24" width="84" height="112" fill="url(#vg-creme-plan)"/><rect class="as-raum" style="--d:1" x="128" y="24" width="88" height="56" fill="url(#vg-sandhell-plan)"/><rect class="as-raum" style="--d:2" x="128" y="80" width="88" height="56" fill="url(#vg-creme-plan)"/><path class="as-strich as-wand" pathLength="1" d="M44 24 H216 V136 H44 Z" fill="none" stroke="#102949" stroke-width="5" stroke-linejoin="round"/><path class="as-strich as-wand2" pathLength="1" d="M128 24 V92 M128 112 V136 M128 80 H160 M182 80 H216" fill="none" stroke="#102949" stroke-width="3.2"/><path d="M128 92 A20 20 0 0 1 148 112" fill="none" stroke="#4C6A93" stroke-width="1.2"/><path d="M160 80 A22 22 0 0 0 182 58" fill="none" stroke="#4C6A93" stroke-width="1.2" transform="translate(0 0)"/><rect x="70" y="21" width="30" height="6" fill="#FFFFFF" stroke="#4C6A93" stroke-width="1.2"/><rect x="156" y="21" width="30" height="6" fill="#FFFFFF" stroke="#4C6A93" stroke-width="1.2"/><rect x="213" y="96" width="6" height="26" fill="#FFFFFF" stroke="#4C6A93" stroke-width="1.2"/><rect x="56" y="100" width="44" height="22" rx="4" fill="#E3E7ED"/><rect x="150" y="96" width="40" height="30" rx="4" fill="#E3E7ED"/><path class="as-strich as-mass" pathLength="1" d="M44 156 H216" fill="none" stroke="#A8874F" stroke-width="1.8"/><path class="as-strich as-mass" pathLength="1" d="M236 24 V136" fill="none" stroke="#A8874F" stroke-width="1.8"/><g class="as-enden" stroke="#A8874F" stroke-width="1.8" stroke-linecap="round"><line x1="44" y1="150" x2="44" y2="162"/><line x1="216" y1="150" x2="216" y2="162"/><line x1="230" y1="24" x2="242" y2="24"/><line x1="230" y1="136" x2="242" y2="136"/></g></svg></figure>
+        <p class="ank-kachel__zahl">30–70&nbsp;m²</p>
+        <p class="ank-kachel__text">Bevorzugt. Größere Einheiten, wenn sie sich teilen oder optimieren lassen.</p>
+      </li>
+      <li class="ank-kachel" data-auf style="--i:5">
+        <h3 class="ank-kachel__titel">Nicht gesucht</h3>
+        <span class="ank-kachel__strich" aria-hidden="true"></span>
+        <figure class="ank-bild ank-bild--schranke" aria-hidden="true"><svg class="as as--nicht" viewBox="6 2 168 198" aria-hidden="true" focusable="false"><defs><linearGradient id="vg-creme-nicht" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF8F3"/><stop offset="1" stop-color="#EDE4D6"/></linearGradient><linearGradient id="vg-navy-nicht" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24406A"/><stop offset="1" stop-color="#0B203D"/></linearGradient><linearGradient id="vg-sand-nicht" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8CBA4"/><stop offset="1" stop-color="#CCA46C"/></linearGradient><linearGradient id="vg-grau-nicht" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1F3F6"/><stop offset="1" stop-color="#D5DBE3"/></linearGradient><linearGradient id="vg-weiss-nicht" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F4F1EC"/></linearGradient><linearGradient id="vg-sandhell-nicht" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5E8D5"/><stop offset="1" stop-color="#E8D3B3"/></linearGradient><linearGradient id="vg-glanz-nicht" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.62"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.12"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient><linearGradient id="vg-rand-nicht" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#94733F"/><stop offset="0.35" stop-color="#C19A62"/><stop offset="0.6" stop-color="#E2C596"/><stop offset="1" stop-color="#9C7B45"/></linearGradient><filter id="as-blur-nicht" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="4.5"/></filter><filter id="as-sch-nicht" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="1" stdDeviation="0.8" flood-color="#102949" flood-opacity="0.10"/><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#102949" flood-opacity="0.12"/></filter></defs><g class="as-karte" style="--d:0"><rect class="as-schatten" x="18" y="30" width="142" height="163" rx="8" fill="url(#vg-navy-nicht)" opacity="0.22" filter="url(#as-blur-nicht)"/><g class="as-blatt"><rect x="14" y="22" width="150" height="168" rx="8" fill="url(#vg-weiss-nicht)" stroke="#102949" stroke-opacity="0.07" stroke-width="0.8" filter="url(#as-sch-nicht)"/><g class="as-grau"><line x1="28" y1="168" x2="150" y2="168" stroke="#C9A874" stroke-width="1.2"/><g stroke="#4C6A93" stroke-width="1.3" fill="none" stroke-linecap="round"><line x1="122" y1="168" x2="122" y2="52"/><line x1="129" y1="168" x2="129" y2="52"/><path d="M122 168 L129 158" stroke-width="0.7"/><path d="M122 158 L129 148" stroke-width="0.7"/><path d="M122 148 L129 138" stroke-width="0.7"/><path d="M122 138 L129 128" stroke-width="0.7"/><path d="M122 128 L129 118" stroke-width="0.7"/><path d="M122 118 L129 108" stroke-width="0.7"/><path d="M122 108 L129 98" stroke-width="0.7"/><path d="M122 98 L129 88" stroke-width="0.7"/><path d="M122 88 L129 78" stroke-width="0.7"/><path d="M122 78 L129 68" stroke-width="0.7"/><path d="M122 68 L129 58" stroke-width="0.7"/><line x1="36" y1="54" x2="148" y2="54"/><path d="M44 54 L125.5 40 L144 54" stroke-width="0.9"/><line x1="62" y1="54" x2="62" y2="80" stroke-width="0.9"/></g><rect x="138" y="55" width="10" height="7" fill="#BCC5D1"/><rect x="54" y="80" width="16" height="7" fill="#E3E7ED" stroke="#4C6A93" stroke-width="0.8"/><rect x="36" y="102" width="76" height="66" fill="#E3E7ED" stroke="#4C6A93" stroke-width="1.3"/><rect x="34" y="102" width="80" height="3" fill="#BCC5D1"/><rect x="34" y="124" width="80" height="3" fill="#BCC5D1"/><rect class="as-fenster" style="--w:3" x="44" y="131" width="16" height="11" rx="0.8" fill="#E3E7ED"/><rect x="44" y="131" width="16" height="6.05" fill="url(#vg-glanz-nicht)" pointer-events="none"/><rect x="43.2" y="142" width="17.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="52" y1="131" x2="52" y2="142" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster" style="--w:4" x="66" y="131" width="16" height="11" rx="0.8" fill="#E3E7ED"/><rect x="66" y="131" width="16" height="6.05" fill="url(#vg-glanz-nicht)" pointer-events="none"/><rect x="65.2" y="142" width="17.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="74" y1="131" x2="74" y2="142" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster" style="--w:5" x="88" y="131" width="16" height="11" rx="0.8" fill="#E3E7ED"/><rect x="88" y="131" width="16" height="6.05" fill="url(#vg-glanz-nicht)" pointer-events="none"/><rect x="87.2" y="142" width="17.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="96" y1="131" x2="96" y2="142" stroke="#FFFFFF" stroke-width="0.8"/><rect x="34" y="146" width="80" height="3" fill="#BCC5D1"/><rect class="as-fenster" style="--w:6" x="44" y="153" width="16" height="11" rx="0.8" fill="#E3E7ED"/><rect x="44" y="153" width="16" height="6.05" fill="url(#vg-glanz-nicht)" pointer-events="none"/><rect x="43.2" y="164" width="17.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="52" y1="153" x2="52" y2="164" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster" style="--w:7" x="66" y="153" width="16" height="11" rx="0.8" fill="#E3E7ED"/><rect x="66" y="153" width="16" height="6.05" fill="url(#vg-glanz-nicht)" pointer-events="none"/><rect x="65.2" y="164" width="17.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="74" y1="153" x2="74" y2="164" stroke="#FFFFFF" stroke-width="0.8"/><rect class="as-fenster" style="--w:8" x="88" y="153" width="16" height="11" rx="0.8" fill="#E3E7ED"/><rect x="88" y="153" width="16" height="6.05" fill="url(#vg-glanz-nicht)" pointer-events="none"/><rect x="87.2" y="164" width="17.6" height="1.3" fill="#102949" fill-opacity="0.22"/><line x1="96" y1="153" x2="96" y2="164" stroke="#FFFFFF" stroke-width="0.8"/><line x1="40" y1="80" x2="40" y2="102" stroke="#4C6A93" stroke-width="1.2"/><line x1="62.7" y1="80" x2="62.7" y2="102" stroke="#4C6A93" stroke-width="1.2"/><line x1="85.4" y1="80" x2="85.4" y2="102" stroke="#4C6A93" stroke-width="1.2"/><line x1="108.1" y1="80" x2="108.1" y2="102" stroke="#4C6A93" stroke-width="1.2"/><rect x="34" y="80" width="80" height="3" fill="#BCC5D1"/></g><g class="as-x" style="--d:0"><circle cx="150" cy="36" r="14" fill="url(#vg-weiss-nicht)" filter="url(#as-sch-nicht)"/><circle cx="150" cy="36" r="11.3" fill="none" stroke="#B23A31" stroke-width="1.8"/><path d="M145.2 31.2 L154.8 40.8 M154.8 31.2 L145.2 40.8" stroke="#B23A31" stroke-width="2.4" stroke-linecap="round"/></g></g></g></svg></figure>
+        <p class="ank-kachel__text">Schlüsselfertige Neubauten, Forward Deals, Erbbaurecht und Denkmalschutz.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     POP-UPS — Eigentuemer und Makler (29.09.2026, Kundenwunsch)
+     Bis heute standen hier zwei lange Abschnitte (#eigentuemer, #makler).
+     Ihr Inhalt ist unveraendert; er steht jetzt je in einem <dialog>, das
+     ankauf.js per showModal() oeffnet: Klick auf die Karte oder „Mehr
+     erfahren", und beim Aufruf der Seite mit #eigentuemer oder #makler in
+     der Adresse. Schliessen per X, Escape und Klick neben den Kasten; der
+     Fokus springt beim Schliessen auf den Ausloeser zurueck.
+     OHNE JAVASCRIPT zeigt ankauf.css beide als gewoehnliche Abschnitte an
+     dieser Stelle (html:not(.ank-js)); die Sprungverweise der Karten
+     landen dann hier. Die Klasse ank-js setzt ein Einzeiler im Kopf der
+     Seite, damit nichts erst sichtbar wird und dann verschwindet.
+     Keine Einblendung (data-auf) im Inneren: die Pop-ups haben ihren
+     eigenen Auftritt.
+     ===================================================================== -->
+<dialog class="ank-pop apo-pop" id="eigentuemer" aria-labelledby="ank-eigentuemer-titel">
+  <div class="ank-pop__kasten apo">
+    <button class="ank-pop__zu" type="button" aria-label="Fenster schließen" data-pop-zu>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg>
+    </button>
+    <!-- NEUER AUFBAU 30.09.2026 (Kundenwunsch „deutlich schoener, mit
+         Abbildungen und Kaesten"): Kopf mit grosser Szene, die Vorteile als
+         sechs Kacheln mit kleinen Szenen, der Ablauf als Zeitleiste, unten
+         ein Navy-Kasten mit Mail-Knopf und PDF. Stil wie „Wonach wir
+         suchen". Wortlaut der Vorteile unveraendert; nur die Kacheltitel
+         sind neu, und zwei Vorteile teilen sich eine Kachel.
+         Stile: ankauf-popup.css, Bewegung: ankauf-popup.js.
+         Die Verlaeufe und Schatten aller Szenen dieses Pop-ups haengen im
+         unsichtbaren SVG direkt hierunter (Vorsatz pe-). -->
+    <svg class="apo-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><linearGradient id="pe-creme" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF8F3"/><stop offset="1" stop-color="#EDE4D6"/></linearGradient><linearGradient id="pe-navy" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24406A"/><stop offset="1" stop-color="#0B203D"/></linearGradient><linearGradient id="pe-sand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8CBA4"/><stop offset="1" stop-color="#CCA46C"/></linearGradient><linearGradient id="pe-weiss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F4F1EC"/></linearGradient><linearGradient id="pe-sandhell" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5E8D5"/><stop offset="1" stop-color="#E8D3B3"/></linearGradient><linearGradient id="pe-glanz" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.62"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.12"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient><linearGradient id="pe-rand" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#94733F"/><stop offset="0.35" stop-color="#C19A62"/><stop offset="0.6" stop-color="#E2C596"/><stop offset="1" stop-color="#9C7B45"/></linearGradient><filter id="pe-sch" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="1" stdDeviation="0.8" flood-color="#102949" flood-opacity="0.10"/><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#102949" flood-opacity="0.12"/></filter><filter id="pe-blur" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="6"/></filter></defs></svg>
+
+    <header class="apo-kopf" data-apo>
+      <div class="apo-kopf__text">
+        <p class="ank-kicker apo-kicker">Für private Eigentümer</p>
+        <h2 class="ank-titel apo-titel" id="ank-eigentuemer-titel">Du möchtest deine <em>Immobilie verkaufen?</em></h2>
+        <p class="ank-unterzeile apo-unterzeile">Wir erwerben ausgewählte Bestandsimmobilien in Bayern direkt, diskret und ohne unnötigen Vermarktungsaufwand.</p>
+        <p class="ank-text apo-einleitung">Ob vermietet, leerstehend, sanierungsbedürftig oder mit besonderen Herausforderungen: Wir prüfen jede Immobilie individuell und geben dir eine klare Rückmeldung, ob ein Ankauf für uns infrage kommt.</p>
+      </div>
+      <!-- Szene: Haus auf einer Karte, davor der Schluessel mit Anhaenger —
+           die Schluesseluebergabe ohne Figuren. Akzent: der Schluessel. -->
+      <figure class="apo-kopf__bild" aria-hidden="true"><svg class="ps ps--haus" viewBox="0 0 400 300" aria-hidden="true" focusable="false">
+<ellipse cx="186" cy="278" rx="150" ry="8" fill="#E3E7ED"/>
+<g class="ps-e ps-auf"><g class="ps-h ps-hebt-sanft">
+<rect x="58" y="46" width="236" height="224" rx="16" fill="url(#pe-navy)" opacity="0.2" filter="url(#pe-blur)"/>
+<rect x="50" y="34" width="244" height="232" rx="16" fill="url(#pe-weiss)" stroke="#102949" stroke-opacity="0.07" filter="url(#pe-sch)"/>
+<line x1="68" y1="238" x2="276" y2="238" stroke="#C9A874" stroke-width="1.4"/>
+<line x1="80" y1="238" x2="80" y2="214" stroke="#4C6A93" stroke-width="1.6"/><ellipse cx="80" cy="203" rx="12" ry="17" fill="url(#pe-sandhell)"/>
+<line x1="264" y1="238" x2="264" y2="218" stroke="#4C6A93" stroke-width="1.6"/><ellipse cx="264" cy="208" rx="10" ry="14" fill="url(#pe-sandhell)"/>
+<rect x="214" y="82" width="12" height="28" fill="url(#pe-navy)"/>
+<rect x="98" y="124" width="148" height="114" fill="url(#pe-creme)" stroke="#102949" stroke-width="2"/>
+<path d="M86 127 L172 72 L258 127 Z" fill="url(#pe-navy)" stroke="#0B203D" stroke-width="1" stroke-linejoin="round"/>
+<rect x="99" y="127" width="146" height="4" fill="#102949" fill-opacity="0.13"/>
+<rect class="ps-fenster ps-fenster--an" style="--w:0" x="162" y="99" width="20" height="16" rx="1" fill="#D9B485" stroke="#FFFFFF" stroke-width="1.5"/>
+<rect class="ps-fenster" x="113" y="140" width="24" height="20" rx="1" fill="#E3E7ED" stroke="#4C6A93" stroke-width="1"/><rect x="113" y="140" width="24" height="10" fill="url(#pe-glanz)"/><line x1="125" y1="140" x2="125" y2="160" stroke="#FFFFFF" stroke-width="1"/><rect x="111" y="160" width="28" height="2" fill="#102949" fill-opacity="0.22"/>
+<rect class="ps-fenster ps-fenster--an" style="--w:1" x="160" y="140" width="24" height="20" rx="1" fill="#D9B485" stroke="#4C6A93" stroke-width="1"/><rect x="160" y="140" width="24" height="10" fill="url(#pe-glanz)"/><line x1="172" y1="140" x2="172" y2="160" stroke="#FFFFFF" stroke-width="1"/><rect x="158" y="160" width="28" height="2" fill="#102949" fill-opacity="0.22"/>
+<rect class="ps-fenster" x="207" y="140" width="24" height="20" rx="1" fill="#E3E7ED" stroke="#4C6A93" stroke-width="1"/><rect x="207" y="140" width="24" height="10" fill="url(#pe-glanz)"/><line x1="219" y1="140" x2="219" y2="160" stroke="#FFFFFF" stroke-width="1"/><rect x="205" y="160" width="28" height="2" fill="#102949" fill-opacity="0.22"/>
+<rect class="ps-fenster ps-fenster--an" style="--w:2" x="113" y="172" width="24" height="20" rx="1" fill="#D9B485" stroke="#4C6A93" stroke-width="1"/><rect x="113" y="172" width="24" height="10" fill="url(#pe-glanz)"/><line x1="125" y1="172" x2="125" y2="192" stroke="#FFFFFF" stroke-width="1"/><rect x="111" y="192" width="28" height="2" fill="#102949" fill-opacity="0.22"/>
+<rect class="ps-fenster" x="160" y="172" width="24" height="20" rx="1" fill="#E3E7ED" stroke="#4C6A93" stroke-width="1"/><rect x="160" y="172" width="24" height="10" fill="url(#pe-glanz)"/><line x1="172" y1="172" x2="172" y2="192" stroke="#FFFFFF" stroke-width="1"/><rect x="158" y="192" width="28" height="2" fill="#102949" fill-opacity="0.22"/>
+<rect class="ps-fenster ps-fenster--an" style="--w:3" x="207" y="172" width="24" height="20" rx="1" fill="#D9B485" stroke="#4C6A93" stroke-width="1"/><rect x="207" y="172" width="24" height="10" fill="url(#pe-glanz)"/><line x1="219" y1="172" x2="219" y2="192" stroke="#FFFFFF" stroke-width="1"/><rect x="205" y="192" width="28" height="2" fill="#102949" fill-opacity="0.22"/>
+<rect class="ps-fenster" x="113" y="206" width="24" height="20" rx="1" fill="#E3E7ED" stroke="#4C6A93" stroke-width="1"/><rect x="113" y="206" width="24" height="10" fill="url(#pe-glanz)"/><line x1="125" y1="206" x2="125" y2="226" stroke="#FFFFFF" stroke-width="1"/><rect x="111" y="226" width="28" height="2" fill="#102949" fill-opacity="0.22"/>
+<rect class="ps-fenster" x="207" y="206" width="24" height="20" rx="1" fill="#E3E7ED" stroke="#4C6A93" stroke-width="1"/><rect x="207" y="206" width="24" height="10" fill="url(#pe-glanz)"/><line x1="219" y1="206" x2="219" y2="226" stroke="#FFFFFF" stroke-width="1"/><rect x="205" y="226" width="28" height="2" fill="#102949" fill-opacity="0.22"/>
+<rect x="155" y="196" width="34" height="4" rx="1" fill="#BCC5D1"/>
+<rect x="159" y="200" width="26" height="38" rx="1" fill="url(#pe-navy)"/><rect x="163" y="205" width="18" height="12" rx="1" fill="#FFFFFF" fill-opacity="0.12"/><circle cx="180" cy="221" r="1.8" fill="#D9B485"/>
+<rect x="152" y="238" width="40" height="5" rx="1" fill="#BCC5D1"/>
+</g></g>
+<ellipse class="ps-e ps-blende ps-halo" cx="318" cy="208" rx="36" ry="36" fill="#D9B485" fill-opacity="0.16"/>
+<g class="ps-e ps-faellt"><g class="ps-h ps-pendel">
+<g transform="rotate(-12 290 206)"><rect x="272" y="198" width="34" height="48" rx="5" fill="url(#pe-navy)" filter="url(#pe-sch)"/><circle cx="289" cy="207" r="3.2" fill="#FFFFFF"/><path d="M280 234 L289 226 L298 234 V241 H280 Z" fill="none" stroke="#D9B485" stroke-width="1.5" stroke-linejoin="round"/></g>
+<g transform="rotate(38 318 206)"><rect x="332" y="202" width="50" height="8" rx="2" fill="url(#pe-sand)" stroke="#A8874F" stroke-width="1"/><path d="M362 210 V219 H367 V214 H372 V222 H378 V210" fill="url(#pe-sand)" stroke="#A8874F" stroke-width="1" stroke-linejoin="round"/><line x1="340" y1="206" x2="370" y2="206" stroke="#FFFFFF" stroke-opacity="0.6" stroke-width="1"/><circle cx="318" cy="206" r="17" fill="url(#pe-sand)" stroke="#A8874F" stroke-width="1.2" filter="url(#pe-sch)"/><circle cx="318" cy="206" r="17" fill="url(#pe-glanz)"/><circle cx="318" cy="206" r="11" fill="none" stroke="#FFFFFF" stroke-opacity="0.55"/><circle cx="311" cy="199" r="4.5" fill="#FFFFFF"/></g>
+<circle cx="303" cy="190" r="12" fill="none" stroke="url(#pe-rand)" stroke-width="3.2"/>
+</g></g>
+</svg></figure>
+    </header>
+
+    <div class="apo-band">
+      <h3 class="apo-h3" data-apo>Was du von uns erwarten kannst</h3>
+      <ul class="apo-raster">
+        <li class="apo-kachel" data-apo style="--i:0">
+          <figure class="apo-kachel__bild" aria-hidden="true"><svg class="ps ps--brief" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+<ellipse cx="80" cy="111" rx="54" ry="4.5" fill="#E3E7ED"/>
+<g class="ps-e ps-auf"><rect x="30" y="46" width="100" height="60" rx="5" fill="url(#pe-sandhell)" stroke="#102949" stroke-width="1.6"/><path d="M30 48 L80 18 L130 48 Z" fill="url(#pe-sandhell)" stroke="#102949" stroke-width="1.6" stroke-linejoin="round"/></g>
+<g class="ps-e ps-rein"><g class="ps-h ps-hebt"><rect x="44" y="28" width="72" height="60" rx="3" fill="#FFFFFF" stroke="#102949" stroke-opacity="0.14"/><rect x="54" y="37" width="34" height="4" rx="2" fill="#102949" fill-opacity="0.8"/><rect x="54" y="46" width="52" height="3.5" rx="1.75" fill="#BCC5D1"/><rect x="54" y="54" width="44" height="3.5" rx="1.75" fill="#E3E7ED"/><rect x="54" y="62" width="48" height="3.5" rx="1.75" fill="#E3E7ED"/></g></g>
+<g class="ps-e ps-auf"><path d="M30 52 L80 82 L130 52 V101 A5 5 0 0 1 125 106 H35 A5 5 0 0 1 30 101 Z" fill="url(#pe-creme)" stroke="#102949" stroke-width="1.6" stroke-linejoin="round"/><path d="M31 104 L66 78 M129 104 L94 78" stroke="#102949" stroke-opacity="0.16" stroke-width="1.2"/></g>
+<g class="ps-e ps-springt"><g class="ps-h ps-dreht"><circle cx="80" cy="84" r="12" fill="url(#pe-sand)" stroke="#A8874F" stroke-width="1" filter="url(#pe-sch)"/><circle cx="80" cy="84" r="8" fill="none" stroke="#FFFFFF" stroke-opacity="0.75"/><path d="M80 79 L85 84 L80 89 L75 84 Z" fill="#FFFFFF" fill-opacity="0.9"/></g></g>
+</svg></figure>
+          <h4 class="apo-kachel__titel">Vertraulich</h4>
+          <span class="apo-strich" aria-hidden="true"></span>
+          <ul class="apo-kachel__punkte"><li>Persönliche und vertrauliche Kommunikation</li></ul>
+        </li>
+        <li class="apo-kachel" data-apo style="--i:1">
+          <figure class="apo-kachel__bild" aria-hidden="true"><svg class="ps ps--blatt" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+<ellipse cx="80" cy="111" rx="46" ry="4.5" fill="#E3E7ED"/>
+<g class="ps-e ps-auf"><g class="ps-h ps-hebt">
+<rect x="40" y="20" width="76" height="88" rx="5" fill="#FFFFFF" stroke="#102949" stroke-opacity="0.08" transform="rotate(-5 78 64)" filter="url(#pe-sch)"/>
+<rect x="46" y="14" width="76" height="92" rx="5" fill="url(#pe-weiss)" stroke="#102949" stroke-opacity="0.08" filter="url(#pe-sch)"/>
+<rect x="54" y="22" width="60" height="36" rx="3" fill="url(#pe-creme)"/>
+<path d="M68 55 V44 L80 36 L92 44 V55 Z" fill="#FFFFFF" stroke="#102949" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M65 45 L80 34.5 L95 45" fill="none" stroke="#102949" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="77" y="47" width="6" height="8" fill="#D9B485"/>
+<line x1="56" y1="55.5" x2="112" y2="55.5" stroke="#C9A874" stroke-width="1"/>
+<rect x="54" y="67" width="40" height="4" rx="2" fill="#102949" fill-opacity="0.8"/>
+<rect x="54" y="76" width="52" height="3.5" rx="1.75" fill="#BCC5D1"/>
+<rect x="54" y="84" width="36" height="3.5" rx="1.75" fill="#E3E7ED"/>
+<rect x="54" y="92" width="44" height="3.5" rx="1.75" fill="#E3E7ED"/>
+</g></g>
+<g class="ps-e ps-springt"><g class="ps-h ps-dreht">
+<circle class="ps-ring" cx="118" cy="92" r="19" fill="none" stroke="#A8874F" stroke-width="1.2"/>
+<circle cx="118" cy="92" r="14.5" fill="url(#pe-sand)" filter="url(#pe-sch)"/>
+<circle cx="118" cy="92" r="11" fill="none" stroke="#FFFFFF" stroke-opacity="0.7"/>
+<path class="ps-strich" pathLength="1" d="M112 92.5 L116.5 97 L124.5 88" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</g></g>
+</svg></figure>
+          <h4 class="apo-kachel__titel">Klare Einschätzung</h4>
+          <span class="apo-strich" aria-hidden="true"></span>
+          <ul class="apo-kachel__punkte"><li>Verständliche Einschätzung deiner Immobilie</li><li>Klare und nachvollziehbare Rückmeldung</li></ul>
+        </li>
+        <li class="apo-kachel" data-apo style="--i:2">
+          <figure class="apo-kachel__bild" aria-hidden="true"><svg class="ps ps--schild" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+<ellipse cx="80" cy="111" rx="54" ry="4.5" fill="#E3E7ED"/>
+<path d="M104 108 V84 L120 71 L136 84 V108 Z" fill="#F1F3F6" stroke="#BCC5D1" stroke-width="1.2" stroke-linejoin="round"/>
+<line x1="26" y1="108" x2="134" y2="108" stroke="#C9A874" stroke-width="1.2"/>
+<g class="ps-e ps-auf"><rect x="42" y="20" width="5" height="88" rx="1.5" fill="url(#pe-navy)"/><rect x="42" y="23" width="76" height="5" rx="1.5" fill="url(#pe-navy)"/><path d="M47 38 L58 28" stroke="#102949" stroke-width="2" stroke-linecap="round"/></g>
+<g class="ps-e ps-auf ps-spaet"><g class="ps-h ps-schwingt">
+<line x1="66" y1="28" x2="66" y2="41" stroke="#4C6A93" stroke-width="1.2"/><line x1="108" y1="28" x2="108" y2="41" stroke="#4C6A93" stroke-width="1.2"/>
+<rect x="58" y="41" width="58" height="36" rx="3" fill="url(#pe-weiss)" stroke="#102949" stroke-width="1.6" filter="url(#pe-sch)"/>
+<rect x="67" y="50" width="40" height="6" rx="1.5" fill="#102949" fill-opacity="0.85"/>
+<rect x="71" y="61" width="32" height="3.5" rx="1.75" fill="#BCC5D1"/>
+<rect x="75" y="68" width="24" height="3" rx="1.5" fill="#E3E7ED"/>
+<path d="M62 74 L112 44" stroke="#FFFFFF" stroke-width="6.5" stroke-linecap="round"/>
+<path class="ps-strich" pathLength="1" d="M62 74 L112 44" stroke="#A8874F" stroke-width="3" stroke-linecap="round"/>
+</g></g>
+</svg></figure>
+          <h4 class="apo-kachel__titel">Ohne öffentliche Vermarktung</h4>
+          <span class="apo-strich" aria-hidden="true"></span>
+          <ul class="apo-kachel__punkte"><li>Kein öffentlicher Vermarktungsprozess notwendig</li></ul>
+        </li>
+        <li class="apo-kachel" data-apo style="--i:3">
+          <figure class="apo-kachel__bild" aria-hidden="true"><svg class="ps ps--ordner" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+<ellipse cx="80" cy="111" rx="56" ry="4.5" fill="#E3E7ED"/>
+<g class="ps-e ps-auf"><path d="M28 30 A4 4 0 0 1 32 26 H58 L66 34 H128 A4 4 0 0 1 132 38 V104 H28 Z" fill="url(#pe-sandhell)" stroke="#A8874F" stroke-width="1" stroke-opacity="0.6"/></g>
+<g class="ps-e ps-rein" style="--d:0"><g class="ps-h ps-hebt"><rect x="40" y="24" width="72" height="54" rx="2" fill="#FFFFFF" stroke="#102949" stroke-opacity="0.12" transform="rotate(-4 76 51)"/></g></g>
+<g class="ps-e ps-rein" style="--d:1"><g class="ps-h ps-hebt ps-hebt--mehr"><g transform="rotate(3 84 57)"><rect x="48" y="30" width="72" height="54" rx="2" fill="url(#pe-weiss)" stroke="#102949" stroke-opacity="0.12"/><rect x="56" y="38" width="34" height="4" rx="2" fill="#102949" fill-opacity="0.8"/><rect x="56" y="47" width="54" height="3.5" rx="1.75" fill="#BCC5D1"/><rect x="56" y="55" width="44" height="3.5" rx="1.75" fill="#E3E7ED"/></g></g></g>
+<g class="ps-e ps-auf"><path d="M24 56 A3 3 0 0 1 27 53 H133 A3 3 0 0 1 136 56.5 L130 102 A3 3 0 0 1 127 105 H33 A3 3 0 0 1 30 102 Z" fill="url(#pe-navy)"/><rect x="62" y="70" width="36" height="14" rx="2" fill="#FFFFFF"/><rect x="68" y="75.5" width="24" height="3" rx="1.5" fill="#BCC5D1"/></g>
+<g class="ps-e ps-springt"><g class="ps-h ps-dreht"><circle class="ps-ring" cx="126" cy="34" r="16" fill="none" stroke="#A8874F" stroke-width="1.2"/><circle cx="126" cy="34" r="12" fill="url(#pe-sand)" filter="url(#pe-sch)"/><path d="M126 28 V40 M120 34 H132" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/></g></g>
+</svg></figure>
+          <h4 class="apo-kachel__titel">Unterlagen</h4>
+          <span class="apo-strich" aria-hidden="true"></span>
+          <ul class="apo-kachel__punkte"><li>Unterstützung bei fehlenden Objektunterlagen</li></ul>
+        </li>
+        <li class="apo-kachel" data-apo style="--i:4">
+          <figure class="apo-kachel__bild" aria-hidden="true"><svg class="ps ps--kalender" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+<ellipse cx="80" cy="111" rx="50" ry="4.5" fill="#E3E7ED"/>
+<g class="ps-e ps-auf">
+<rect x="34" y="20" width="92" height="86" rx="6" fill="url(#pe-weiss)" stroke="#102949" stroke-opacity="0.08" filter="url(#pe-sch)"/>
+<path d="M34 26 A6 6 0 0 1 40 20 H120 A6 6 0 0 1 126 26 V38 H34 Z" fill="url(#pe-navy)"/>
+<rect x="54" y="13" width="5" height="13" rx="2.5" fill="url(#pe-sand)"/><rect x="101" y="13" width="5" height="13" rx="2.5" fill="url(#pe-sand)"/>
+<g fill="#EEF1F5"><rect x="44" y="48" width="12" height="12" rx="2"/><rect x="59" y="48" width="12" height="12" rx="2"/><rect x="74" y="48" width="12" height="12" rx="2"/><rect x="89" y="48" width="12" height="12" rx="2"/><rect x="104" y="48" width="12" height="12" rx="2"/><rect x="44" y="65" width="12" height="12" rx="2"/><rect x="74" y="65" width="12" height="12" rx="2"/><rect x="104" y="65" width="12" height="12" rx="2"/><rect x="44" y="82" width="12" height="12" rx="2"/><rect x="59" y="82" width="12" height="12" rx="2"/><rect x="74" y="82" width="12" height="12" rx="2"/><rect x="89" y="82" width="12" height="12" rx="2"/><rect x="104" y="82" width="12" height="12" rx="2"/></g>
+<rect x="59.5" y="65.5" width="11" height="11" rx="2" fill="#FFFFFF" stroke="#A8874F" stroke-width="1.1" stroke-dasharray="2 2"/>
+</g>
+<path class="ps-e ps-strich ps-zeichnet" pathLength="1" d="M66 63 C71 54 86 54 92 61" fill="none" stroke="#A8874F" stroke-width="1.5" stroke-linecap="round"/>
+<g class="ps-e ps-springt"><g class="ps-h ps-tupf"><circle class="ps-ring" cx="95" cy="71" r="11" fill="none" stroke="#A8874F" stroke-width="1.2"/><rect x="89" y="65" width="12" height="12" rx="2" fill="url(#pe-sand)"/><path d="M91 57.5 L93 61.5 L88.5 62" fill="none" stroke="#A8874F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+</svg></figure>
+          <h4 class="apo-kachel__titel">Flexibler Ablauf</h4>
+          <span class="apo-strich" aria-hidden="true"></span>
+          <ul class="apo-kachel__punkte"><li>Flexible Abstimmung des Verkaufsablaufs</li></ul>
+        </li>
+        <li class="apo-kachel" data-apo style="--i:5">
+          <figure class="apo-kachel__bild" aria-hidden="true"><svg class="ps ps--urkunde" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+<ellipse cx="80" cy="111" rx="50" ry="4.5" fill="#E3E7ED"/>
+<g class="ps-e ps-auf"><g class="ps-h ps-hebt">
+<rect x="36" y="12" width="88" height="94" rx="3" fill="url(#pe-creme)" stroke="#102949" stroke-opacity="0.1" filter="url(#pe-sch)"/>
+<rect x="42" y="18" width="76" height="82" rx="1.5" fill="none" stroke="#C9A874" stroke-width="0.9"/>
+<rect x="60" y="27" width="40" height="5" rx="2.5" fill="#102949" fill-opacity="0.85"/>
+<rect x="66" y="36" width="28" height="3" rx="1.5" fill="#BCC5D1"/>
+<rect x="50" y="47" width="60" height="3.5" rx="1.75" fill="#E3E7ED"/><rect x="50" y="55" width="56" height="3.5" rx="1.75" fill="#E3E7ED"/><rect x="50" y="63" width="60" height="3.5" rx="1.75" fill="#E3E7ED"/><rect x="50" y="71" width="40" height="3.5" rx="1.75" fill="#E3E7ED"/>
+<line x1="50" y1="92" x2="86" y2="92" stroke="#BCC5D1" stroke-width="1"/>
+<path class="ps-strich ps-unterschrift" pathLength="1" d="M52 89 C56 81 59 81 60 87 C61 92 64 90 67 84 C70 79 73 81 73 86 C73 90 77 89 82 84" fill="none" stroke="#102949" stroke-width="1.4" stroke-linecap="round"/>
+</g></g>
+<g class="ps-e ps-springt"><g class="ps-h ps-dreht-klein">
+<path d="M101 98 L95 116 L102 112 L106 118 L109 100 Z" fill="url(#pe-navy)"/><path d="M113 100 L116 118 L120 112 L127 116 L121 98 Z" fill="url(#pe-navy)"/>
+<circle cx="111" cy="92" r="14" fill="url(#pe-sand)" stroke="#A8874F" stroke-width="1" filter="url(#pe-sch)"/>
+<circle cx="111" cy="92" r="10" fill="none" stroke="#FFFFFF" stroke-opacity="0.75" stroke-dasharray="2 2"/>
+<path d="M111 86 L117 92 L111 98 L105 92 Z" fill="#FFFFFF" fill-opacity="0.9"/>
+</g></g>
+</svg></figure>
+          <h4 class="apo-kachel__titel">Bis zum Notar</h4>
+          <span class="apo-strich" aria-hidden="true"></span>
+          <ul class="apo-kachel__punkte"><li>Strukturierte Vorbereitung bis zum Notartermin</li></ul>
+        </li>
+      </ul>
+
+      <!-- Der Ablauf als Zeitleiste: waagerecht ab 760 px, darunter senkrecht.
+           Die Goldlinie zieht sich, danach setzen die fuenf Punkte nacheinander
+           auf (ankauf-popup.css). Die Ziffern sind Schmuck (aria-hidden), die
+           Reihenfolge traegt das <ol>. -->
+      <section class="apo-ablauf" data-apo aria-labelledby="apo-e-ablauf">
+        <h3 class="apo-h3" id="apo-e-ablauf">So läuft der Verkauf ab</h3>
+        <span class="apo-strich" aria-hidden="true"></span>
+        <ol class="apo-schritte">
+          <li style="--i:0"><span class="apo-schritt__nr" aria-hidden="true">1</span><span class="apo-schritt__text">Immobilie unverbindlich anbieten</span></li>
+          <li style="--i:1"><span class="apo-schritt__nr" aria-hidden="true">2</span><span class="apo-schritt__text">Ersteinschätzung und Rückmeldung erhalten</span></li>
+          <li style="--i:2"><span class="apo-schritt__nr" aria-hidden="true">3</span><span class="apo-schritt__text">Besichtigung und Prüfung</span></li>
+          <li style="--i:3"><span class="apo-schritt__nr" aria-hidden="true">4</span><span class="apo-schritt__text">Kaufpreis und Abwicklung abstimmen</span></li>
+          <li style="--i:4"><span class="apo-schritt__nr" aria-hidden="true">5</span><span class="apo-schritt__text">Notarielle Beurkundung</span></li>
+        </ol>
+      </section>
+
+      <div class="apo-fuss" data-apo>
+        <figure class="apo-fuss__bild" aria-hidden="true"><svg class="ps ps--post" viewBox="0 0 200 150" aria-hidden="true" focusable="false">
+<ellipse cx="100" cy="141" rx="72" ry="5" fill="#000000" fill-opacity="0.2"/>
+<g class="ps-e ps-auf"><rect x="30" y="62" width="140" height="76" rx="6" fill="url(#pe-sandhell)"/><path d="M30 64 L100 22 L170 64 Z" fill="url(#pe-sandhell)" stroke="#A8874F" stroke-width="0.8" stroke-linejoin="round"/></g>
+<g class="ps-e ps-raus"><g class="ps-h ps-hebt ps-hebt--mehr">
+<rect x="52" y="30" width="96" height="86" rx="4" fill="#FFFFFF"/>
+<rect x="62" y="40" width="76" height="40" rx="3" fill="url(#pe-creme)"/>
+<path d="M86 77 V63 L100 53 L114 63 V77 Z" fill="#FFFFFF" stroke="#102949" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M83 64 L100 51.5 L117 64" fill="none" stroke="#102949" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="97" y="69" width="6" height="8" fill="#D9B485"/>
+<rect x="62" y="88" width="44" height="4.5" rx="2.25" fill="#102949" fill-opacity="0.8"/>
+<rect x="62" y="97" width="64" height="3.5" rx="1.75" fill="#BCC5D1"/>
+</g></g>
+<g class="ps-e ps-auf"><path d="M30 70 L100 108 L170 70 V132 A6 6 0 0 1 164 138 H36 A6 6 0 0 1 30 132 Z" fill="url(#pe-creme)"/><path d="M32 136 L80 98 M168 136 L120 98" stroke="#102949" stroke-opacity="0.14" stroke-width="1.4"/></g>
+<g class="ps-e ps-springt"><g class="ps-h ps-tupf"><circle class="ps-ring" cx="160" cy="44" r="19" fill="none" stroke="#D9B485" stroke-width="1.2"/><circle cx="160" cy="44" r="14" fill="url(#pe-sand)" filter="url(#pe-sch)"/><path d="M153 44 H166 M161 38.5 L166.5 44 L161 49.5" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+</svg></figure>
+        <div class="apo-fuss__text">
+          <h3 class="apo-fuss__titel">Dein erster Schritt</h3>
+          <p class="apo-fuss__satz">Biete uns deine Immobilie unverbindlich per Mail an. Ein paar Eckdaten genügen für den Anfang.</p>
+          <p class="apo-fuss__knoepfe">
+            <a class="kar-knopf kar-knopf--voll" href="mailto:ankauf@estera.immobilien?subject=Immobilie%20verkaufen%20%E2%80%93%20Angebot%20von%20Eigent%C3%BCmer/in&amp;body=Hallo%20Estera-Team%2C%0A%0Aich%20m%C3%B6chte%20euch%20meine%20Immobilie%20unverbindlich%20anbieten.%0A%0AOrt%20/%20Adresse%3A%0AObjektart%3A%0AWohnfl%C3%A4che%20/%20Anzahl%20Einheiten%3A%0AVermietet%20/%20leer%3A%0AKaufpreisvorstellung%3A%0A%0A">Immobilie unverbindlich anbieten</a>
+            <a class="ank-textlink ank-textlink--hell" href="assets/pdf/Estera_Ankaufsprofil_Bayern_2026.pdf" target="_blank" rel="noopener">Ankaufsprofil ansehen (PDF)</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="ank-pop apo-pop" id="makler" aria-labelledby="ank-makler-titel">
+  <div class="ank-pop__kasten apo">
+    <button class="ank-pop__zu" type="button" aria-label="Fenster schließen" data-pop-zu>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg>
+    </button>
+    <!-- NEUER AUFBAU 30.09.2026, wie beim Pop-up fuer Eigentuemer: Kopf mit
+         grosser Szene, die neun Vorteile in sechs Kacheln (Wortlaut
+         unveraendert, nur die Kacheltitel sind neu), der Satz zum Einreichen
+         als Navy-Kasten mit Szene, Mail-Knopf und PDF. Verlaeufe und
+         Schatten im unsichtbaren SVG hierunter (Vorsatz pm-). -->
+    <svg class="apo-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><linearGradient id="pm-creme" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF8F3"/><stop offset="1" stop-color="#EDE4D6"/></linearGradient><linearGradient id="pm-navy" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24406A"/><stop offset="1" stop-color="#0B203D"/></linearGradient><linearGradient id="pm-sand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8CBA4"/><stop offset="1" stop-color="#CCA46C"/></linearGradient><linearGradient id="pm-weiss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F4F1EC"/></linearGradient><linearGradient id="pm-sandhell" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5E8D5"/><stop offset="1" stop-color="#E8D3B3"/></linearGradient><linearGradient id="pm-glanz" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.62"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.12"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient><filter id="pm-sch" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="1" stdDeviation="0.8" flood-color="#102949" flood-opacity="0.10"/><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#102949" flood-opacity="0.12"/></filter><filter id="pm-blur" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="6"/></filter></defs></svg>
+
+    <header class="apo-kopf" data-apo>
+      <div class="apo-kopf__text">
+        <p class="ank-kicker apo-kicker">Für Makler &amp; Immobilienpartner</p>
+        <h2 class="ank-titel apo-titel" id="ank-makler-titel">Ein verlässlicher Käufer <em>für deine Immobilienangebote.</em></h2>
+        <p class="ank-unterzeile apo-unterzeile">Wir prüfen Bestandsimmobilien in Bayern schnell, strukturiert und mit einem direkten Ansprechpartner über den gesamten Ankaufsprozess.</p>
+        <p class="ank-text apo-einleitung">Wir setzen auf eine langfristige und partnerschaftliche Zusammenarbeit mit Maklern und Immobilienpartnern. Eingereichte Angebote prüfen wir kurzfristig und geben dir eine klare Rückmeldung zu Ankaufsmöglichkeit und weiterem Vorgehen.</p>
+      </div>
+      <!-- Szene: links das Expose, rechts die Pruefung mit Haken und Siegel,
+           dazwischen ein Goldbogen. Akzent: das Siegel. -->
+      <figure class="apo-kopf__bild" aria-hidden="true"><svg class="ps ps--akten" viewBox="0 0 400 300" aria-hidden="true" focusable="false">
+<ellipse cx="204" cy="280" rx="164" ry="8" fill="#E3E7ED"/>
+<g class="ps-e ps-auf"><g class="ps-h ps-links"><g transform="rotate(-6 122 160)">
+<rect x="58" y="72" width="140" height="190" rx="10" fill="url(#pm-navy)" opacity="0.2" filter="url(#pm-blur)"/>
+<rect x="50" y="60" width="144" height="194" rx="10" fill="url(#pm-weiss)" stroke="#102949" stroke-opacity="0.07" filter="url(#pm-sch)"/>
+<rect x="64" y="76" width="116" height="78" rx="5" fill="url(#pm-creme)"/>
+<ellipse cx="160" cy="92" rx="9" ry="9" fill="#F5E8D5"/>
+<line x1="70" y1="146" x2="174" y2="146" stroke="#C9A874" stroke-width="1"/>
+<rect x="92" y="114" width="60" height="32" fill="#FFFFFF" stroke="#102949" stroke-width="1.4"/>
+<path d="M86 116 L122 94 L158 116" fill="none" stroke="#102949" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="100" y="121" width="10" height="8" fill="#D9B485"/><rect x="117" y="121" width="10" height="8" fill="#E3E7ED" stroke="#4C6A93" stroke-width="0.6"/><rect x="134" y="121" width="10" height="8" fill="#D9B485"/><rect x="117" y="134" width="10" height="12" fill="url(#pm-navy)"/><rect x="100" y="134" width="10" height="8" fill="#E3E7ED" stroke="#4C6A93" stroke-width="0.6"/><rect x="134" y="134" width="10" height="8" fill="#E3E7ED" stroke="#4C6A93" stroke-width="0.6"/>
+<rect x="64" y="166" width="72" height="7" rx="3.5" fill="#102949" fill-opacity="0.85"/>
+<rect x="64" y="181" width="104" height="5" rx="2.5" fill="#BCC5D1"/>
+<rect x="64" y="192" width="86" height="4.5" rx="2.25" fill="#E3E7ED"/>
+<rect x="64" y="202" width="96" height="4.5" rx="2.25" fill="#E3E7ED"/>
+<rect x="64" y="222" width="36" height="15" rx="7.5" fill="#F5E8D5" stroke="#C9A874" stroke-width="0.8"/><rect x="106" y="222" width="44" height="15" rx="7.5" fill="#F5E8D5" stroke="#C9A874" stroke-width="0.8"/>
+</g></g></g>
+<g class="ps-e ps-auf ps-spaet"><g class="ps-h ps-rechts"><g transform="rotate(5 290 160)">
+<rect x="222" y="70" width="140" height="192" rx="10" fill="url(#pm-navy)" opacity="0.2" filter="url(#pm-blur)"/>
+<rect x="214" y="58" width="144" height="196" rx="10" fill="url(#pm-weiss)" stroke="#102949" stroke-opacity="0.07" filter="url(#pm-sch)"/>
+<rect x="230" y="76" width="64" height="7" rx="3.5" fill="#102949" fill-opacity="0.85"/>
+<rect x="230" y="90" width="96" height="5" rx="2.5" fill="#BCC5D1"/>
+<rect x="230" y="110" width="13" height="13" rx="2.5" fill="#FFFFFF" stroke="#4C6A93" stroke-width="1.6"/><rect x="252" y="111" width="78" height="5" rx="2.5" fill="#BCC5D1"/><rect x="252" y="119" width="50" height="4" rx="2" fill="#E3E7ED"/>
+<path class="ps-strich ps-haken" style="--d:0" pathLength="1" d="M232.5 116.5 L236 120 L242.5 112" fill="none" stroke="#A8874F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="230" y="134" width="13" height="13" rx="2.5" fill="#FFFFFF" stroke="#4C6A93" stroke-width="1.6"/><rect x="252" y="135" width="64" height="5" rx="2.5" fill="#BCC5D1"/><rect x="252" y="143" width="42" height="4" rx="2" fill="#E3E7ED"/>
+<path class="ps-strich ps-haken" style="--d:1" pathLength="1" d="M232.5 140.5 L236 144 L242.5 136" fill="none" stroke="#A8874F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="230" y="158" width="13" height="13" rx="2.5" fill="#FFFFFF" stroke="#4C6A93" stroke-width="1.6"/><rect x="252" y="159" width="72" height="5" rx="2.5" fill="#BCC5D1"/><rect x="252" y="167" width="36" height="4" rx="2" fill="#E3E7ED"/>
+<path class="ps-strich ps-haken" style="--d:2" pathLength="1" d="M232.5 164.5 L236 168 L242.5 160" fill="none" stroke="#A8874F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="230" y1="226" x2="296" y2="226" stroke="#BCC5D1" stroke-width="1"/>
+<path class="ps-strich ps-unterschrift" pathLength="1" d="M233 222 C238 212 242 212 243 219 C244 225 248 222 252 215 C256 209 260 212 260 218 C260 223 265 221 272 214" fill="none" stroke="#102949" stroke-width="1.6" stroke-linecap="round"/>
+<g class="ps-siegel-e"><g class="ps-h ps-dreht"><circle class="ps-ring" cx="328" cy="216" r="25" fill="none" stroke="#A8874F" stroke-width="1.4"/><circle cx="328" cy="216" r="19.5" fill="url(#pm-sand)" filter="url(#pm-sch)"/><circle cx="328" cy="216" r="15" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-opacity="0.7"/><path d="M320 216.5 L325.5 222 L336 211" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+</g></g></g>
+<path class="ps-e ps-strich ps-zeichnet ps-bogen" pathLength="1" d="M146 50 C182 10 236 8 270 38" fill="none" stroke="#A8874F" stroke-width="2" stroke-linecap="round"/>
+<path class="ps-e ps-springt ps-bogen-spitze" d="M259 38.5 L270.5 39 L269 27.5" fill="none" stroke="#A8874F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></figure>
+    </header>
+
+    <div class="apo-band">
+      <h3 class="apo-h3" data-apo>Worauf du dich verlassen kannst</h3>
+      <ul class="apo-raster">
+        <li class="apo-kachel" data-apo style="--i:0">
+          <figure class="apo-kachel__bild" aria-hidden="true"><svg class="ps ps--profil" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+<ellipse cx="80" cy="111" rx="50" ry="4.5" fill="#E3E7ED"/>
+<g class="ps-e ps-auf"><g class="ps-h ps-hebt">
+<rect x="40" y="18" width="74" height="88" rx="4" fill="#FFFFFF" stroke="#102949" stroke-opacity="0.08" transform="rotate(-5 77 62)" filter="url(#pm-sch)"/>
+<rect x="46" y="14" width="76" height="92" rx="4" fill="url(#pm-weiss)" stroke="#102949" stroke-opacity="0.08" filter="url(#pm-sch)"/>
+<path d="M46 18 A4 4 0 0 1 50 14 H118 A4 4 0 0 1 122 18 V30 H46 Z" fill="url(#pm-navy)"/>
+<rect x="54" y="20" width="34" height="4" rx="2" fill="#FFFFFF" fill-opacity="0.9"/>
+<path d="M58 38 L61 41 L58 44 L55 41 Z" fill="#C9A874"/><rect x="66" y="39" width="44" height="4" rx="2" fill="#BCC5D1"/>
+<path d="M58 53 L61 56 L58 59 L55 56 Z" fill="#C9A874"/><rect x="66" y="54" width="34" height="4" rx="2" fill="#BCC5D1"/>
+<path d="M58 68 L61 71 L58 74 L55 71 Z" fill="#C9A874"/><rect x="66" y="69" width="40" height="4" rx="2" fill="#BCC5D1"/>
+<rect x="54" y="86" width="44" height="3.5" rx="1.75" fill="#E3E7ED"/><rect x="54" y="94" width="32" height="3.5" rx="1.75" fill="#E3E7ED"/>
+</g></g>
+<ellipse class="ps-ring ps-ring--puls" cx="122" cy="102" rx="9" ry="3.2" fill="#D9B485" fill-opacity="0.5"/>
+<g class="ps-e ps-faellt"><g class="ps-h ps-huepft"><path d="M122 101 C117 91 111.5 86 111.5 79 A10.5 10.5 0 0 1 132.5 79 C132.5 86 127 91 122 101 Z" fill="url(#pm-navy)" stroke="#FFFFFF" stroke-width="1.4"/><circle cx="122" cy="79" r="4" fill="#D9B485"/></g></g>
+</svg></figure>
+          <h4 class="apo-kachel__titel">Klares Profil</h4>
+          <span class="apo-strich" aria-hidden="true"></span>
+          <ul class="apo-kachel__punkte"><li>Klares und verständliches Ankaufsprofil</li></ul>
+        </li>
+        <li class="apo-kachel" data-apo style="--i:1">
+          <figure class="apo-kachel__bild" aria-hidden="true"><svg class="ps ps--uhr" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+<ellipse cx="80" cy="111" rx="40" ry="4.5" fill="#E3E7ED"/>
+<g class="ps-e ps-auf">
+<circle cx="80" cy="60" r="44" fill="url(#pm-weiss)" filter="url(#pm-sch)"/>
+<circle cx="80" cy="60" r="37" fill="none" stroke="#102949" stroke-width="2.4"/>
+<g stroke="#102949" stroke-width="2.2" stroke-linecap="round"><line x1="80" y1="28" x2="80" y2="33"/><line x1="112" y1="60" x2="107" y2="60"/><line x1="80" y1="92" x2="80" y2="87"/><line x1="48" y1="60" x2="53" y2="60"/></g>
+<g fill="#BCC5D1"><circle cx="95" cy="34" r="1.3"/><circle cx="106" cy="45" r="1.3"/><circle cx="106" cy="75" r="1.3"/><circle cx="95" cy="86" r="1.3"/><circle cx="65" cy="86" r="1.3"/><circle cx="54" cy="75" r="1.3"/><circle cx="54" cy="45" r="1.3"/><circle cx="65" cy="34" r="1.3"/></g>
+</g>
+<path class="ps-e ps-strich ps-zeichnet" pathLength="1" d="M80 17 A43 43 0 0 1 123 60" fill="none" stroke="#D9B485" stroke-width="3.4" stroke-linecap="round"/>
+<path class="ps-e ps-springt ps-spaet" d="M117.5 54.5 L123 61 L128.5 54.5" fill="none" stroke="#D9B485" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="80" y1="60" x2="96" y2="60" stroke="#102949" stroke-width="3.2" stroke-linecap="round"/>
+<g class="ps-e ps-zeiger-e"><g class="ps-h ps-zeiger"><line x1="80" y1="60" x2="80" y2="32" stroke="#102949" stroke-width="2.4" stroke-linecap="round"/></g></g>
+<circle cx="80" cy="60" r="3.6" fill="#D9B485" stroke="#102949" stroke-width="1.4"/>
+</svg></figure>
+          <h4 class="apo-kachel__titel">Schnelle Rückmeldung</h4>
+          <span class="apo-strich" aria-hidden="true"></span>
+          <ul class="apo-kachel__punkte"><li>Schnelle Rückmeldung auf Angebote</li></ul>
+        </li>
+        <li class="apo-kachel" data-apo style="--i:2">
+          <figure class="apo-kachel__bild" aria-hidden="true"><svg class="ps ps--draht" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+<ellipse cx="80" cy="111" rx="52" ry="4.5" fill="#E3E7ED"/>
+<g class="ps-e ps-auf" style="--d:0"><g class="ps-h ps-links">
+<path d="M34 18 H88 A12 12 0 0 1 100 30 V52 A12 12 0 0 1 88 64 H48 L34 76 L37 63.5 A12 12 0 0 1 22 52 V30 A12 12 0 0 1 34 18 Z" fill="url(#pm-navy)" filter="url(#pm-sch)"/>
+<circle class="ps-punkt" style="--d:0" cx="46" cy="41" r="3.8" fill="#FFFFFF" fill-opacity="0.92"/><circle class="ps-punkt" style="--d:1" cx="61" cy="41" r="3.8" fill="#FFFFFF" fill-opacity="0.92"/><circle class="ps-punkt" style="--d:2" cx="76" cy="41" r="3.8" fill="#D9B485"/>
+</g></g>
+<g class="ps-e ps-auf ps-spaet" style="--d:1"><g class="ps-h ps-rechts">
+<path d="M74 52 H126 A12 12 0 0 1 138 64 V86 A12 12 0 0 1 126 98 H124 L127 108 L114 98 H74 A12 12 0 0 1 62 86 V64 A12 12 0 0 1 74 52 Z" fill="url(#pm-weiss)" stroke="#102949" stroke-opacity="0.1" filter="url(#pm-sch)"/>
+<rect x="74" y="65" width="34" height="4" rx="2" fill="#102949" fill-opacity="0.8"/>
+<rect x="74" y="74" width="50" height="3.5" rx="1.75" fill="#BCC5D1"/>
+<rect x="74" y="82" width="36" height="3.5" rx="1.75" fill="#E3E7ED"/>
+<circle cx="125" cy="67" r="6.5" fill="url(#pm-sand)"/><path d="M122 67.2 L124.2 69.4 L128.2 64.8" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+</g></g>
+</svg></figure>
+          <h4 class="apo-kachel__titel">Direkter Draht</h4>
+          <span class="apo-strich" aria-hidden="true"></span>
+          <ul class="apo-kachel__punkte"><li>Direkter Entscheiderkontakt</li><li>Verlässliche Kommunikation</li><li>Professioneller Umgang mit Eigentümern</li></ul>
+        </li>
+        <li class="apo-kachel" data-apo style="--i:3">
+          <figure class="apo-kachel__bild" aria-hidden="true"><svg class="ps ps--vertrag" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+<ellipse cx="80" cy="111" rx="48" ry="4.5" fill="#E3E7ED"/>
+<g class="ps-e ps-auf"><g class="ps-h ps-hebt">
+<rect x="36" y="12" width="84" height="96" rx="4" fill="url(#pm-weiss)" stroke="#102949" stroke-opacity="0.08" filter="url(#pm-sch)"/>
+<rect x="46" y="22" width="40" height="5" rx="2.5" fill="#102949" fill-opacity="0.85"/>
+<rect x="46" y="35" width="62" height="3.5" rx="1.75" fill="#BCC5D1"/><rect x="46" y="43" width="52" height="3.5" rx="1.75" fill="#E3E7ED"/><rect x="46" y="51" width="58" height="3.5" rx="1.75" fill="#E3E7ED"/><rect x="46" y="59" width="44" height="3.5" rx="1.75" fill="#E3E7ED"/><rect x="46" y="67" width="54" height="3.5" rx="1.75" fill="#E3E7ED"/>
+<line x1="46" y1="94" x2="72" y2="94" stroke="#BCC5D1" stroke-width="1"/><line x1="82" y1="94" x2="110" y2="94" stroke="#BCC5D1" stroke-width="1"/>
+<path class="ps-strich ps-unterschrift" style="--d:0" pathLength="1" d="M47 91 C50 84 53 84 54 89 C55 93 58 91 60 86 C62 82 65 84 65 88 C65 91 68 90 71 86" fill="none" stroke="#102949" stroke-width="1.3" stroke-linecap="round"/>
+<path class="ps-strich ps-unterschrift" style="--d:1" pathLength="1" d="M84 90 C88 83 91 84 92 89 C93 92 96 88 99 85 C102 83 103 88 106 90 C107 91 108 88 109 86" fill="none" stroke="#102949" stroke-width="1.3" stroke-linecap="round"/>
+</g></g>
+<g class="ps-e ps-springt"><g class="ps-h ps-dreht">
+<circle class="ps-ring" cx="118" cy="34" r="19" fill="none" stroke="#A8874F" stroke-width="1.2"/>
+<circle cx="118" cy="34" r="14.5" fill="url(#pm-sand)" filter="url(#pm-sch)"/>
+<circle cx="118" cy="34" r="11" fill="none" stroke="#FFFFFF" stroke-opacity="0.7"/>
+<circle cx="113.8" cy="29.8" r="2.4" fill="none" stroke="#FFFFFF" stroke-width="1.7"/><circle cx="122.2" cy="38.2" r="2.4" fill="none" stroke="#FFFFFF" stroke-width="1.7"/><line x1="122.5" y1="28.5" x2="113.5" y2="39.5" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round"/>
+</g></g>
+</svg></figure>
+          <h4 class="apo-kachel__titel">Transparente Provision</h4>
+          <span class="apo-strich" aria-hidden="true"></span>
+          <ul class="apo-kachel__punkte"><li>Transparente Provisionsabsprachen</li></ul>
+        </li>
+        <li class="apo-kachel" data-apo style="--i:4">
+          <figure class="apo-kachel__bild" aria-hidden="true"><svg class="ps ps--schutz" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+<ellipse cx="80" cy="111" rx="54" ry="4.5" fill="#E3E7ED"/>
+<g class="ps-e ps-auf"><g class="ps-h ps-links">
+<rect x="20" y="30" width="88" height="60" rx="6" fill="url(#pm-weiss)" stroke="#102949" stroke-opacity="0.08" filter="url(#pm-sch)"/>
+<rect x="20" y="30" width="88" height="10" rx="6" fill="url(#pm-creme)"/><rect x="20" y="36" width="88" height="4" fill="url(#pm-creme)"/>
+<circle cx="42" cy="56" r="7" fill="#E3E7ED"/><path d="M30 78 C30 68 54 68 54 78 Z" fill="#E3E7ED"/>
+<rect x="62" y="51" width="34" height="4" rx="2" fill="#102949" fill-opacity="0.8"/>
+<rect x="62" y="60" width="28" height="3.5" rx="1.75" fill="#BCC5D1"/>
+<rect x="62" y="68" width="32" height="3.5" rx="1.75" fill="#E3E7ED"/>
+</g></g>
+<g class="ps-e ps-springt"><g class="ps-h ps-tupf">
+<path d="M114 36 L138 45 V66 C138 83 127 94 114 101 C101 94 90 83 90 66 V45 Z" fill="url(#pm-navy)" filter="url(#pm-sch)"/>
+<path d="M114 42.5 L132 49.5 V66 C132 79 124 87.5 114 93.5 C104 87.5 96 79 96 66 V49.5 Z" fill="none" stroke="#D9B485" stroke-width="1" stroke-opacity="0.8"/>
+<path class="ps-strich" pathLength="1" d="M105.5 67 L111.5 73 L123 61" fill="none" stroke="#D9B485" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</g></g>
+</svg></figure>
+          <h4 class="apo-kachel__titel">Kontakte geschützt</h4>
+          <span class="apo-strich" aria-hidden="true"></span>
+          <ul class="apo-kachel__punkte"><li>Schutz der eingebrachten Kontakte</li><li>Keine Umgehung des Maklers</li></ul>
+        </li>
+        <li class="apo-kachel" data-apo style="--i:5">
+          <figure class="apo-kachel__bild" aria-hidden="true"><svg class="ps ps--antwort" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+<ellipse cx="80" cy="111" rx="58" ry="4.5" fill="#E3E7ED"/>
+<g class="ps-e ps-auf">
+<rect x="18" y="26" width="124" height="72" rx="12" fill="url(#pm-weiss)" stroke="#102949" stroke-opacity="0.08" filter="url(#pm-sch)"/>
+<line x1="80" y1="38" x2="80" y2="86" stroke="#C9A874" stroke-width="1"/>
+</g>
+<g class="ps-e ps-springt" style="--d:0"><g class="ps-h ps-tupf-klein"><circle cx="49" cy="62" r="18" fill="#FFFFFF" stroke="#102949" stroke-width="1.8"/><line x1="41" y1="62" x2="57" y2="62" stroke="#102949" stroke-width="2.6" stroke-linecap="round"/></g></g>
+<g class="ps-e ps-springt ps-spaet" style="--d:1"><g class="ps-h ps-tupf"><circle class="ps-ring" cx="111" cy="62" r="23" fill="none" stroke="#A8874F" stroke-width="1.2"/><circle cx="111" cy="62" r="18" fill="url(#pm-sand)" filter="url(#pm-sch)"/><path class="ps-strich" pathLength="1" d="M103 62.5 L108.5 68 L119 57" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+</svg></figure>
+          <h4 class="apo-kachel__titel">Klare Zu- oder Absage</h4>
+          <span class="apo-strich" aria-hidden="true"></span>
+          <ul class="apo-kachel__punkte"><li>Nachvollziehbare Zu- oder Absage</li></ul>
+        </li>
+      </ul>
+
+      <!-- Der Satz zum Einreichen als hervorgehobener Navy-Kasten mit Szene
+           (Umschlag, aus dem das Expose kommt). -->
+      <div class="apo-fuss" data-apo>
+        <figure class="apo-fuss__bild" aria-hidden="true"><svg class="ps ps--post" viewBox="0 0 200 150" aria-hidden="true" focusable="false">
+<ellipse cx="100" cy="141" rx="72" ry="5" fill="#000000" fill-opacity="0.2"/>
+<g class="ps-e ps-auf"><rect x="30" y="62" width="140" height="76" rx="6" fill="url(#pm-sandhell)"/><path d="M30 64 L100 22 L170 64 Z" fill="url(#pm-sandhell)" stroke="#A8874F" stroke-width="0.8" stroke-linejoin="round"/></g>
+<g class="ps-e ps-raus"><g class="ps-h ps-hebt ps-hebt--mehr">
+<rect x="52" y="30" width="96" height="86" rx="4" fill="#FFFFFF"/>
+<rect x="62" y="40" width="76" height="40" rx="3" fill="url(#pm-creme)"/>
+<path d="M86 77 V63 L100 53 L114 63 V77 Z" fill="#FFFFFF" stroke="#102949" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M83 64 L100 51.5 L117 64" fill="none" stroke="#102949" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="97" y="69" width="6" height="8" fill="#D9B485"/>
+<rect x="62" y="88" width="44" height="4.5" rx="2.25" fill="#102949" fill-opacity="0.8"/>
+<rect x="62" y="97" width="64" height="3.5" rx="1.75" fill="#BCC5D1"/>
+</g></g>
+<g class="ps-e ps-auf"><path d="M30 70 L100 108 L170 70 V132 A6 6 0 0 1 164 138 H36 A6 6 0 0 1 30 132 Z" fill="url(#pm-creme)"/><path d="M32 136 L80 98 M168 136 L120 98" stroke="#102949" stroke-opacity="0.14" stroke-width="1.4"/></g>
+<g class="ps-e ps-springt"><g class="ps-h ps-tupf"><circle class="ps-ring" cx="160" cy="44" r="19" fill="none" stroke="#D9B485" stroke-width="1.2"/><circle cx="160" cy="44" r="14" fill="url(#pm-sand)" filter="url(#pm-sch)"/><path d="M153 44 H166 M161 38.5 L166.5 44 L161 49.5" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+</svg></figure>
+        <div class="apo-fuss__text">
+          <h3 class="apo-fuss__titel">Objekt einreichen</h3>
+          <p class="apo-fuss__satz">Schick uns Exposé oder Eckdaten per Mail. Wir prüfen kurzfristig und melden uns mit einer klaren Zu- oder Absage.</p>
+          <p class="apo-fuss__knoepfe">
+            <a class="kar-knopf kar-knopf--voll" href="mailto:ankauf@estera.immobilien?subject=Objekt%20zur%20Pr%C3%BCfung%20%E2%80%93%20Angebot%20von%20Makler/Partner&amp;body=Hallo%20Estera-Team%2C%0A%0Aich%20reiche%20euch%20folgendes%20Objekt%20zur%20Pr%C3%BCfung%20ein.%0A%0AOrt%20/%20Adresse%3A%0AObjektart%3A%0AWohnfl%C3%A4che%20/%20Anzahl%20Einheiten%3A%0AKaufpreis%3A%0AProvision%3A%0AUnterlagen%20%28Expos%C3%A9%2C%20Mieterliste%2C%20Grundrisse%29%3A%0A%0A">Objekt zur Prüfung einreichen</a>
+            <a class="ank-textlink ank-textlink--hell" href="assets/pdf/Estera_Ankaufsprofil_Bayern_2026.pdf" target="_blank" rel="noopener">Ankaufsprofil ansehen (PDF)</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bewegung beider Pop-ups (Einblenden beim Oeffnen und beim Rollen im
+       Kasten). Steht hier, damit ausserhalb der Pop-ups nichts an der Seite
+       geaendert werden muss; defer, laeuft also nach ankauf.js. -->
+  <script src="assets/js/ankauf-popup.js?v=c05g" defer></script>
+</dialog>
+
+
+<!-- =====================================================================
+     6  ABSCHLUSS — wie der Fuss des PDF
+     „Ihr Objekt passt? Sprechen wir." aus dem PDF, ins Du uebertragen.
+     ===================================================================== -->
+<section class="ank-schluss" aria-labelledby="ank-schluss-titel">
+  <div class="ank-mitte">
+    <p class="ank-kicker ank-kicker--hell" data-auf>Objekt anbieten</p>
+    <h2 class="ank-titel ank-titel--hell" id="ank-schluss-titel" data-auf>Dein Objekt passt? <em>Lass uns sprechen.</em></h2>
+    <ul class="ank-schluss__punkte" data-auf>
+      <li>Schnelle Prüfung</li>
+      <li>Klare Kaufpreisindikation</li>
+      <li>Diskrete Abwicklung</li>
+    </ul>
+    <p class="ank-schluss__satz" data-auf>Du möchtest uns eine Immobilie anbieten? Wir prüfen dein Angebot kurzfristig, diskret und unverbindlich.</p>
+    <p class="kar-kopf__knoepfe ank-schluss__knoepfe" data-auf>
+      <a class="kar-knopf kar-knopf--voll" href="mailto:ankauf@estera.immobilien?subject=Objektangebot%20%E2%80%93%20Ankauf%20Estera">ankauf@estera.immobilien</a>
+      <a class="kar-knopf kar-knopf--linie" href="assets/pdf/Estera_Ankaufsprofil_Bayern_2026.pdf" download>Ankaufsprofil als PDF herunterladen</a>
+    </p>
+    <p class="ank-schluss__klein" data-auf>Angebote von Eigentümern, Maklern und Immobilienpartnern sind willkommen. Alle Angebote werden vertraulich behandelt.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- =====================================================================
+     FUSS — unveraendert aus variante-a.html uebernommen.
+     Auch die noch fehlenden Ziele (impressum.html, datenschutz.html,
+     cookies.html, erstinformation.html, partner.html) stehen unveraendert
+     drin: die Fusszeile MUSS auf allen Seiten identisch sein, und diese
+     Seiten sind ohnehin zu bauen. In der Rueckmeldung sind sie aufgelistet.
+     ===================================================================== -->
+<footer class="fuss" id="kontakt">
+  <div class="fuss__inner">
+
+    <div class="fuss__marke">
+      <span class="wordmark">
+        <span class="wordmark__name">ESTERA</span>
+        <span class="wordmark__sub">Immobilien</span>
+      </span>
+      <p class="fuss__anker">Diskret. Strukturiert. Langfristig.</p>
+    </div>
+
+    <div>
+      <p class="fuss__titel">Kontakt</p>
+      <div class="fuss__liste">
+        <a href="mailto:info@estera.immobilien">info@estera.immobilien</a>
+        <!-- ENTFERNT 01.09.2026 — Optimierungsbriefing, P0 „Footer-Platzhalter":
+             „'Telefon - folgt', 'Anschrift - folgt' und vergleichbare
+             Platzhalter vollstaendig entfernen. Sichtbar bleiben die
+             E-Mail-Adresse und die Links zu Impressum, Datenschutz,
+             Cookie-Einstellungen und Erstinformation. Die Anschrift wird
+             ausschliesslich im Impressum vollstaendig gefuehrt."
+             Vorher: <span>Telefon — folgt</span>
+                     <span>Anschrift — folgt</span> -->
+        <!-- „FÜR PARTNER" ENTFERNT 04.09.2026 — Kundenwunsch woertlich:
+             „Du musst im Footer bei ‚Kontakt‘ … ‚Für Partner‘ muss raus. Wo
+             führt das einen hin? Das macht ja gar keinen Sinn. Da kommt
+             Error Response raus, weil es dafür ja keine Seite gibt."
+             GEPRUEFT: partner.html gibt es im Projekt nicht, der Verweis
+             lief ins Leere. Er stand hier:
+                 <a href="partner.html">Für Partner</a>
+             Ersatzlos gestrichen. Wenn Estera eine Partnerseite bekommt,
+             gehoert der Eintrag zurueck — dann mit einer Datei dahinter. -->
+      </div>
+    </div>
+
+    <div>
+      <p class="fuss__titel">Rechtliches</p>
+      <div class="fuss__liste">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="cookies.html">Cookie-Einstellungen</a>
+        <!-- „ERSTINFORMATION" ENTFERNT 11.09.2026 — Kundenwunsch woertlich:
+             „Erste Information: Lasst es einfach raus."
+             erstinformation.html hat es nie gegeben; der Verweis lief auf
+             jeder Seite in einen 404. Er stand hier:
+                 <a href="erstinformation.html">Erstinformation</a>
+             OB ESTERA EINE ERSTINFORMATION BRAUCHT, ist damit nicht beantwortet,
+             nur vertagt: fuer Immobilienmakler nach § 34c GewO gibt es keine
+             Pflicht zur Erstinformation auf der Website; vermittelt Estera
+             aber Immobiliardarlehen selbst (§ 34i GewO), wird sie beim ersten
+             Kontakt faellig. Das ist mit Estera zu klaeren, nicht hier. -->
+      </div>
+    </div>
+
+  </div>
+
+  <p class="fuss__risiko">
+    Kapitalanlageimmobilien sind langfristige Investitionen. Wertentwicklung,
+    Vermietbarkeit und steuerliche Wirkung hängen vom Einzelfall ab und können
+    nicht zugesichert werden. Diese Website ersetzt keine steuerliche,
+    rechtliche oder finanzielle Beratung.
+  </p>
+
+  <div class="fuss__unten">
+    <span>© 2026 Estera GmbH</span>
+    <!-- ENTFERNT 01.09.2026 — Optimierungsbriefing P0, Platzhalter:
+         <span>Firmierung, Anschrift, Register und Erlaubnis nach § 34c GewO folgen.</span> -->
+  </div>
+</footer>
+
+<!-- =====================================================================
+     NAVIGATIONSVORHANG — auf allen neun Seiten zeichengleich.
+
+     UMGEBAUT 04.09.2026 nach den Ansagen des Kunden. Er faehrt jetzt von
+     rechts ein und bedeckt rund 70 % des Fensters, statt sich ueber die
+     ganze Seite zu legen. Die Regeln dazu stehen in assets/css/base.css
+     unter „NAVIGATIONSVORHANG", das Verhalten in assets/js/site.js.
+
+     WARUM DIESER BLOCK IN ALLEN NEUN DATEIEN ZEICHENGLEICH IST: er stand
+     vorher in neun Fassungen da, die sich in Kleinigkeiten unterschieden —
+     `#warum-immobilien` auf der Startseite gegen
+     `variante-a.html#warum-immobilien` sonst, ein Cache-Anhaengsel
+     `?v=c05g` nur auf den drei Karriereseiten, `aria-current="page"` je
+     nach Seite an anderer Stelle, und unter „Naechster Schritt" zwei
+     verschiedene Wortlaute. Wer eine Zeile aenderte, musste neun Stellen
+     treffen — und hat es nachweislich nicht immer getan.
+     Alles, was sich von Seite zu Seite unterscheiden MUSS, setzt jetzt
+     site.js zur Laufzeit:
+       - `aria-current="page"` auf dem Verweis, der auf die eigene Seite
+         zeigt
+       - Verweise auf Abschnitte der EIGENEN Seite werden zu reinen
+         `#`-Sprungmarken, damit sie die Seite nicht neu laden
+     ===================================================================== -->
+<nav class="menu" id="hauptmenue" data-menu data-open="false" aria-hidden="true" aria-label="Hauptmenü">
+
+  <div class="menu__bar">
+    <span class="wordmark">
+      <span class="wordmark__name">ESTERA</span>
+      <span class="wordmark__sub">Immobilien</span>
+    </span>
+    <!-- NUR NOCH EIN KREUZ — Kundenwunsch 04.09.2026, woertlich:
+         „Statt ‚Schliessen‘ ist einfach nur ein X oben rechts."
+         Vorher stand hier das Wort „Schließen" und rechts daneben
+         dasselbe Kreuz. Das Wort ist weg; der Name des Knopfes wandert
+         deshalb nach aria-label — ohne das waere er im Vorlesegeraet
+         stumm. Gezeichnet sind es zwei Linien im SVG, kein Buchstabe „X"
+         und kein Zeichen aus einer Symbolschrift. Die Trefferflaeche
+         haelt base.css bei 44 x 44 px. -->
+    <button class="menu__close" type="button" data-menu-close aria-label="Menü schließen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true" focusable="false">
+        <line x1="5" y1="5" x2="19" y2="19"></line>
+        <line x1="19" y1="5" x2="5" y2="19"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="menu__body">
+    <!-- EINE LISTE STATT ZWEIER GRUPPEN — Kundenwunsch 04.09.2026,
+         woertlich: „Seite: ‚Warum Immobilien‘ kann komplett raus. Du
+         stellst einfach nur die einzelnen Seiten dar, und das machst du
+         wie folgt: ‚Warum Immobilien‘, ‚Estera‘ und ‚Ablauf‘ ohne Zahl
+         davor, ohne Striche dazwischen. Du machst das einfach mit dick,
+         und dann laesst du einen kleinen Abstand." Und weiter:
+         „‚Karriere‘ und ‚Kontakt‘ schliessen oben an."
+
+         Vorher standen hier ZWEI Listen mit je einer Rubrik darueber —
+         <p class="menu__gruppe">Auf dieser Seite</p> (auf den Unterseiten
+         „Auf der Startseite") und <p class="menu__gruppe">Seiten</p> —
+         und jeder Eintrag trug eine vorangestellte Ziffer:
+         <span class="num">01</span>. Rubriken und Ziffern sind ersatzlos
+         weg, die Trennstriche zwischen den Zeilen ebenfalls (base.css).
+         Die fuenf Punkte stehen in genau der Reihenfolge, in der sie
+         vorher untereinander standen.
+
+         VERMERK ZU DEN BESCHRIFTUNGEN: der Kunde nennt den zweiten Punkt
+         „Estera"; im Projekt heisst er seit jeher „Warum Estera" und
+         steht so auch in der Kopfleiste. Umbenannt ist er hier NICHT —
+         die Ansage galt erkennbar der Darstellung (keine Zahl, keine
+         Striche, dick), und eine Beschriftung, die an zwei Stellen
+         verschieden heisst, waere ein neuer Fehler. Zur Klaerung
+         vorgelegt. -->
+    <ul class="menu__nav">
+      <li><a class="menu__link" href="variante-a.html#warum-immobilien">Warum Immobilien</a></li>
+      <li><a class="menu__link" href="variante-a.html#leistungen">Warum Estera</a></li>
+      <li><a class="menu__link" href="variante-a.html#ablauf">Ablauf</a></li>
+      <li><a class="menu__link" href="karriere.html">Karriere</a></li>
+      <li><a class="menu__link" href="ankaufsprofil.html">Ankaufsprofil</a></li>
+      <li><a class="menu__link" href="kontakt.html">Kontakt</a></li>
+    </ul>
+
+    <aside class="menu__aside">
+      <div>
+        <p class="kicker">Nächster Schritt</p>
+        <!-- WORDING 04.09.2026 — Kundenwunsch, woertlich vorgegeben:
+             „Erst pruefen wir, ob deine Kapitalanlage zu dir passt.
+              Danach sprechen wir ueber Objekte."
+             Vorher standen im Projekt ZWEI Fassungen nebeneinander:
+             auf der Startseite "Erst prüfen wir, ob eine Immobilie zu dir
+             passt. Danach sprechen wir über Objekte." und auf allen acht
+             uebrigen Seiten noch die aeltere "Im Erstgespräch klären wir
+             erst deine Situation. Danach sprechen wir über Objekte."
+             Beide sind ersetzt. Der Satz steht mittig — ebenfalls
+             Kundenwunsch: „Das muss mittig stehen." -->
+        <p>Erst prüfen wir, ob deine Kapitalanlage zu dir passt.
+           Danach sprechen wir über Objekte.</p>
+      </div>
+      <!-- „Unterhalb kommt der CTA ‚Erstgespraech vereinbaren‘." —
+           Kundenwunsch 04.09.2026. Der Knopf stand vorher schon an dieser
+           Stelle; die Reihenfolge ist damit bestaetigt. Neu ist, dass er
+           mittig unter dem Satz sitzt statt linksbuendig in einer
+           Beispalte. -->
+      <a class="btn" href="kontakt.html">Erstgespräch vereinbaren</a>
+      <!-- DIESER BLOCK FAELLT AUF DEM TELEFON WEG — 09.09.2026, Kundenwunsch
+           woertlich: „In der NavBar, die sich oeffnet, soll auf der mobilen
+           Ansicht Kontakt, also info@estera.immobilien, raus … Dann Kontakt /
+           info@estera.immobilien kann raus."
+           Er bleibt im Markup und faellt unter 768 px per `display: none`
+           (base.css, .menu__kontakt) — nicht geloescht, weil er am breiten
+           Fenster unveraendert stehen bleiben soll. Was auf display:none
+           steht, faellt auch aus dem Vorlesebaum; auf dem Telefon liest ihn
+           also niemand vor.
+           DIE E-MAIL-ADRESSE BLEIBT ERREICHBAR. Nachgesehen, nicht
+           angenommen: sie steht in der Fusszeile JEDER der neun Seiten
+           (.fuss__liste, erster Eintrag unter „Kontakt") und zusaetzlich im
+           Fliesstext von kontakt.html und impressum.html. Der Vorhang war
+           nie ihr einziger Ort.
+           MIT IHM WANDERN Datenschutz und Cookie-Einstellungen: sie stehen
+           seit dem 04.09.2026 in diesem Block und muessen auf dem Telefon
+           nach unten. Sie sind deshalb weiter unten in .menu__foot ein
+           zweites Mal angelegt — siehe die Begruendung dort. -->
+      <div class="menu__kontakt">
+        <p class="kicker">Kontakt</p>
+        <p><a href="mailto:info@estera.immobilien">info@estera.immobilien</a></p>
+        <!-- HIERHER GEZOGEN 04.09.2026 — Kundenwunsch, woertlich: „Bei
+             ‚Kontakt‘ und der E-Mail muessen auch ‚Datenschutz‘ und
+             ‚Cookie-Einstellungen‘ mittig stehen, auch dick."
+             Vorher standen beide unten in .menu__foot neben „Impressum",
+             in gesperrten Versalien und Gewicht 500. -->
+        <ul class="menu__recht">
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+          <li><a href="cookies.html">Cookie-Einstellungen</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <div class="menu__foot">
+    <span>Diskret. Strukturiert. Langfristig.</span>
+    <!-- Hier bleibt nur „Impressum". Datenschutz und Cookie-Einstellungen
+         sind am 04.09.2026 nach oben in den Kontaktblock gewandert (siehe
+         dort). Impressum bleibt stehen: der Kunde hat es nicht genannt,
+         und der Verweis ist gesetzlich gefordert — ihn stillschweigend
+         aus dem Menue zu nehmen waere mehr, als hier verlangt ist.
+         AUF DER STARTSEITE standen an dieser Stelle bis heute drei
+         Verweise, die ins Leere zeigten: href="#impressum",
+         href="#datenschutz" und href="#cookies". Diese Sprungmarken gibt
+         es auf variante-a.html nicht, die Verweise haben schlicht nichts
+         getan. Sie zeigen jetzt wie ueberall sonst auf die echten
+         Seiten. -->
+    <!-- DREI VERWEISE IN EINER REIHE — 09.09.2026, Kundenwunsch woertlich:
+         „Und dann steht unten: Impressum, Datenschutz, Cookie-Einstellungen."
+         Bis heute stand hier NUR „Impressum"; Datenschutz und
+         Cookie-Einstellungen standen seit dem 04.09.2026 oben im
+         Kontaktblock. Der faellt auf dem Telefon weg (siehe dort), die
+         beiden Verweise muessen also mit nach unten.
+
+         WARUM SIE HIER EIN ZWEITES MAL STEHEN und nicht umgezogen sind:
+         der Kontaktblock oben bleibt am breiten Fenster unveraendert, dort
+         gehoeren sie weiterhin hinein — das war die Ansage vom 04.09. Ein
+         Umzug haette den Desktop veraendert, und der hat unangetastet zu
+         bleiben. Die zwei Fassungen schliessen sich per `display` gegen-
+         seitig aus: unter 768 px steht diese Reihe und der Kontaktblock ist
+         aus, ab 768 px umgekehrt. Es ist also immer genau EINE sichtbar,
+         und weil `display: none` auch aus dem Vorlesebaum nimmt, liest ein
+         Vorlesegeraet die beiden Verweise nie doppelt.
+         Die Klasse steht am <li>, nicht am <a>: das <li> ist das Kind der
+         Flexzeile, an ihm haengt die Umschaltung. -->
+    <ul>
+      <li><a href="impressum.html">Impressum</a></li>
+      <li class="menu__foot-mobil"><a href="datenschutz.html">Datenschutz</a></li>
+      <li class="menu__foot-mobil"><a href="cookies.html">Cookie-Einstellungen</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ABDUNKELNDE LAGE HINTER DEM VORHANG — neu am 04.09.2026. Sie folgt
+     aus dem Kundenwunsch „Ich will, dass die Navigationsbar nicht
+     komplett aufmacht, sondern nur circa 70 % von rechts nach links diese
+     Seite bedeckt": weil die Seite links neben dem Vorhang stehen bleibt,
+     legt sich diese Lage darueber und nimmt ihr den Kontrast, damit der
+     Text dahinter das Menue nicht stoert. Ein Klick darauf schliesst das
+     Menue (site.js) — die Escape-Taste tut das wie bisher.
+     Sie steht bewusst NACH dem Vorhang im Markup: base.css liest ihren
+     Zustand ueber `.menu[data-open='true'] ~ .menu-schleier`, und der
+     Geschwister-Wahlschalter greift nur vorwaerts. z-index haelt sie
+     trotzdem unter dem Vorhang (89 gegen 90). -->
+<div class="menu-schleier" data-menu-schleier></div>
+
+<!-- Der Varianten-Umschalter der Startseite gehoert hier nicht hin: er ist
+     ein Werkzeug der internen Abstimmung zwischen zwei Startseitenentwuerfen
+     und hat auf einer Unterseite keine Bedeutung. -->
+
+<script src="assets/js/site.js?v=c05g"></script>
+<!-- karriere.js wird hier MITBENUTZT, unveraendert: es haelt das Kopfvideo
+     bei prefers-reduced-motion an, teilt die Kopfueberschrift (.kar-titel)
+     in Zeilen und setzt beim Rollen .ist-da auf alle [data-auf] unter
+     .kar. Die Seite traegt dafuer <main class="kar ank">. Faellt das Skript
+     aus, steht alles sichtbar da — die Anfangszustaende haengen an
+     [data-js='an'], das erst dieses Skript setzt. ankauf.js kommt
+     nur fuer die Pop-ups dazu (siehe unten). -->
+<script src="assets/js/karriere.js?v=c05g"></script>
+<!-- ankauf.js gehoert allein dieser Seite: die zwei Pop-ups (oeffnen,
+     schliessen, Fokus, Sprungmarken in der Adresse). -->
+<script src="assets/js/ankauf.js?v=c05g"></script>
+</body>
+</html>
