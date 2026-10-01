@@ -146,13 +146,23 @@
 <section class="kar-kopf ank-kopf" aria-labelledby="ank-kopf-titel">
 
   <div class="kar-kopf__grund" aria-hidden="true">
+    <!-- IPHONE-KORREKTUR 01.10.2026: Auf dem iPhone lief das Video nicht.
+         Die WebM-Fassung war als VP9 Profil 1 im Farbformat gbrp kodiert
+         (Folge der Farbangleichung, die intern in RGB rechnet). Chrome spielt
+         das ab, Safari auf iOS nicht — und weil die WebM zuerst steht, nimmt
+         das iPhone sie, scheitert und zeigt nur das Standbild. Neu kodiert
+         als VP9 Profil 0 / yuv420p (wie kar-hero.webm), die MP4 als H.264
+         High, Level 4.1, yuv420p. Cache-Marke c05g -> c05i, damit
+         zwischengespeicherte Fassungen neu geholt werden.
+         BEI KUENFTIGEN VIDEOS: Farbfilter immer mit format=yuv420p
+         abschliessen und das Ergebnis mit ffprobe pruefen. -->
     <video class="kar-kopf__video"
            autoplay muted loop playsinline preload="auto"
            poster="assets/video/ankauf-hero-poster.jpg?v=c05g"
            width="1920" height="1080"
            tabindex="-1" data-hero-video>
-      <source src="assets/video/ankauf-hero.webm?v=c05g" type="video/webm">
-      <source src="assets/video/ankauf-hero.mp4?v=c05g" type="video/mp4">
+      <source src="assets/video/ankauf-hero.webm?v=c05i" type="video/webm">
+      <source src="assets/video/ankauf-hero.mp4?v=c05i" type="video/mp4">
     </video>
   </div>
 
@@ -1171,7 +1181,7 @@
      ein Werkzeug der internen Abstimmung zwischen zwei Startseitenentwuerfen
      und hat auf einer Unterseite keine Bedeutung. -->
 
-<script src="assets/js/site.js?v=c05g"></script>
+<script src="assets/js/site.js?v=c05i"></script>
 <!-- karriere.js wird hier MITBENUTZT, unveraendert: es haelt das Kopfvideo
      bei prefers-reduced-motion an, teilt die Kopfueberschrift (.kar-titel)
      in Zeilen und setzt beim Rollen .ist-da auf alle [data-auf] unter

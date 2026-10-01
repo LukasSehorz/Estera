@@ -585,10 +585,20 @@
   Array.prototype.forEach.call(document.querySelectorAll('video[autoplay]'), function (film) {
     var poster = film.getAttribute('poster');
     if (!poster) return;
-    var versprechen;
-    try { versprechen = film.play(); } catch (e) { return; }
-    if (!versprechen || typeof versprechen.then !== 'function') return;
-    versprechen.then(null, function () {
+    /* NACHGESCHAERFT 01.10.2026. Getauscht wurde bisher bei JEDER
+       Ablehnung von play(). Das traf auch Faelle, in denen iOS das
+       Abspielen gar nicht verbietet:
+         - NotSupportedError: die zuerst gewaehlte Quelle laesst sich nicht
+           dekodieren (so geschehen beim Ankaufsvideo, dessen WebM als VP9
+           Profil 1 kodiert war) — dann gibt es eine zweite Quelle (MP4);
+         - AbortError: play() wurde durch ein pause() oder load()
+           unterbrochen, etwa waehrend der Browser die Quelle wechselt.
+       Jetzt wird NUR bei NotAllowedError getauscht — das ist die Ablehnung
+       durch Stromsparmodus oder Autoplay-Sperre. Bei NotSupportedError wird
+       die naechste <source> direkt gesetzt und neu versucht, bei AbortError
+       einmal neu versucht, sobald der Film abspielbereit ist. */
+    var versuche = 0;
+    var tauschen = function () {
       if (!film.parentNode) return;
       var bild = document.createElement('img');
       bild.src = poster;
@@ -599,6 +609,35 @@
       if (film.hasAttribute('width'))  bild.setAttribute('width',  film.getAttribute('width'));
       if (film.hasAttribute('height')) bild.setAttribute('height', film.getAttribute('height'));
       film.parentNode.replaceChild(bild, film);
-    });
+    };
+    var naechsteQuelle = function () {
+      var quellen = film.querySelectorAll('source');
+      var jetzt = film.currentSrc || '';
+      for (var i = 0; i < quellen.length; i++) {
+        var q = quellen[i].src;
+        if (q && jetzt.indexOf(quellen[i].getAttribute('src')) === -1 && q !== jetzt) {
+          var typ = quellen[i].getAttribute('type');
+          if (!typ || film.canPlayType(typ)) { film.src = q; film.load(); return true; }
+        }
+      }
+      return false;
+    };
+    var starten = function () {
+      versuche += 1;
+      var versprechen;
+      try { versprechen = film.play(); } catch (e) { return; }
+      if (!versprechen || typeof versprechen.then !== 'function') return;
+      versprechen.then(null, function (fehler) {
+        var name = fehler && fehler.name;
+        if (name === 'NotAllowedError') { tauschen(); return; }
+        if (versuche > 3) return;
+        if (name === 'NotSupportedError' && naechsteQuelle()) { starten(); return; }
+        film.addEventListener('canplay', function einmal() {
+          film.removeEventListener('canplay', einmal);
+          starten();
+        });
+      });
+    };
+    starten();
   });
 })();
