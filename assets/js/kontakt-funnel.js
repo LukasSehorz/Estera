@@ -416,6 +416,55 @@
   }
 
   /* --------------------------------------------------------------------------
+     PRUEFWERT GEGEN AUTOMATEN — 09.10.2026
+     Die Gegenstelle versendet nur, wenn ein Pruefwert mitkommt, den sie
+     selbst ausgestellt hat, und wenn seit dem Ausstellen mindestens fuenf
+     Sekunden vergangen sind (Begruendung in netlify/functions/anfrage.js,
+     „SCHUTZ GEGEN FORMULAR-SPAM"). Automaten, die direkt an die Adresse
+     schicken, haben keinen. Fuer Besucher aendert sich nichts: Der Wert wird
+     beim Laden geholt; wer schneller als 5,5 s absendet oder die Seite
+     laenger als 6 Std. offen hatte, wartet beim Absenden kurz, waehrend
+     „Wird gesendet …" dasteht.
+  -------------------------------------------------------------------------- */
+  var MINDESTALTER_MS = 5500;                 /* Gegenstelle verlangt 5 s     */
+  var HOECHSTALTER_MS = 6 * 60 * 60 * 1000;   /* Gegenstelle nimmt bis 24 Std. */
+  var pruefwert = null;
+  var pruefwertZeit = 0;
+  var pruefwertLaeuft = null;
+
+  function pruefwertHolen(ziel) {
+    if (pruefwertLaeuft) return pruefwertLaeuft;
+    pruefwertLaeuft = fetch(ziel, { method: 'get', cache: 'no-store' })
+      .then(function (antwort) {
+        if (!antwort.ok) throw new Error('Status ' + antwort.status);
+        return antwort.json();
+      })
+      .then(function (daten) {
+        if (!daten || !daten.t) throw new Error('kein Pruefwert');
+        pruefwert = daten.t;
+        pruefwertZeit = Date.now();
+        pruefwertLaeuft = null;
+        return pruefwert;
+      }, function (fehler) {
+        pruefwertLaeuft = null;
+        throw fehler;
+      });
+    return pruefwertLaeuft;
+  }
+
+  function bereitmachen(ziel) {
+    var frisch = pruefwert && (Date.now() - pruefwertZeit) < HOECHSTALTER_MS;
+    return (frisch ? Promise.resolve(pruefwert) : pruefwertHolen(ziel))
+      .then(function (wert) {
+        var rest = MINDESTALTER_MS - (Date.now() - pruefwertZeit);
+        if (rest <= 0) return wert;
+        return new Promise(function (fertig) {
+          setTimeout(function () { fertig(wert); }, rest);
+        });
+      });
+  }
+
+  /* --------------------------------------------------------------------------
      EINE STRECKE
   -------------------------------------------------------------------------- */
   function strecke(form) {
@@ -897,7 +946,12 @@
       /* FormData nimmt die Datei mit; ohne enctype-Kopfzeile von Hand —
          die setzt der Browser selbst, samt boundary. Wer sie hier setzt,
          zerbricht den Upload. */
-      fetch(ziel, { method: 'post', body: new FormData(form) })
+      bereitmachen(ziel)
+        .then(function (wert) {
+          var daten = new FormData(form);
+          daten.append('pruefwert', wert);
+          return fetch(ziel, { method: 'post', body: daten });
+        })
         .then(function (antwort) {
           if (!antwort.ok) throw new Error('Status ' + antwort.status);
           sendetGerade = false;
@@ -1099,6 +1153,14 @@
   var vollbildDa = vollbildBauen();
 
   formulare.forEach(strecke);
+
+  /* Den Pruefwert gleich beim Laden holen, nicht erst beim Absenden: dann
+     ist er beim Klick auf „Absenden" laengst alt genug und niemand wartet.
+     Scheitert es hier, holt bereitmachen() ihn beim Absenden nach. */
+  var erstesZiel = formulare
+    .map(function (f) { return (f.getAttribute('action') || '').trim(); })
+    .filter(Boolean)[0];
+  if (erstesZiel) pruefwertHolen(erstesZiel).catch(function () {});
 
   if (vollbildDa) {
     Array.prototype.forEach.call(

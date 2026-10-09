@@ -21,6 +21,7 @@
    ===================================================================== */
 
 const { Resend } = require('resend');
+const crypto = require('crypto');
 
 /* Die Beschriftungen aus dem Formular. Ohne sie stuenden in der Mail die
    technischen Feldnamen („berufliche-situation"), was im Postfach
@@ -53,6 +54,123 @@ const FELDER_BEWERBUNG = [
    deshalb leer bleibt. Ist es gefuellt, war es ein Automat — die Anfrage
    wird still verworfen (200, damit der Automat nichts lernt). */
 const FALLE = 'website';
+
+/* =====================================================================
+   SCHUTZ GEGEN FORMULAR-SPAM — 09.10.2026
+   =====================================================================
+   Anlass: Estera bekam ueber die Formulare viele Einsendungen von
+   Automaten („ScottgralfGM Robertgralf", „NAEWTRER1464554NERTYTRY",
+   Adresshaendler „FreeB2BData"). Die Feldfalle oben hielt sie nicht auf —
+   diese Automaten fuellen sogar Auswahlfelder und die Einwilligung aus und
+   schicken direkt an /api/anfrage, ohne die Seite je im Browser zu laden.
+
+   DREI HUERDEN, alle unsichtbar fuer echte Besucher:
+
+   1  PRUEFWERT. Die Seite holt sich beim Laden per GET einen Wert von hier:
+      die Uhrzeit, mit einem Schluessel unterschrieben, den nur diese
+      Funktion kennt. Ohne gueltige Unterschrift wird nicht versendet. Wer
+      direkt an die Adresse schickt, hat keinen.
+   2  ZEITFALLE. Die Unterschrift traegt die Uhrzeit DES SERVERS. Wer frueher
+      als MINDESTALTER nach dem Laden absendet, ist kein Mensch — allein das
+      Oeffnen der Strecke und drei Auswahlschritte dauern laenger. Die Uhr
+      des Besuchers spielt dabei keine Rolle.
+   3  INHALTSFILTER. Bekannte Muster (eindeutig) verwerfen; schwache
+      Anzeichen (Link im Text, rein englischer Text, Unsinnsnamen) zaehlen.
+      Zwei schwache = verworfen. EIN schwaches = trotzdem zugestellt, aber
+      mit „[Spamverdacht]" im Betreff — ein englischsprachiger Interessent
+      oder ein Link zu einem Expose soll nicht still verloren gehen.
+
+   Verworfen wird STILL mit 200 „OK", wie bei der Feldfalle: Der Automat
+   lernt nichts, und der Grund steht im Protokoll der Funktion (Netlify →
+   Logs → Functions → anfrage), ohne Inhalt, nur Grund und Formular.
+
+   WER OHNE JAVASCRIPT ABSENDET, hat keinen Pruefwert und faellt mit
+   heraus. Ohne JavaScript landete er bisher schon auf einer weissen Seite
+   mit Rohtext; die Strecke selbst braucht es.
+
+   Der Schluessel wird aus RESEND_API_KEY abgeleitet, damit niemand in
+   Netlify etwas eintragen muss. Wer ihn getrennt will, setzt
+   FORMULAR_GEHEIMNIS. Wird der Resend-Schluessel getauscht, verfallen nur
+   die Pruefwerte offener Seiten — die holen beim Absenden einen neuen.
+   ===================================================================== */
+const MINDESTALTER_MS = 5000;               /* frueher abgesendet = Automat     */
+const HOECHSTALTER_MS = 24 * 60 * 60 * 1000; /* die Seite erneuert nach 6 Std.  */
+
+function pruefSchluessel() {
+  const quelle = process.env.FORMULAR_GEHEIMNIS || process.env.RESEND_API_KEY || '';
+  return crypto.createHash('sha256').update('estera-formular:' + quelle).digest();
+}
+
+function unterschrift(zeit) {
+  return crypto.createHmac('sha256', pruefSchluessel()).update(zeit).digest('base64url').slice(0, 22);
+}
+
+function pruefwertAusstellen() {
+  const zeit = Date.now().toString(36);
+  return zeit + '.' + unterschrift(zeit);
+}
+
+/* Liefert das Alter des Pruefwerts in Millisekunden, oder null, wenn er
+   fehlt, kaputt oder nicht von hier ist. */
+function pruefwertAlter(wert) {
+  const m = /^([0-9a-z]{6,12})\.([A-Za-z0-9_-]{22})$/.exec(String(wert || '').trim());
+  if (!m) return null;
+  const soll = Buffer.from(unterschrift(m[1]));
+  const ist = Buffer.from(m[2]);
+  if (soll.length !== ist.length || !crypto.timingSafeEqual(soll, ist)) return null;
+  return Date.now() - parseInt(m[1], 36);
+}
+
+/* Muster, die in keiner echten Anfrage an Estera stehen. Alle aus
+   tatsaechlich eingegangenem Spam oder dessen bekannten Abwandlungen. */
+const EINDEUTIG = [
+  /gralf/i,                                  /* „ScottgralfGM Robertgralf" u. a. */
+  /freeb2bdata|b2b ?data/i,
+  /wanted to know your price/i,
+  /\b(seo|backlinks?|casino|crypto|bitcoin|viagra|forex)\b/i,
+  /[Ѐ-ӿ一-鿿؀-ۿ]/, /* kyrillisch, chinesisch, arabisch */
+];
+const FREITEXT = ['name', 'vorname', 'nachname', 'bereich', 'aufgaben', 'letzte-stelle', 'schulabschluss'];
+const NAMEN = ['name', 'vorname', 'nachname'];
+const WORT_EN = new Set(['the', 'you', 'your', 'we', 'our', 'hello', 'hi', 'price', 'please',
+  'would', 'like', 'know', 'with', 'this', 'that', 'are', 'is', 'and', 'website', 'business', 'regards']);
+const WORT_DE = new Set(['der', 'die', 'das', 'und', 'ich', 'ist', 'nicht', 'mit', 'für', 'fuer',
+  'ein', 'eine', 'bei', 'auf', 'zu', 'wir', 'sie', 'du', 'habe', 'von', 'als', 'im', 'in']);
+
+/* Liefert { verwerfen: Grund oder null, verdacht: Grund oder null }. */
+function inhaltPruefen(werte) {
+  /* Ohne Feldfalle und Pruefwert: der Pruefwert ist Zufallstext und koennte
+     sonst rein zufaellig ein Muster treffen. */
+  const alles = Object.keys(werte).filter((k) => k !== FALLE && k !== 'pruefwert')
+    .map((k) => werte[k]).join(' \n ');
+  for (const muster of EINDEUTIG) {
+    if (muster.test(alles)) return { verwerfen: 'Muster ' + muster.source.slice(0, 24), verdacht: null };
+  }
+  const frei = FREITEXT.map((k) => werte[k] || '').join(' ');
+  const namen = NAMEN.map((k) => werte[k] || '');
+  const anzeichen = [];
+
+  if (/https?:\/\/|www\.|\b[a-z0-9-]+\.(com|org|net|ru|info|xyz|io)\b/i.test(frei)) anzeichen.push('Link im Text');
+  if (namen.some((n) => /https?:|www\./i.test(n))) return { verwerfen: 'Link im Namen', verdacht: null };
+
+  const woerter = frei.toLowerCase().match(/[a-zäöüß]+/g) || [];
+  const en = woerter.filter((w) => WORT_EN.has(w)).length;
+  const de = woerter.filter((w) => WORT_DE.has(w)).length + (/[äöüß]/i.test(frei) ? 1 : 0);
+  if (en >= 3 && de === 0) anzeichen.push('englischer Text');
+
+  if (namen.some((n) => (n.match(/\d/g) || []).length >= 4)) anzeichen.push('Ziffern im Namen');
+  const [vor, nach] = [werte['vorname'] || '', werte['nachname'] || ''].map((s) => s.trim().toLowerCase());
+  if (vor.length > 3 && vor === nach) anzeichen.push('Vorname gleich Nachname');
+
+  if (anzeichen.length >= 2) return { verwerfen: anzeichen.join(' + '), verdacht: null };
+  return { verwerfen: null, verdacht: anzeichen[0] || null };
+}
+
+function verwerfen(grund, werte) {
+  /* Kein Inhalt ins Protokoll — nur, WARUM und WELCHES Formular. */
+  console.log('Formular verworfen:', grund, '| formular=' + (werte['formular'] || '?'));
+  return { statusCode: 200, body: 'OK' };
+}
 
 function html(s) {
   return String(s == null ? '' : s)
@@ -110,8 +228,16 @@ function mailHtml(felder, werte, ueberschrift) {
 }
 
 exports.handler = async (event) => {
+  /* GET stellt den Pruefwert aus (siehe SCHUTZ GEGEN FORMULAR-SPAM oben). */
+  if (event.httpMethod === 'GET') {
+    return {
+      statusCode: 200,
+      headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
+      body: JSON.stringify({ t: pruefwertAusstellen() }),
+    };
+  }
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Nur POST.' };
+    return { statusCode: 405, body: 'Nur GET und POST.' };
   }
 
   const schluessel = process.env.RESEND_API_KEY;
@@ -174,8 +300,18 @@ exports.handler = async (event) => {
 
   /* Automat? Still annehmen, nichts versenden. */
   if ((werte[FALLE] || '').trim() !== '') {
-    return { statusCode: 200, body: 'OK' };
+    return verwerfen('Feldfalle gefuellt', werte);
   }
+
+  /* Pruefwert und Zeitfalle — vor der Einwilligung, denn die fuellen die
+     Automaten ebenfalls aus. */
+  const alter = pruefwertAlter(werte['pruefwert']);
+  if (alter === null) return verwerfen('ohne gueltigen Pruefwert', werte);
+  if (alter < MINDESTALTER_MS) return verwerfen('zu schnell (' + Math.round(alter / 100) / 10 + ' s)', werte);
+  if (alter > HOECHSTALTER_MS) return verwerfen('Pruefwert abgelaufen', werte);
+
+  const inhalt = inhaltPruefen(werte);
+  if (inhalt.verwerfen) return verwerfen(inhalt.verwerfen, werte);
 
   /* Einwilligung ist Pflicht — dieselbe Pruefung wie im Browser, denn
      eine Pruefung allein im Browser laesst sich umgehen. */
@@ -205,9 +341,10 @@ exports.handler = async (event) => {
     ? 'Neue Bewerbung über das Karriere-Formular'
     : 'Neue Anfrage über das Kontaktformular';
 
-  const betreff = istBewerbung
+  const betreff = (inhalt.verdacht ? '[Spamverdacht] ' : '') + (istBewerbung
     ? `Bewerbung: ${werte['vorname'] || ''} ${werte['nachname'] || ''}`.trim()
-    : `Anfrage: ${werte['name'] || 'ohne Namen'}`;
+    : `Anfrage: ${werte['name'] || 'ohne Namen'}`);
+  if (inhalt.verdacht) console.log('Formular mit Spamverdacht zugestellt:', inhalt.verdacht);
 
   const nachricht = {
     from: `Estera Formular <${absender}>`,
